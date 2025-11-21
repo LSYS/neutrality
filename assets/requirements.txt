@@ -1,0 +1,35 @@
+pandas
+pyarrow
+fastparquet
+numpy==1.26.4
+openpyxl
+pyjanitor
+seaborn
+scikit-learn
+scipy==1.12.0
+# jupyter
+jupyter
+notebook==6.4.8
+jupyter_contrib_nbextensions
+jupyter_nbextensions_configurator
+jupyterthemes
+traitlets==5.9.0
+tqdm
+# text
+python-Levenshtein
+fuzzywuzzy
+nltk
+spacy
+spacy>=3.7
+gensim==4.3.3
+textatistic
+lexicalrichness
+# dev
+nbqa
+black
+pyflakes
+mypy
+isort
+runpynb
+jupytext
+watermark
