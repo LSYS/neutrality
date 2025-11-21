@@ -25,7 +25,7 @@ giti: ## Make .gitignore from gitignore.io
 # Installs packages from requirements.txt
 # ============================================================================
 .PHONY: setup
-VENVPATH ?= venv_media
+VENVPATH ?= venv_neutrality
 ifeq ($(OS),Windows_NT)
 	VENVPATH :=  c:/users/admin/$(VENVPATH)
 	ACTIVATE_PATH := $(VENVPATH)/Scripts/activate
