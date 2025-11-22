@@ -53,7 +53,20 @@ Standard errors in parentheses<br>
 
 ### Intensity
 
-#### Figure C1/C2? (combine?)
+#### Figure C2
+
+<table>
+  <tr>
+    <td width="50%" align="center">
+      <img src="./figures/partyyear-count.png" width="100%"><br>
+      <b>(a) By year</b>
+    </td>
+    <td width="50%" align="center">
+      <img src="./figures/partyparl-count.png" width="100%"><br>
+      <b>(b) By parliament </b>
+    </td>
+  </tr>
+</table>
 
 #### Table C1
 
