@@ -145,8 +145,8 @@ Standard errors in parentheses<br>
 
 
 
-
 #### Figure D1
+![Figure D1](./figures/specchart-acc2.png)
 
 #### Figure D2
 
