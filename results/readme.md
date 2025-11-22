@@ -29,6 +29,22 @@ Standard errors in parentheses<br>
 
 
 #### Figure 3
+<table>
+  <tr>
+    <td width="34%" align="center">
+      <img src="./figures/pred-margins-year-ss1_quote_to_speech.png" width="100%"><br>
+      <b>(a) Substring</b>
+    </td>
+    <td width="34%" align="center">
+      <img src="./figures/pred-margins-year-ss2_quote_to_speech.png" width="100%"><br>
+      <b>(b) BoW</b>
+    </td>
+    <td width="34%" align="center">
+      <img src="./figures/pred-margins-year-ce_max_quote2speech.png" width="100%"><br>
+      <b>(c) Semantic</b>
+    </td>
+  </tr>
+</table>
 
 #### Figure 4
 ![Figure 4](./figures/specchart-acc1.png)
