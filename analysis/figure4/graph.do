@@ -1,4 +1,4 @@
-local SAVEPATH ./figure2/specest-acc1
+local SAVEPATH ./figure4/specest-acc1
 use `SAVEPATH', clear
 
 gsort beta

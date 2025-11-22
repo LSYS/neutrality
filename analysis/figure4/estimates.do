@@ -20,7 +20,7 @@ global maintopics		speech_92K* quote_92K* article_40K*
 global alttopics		speech_50K* quote_50K* article_30K*
 
 assert_macros "time length maintopics ind article portfolio"
-local SAVEPATH ./figure2/specest-acc1
+local SAVEPATH ./figure4/specest-acc1
 
 * main is full interaction of portfolio, but no electoral controls
 qui reg ss1_quote_to_speech $time $length $maintopics $ind $article ($portfolio)##i.rank opposition, vce(cluster article_id)
