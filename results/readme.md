@@ -149,6 +149,7 @@ Standard errors in parentheses<br>
 ![Figure D1](./figures/specchart-acc2.png)
 
 #### Figure D2
+![Figure D2](./figures/specchart-semantic.png)
 
 ------------
 #### Table D2
