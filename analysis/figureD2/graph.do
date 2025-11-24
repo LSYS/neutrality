@@ -106,4 +106,4 @@ gr_edit .yaxis1.add_ticks -17.2 `"Speech K = 100, Article K = 30"', custom ticks
 gr_edit .yaxis1.add_ticks -17.6 `"Speech K = 100, Article K = 40"', custom tickset(major) editstyle(tickstyle(textstyle(size(`ILABSIZE'))) )
 gr_edit .yaxis1.add_ticks -18.0 `"Speech K = 100, Article K = 50"', custom tickset(major) editstyle(tickstyle(textstyle(size(`ILABSIZE'))) )
 
-// savefig, path($FIGSAVEDIR/specchart-semantic) format($graphformats) override(width(1200))
+savefig, path($FIGSAVEDIR/specchart-semantic) format($graphformats) override(width(1200))
