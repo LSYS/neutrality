@@ -9,23 +9,14 @@ tictoc tic 1
 
 
 global outcome ss2_quote_to_speech _ss2_quote_to_speech
-global length		ln_paragraph ln_speech ln_article
-global time 		i.parl i.year
-global ind 			i.gender i.race c.age c.age2 c.tenure c.tenure2
-global article 		i.weekday i.section2 translations
-global portfolio 	MFA PMO MEWR MCI MTI MHA MCCY MinLaw MOH MOM MinDef MSF MOT MND MOF MOE speaker
-global electoral	c.group_size c.voters c.vote c.vote_share c.winners_majority c.winners_majority_share
-
-
 global maintopics		speech_92K* quote_92K* article_40K*
-global alttopics		speech_50K* quote_50K* article_30K*
 
-assert_macros "time length maintopics ind article portfolio"
+assert_macros "length_s time ind article portfolio maintopics"
 local SAVEPATH ./figureD1/specest-acc2
 
 * main is full interaction of portfolio, but no electoral controls
 qui reg ss2_quote_to_speech $time $length $maintopics $ind $article ($portfolio)##i.rank opposition, vce(cluster article_id)
-specchart  opposition,spec(main ss2_quote_to_speech time length topic5 ind article portfolio rank portfoliorank) file(`SAVEPATH') replace
+specchart  opposition,spec(main ss2_quote_to_speech time length topic ind article portfolio rank portfoliorank) file(`SAVEPATH') replace
 
 * Loop over accuracy type
 foreach y of varlist $outcome {

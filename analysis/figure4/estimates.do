@@ -1,5 +1,5 @@
 cap log close
-local log ./logs/figure2-estimates
+local log ./logs/figure4-estimates
 log using `log'.smcl, replace smcl
 
 do ./init.do
@@ -8,23 +8,14 @@ tictoc tic 1
 
 
 global outcome ss1_quote_to_speech _ss1_quote_to_speech
-global length		ln_paragraph ln_speech ln_article
-global time 		i.parl i.year
-global ind 			i.gender i.race c.age c.age2 c.tenure c.tenure2
-global article 		i.weekday i.section2 translations
-global portfolio 	MFA PMO MEWR MCI MTI MHA MCCY MinLaw MOH MOM MinDef MSF MOT MND MOF MOE speaker
-global electoral	c.group_size c.voters c.vote c.vote_share c.winners_majority c.winners_majority_share
-
-
 global maintopics		speech_92K* quote_92K* article_40K*
-global alttopics		speech_50K* quote_50K* article_30K*
 
-assert_macros "time length maintopics ind article portfolio"
+assert_macros "length_s time ind article portfolio maintopics"
 local SAVEPATH ./figure4/specest-acc1
 
 * main is full interaction of portfolio, but no electoral controls
-qui reg ss1_quote_to_speech $time $length $maintopics $ind $article ($portfolio)##i.rank opposition, vce(cluster article_id)
-specchart  opposition,spec(main ss1_quote_to_speech time length topic5 ind article portfolio rank portfoliorank) file(`SAVEPATH') replace
+qui reg ss1_quote_to_speech $time $length_s $maintopics $ind $article ($portfolio)##i.rank opposition, vce(cluster article_id)
+specchart  opposition,spec(main ss1_quote_to_speech time length topic ind article portfolio rank portfoliorank) file(`SAVEPATH') replace
 
 * Loop over accuracy type
 foreach y of varlist $outcome {
@@ -66,11 +57,11 @@ foreach y of varlist $outcome {
 			local topictype topic`i'
 		}
 		* (1) Main spec, in terms of covariates
-		qui reg `y' $time $length $topictype $ind $article ($portfolio)##i.rank opposition, vce(cluster article_id)
+		qui reg `y' $time $length_s $topictype $ind $article ($portfolio)##i.rank opposition, vce(cluster article_id)
 		specchart  opposition,spec(`y' time length `topictype' ind article portfolio rank portfoliorank) file(`SAVEPATH')		
 
 		* (2) No Ind controls
-		qui reg `y' $time $length $topictype $article ($portfolio)##i.rank opposition, vce(cluster article_id)
+		qui reg `y' $time $length_s $topictype $article ($portfolio)##i.rank opposition, vce(cluster article_id)
 		specchart  opposition,spec(`y' time length `topictype' article portfolio rank portfoliorank) file(`SAVEPATH') 		
 
 		* (3) No length controls
@@ -78,23 +69,23 @@ foreach y of varlist $outcome {
 		specchart  opposition,spec(`y' time `topictype' ind article portfolio rank portfoliorank) file(`SAVEPATH') 		
 
 		* (4) No article controls
-		qui reg `y' $time $length $topictype $ind ($portfolio)##i.rank opposition, vce(cluster article_id)
+		qui reg `y' $time $length_s $topictype $ind ($portfolio)##i.rank opposition, vce(cluster article_id)
 		specchart  opposition,spec(`y' time length `topictype' ind portfolio rank portfoliorank) file(`SAVEPATH')		
 
 		* (5) No portfolio
-		qui reg `y' $time $length $topictype $ind $article i.rank opposition, vce(cluster article_id)
+		qui reg `y' $time $length_s $topictype $ind $article i.rank opposition, vce(cluster article_id)
 		specchart  opposition,spec(`y' time length `topictype' ind article rank) file(`SAVEPATH')		
 
 		* (6) No Rank
-		qui reg `y' $time $length $topictype $ind $article $portfolio opposition, vce(cluster article_id)
+		qui reg `y' $time $length_s $topictype $ind $article $portfolio opposition, vce(cluster article_id)
 		specchart  opposition,spec(`y' time length `topictype' ind article portfolio) file(`SAVEPATH')	
 
 		* (7) No portfolio + rank interaction
-		qui reg `y' $time $length $topictype $ind $article $portfolio i.rank opposition, vce(cluster article_id)
+		qui reg `y' $time $length_s $topictype $ind $article $portfolio i.rank opposition, vce(cluster article_id)
 		specchart  opposition,spec(`y' time length `topictype' ind article portfolio rank) file(`SAVEPATH')	
 
 		* (8) + electoral
-		qui reg `y' $time $length $topictype $ind $article ($portfolio)##i.rank opposition $electoral, vce(cluster article_id)
+		qui reg `y' $time $length_s $topictype $ind $article ($portfolio)##i.rank opposition $electoral, vce(cluster article_id)
 		specchart  opposition,spec(`y' time length `topictype' ind article portfolio rank portfoliorank elec) file(`SAVEPATH')		
 	}
 }
