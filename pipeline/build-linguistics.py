@@ -14,6 +14,7 @@
 # ---
 
 # %%
+import pandas as pd
 import janitor
 
 janitor
@@ -36,7 +37,8 @@ from utilities import load_input_data, clean_quote_speech_preserve_sentences
 SAVEPATH = "intermediate/build-linguistics.csv"
 
 # %%
-df = load_input_data().assign(
+df = (
+    load_input_data().assign(
     matched_fullspeech_cleaned=lambda df_: df_["matched_fullspeech"].apply(
         clean_quote_speech_preserve_sentences
     ),
@@ -50,6 +52,10 @@ df = load_input_data().assign(
     full_sentence_cleaned=lambda df_: df_["full_sentence"].apply(
         clean_quote_speech_preserve_sentences
     ),
+    )
+    .assign(
+        speech_id=lambda df_: pd.factorize(df_["matched_fullspeech_cleaned"])[0],
+    )
 )
 display(df.head())
 df.info()
@@ -217,6 +223,7 @@ df.info()
 # %%
 cols = [
     "qid",
+    "speech_id",
     "ttr",
     "rttr",
     "cttr",

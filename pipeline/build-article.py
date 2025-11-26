@@ -787,14 +787,12 @@ df["weekday"] = df["date"].apply(get_weekday)
 (
     df.assign(
         article_id=lambda df_: df_.groupby(["title", "date"]).ngroup(),
-        speech_id=lambda df_: pd.factorize(df_["matched_fullspeech"])[0],
         author_cleaned2=lambda df_: 1 + pd.factorize(df_["author_cleaned2"])[0],
     )
     .filter(
         [
             "qid",
             "article_id",
-            "speech_id",
             "beat",
             "author_cleaned2",
             "wordcount",

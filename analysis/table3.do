@@ -7,7 +7,6 @@ do init.do
 tictoc tic 1
 assert_macros "length_s base_controls article min electoral"
 
-
 eststo: reg ss1_quote_to_speech i.opposition $length_s $base_controls $min, vce(cluster article_id)
 	add_scalars
 

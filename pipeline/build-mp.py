@@ -323,6 +323,24 @@ df = df.merge(
 df.head()
 
 # %%
+_qids = [
+    5043, 5044, 5045, 5046, 5047, 5048, 5049,
+    5380, 5381, 5382, 5383, 5384,
+    5390, 5391, 5392, 5393,
+    5408, 5409, 5410,
+    5531, 5532,
+    5939, 5940, 5941, 5942, 5943,
+    6157, 6158,
+]
+
+df.loc[df["qid"].isin(_qids), "rank"] = "minister"
+df.loc[df["qid"].isin([14001, 14002]), "rank"] = "nmp"
+df.loc[df["qid"].isin([14033, 14034, 14035, 14391]), "rank"] = "nmp"
+df.loc[df["qid"].isin([14058, 14059, 14060]), "rank"] = "nmp"
+df.loc[df["qid"].isin([14886]), "rank"] = "nmp"
+df.loc[df["qid"].isin([14611]), "rank"] = "nmp"
+
+# %%
 (
     df.assign(
         mp=lambda df_: pd.factorize(df_["mp_cleaned"])[0],

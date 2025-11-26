@@ -42,8 +42,8 @@ local model_title	"
 					";
 #delimit cr
 
-assert_macros "time ind article min"
-local base quote paragraph speech article $time $ind $article
+assert_macros "length_s time ind article min"
+local base $length_s $time $ind $article
 
 *--------------------------------------------------------------------------------------------------
 * Panel A. string similarity 1 robustness checks
@@ -53,7 +53,7 @@ eststo clear
 eststo: qui reg ss1_quote_to_speech i.opposition `base' $min speech_92K*  article_40K* quote_92K*,          vce(cluster article_id)
 	local nobs: display %9.0fc `e(N)'
 	estadd local nobs = "\multicolumn{1}{c}{`nobs'}"
-eststo: qui reg ss1_quote_to_speech i.opposition `base' $min speech_92K*  article_40K* quote_92K* i.author2 i.beat, vce(cluster article_id)
+eststo: qui reg ss1_quote_to_speech i.opposition `base' $min speech_92K*  article_40K* quote_92K* i.authorID i.beat, vce(cluster article_id)
 	local nobs: display %9.0fc `e(N)'
 	estadd local nobs = "\multicolumn{1}{c}{`nobs'}"
 eststo: qui reg ss1_quote_to_speech i.opposition `base'      speech_92K*  article_50K* quote_92K*,          vce(cluster article_id)
@@ -65,7 +65,7 @@ eststo: qui reg ss1_quote_to_speech i.opposition `base' $min speech_92K*  articl
 eststo: qui reg ss1_quote_to_speech i.opposition `base' $min speech_92K*  article_40K* quote_92K*,          vce(cluster speech_id)
 	local nobs: display %9.0fc `e(N)'
 	estadd local nobs = "\multicolumn{1}{c}{`nobs'}"
-eststo: qui reg ss1_quote_to_speech i.opposition `base' $min speech_92K*  article_40K* quote_92K* i.author2,vce(cluster author2)
+eststo: qui reg ss1_quote_to_speech i.opposition `base' $min speech_92K*  article_40K* quote_92K* i.authorID, vce(cluster authorID)
 	local nobs: display %9.0fc `e(N)'
 	estadd local nobs = "\multicolumn{1}{c}{`nobs'}"
 eststo: qui reg ss1_quote_to_speech i.opposition `base' $min speech_50K*  article_40K* quote_50K*,          vce(cluster article_id)
@@ -144,7 +144,7 @@ eststo clear
 eststo: qui reg _ss1_quote_to_speech i.opposition `base' $min speech_92K*  article_40K* quote_92K*,          vce(cluster article_id)
 	local nobs: display %9.0fc `e(N)'
 	estadd local nobs = "\multicolumn{1}{c}{`nobs'}"
-eststo: qui reg _ss1_quote_to_speech i.opposition `base' $min speech_92K*  article_40K* quote_92K* i.author2 i.beat, vce(cluster article_id)
+eststo: qui reg _ss1_quote_to_speech i.opposition `base' $min speech_92K*  article_40K* quote_92K* i.authorID i.beat, vce(cluster article_id)
 	local nobs: display %9.0fc `e(N)'
 	estadd local nobs = "\multicolumn{1}{c}{`nobs'}"
 eststo: qui reg _ss1_quote_to_speech i.opposition `base'      speech_92K*  article_50K* quote_92K*,          vce(cluster article_id)
@@ -156,7 +156,7 @@ eststo: qui reg _ss1_quote_to_speech i.opposition `base' $min speech_92K*  artic
 eststo: qui reg _ss1_quote_to_speech i.opposition `base' $min speech_92K*  article_40K* quote_92K*,          vce(cluster speech_id)
 	local nobs: display %9.0fc `e(N)'
 	estadd local nobs = "\multicolumn{1}{c}{`nobs'}"
-eststo: qui reg _ss1_quote_to_speech i.opposition `base' $min speech_92K*  article_40K* quote_92K* i.author2,vce(cluster author2)
+eststo: qui reg _ss1_quote_to_speech i.opposition `base' $min speech_92K*  article_40K* quote_92K* i.authorID,vce(cluster authorID)
 	local nobs: display %9.0fc `e(N)'
 	estadd local nobs = "\multicolumn{1}{c}{`nobs'}"
 eststo: qui reg _ss1_quote_to_speech i.opposition `base' $min speech_50K*  article_40K* quote_50K*,          vce(cluster article_id)
@@ -235,7 +235,7 @@ eststo clear
 eststo: qui reg ss2_quote_to_speech i.opposition `base' $min speech_92K*  article_40K* quote_92K*,          vce(cluster article_id)
 	local nobs: display %9.0fc `e(N)'
 	estadd local nobs = "\multicolumn{1}{c}{`nobs'}"
-eststo: qui reg ss2_quote_to_speech i.opposition `base' $min speech_92K*  article_40K* quote_92K* i.author2 i.beat, vce(cluster article_id)
+eststo: qui reg ss2_quote_to_speech i.opposition `base' $min speech_92K*  article_40K* quote_92K* i.authorID i.beat, vce(cluster article_id)
 	local nobs: display %9.0fc `e(N)'
 	estadd local nobs = "\multicolumn{1}{c}{`nobs'}"
 eststo: qui reg ss2_quote_to_speech i.opposition `base'      speech_92K*  article_50K* quote_92K*,          vce(cluster article_id)
@@ -247,7 +247,7 @@ eststo: qui reg ss2_quote_to_speech i.opposition `base' $min speech_92K*  articl
 eststo: qui reg ss2_quote_to_speech i.opposition `base' $min speech_92K*  article_40K* quote_92K*,          vce(cluster speech_id)
 	local nobs: display %9.0fc `e(N)'
 	estadd local nobs = "\multicolumn{1}{c}{`nobs'}"
-eststo: qui reg ss2_quote_to_speech i.opposition `base' $min speech_92K*  article_40K* quote_92K* i.author2,vce(cluster author2)
+eststo: qui reg ss2_quote_to_speech i.opposition `base' $min speech_92K*  article_40K* quote_92K* i.authorID,vce(cluster authorID)
 	local nobs: display %9.0fc `e(N)'
 	estadd local nobs = "\multicolumn{1}{c}{`nobs'}"
 eststo: qui reg ss2_quote_to_speech i.opposition `base' $min speech_50K*  article_40K* quote_50K*,          vce(cluster article_id)
@@ -326,7 +326,7 @@ eststo clear
 eststo: qui reg _ss2_quote_to_speech i.opposition `base' $min speech_92K*  article_40K* quote_92K*,          vce(cluster article_id)
 	local nobs: display %9.0fc `e(N)'
 	estadd local nobs = "\multicolumn{1}{c}{`nobs'}"
-eststo: qui reg _ss2_quote_to_speech i.opposition `base' $min speech_92K*  article_40K* quote_92K* i.author2 i.beat, vce(cluster article_id)
+eststo: qui reg _ss2_quote_to_speech i.opposition `base' $min speech_92K*  article_40K* quote_92K* i.authorID i.beat, vce(cluster article_id)
 	local nobs: display %9.0fc `e(N)'
 	estadd local nobs = "\multicolumn{1}{c}{`nobs'}"
 eststo: qui reg _ss2_quote_to_speech i.opposition `base'      speech_92K*  article_50K* quote_92K*,          vce(cluster article_id)
@@ -338,7 +338,7 @@ eststo: qui reg _ss2_quote_to_speech i.opposition `base' $min speech_92K*  artic
 eststo: qui reg _ss2_quote_to_speech i.opposition `base' $min speech_92K*  article_40K* quote_92K*,          vce(cluster speech_id)
 	local nobs: display %9.0fc `e(N)'
 	estadd local nobs = "\multicolumn{1}{c}{`nobs'}"
-eststo: qui reg _ss2_quote_to_speech i.opposition `base' $min speech_92K*  article_40K* quote_92K* i.author2,vce(cluster author2)
+eststo: qui reg _ss2_quote_to_speech i.opposition `base' $min speech_92K*  article_40K* quote_92K* i.authorID,vce(cluster authorID)
 	local nobs: display %9.0fc `e(N)'
 	estadd local nobs = "\multicolumn{1}{c}{`nobs'}"
 eststo: qui reg _ss2_quote_to_speech i.opposition `base' $min speech_50K*  article_40K* quote_50K*,          vce(cluster article_id)
@@ -417,7 +417,7 @@ eststo clear
 eststo: reg ce_max_quote2speech i.opposition `base' $min speech_92K*  article_40K* quote_92K*,          vce(cluster article_id)
 	local nobs: display %9.0fc `e(N)'
 	estadd local nobs = "\multicolumn{1}{c}{`nobs'}"
-eststo: qui reg ce_max_quote2speech i.opposition `base' $min speech_92K*  article_40K* quote_92K* i.author2 i.beat, vce(cluster article_id)
+eststo: qui reg ce_max_quote2speech i.opposition `base' $min speech_92K*  article_40K* quote_92K* i.authorID i.beat, vce(cluster article_id)
 	local nobs: display %9.0fc `e(N)'
 	estadd local nobs = "\multicolumn{1}{c}{`nobs'}"
 eststo: qui reg ce_max_quote2speech i.opposition `base'      speech_92K*  article_50K* quote_92K*,          vce(cluster article_id)
@@ -429,7 +429,7 @@ eststo: qui reg ce_max_quote2speech i.opposition `base' $min speech_92K*  articl
 eststo: qui reg ce_max_quote2speech i.opposition `base' $min speech_92K*  article_40K* quote_92K*,          vce(cluster speech_id)
 	local nobs: display %9.0fc `e(N)'
 	estadd local nobs = "\multicolumn{1}{c}{`nobs'}"
-eststo: qui reg ce_max_quote2speech i.opposition `base' $min speech_92K*  article_40K* quote_92K* i.author2,vce(cluster author2)
+eststo: qui reg ce_max_quote2speech i.opposition `base' $min speech_92K*  article_40K* quote_92K* i.authorID,vce(cluster authorID)
 	local nobs: display %9.0fc `e(N)'
 	estadd local nobs = "\multicolumn{1}{c}{`nobs'}"
 eststo: qui reg ce_max_quote2speech i.opposition `base' $min speech_50K*  article_40K* quote_50K*,          vce(cluster article_id)
@@ -506,19 +506,13 @@ esttab using $TABSAVEDIR/sensitivity-panelE-semantic-accuracy.md,
 // *--------------------------------------------------------------------------------------------------
 // * Panel F. Semantic similarity robustness checks (Binarized)
 // *--------------------------------------------------------------------------------------------------
-foreach val in 90 95 99 {
-    count if ce_max_quote2speech <= `val'
-    local pct = (r(N)/_N) * 100
-    display "Value `val' is at the `pct'th percentile"
-}
-
-gen dce_max_quote2speech = (ce_max_quote2speech >= 99) if !missing(ce_max_quote2speech)
+gen dce_max_quote2speech = (ce_max_quote2speech >= 95) if !missing(ce_max_quote2speech)
 
 eststo clear
 eststo: reg dce_max_quote2speech i.opposition `base' $min speech_92K*  article_40K* quote_92K*,          vce(cluster article_id)
 	local nobs: display %9.0fc `e(N)'
 	estadd local nobs = "\multicolumn{1}{c}{`nobs'}"
-eststo: qui reg dce_max_quote2speech i.opposition `base' $min speech_92K*  article_40K* quote_92K* i.author2 i.beat, vce(cluster article_id)
+eststo: qui reg dce_max_quote2speech i.opposition `base' $min speech_92K*  article_40K* quote_92K* i.authorID i.beat, vce(cluster article_id)
 	local nobs: display %9.0fc `e(N)'
 	estadd local nobs = "\multicolumn{1}{c}{`nobs'}"
 eststo: qui reg dce_max_quote2speech i.opposition `base'      speech_92K*  article_50K* quote_92K*,          vce(cluster article_id)
@@ -530,7 +524,7 @@ eststo: qui reg dce_max_quote2speech i.opposition `base' $min speech_92K*  artic
 eststo: qui reg dce_max_quote2speech i.opposition `base' $min speech_92K*  article_40K* quote_92K*,          vce(cluster speech_id)
 	local nobs: display %9.0fc `e(N)'
 	estadd local nobs = "\multicolumn{1}{c}{`nobs'}"
-eststo: qui reg dce_max_quote2speech i.opposition `base' $min speech_92K*  article_40K* quote_92K* i.author2,vce(cluster author2)
+eststo: qui reg dce_max_quote2speech i.opposition `base' $min speech_92K*  article_40K* quote_92K* i.authorID,vce(cluster authorID)
 	local nobs: display %9.0fc `e(N)'
 	estadd local nobs = "\multicolumn{1}{c}{`nobs'}"
 eststo: qui reg dce_max_quote2speech i.opposition `base' $min speech_50K*  article_40K* quote_50K*,          vce(cluster article_id)
@@ -561,7 +555,7 @@ esttab, keep(1.opposition)
 		mtitles(`model_title')
 		title(Panel E)
 ;
-esttab using $TABSAVEDIR/sensitivity-panelF-semantic-accuracy-binarized99.tex,
+esttab using $TABSAVEDIR/sensitivity-panelF-semantic-accuracy-binarized-nearperfect.tex,
 	replace
 	booktabs
 	fragment
@@ -576,7 +570,7 @@ esttab using $TABSAVEDIR/sensitivity-panelF-semantic-accuracy-binarized99.tex,
 	nodepvars
 	scalars("nobs N")
 ;
-esttab using $TABSAVEDIR/sensitivity-panelF-semantic-accuracy-binarized99.md,
+esttab using $TABSAVEDIR/sensitivity-panelF-semantic-accuracy-nearperfect.md,
 	replace
 	se
 	star (* 0.1 ** 0.05 *** 0.01)
