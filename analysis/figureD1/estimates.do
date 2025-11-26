@@ -15,7 +15,7 @@ assert_macros "length_s time ind article portfolio maintopics"
 local SAVEPATH ./figureD1/specest-acc2
 
 * main is full interaction of portfolio, but no electoral controls
-qui reg ss2_quote_to_speech $time $length $maintopics $ind $article ($portfolio)##i.rank opposition, vce(cluster article_id)
+qui reg ss2_quote_to_speech $time $length_s $maintopics $ind $article ($portfolio)##i.rank opposition, vce(cluster article_id)
 specchart  opposition,spec(main ss2_quote_to_speech time length topic ind article portfolio rank portfoliorank) file(`SAVEPATH') replace
 
 * Loop over accuracy type
@@ -58,11 +58,11 @@ foreach y of varlist $outcome {
 			local topictype topic`i'
 		}
 		* (1) Main spec, in terms of covariates
-		qui reg `y' $time $length $topictype $ind $article ($portfolio)##i.rank opposition, vce(cluster article_id)
+		qui reg `y' $time $length_s $topictype $ind $article ($portfolio)##i.rank opposition, vce(cluster article_id)
 		specchart  opposition,spec(`y' time length `topictype' ind article portfolio rank portfoliorank) file(`SAVEPATH')		
 
 		* (2) No Ind controls
-		qui reg `y' $time $length $topictype $article ($portfolio)##i.rank opposition, vce(cluster article_id)
+		qui reg `y' $time $length_s $topictype $article ($portfolio)##i.rank opposition, vce(cluster article_id)
 		specchart  opposition,spec(`y' time length `topictype' article portfolio rank portfoliorank) file(`SAVEPATH') 		
 
 		* (3) No length controls
@@ -70,23 +70,23 @@ foreach y of varlist $outcome {
 		specchart  opposition,spec(`y' time `topictype' ind article portfolio rank portfoliorank) file(`SAVEPATH') 		
 
 		* (4) No article controls
-		qui reg `y' $time $length $topictype $ind ($portfolio)##i.rank opposition, vce(cluster article_id)
+		qui reg `y' $time $length_s $topictype $ind ($portfolio)##i.rank opposition, vce(cluster article_id)
 		specchart  opposition,spec(`y' time length `topictype' ind portfolio rank portfoliorank) file(`SAVEPATH')		
 
 		* (5) No portfolio
-		qui reg `y' $time $length $topictype $ind $article i.rank opposition, vce(cluster article_id)
+		qui reg `y' $time $length_s $topictype $ind $article i.rank opposition, vce(cluster article_id)
 		specchart  opposition,spec(`y' time length `topictype' ind article rank) file(`SAVEPATH')		
 
 		* (6) No Rank
-		qui reg `y' $time $length $topictype $ind $article $portfolio opposition, vce(cluster article_id)
+		qui reg `y' $time $length_s $topictype $ind $article $portfolio opposition, vce(cluster article_id)
 		specchart  opposition,spec(`y' time length `topictype' ind article portfolio) file(`SAVEPATH')	
 
 		* (7) No portfolio + rank interaction
-		qui reg `y' $time $length $topictype $ind $article $portfolio i.rank opposition, vce(cluster article_id)
+		qui reg `y' $time $length_s $topictype $ind $article $portfolio i.rank opposition, vce(cluster article_id)
 		specchart  opposition,spec(`y' time length `topictype' ind article portfolio rank) file(`SAVEPATH')	
 
 		* (8) + electoral
-		qui reg `y' $time $length $topictype $ind $article ($portfolio)##i.rank opposition $electoral, vce(cluster article_id)
+		qui reg `y' $time $length_s $topictype $ind $article ($portfolio)##i.rank opposition $electoral, vce(cluster article_id)
 		specchart  opposition,spec(`y' time length `topictype' ind article portfolio rank portfoliorank elec) file(`SAVEPATH')		
 	}
 }
