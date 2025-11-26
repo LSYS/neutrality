@@ -3,6 +3,7 @@ pyarrow
 fastparquet
 numpy==1.26.4
 openpyxl
+pandas_flavor>=0.6.0
 pyjanitor
 seaborn
 scikit-learn

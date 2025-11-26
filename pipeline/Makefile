@@ -27,7 +27,6 @@ data: ## Run all notebooks, then run build.ipynb last
 	  build-verbatim-accuracy.ipynb && \
 	runpynb build.ipynb
 
-
 ########################################################################
 # Jupytext sync to .py
 ########################################################################
@@ -63,15 +62,14 @@ pylint: ## Run mypy, pyflakes, isort, black on utilities.py (same as GH action)
 # Notebook lint
 ########################################################################
 NOTEBOOKS := \
-    ./0-get-subzones-from-records.ipynb \
-    ./1-get-IDs.ipynb \
-    ./2-get-devicehome.ipynb \
-    ./3-get-movementcount.ipynb \
-    ./4-postal-to-2014subzonename.ipynb \
-    ./5-compile-POI-count.ipynb \
-    ./6a-clean-housetype.ipynb \
-    ./6b-map-weather.ipynb \
-    ./7-merge.ipynb
+    ./build-article-topics.ipynb \
+    ./build-article.ipynb \
+    ./build-linguistics.ipynb \
+    ./build-mp.ipynb \
+    ./build-semsim.ipynb \
+    ./build-speech-topics.ipynb \
+    ./build-verbatim-accuracy.ipynb \
+    ./build.ipynb
 
 .PHONY: lint-notebooks
 lint-notebooks: ## Run nbqa pyflakes and black --check on selected notebooks
