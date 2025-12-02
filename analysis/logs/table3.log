@@ -1,0 +1,1503 @@
+------------------------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  \\wsl.localhost\Debian\home\lsys\neutrality\analysis\logs/table3.smcl
+  log type:  smcl
+ opened on:   2 Dec 2025, 12:20:44
+
+. 
+. do init.do
+
+. cls                                     // Clear results window
+
+. clear all               // Start with a clean slate
+
+. set more off, perm      // Disable partitioned output
+(set more preference recorded)
+
+. macro drop _all         // Clear all macros to avoid namespace conflicts
+
+. set linesize 150        // Line size limit to make output more readable, affects logs
+
+. set varabbrev off, perm // Turn off variable abbreviation
+(set varabbrev preference recorded)
+
+. // pause on                // Enable pause mode for debugging
+. version 13.1            // Set Stata version to 13.1
+
+. set matsize 10000
+
+. 
+. *==============================================================================
+. // Set root path
+. // cap net install here, from("https://raw.githubusercontent.com/korenmiklos/here/master/")
+. cap here
+
+. if _rc == 0 {
+.         here, set
+.         cd ${here}
+. }
+
+. else {
+.         global here "\\wsl.localhost\Debian\home\lsys\neutrality\analysis"
+.         cd $here
+\\wsl.localhost\Debian\home\lsys\neutrality\analysis
+. }
+
+. 
+. *==============================================================================
+. // Point to ado programs
+. adopath ++ ./ado
+  [1]              "./ado"
+  [2]  (BASE)      "C:\Program Files (x86)\Stata13\ado\base/"
+  [3]  (SITE)      "C:\Program Files (x86)\Stata13\ado\site/"
+  [4]              "."
+  [5]  (PERSONAL)  "c:\ado\personal/"
+  [6]  (PLUS)      "c:\ado\plus/"
+  [7]  (OLDPLACE)  "c:\ado/"
+
+. 
+. use "../pipeline/out/media.dta", clear
+
+. do preamble
+
+. *-----------------------------------------------------------------------
+. * IDENTIFIERS AND METADATA
+. *-----------------------------------------------------------------------
+. label var qid         "Quote ID"
+
+. label var article_id  "News article ID (title-date tuple)"
+
+. label var speech_id   "Speech ID"
+
+. 
+. label var date        "Publication date"
+
+. label var matched_date "Matched speech date"
+
+. label var matched_score "Matched score in semi-automated assessing"
+
+. 
+. label var mp          "MP ID"
+
+. label var party       "Party of politician (string code)"
+
+. label var opposition  "=1 if from an opposition party"
+
+. gen ruling = (party == "pap")
+
+. label var ruling  "=1 if from the government party"
+
+. label var non_partisan "=1 if non-partisan MP"
+
+. assert (1 == opposition + ruling + non_partisan)
+
+. label var speaker     "=1 if making speech in capacity of speaker"
+
+. 
+. label var section     "Original article section"
+
+. 
+. *======================================================================
+. * MP CAREER
+. *======================================================================
+. label var start "Start date of MP's parliamentary service"
+
+. rename _end end
+
+. label var end   "End date of MP's parliamentary service"
+
+. 
+. *--- Rank of MP --------------------------------------------------------
+. label define rank_label ///
+>     1 "pm" 2 "dpm" 3 "minister" 4 "sms" 5 "mos" 6 "mayor" 7 "sps" ///
+>     8 "parl sec" 9 "speaker" 10 "mp" 11 "ncmp" 12 "nmp"
+
+. encode rank, gen(mp_rank) label(rank_label)
+
+. drop rank
+
+. rename mp_rank rank
+
+. label var rank "Rank of MP at time of speech"
+
+. fvset base 10 rank   // base: Member of Parliament
+
+. 
+. *--- Tenunre -----------------------------------------------------------
+. gen _tenure = tenure / 365
+
+. drop tenure
+
+. rename _tenure tenure
+
+. label var tenure "Seniority of politician at time of speech (years)"
+
+. 
+. gen tenure2 = tenure^2
+
+. label var tenure2 "Square of tenure"
+
+. 
+. *======================================================================
+. * INDIVIDUAL DEMOGRAPHICS
+. *======================================================================
+. label var dob   "Date of birth of MP"
+
+. label var yob   "Year of birth of MP"
+
+. 
+. *--- Gender (0 = male, 1 = female) ------------------------------------
+. label define gender_label 0 "male" 1 "female"
+
+. encode gender, gen(sex) label(gender_label)
+
+. drop gender
+
+. rename sex gender
+
+. fvset base 0 gender
+
+. label var gender "Gender of politician"
+
+. 
+. *--- Race --------------------------------------------------------------
+. label define race_label 0 "chinese" 1 "malay" 2 "indian" 3 "eurasian"
+
+. encode race, gen(ethnic) label(race_label)
+
+. drop race
+
+. rename ethnic race
+
+. fvset base 0 race
+
+. label var race "Race of politician (Chinese, Malay, Indian, Eurasian/other)"
+
+. 
+. *--- Age ---------------------------------------------------------------
+. gen _age = age / 365
+
+. drop age
+
+. rename _age age
+
+. label var age "Age of politician at time of speech (years)"
+
+. 
+. gen age2    = age^2
+
+. label var age2 "Square of age"
+
+. 
+. *======================================================================
+. * MINISTRY
+. *======================================================================
+. label var MND    "=1 if speech made while at Ministry of National Development"
+
+. label var MinDef "=1 if speech made while at Ministry of Defence"
+
+. label var MFA    "=1 if speech made while at Ministry of Foreign Affairs"
+
+. label var MinLaw "=1 if speech made while at Ministry of Law"
+
+. label var MHA    "=1 if speech made while at Ministry of Home Affairs"
+
+. label var MOT    "=1 if speech made while at Ministry of Transport"
+
+. label var MOF    "=1 if speech made while at Ministry of Finance"
+
+. label var MOM    "=1 if speech made while at Ministry of Manpower"
+
+. label var MTI    "=1 if speech made while at Ministry of Trade and Industry"
+
+. label var MCCY   "=1 if speech made while at Ministry of Culture, Community and Youth"
+
+. label var MSF    "=1 if speech made while at Ministry of Social and Family Development"
+
+. label var MOH    "=1 if speech made while at Ministry of Health"
+
+. label var PMO    "=1 if speech made while at Prime Minister's Office"
+
+. label var MEWR   "=1 if speech made while at Ministry of the Environment and Water Resources"
+
+. label var MCI    "=1 if speech made while at Ministry of Communications and Information"
+
+. label var MOE    "=1 if speech made while at Ministry of Education"
+
+. 
+. recode MFA PMO MEWR MCI MTI MHA MCCY MinLaw MOH MOM MinDef MSF MOT MND MOF MOE (. = 0)
+(MFA: 13913 changes made)
+(PMO: 14288 changes made)
+(MEWR: 14348 changes made)
+(MCI: 14173 changes made)
+(MTI: 14135 changes made)
+(MHA: 13392 changes made)
+(MCCY: 14301 changes made)
+(MinLaw: 13971 changes made)
+(MOH: 14054 changes made)
+(MOM: 14058 changes made)
+(MinDef: 13790 changes made)
+(MSF: 14693 changes made)
+(MOT: 13884 changes made)
+(MND: 13741 changes made)
+(MOF: 13401 changes made)
+(MOE: 13792 changes made)
+
+. 
+. *======================================================================
+. * STRING SIMILARITY AND SEMANTIC MATCHING
+. *======================================================================
+. 
+. *--- String similarity 1 (partialscore) -------------------------------
+. rename partialscore_quote_to_fullspeech  ss1_quote_to_speech
+
+. label var ss1_quote_to_speech            "String similarity score 1 for quote to speech"
+
+. 
+. rename partialscore_quote_to_paragraph   ss1_quote_to_paragraph
+
+. label var ss1_quote_to_paragraph         "String similarity score 1 for quote to paragraph"
+
+. 
+. rename partialscore_quote_to_sentence    ss1_quote_to_sentence
+
+. label var ss1_quote_to_sentence          "String similarity score 1 for quote to sentence"
+
+. 
+. rename _partialscore_speech              _ss1_quote_to_speech
+
+. label var _ss1_quote_to_speech           "(no stopwords) string similarity score 1 for quote to speech"
+
+. 
+. rename _partialscore_paragraph           _ss1_quote_to_paragraph
+
+. label var _ss1_quote_to_paragraph        "(no stopwords) string similarity score 1 for quote to paragraph"
+
+. 
+. rename _partialscore_sentence            _ss1_quote_to_sentence
+
+. label var _ss1_quote_to_sentence         "(no stopwords) string similarity score 1 for quote to sentence"
+
+. 
+. *--- String similarity 2 (tokensetscore) ------------------------------
+. rename tokensetscore_quote_to_sentence   ss2_quote_to_sentence
+
+. label var ss2_quote_to_sentence          "String similarity score 2 for quote to sentence"
+
+. 
+. rename tokensetscore_quote_to_paragraph  ss2_quote_to_paragraph
+
+. label var ss2_quote_to_paragraph         "String similarity score 2 for quote to paragraph"
+
+. 
+. rename tokensetscore_quote_to_fullspeec  ss2_quote_to_speech
+
+. label var ss2_quote_to_speech            "String similarity score 2 for quote to speech"
+
+. 
+. rename tokensetscore_quote_to_sentence_  _ss2_quote_to_sentence
+
+. label var _ss2_quote_to_sentence         "(no stopwords) string similarity score 2 for quote to sentence"
+
+. 
+. rename _0tokensetscore_quote_to_paragra  _ss2_quote_to_paragraph
+
+. label var _ss2_quote_to_paragraph        "(no stopwords) string similarity score 2 for quote to paragraph"
+
+. 
+. rename _1tokensetscore_quote_to_fullspe  _ss2_quote_to_speech
+
+. label var _ss2_quote_to_speech           "(no stopwords) string similarity score 2 for quote to speech"
+
+. 
+. *--- Semantic matching scores -----------------------------------------
+. replace ce_max_quote2speech = 100 * ce_max_quote2speech
+(14903 real changes made)
+
+. label var be_max_quote2speech "Best embedding-based biencoder score for quote to speech"
+
+. label var ce_max_quote2speech "Cross-encoder semantic score for quote to speech (0-100)"
+
+. 
+. *======================================================================
+. * CONSTITUENCY AND ELECTORAL VARIABLES
+. *======================================================================
+. rename num group_size
+
+. label var group_size             "Politician size of constituency (1 to 6)"
+
+. 
+. label var voters                 "Electoral size of constituency for current parliament"
+
+. label var valid_votes            "Number of valid votes in constituency"
+
+. label var winners_majority       "Number of votes for winning party/candidate"
+
+. label var vote                   "Number of votes for current parliament"
+
+. label var vote_share             "Percentage of votes for current parliament"
+
+. label var winners_majority_share "Winners' majority share (percent of valid votes)"
+
+. label var swing                  "Electoral swing in ruling party vote share (percentage points)"
+
+. 
+. *======================================================================
+. * PARLIAMENT, YEAR, ELECTION TIMING, WEEKDAY
+. *======================================================================
+. *--- Parliament life: dummies + factor ---------------------------------
+. label var parl10 "=1 if speech occurred in 10th Parliament"
+
+. label var parl11 "=1 if speech occurred in 11th Parliament"
+
+. label var parl12 "=1 if speech occurred in 12th Parliament"
+
+. label var parl13 "=1 if speech occurred in 13th Parliament"
+
+. 
+. label define parl_label 0 "10th parliament" 1 "11th parliament" 2 "12th parliament" 3 "13th parliament"
+
+. encode parl, gen(parliament) label(parl_label)
+
+. drop parl
+
+. rename parliament parl
+
+. fvset base 0 parl
+
+. label var parl "Parliament life (categorical)"
+
+. 
+. *======================================================================
+. * ELECTION TIMING INDICATORS
+. *======================================================================
+. *--- General elections -------------------------------------------------
+. label var ge2006       "=1 if article published in year of General Election 2006"
+
+. label var ge2011       "=1 if article published in year of General Election 2011"
+
+. label var ge2015       "=1 if article published in year of General Election 2015"
+
+. 
+. label var ge2006_1mth  "=1 if article within 1 month of General Election 2006"
+
+. label var ge2006_3mths "=1 if article within 3 months of General Election 2006"
+
+. label var ge2006_6mths "=1 if article within 6 months of General Election 2006"
+
+. 
+. label var ge2011_1mth  "=1 if article within 1 month of General Election 2011"
+
+. label var ge2011_3mths "=1 if article within 3 months of General Election 2011"
+
+. label var ge2011_6mths "=1 if article within 6 months of General Election 2011"
+
+. 
+. label var ge2015_1mth  "=1 if article within 1 month of General Election 2015"
+
+. label var ge2015_3mths "=1 if article within 3 months of General Election 2015"
+
+. label var ge2015_6mths "=1 if article within 6 months of General Election 2015"
+
+. 
+. *--- By-elections ------------------------------------------------------
+. label var be2012       "=1 if article published in year of By-election 2012"
+
+. label var be2013       "=1 if article published in year of By-election 2013"
+
+. label var be2016       "=1 if article published in year of By-election 2016"
+
+. 
+. label var be2012_1mth  "=1 if article within 1 month of By-election 2012"
+
+. label var be2012_3mths "=1 if article within 3 months of By-election 2012"
+
+. label var be2013_1mth  "=1 if article within 1 month of By-election 2013"
+
+. label var be2013_3mths "=1 if article within 3 months of By-election 2013"
+
+. label var be2016_1mth  "=1 if article within 1 month of By-election 2016"
+
+. label var be2016_3mths "=1 if article within 3 months of By-election 2016"
+
+. 
+. *--- Presidential elections --------------------------------------------
+. label var pe2005       "=1 if article published in year of Presidential Election 2005"
+
+. label var pe2011       "=1 if article published in year of Presidential Election 2011"
+
+. 
+. label var pe2005_1mth  "=1 if article within 1 month of Presidential Election 2005"
+
+. label var pe2005_3mths "=1 if article within 3 months of Presidential Election 2005"
+
+. label var pe2005_6mths "=1 if article within 6 months of Presidential Election 2005"
+
+. 
+. label var pe2011_1mth  "=1 if article within 1 month of Presidential Election 2011"
+
+. label var pe2011_3mths "=1 if article within 3 months of Presidential Election 2011"
+
+. label var pe2011_6mths "=1 if article within 6 months of Presidential Election 2011"
+
+. 
+. *======================================================================
+. * ARTICLE-LEVEL VARIABLES: SECTION, AUTHOR, LANGUAGE, BEAT
+. *======================================================================
+. * Encoded section with 'others' as base
+. label define section2_label ///
+>     1 "home" 2 "insight" 3 "money" 4 "news" 5 "opinion" 6 "others" ///
+>     7 "prime news" 8 "review - insight" 9 "singapore" 10 "sports" ///
+>     11 "st" 12 "think" 13 "top of the news" 14 "world"
+
+. encode section2, gen(sect2) label(section2_label)
+
+. drop section2
+
+. rename sect2 section2
+
+. fvset base 6 section2
+
+. label var section2 "Section of article (base: others)"
+
+. 
+. * Language / translation flags
+. label var malay        "=1 if quote is in Malay"
+
+. label var mandarin     "=1 if quote is in Mandarin"
+
+. label var tamil        "=1 if quote is in Tamil"
+
+. label var vernacular   "=1 if quote is in a non-English vernacular language"
+
+. label var translations "=1 if quote translated from vernacular to English"
+
+. 
+. * Author and beat
+. rename author_cleaned2 authorID
+
+. label var authorID "Author ID"
+
+. 
+. encode beat, gen(beat2)
+
+. drop beat
+
+. rename beat2 beat
+
+. label var beat "Beat assignment of reporter"
+
+. 
+. *--- Weekday of publication -------------------------------------------
+. label define weekday_label ///
+>     1 "monday" 2 "tuesday" 3 "wednesday" 4 "thursday" 5 "friday" 6 "saturday" 7 "sunday"
+
+. encode weekday, gen(dayofweek) label(weekday_label)
+
+. drop weekday
+
+. rename dayofweek weekday
+
+. fvset base 1 weekday
+
+. label var weekday "Day of week of article publication"
+
+. 
+. *======================================================================
+. * TEXT LENGTH
+. *======================================================================
+. * Word counts
+. rename wordcount_quote      quote
+
+. label var quote             "Word count of quote"
+
+. 
+. rename wordcount_paragraph  paragraph
+
+. label var paragraph         "Word count of paragraph"
+
+. 
+. rename wordcount_fullspeech speech
+
+. label var speech            "Word count of full speech"
+
+. 
+. rename wordcount            article
+
+. label var article           "Article length (words)"
+
+. 
+. * Character counts
+. rename char_count_quote     quote_char
+
+. label var quote_char        "Character count of quote"
+
+. 
+. rename char_count_paragraph paragraph_char
+
+. label var paragraph_char    "Character count of paragraph"
+
+. 
+. rename char_count_fullspeech speech_char
+
+. label var speech_char       "Character count of speech"
+
+. 
+. rename article_len_char     article_char
+
+. label var article_char      "Article length (characters)"
+
+. 
+. * Log transformations
+. #delimit ;
+delimiter now ;
+. global log_variables "
+>     quote 
+>     quote_char 
+>     paragraph 
+>     paragraph_char
+>     speech
+>     speech_char 
+>     article
+>     article_char
+> ";
+
+. #delimit cr
+delimiter now cr
+. 
+. foreach var in $log_variables {
+  2.     gen ln_`var' = ln(`var')
+  3.     label var ln_`var' "ln of `var'"
+  4. }
+(2 missing values generated)
+(2 missing values generated)
+
+. 
+. *======================================================================
+. * TOPIC DISTRIBUTIONS
+. *======================================================================
+. 
+. * 50-topic models: quote, speech, article
+. forvalues i = 1/50 {
+  2.     label var quote_50K_`i'   "Probability for topic `i'/50 for quote"
+  3.     label var speech_50K_`i'  "Probability for topic `i'/50 for speech"
+  4.     label var article_50K_`i' "Probability for topic `i'/50 for article"
+  5. }
+
+. 
+. * 92-topic models: quote, speech, sentence
+. forvalues i = 1/92 {
+  2.     label var quote_92K_`i'    "Probability for topic `i'/92 for quote"
+  3.     label var speech_92K_`i'   "Probability for topic `i'/92 for speech"
+  4.     label var sentence_92K_`i' "Probability for topic `i'/92 for sentence"
+  5. }
+
+. 
+. * 100-topic models: quote, speech
+. forvalues i = 1/100 {
+  2.     label var quote_100K_`i'  "Probability for topic `i'/100 for quote"
+  3.     label var speech_100K_`i' "Probability for topic `i'/100 for speech"
+  4. }
+
+. 
+. * Article-level topic models (30 and 40 topics)
+. forvalues i = 1/30 {
+  2.     label var article_30K_`i' "Probability for topic `i'/30 for article"
+  3. }
+
+. 
+. forvalues i = 1/40 {
+  2.     label var article_40K_`i' "Probability for topic `i'/40 for article"
+  3. }
+
+. 
+. *======================================================================
+. * LEXICAL RICHNESS
+. *======================================================================
+. label var ttr    "Type-token ratio"
+
+. label var rttr   "Root type-token ratio"
+
+. label var cttr   "Corrected type-token ratio"
+
+. label var herdan "Herdan's C lexical diversity"
+
+. label var summer "Summer lexical diversity index"
+
+. label var dugast "Dugast lexical diversity index"
+
+. label var maas   "Maas lexical diversity index"
+
+. label var msttr  "Mean segmental type-token ratio"
+
+. label var mattr  "Moving-average type-token ratio"
+
+. label var mtld   "Measure of textual lexical diversity"
+
+. label var hdd    "Hypergeometric distribution diversity"
+
+. 
+. *======================================================================
+. * READABILITY
+. *======================================================================
+. label var dalechall     "Dale-Chall readability index"
+
+. label var flesch        "Flesch reading easse score"
+
+. label var fleschkincaid "Flesch-Kincaid grade level"
+
+. label var gunningfog    "Gunning-Fog readability index"
+
+. label var smog          "SMOG readability index"
+
+. label var notdalechall  "Share of difficult words (not in Dale-Chall list)"
+
+. label var polysyllable  "Number of polysyllabic words (more than 3 syllables)"
+
+. label var syllables     "Total number of syllables"
+
+. label var sentences     "Total number of sentences"
+
+. 
+. *======================================================================
+. * SUBJECTIVITY, OBJECTIVITY, POLARITY
+. *======================================================================
+. * Subjectivity (0 = objective, 1 = subjective)
+. gen speech_objectivity         = 1 - speech_subjectivity
+
+. label var speech_subjectivity  "Speech subjectivity (0 objective - 1 subjective)"
+
+. 
+. gen para_objectivity           = 1 - para_subjectivity
+(2 missing values generated)
+
+. label var para_subjectivity    "Paragraph subjectivity (0-1)"
+
+. 
+. gen sentence_objectivity       = 1 - sentence_subjectivity
+(2 missing values generated)
+
+. label var sentence_subjectivity "Sentence subjectivity (0-1)"
+
+. 
+. gen quote_objectivity          = 1 - quote_subjectivity
+
+. label var quote_subjectivity   "Quote subjectivity (0-1)"
+
+. 
+. gen quote_sentence_objectivity = 1 - quote_sentence_subjectivity
+(1 missing value generated)
+
+. label var quote_sentence_subjectivity "Quote sentence subjectivity (0-1)"
+
+. 
+. label var speech_objectivity         "Speech objectivity (0 objective - 1 subjective)"
+
+. label var para_objectivity           "Paragraph objectivity (0-1)"
+
+. label var sentence_objectivity       "Sentence objectivity (0-1)"
+
+. label var quote_objectivity          "Quote objectivity (0-1)"
+
+. label var quote_sentence_objectivity "Quote sentence objectivity (0-1)"
+
+. 
+. * Polarity (-1 = negative, +1 = positive)
+. label var speech_polarity         "Speech polarity (-1 negative to +1 positive), PatternAnalyzer"
+
+. label var para_polarity           "Paragraph polarity (-1 to +1), PatternAnalyzer"
+
+. label var sentence_polarity       "Sentence polarity (-1 to +1), PatternAnalyzer"
+
+. label var quote_polarity          "Quote polarity (-1 to +1), PatternAnalyzer"
+
+. label var quote_sentence_polarity "Quote sentence polarity (-1 to +1), PatternAnalyzer"
+
+. 
+end of do-file
+
+. 
+. global TABSAVEDIR ../results/tables
+
+. global FIGSAVEDIR ../results/figures
+
+. global graphformats png pdf eps tif
+
+. 
+. 
+. *==============================================================================
+. * Global macros
+. *==============================================================================
+. #delimit;
+delimiter now ;
+. global time
+>         i.parl
+>         i.year
+> ;
+
+. global ind
+>     i.gender
+>     i.race
+>     c.age
+>     c.age2
+>     c.tenure
+>     c.tenure2
+> ;
+
+.     global article
+>     i.weekday
+>     i.section2
+>     translations
+> ;
+
+.     global portfolio
+>     MFA
+>     PMO
+>     MEWR
+>     MCI
+>     MTI
+>     MHA
+>     MCCY
+>     MinLaw
+>     MOH
+>     MOM
+>     MinDef
+>     MSF
+>     MOT
+>     MND
+>     MOF
+>     MOE
+>     speaker
+> ;
+
+.     global electoral
+>     c.group_size
+>     c.voters
+>     c.vote_share
+>     c.winners_majority_share
+> ;
+
+.     global topics
+>     speech_92K*
+>     quote_92K*
+>     article_40K*
+> ;
+
+.     global objectivity
+>     speech_objectivity
+>     para_objectivity
+>     sentence_objectivity
+>     quote_objectivity
+>     quote_sentence_objectivity
+> ;
+
+.     global polarity
+>     speech_polarity
+>     para_polarity
+>     sentence_polarity
+>     quote_polarity
+>     quote_sentence_polarity
+> ;
+
+.     global readability
+>     flesch
+>     fleschkincaid
+>     gunningfog
+>     smog
+>     dalechall
+>     notdalechall
+>     sentences
+>     syllables
+>     polysyllable
+> ;
+
+.     global lexical
+>     ttr
+>     rttr
+>     cttr
+>     herdan
+>     summer
+>     dugast
+>     maas
+>     msttr
+>     mattr
+>     mtld
+>     hdd
+> ;
+
+.     global length_s
+>     quote
+>     speech
+>     article
+> ;
+
+. global length_s
+>     ln_quote
+>     ln_speech
+>     ln_article
+> ;
+
+. assert_macros "portfolio time ind article topics";
+Checking portfolio:
+portfolio contains: MFA     PMO     MEWR     MCI     MTI     MHA     MCCY     MinLaw     MOH     MOM     MinDef     MSF     MOT     MND     MOF     MO
+> E     speaker
+Checking time:
+time contains: i.parl         i.year
+Checking ind:
+ind contains: i.gender     i.race     c.age     c.age2     c.tenure     c.tenure2
+Checking article:
+article contains: i.weekday     i.section2     translations
+Checking topics:
+topics contains: speech_92K*     quote_92K*     article_40K*
+
+. global min
+>     i.rank
+>     $portfolio
+>     i.rank#($portfolio)
+>     ;
+
+.     global base_controls
+>     $time
+>     $ind
+>     $article
+>     $topics
+>     ;
+
+.     global base_controls_min
+>     $time
+>     $ind
+>     $article
+>     $topics
+>     $min
+>     ;
+
+. #delimit cr
+delimiter now cr
+. 
+. *==============================================================================
+. * COEFFICIENT LABELS
+. *==============================================================================
+. #delimit;
+delimiter now ;
+. global coeff_labels
+>         "
+>     1.opposition "Opposition"
+>     1.opposition#c.trend "Opposition $\times$ Year"
+>     trend "Year"
+>         pc1_objectivity "Objectivity of speech and quote"
+>         pc1_polarity "Polarity of speech and quote"
+>         pc1_readability "Grade/readability score of speech transcipt"
+>         pc1_lexical "Lexical richness of speech transcipt"
+>     "
+> ;
+
+. #delimit cr
+delimiter now cr
+. 
+end of do-file
+
+. 
+. tictoc tic 1
+------------------------------------------------------------------------------------------------------------------------------------------------------
+----------- Time log -----------
+Start time:  2 Dec 2025 12:20:45
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+. assert_macros "objectivity polarity readability"
+Checking objectivity:
+objectivity contains: speech_objectivity     para_objectivity     sentence_objectivity     quote_objectivity     quote_sentence_objectivity
+Checking polarity:
+polarity contains: speech_polarity     para_polarity     sentence_polarity     quote_polarity     quote_sentence_polarity
+Checking readability:
+readability contains: flesch     fleschkincaid     gunningfog     smog     dalechall     notdalechall     sentences     syllables     polysyllable
+
+. 
+. pca $objectivity
+
+Principal components/correlation                  Number of obs    =     14901
+                                                  Number of comp.  =         5
+                                                  Trace            =         5
+    Rotation: (unrotated = principal)             Rho              =    1.0000
+
+    --------------------------------------------------------------------------
+       Component |   Eigenvalue   Difference         Proportion   Cumulative
+    -------------+------------------------------------------------------------
+           Comp1 |      2.78163      1.69215             0.5563       0.5563
+           Comp2 |      1.08948      .546644             0.2179       0.7742
+           Comp3 |      .542831      .186271             0.1086       0.8828
+           Comp4 |      .356561      .127054             0.0713       0.9541
+           Comp5 |      .229507            .             0.0459       1.0000
+    --------------------------------------------------------------------------
+
+Principal components (eigenvectors) 
+
+    ------------------------------------------------------------------------------
+        Variable |    Comp1     Comp2     Comp3     Comp4     Comp5 | Unexplained 
+    -------------+--------------------------------------------------+-------------
+    speech_obj~y |   0.2489    0.7656    0.5843    0.1023    0.0005 |           0 
+    para_objec~y |   0.3922    0.4756   -0.7521   -0.2187    0.0806 |           0 
+    sentence_o~y |   0.5076   -0.1857   -0.1111    0.7910   -0.2643 |           0 
+    quote_obje~y |   0.5157   -0.3013    0.1949   -0.1174    0.7691 |           0 
+    quote_sent.. |   0.5105   -0.2497    0.2064   -0.5497   -0.5764 |           0 
+    ------------------------------------------------------------------------------
+
+. predict pc1_objectivity, score
+(4 components skipped)
+
+Scoring coefficients 
+    sum of squares(column-loading) = 1
+
+    ----------------------------------------------------------------
+        Variable |    Comp1     Comp2     Comp3     Comp4     Comp5 
+    -------------+--------------------------------------------------
+    speech_obj~y |   0.2489    0.7656    0.5843    0.1023    0.0005 
+    para_objec~y |   0.3922    0.4756   -0.7521   -0.2187    0.0806 
+    sentence_o~y |   0.5076   -0.1857   -0.1111    0.7910   -0.2643 
+    quote_obje~y |   0.5157   -0.3013    0.1949   -0.1174    0.7691 
+    quote_sent.. |   0.5105   -0.2497    0.2064   -0.5497   -0.5764 
+    ----------------------------------------------------------------
+
+. label variable pc1_objectivity  "1st PC of objectivity scores"
+
+. 
+. pca $polarity
+
+Principal components/correlation                  Number of obs    =     14901
+                                                  Number of comp.  =         5
+                                                  Trace            =         5
+    Rotation: (unrotated = principal)             Rho              =    1.0000
+
+    --------------------------------------------------------------------------
+       Component |   Eigenvalue   Difference         Proportion   Cumulative
+    -------------+------------------------------------------------------------
+           Comp1 |      3.06248      2.05593             0.6125       0.6125
+           Comp2 |      1.00655      .528862             0.2013       0.8138
+           Comp3 |      .477687      .183807             0.0955       0.9093
+           Comp4 |      .293879      .134476             0.0588       0.9681
+           Comp5 |      .159404            .             0.0319       1.0000
+    --------------------------------------------------------------------------
+
+Principal components (eigenvectors) 
+
+    ------------------------------------------------------------------------------
+        Variable |    Comp1     Comp2     Comp3     Comp4     Comp5 | Unexplained 
+    -------------+--------------------------------------------------+-------------
+    speech_pol~y |   0.2633    0.8066    0.5246   -0.0700   -0.0010 |           0 
+    para_polar~y |   0.4172    0.3945   -0.7878    0.2115   -0.0709 |           0 
+    sentence_p~y |   0.4995   -0.1874   -0.0681   -0.7958    0.2783 |           0 
+    quote_pola~y |   0.5079   -0.2985    0.2160    0.1006   -0.7721 |           0 
+    quote_s~rity |   0.4992   -0.2638    0.2300    0.5540    0.5669 |           0 
+    ------------------------------------------------------------------------------
+
+. predict pc1_polarity, score
+(4 components skipped)
+
+Scoring coefficients 
+    sum of squares(column-loading) = 1
+
+    ----------------------------------------------------------------
+        Variable |    Comp1     Comp2     Comp3     Comp4     Comp5 
+    -------------+--------------------------------------------------
+    speech_pol~y |   0.2633    0.8066    0.5246   -0.0700   -0.0010 
+    para_polar~y |   0.4172    0.3945   -0.7878    0.2115   -0.0709 
+    sentence_p~y |   0.4995   -0.1874   -0.0681   -0.7958    0.2783 
+    quote_pola~y |   0.5079   -0.2985    0.2160    0.1006   -0.7721 
+    quote_s~rity |   0.4992   -0.2638    0.2300    0.5540    0.5669 
+    ----------------------------------------------------------------
+
+. label variable pc1_polarity     "1st PC of polarity scores"
+
+. 
+. pca $readability
+
+Principal components/correlation                  Number of obs    =     14892
+                                                  Number of comp.  =         9
+                                                  Trace            =         9
+    Rotation: (unrotated = principal)             Rho              =    1.0000
+
+    --------------------------------------------------------------------------
+       Component |   Eigenvalue   Difference         Proportion   Cumulative
+    -------------+------------------------------------------------------------
+           Comp1 |      4.66346      .918432             0.5182       0.5182
+           Comp2 |      3.74502      3.36503             0.4161       0.9343
+           Comp3 |      .379996      .290044             0.0422       0.9765
+           Comp4 |     .0899524     .0314177             0.0100       0.9865
+           Comp5 |     .0585347     .0128057             0.0065       0.9930
+           Comp6 |      .045729     .0363148             0.0051       0.9981
+           Comp7 |    .00941423    .00384603             0.0010       0.9991
+           Comp8 |     .0055682    .00324227             0.0006       0.9997
+           Comp9 |    .00232593            .             0.0003       1.0000
+    --------------------------------------------------------------------------
+
+Principal components (eigenvectors) 
+
+    ----------------------------------------------------------------------------------------------------------------------
+        Variable |    Comp1     Comp2     Comp3     Comp4     Comp5     Comp6     Comp7     Comp8     Comp9 | Unexplained 
+    -------------+------------------------------------------------------------------------------------------+-------------
+          flesch |  -0.4214   -0.1897    0.0939    0.2212   -0.0950    0.7910    0.0655    0.1126    0.2776 |           0 
+    fleschkinc~d |   0.4241    0.1467    0.3530    0.5914   -0.0282   -0.1558    0.0078    0.1404    0.5286 |           0 
+      gunningfog |   0.4267    0.1482    0.3901    0.1310   -0.0042    0.4146    0.1582   -0.2599   -0.6018 |           0 
+            smog |   0.4181    0.1883    0.1086   -0.6787    0.0938    0.3241   -0.2152    0.1716    0.3573 |           0 
+       dalechall |   0.3409    0.2257   -0.8242    0.2474    0.0786    0.2546    0.1299    0.0670   -0.0031 |           0 
+    notdalechall |  -0.1712    0.4759   -0.0546    0.1282   -0.3507    0.0584   -0.6913   -0.3470   -0.0009 |           0 
+       sentences |  -0.2673    0.4103    0.0765    0.0194    0.7534    0.0132    0.1498   -0.3685    0.1676 |           0 
+       syllables |  -0.2158    0.4542    0.1161    0.0766    0.1299   -0.0170   -0.0851    0.7756   -0.3191 |           0 
+    polysyllable |  -0.1490    0.4828    0.0324   -0.1989   -0.5174   -0.0673    0.6323   -0.0915    0.1540 |           0 
+    ----------------------------------------------------------------------------------------------------------------------
+
+. predict pc1_readability, score
+(8 components skipped)
+
+Scoring coefficients 
+    sum of squares(column-loading) = 1
+
+    --------------------------------------------------------------------------------------------------------
+        Variable |    Comp1     Comp2     Comp3     Comp4     Comp5     Comp6     Comp7     Comp8     Comp9 
+    -------------+------------------------------------------------------------------------------------------
+          flesch |  -0.4214   -0.1897    0.0939    0.2212   -0.0950    0.7910    0.0655    0.1126    0.2776 
+    fleschkinc~d |   0.4241    0.1467    0.3530    0.5914   -0.0282   -0.1558    0.0078    0.1404    0.5286 
+      gunningfog |   0.4267    0.1482    0.3901    0.1310   -0.0042    0.4146    0.1582   -0.2599   -0.6018 
+            smog |   0.4181    0.1883    0.1086   -0.6787    0.0938    0.3241   -0.2152    0.1716    0.3573 
+       dalechall |   0.3409    0.2257   -0.8242    0.2474    0.0786    0.2546    0.1299    0.0670   -0.0031 
+    notdalechall |  -0.1712    0.4759   -0.0546    0.1282   -0.3507    0.0584   -0.6913   -0.3470   -0.0009 
+       sentences |  -0.2673    0.4103    0.0765    0.0194    0.7534    0.0132    0.1498   -0.3685    0.1676 
+       syllables |  -0.2158    0.4542    0.1161    0.0766    0.1299   -0.0170   -0.0851    0.7756   -0.3191 
+    polysyllable |  -0.1490    0.4828    0.0324   -0.1989   -0.5174   -0.0673    0.6323   -0.0915    0.1540 
+    --------------------------------------------------------------------------------------------------------
+
+. label variable pc1_readability  "1st PC of readability scores"
+
+. 
+. pca cttr msttr mattr mtld hdd maas // rttr and cttr are perfectly correlated, so rttr is removed, herdan, ttr, and summer are removed because their 
+> kmo < 0.5
+
+Principal components/correlation                  Number of obs    =     14850
+                                                  Number of comp.  =         6
+                                                  Trace            =         6
+    Rotation: (unrotated = principal)             Rho              =    1.0000
+
+    --------------------------------------------------------------------------
+       Component |   Eigenvalue   Difference         Proportion   Cumulative
+    -------------+------------------------------------------------------------
+           Comp1 |      4.42888      3.53813             0.7381       0.7381
+           Comp2 |       .89075      .609435             0.1485       0.8866
+           Comp3 |      .281314      .106136             0.0469       0.9335
+           Comp4 |      .175178    .00385213             0.0292       0.9627
+           Comp5 |      .171326      .118774             0.0286       0.9912
+           Comp6 |     .0525522            .             0.0088       1.0000
+    --------------------------------------------------------------------------
+
+Principal components (eigenvectors) 
+
+    ----------------------------------------------------------------------------------------
+        Variable |    Comp1     Comp2     Comp3     Comp4     Comp5     Comp6 | Unexplained 
+    -------------+------------------------------------------------------------+-------------
+            cttr |   0.2980    0.7855   -0.2293    0.4612   -0.1698    0.0103 |           0 
+           msttr |   0.4420   -0.2432    0.0978    0.3595    0.4571   -0.6306 |           0 
+           mattr |   0.4492   -0.2339    0.0407    0.2271    0.3147    0.7689 |           0 
+            mtld |   0.4271   -0.1620    0.5502    0.0179   -0.6971   -0.0479 |           0 
+             hdd |   0.4071    0.4021    0.2079   -0.7320    0.3037   -0.0346 |           0 
+            maas |  -0.4072    0.2850    0.7683    0.2652    0.2915    0.0863 |           0 
+    ----------------------------------------------------------------------------------------
+
+. predict pc1_lexical, score
+(5 components skipped)
+
+Scoring coefficients 
+    sum of squares(column-loading) = 1
+
+    --------------------------------------------------------------------------
+        Variable |    Comp1     Comp2     Comp3     Comp4     Comp5     Comp6 
+    -------------+------------------------------------------------------------
+            cttr |   0.2980    0.7855   -0.2293    0.4612   -0.1698    0.0103 
+           msttr |   0.4420   -0.2432    0.0978    0.3595    0.4571   -0.6306 
+           mattr |   0.4492   -0.2339    0.0407    0.2271    0.3147    0.7689 
+            mtld |   0.4271   -0.1620    0.5502    0.0179   -0.6971   -0.0479 
+             hdd |   0.4071    0.4021    0.2079   -0.7320    0.3037   -0.0346 
+            maas |  -0.4072    0.2850    0.7683    0.2652    0.2915    0.0863 
+    --------------------------------------------------------------------------
+
+. label variable pc1_lexical              "1st PC of lexical richness scores"
+
+. 
+. 
+. assert_macros "length_s base_controls_min"
+Checking length_s:
+length_s contains: ln_quote     ln_speech     ln_article
+Checking base_controls_min:
+base_controls_min contains: i.parl         i.year     i.gender     i.race     c.age     c.age2     c.tenure     c.tenure2     i.weekday     i.section2
+>      translations     speech_92K*     quote_92K*     article_40K*     i.rank     MFA     PMO     MEWR     MCI     MTI     MHA     MCCY     MinLaw   
+>   MOH     MOM     MinDef     MSF     MOT     MND     MOF     MOE     speaker     i.rank#(MFA     PMO     MEWR     MCI     MTI     MHA     MCCY     M
+> inLaw     MOH     MOM     MinDef     MSF     MOT     MND     MOF     MOE     speaker)
+
+. *--------------------------------------------------------------------------------------------------
+. * Panel A. String simlarity 1 with PC controls
+. *--------------------------------------------------------------------------------------------------
+. eststo clear
+
+. 
+. eststo: qui reg ss1_quote_to_speech i.opposition $length_s $base_controls_min,                                                                      
+>                                         vce(cluster article_id) 
+(est1 stored)
+
+. eststo: qui reg ss1_quote_to_speech i.opposition $length_s $base_controls_min pc1_objectivity,                                                      
+>                         vce(cluster article_id) 
+(est2 stored)
+
+. eststo: qui reg ss1_quote_to_speech i.opposition $length_s $base_controls_min                             pc1_polarity,                             
+>                             vce(cluster article_id) 
+(est3 stored)
+
+. eststo: qui reg ss1_quote_to_speech i.opposition $length_s $base_controls_min                                                      pc1_readability, 
+>                     vce(cluster article_id) 
+(est4 stored)
+
+. eststo: qui reg ss1_quote_to_speech i.opposition $length_s $base_controls_min                                                                       
+>                pc1_lexical, vce(cluster article_id) 
+(est5 stored)
+
+. eststo: qui reg ss1_quote_to_speech i.opposition $length_s $base_controls_min pc1_objectivity pc1_polarity pc1_readability pc1_lexical, vce(cluster 
+> article_id) 
+(est6 stored)
+
+. 
+. #delimit ;
+delimiter now ;
+. esttab, keep(
+>                         1.opposition
+>                         pc1_objectivity
+>                         pc1_polarity
+>                         pc1_readability
+>                         pc1_lexical
+>                 )
+>                 coeflabel(`my_coeflabel')
+>                 `esttab_options'
+>                 order(`keep_coeff') 
+> ;
+
+------------------------------------------------------------------------------------------------------------
+                      (1)             (2)             (3)             (4)             (5)             (6)   
+             ss1_quote~ch    ss1_quote~ch    ss1_quote~ch    ss1_quote~ch    ss1_quote~ch    ss1_quote~ch   
+------------------------------------------------------------------------------------------------------------
+1.opposition       -1.858**        -1.808*         -1.855**        -2.120**        -1.764*         -2.024** 
+                  (-2.61)         (-2.54)         (-2.61)         (-2.97)         (-2.48)         (-2.83)   
+
+pc1_object~y                       -0.127*                                                         -0.129*  
+                                  (-2.03)                                                         (-2.04)   
+
+pc1_polarity                                      -0.0183                                         -0.0287   
+                                                  (-0.30)                                         (-0.47)   
+
+pc1_readab~y                                                        0.649***                        0.642***
+                                                                   (7.73)                          (7.35)   
+
+pc1_lexical                                                                         0.361***        0.309***
+                                                                                   (4.72)          (4.00)   
+------------------------------------------------------------------------------------------------------------
+N                   14901           14899           14899           14890           14848           14836   
+------------------------------------------------------------------------------------------------------------
+t statistics in parentheses
+* p<0.05, ** p<0.01, *** p<0.001
+
+. esttab using $TABSAVEDIR/add-linguistics-panelA-substring-accuracy.tex,         
+>         replace
+>         booktabs
+>         fragment
+>         keep(
+>                 1.opposition
+>                 pc1_objectivity
+>                 pc1_polarity
+>                 pc1_readability
+>                 pc1_lexical
+>         )
+>         coeflabel($coeff_labels)
+>         b(%9.2fc)
+>         se(%9.2fc)
+>         star (* 0.1 ** 0.05 *** 0.01)
+>         label
+>         noobs
+>         nomtitle
+>         nonumbers
+>         nolines
+>         nogaps
+>         noeqlines
+>         nodepvars
+> ;
+(output written to ../results/tables/add-linguistics-panelA-substring-accuracy.tex)
+
+. esttab using $TABSAVEDIR/add-linguistics-panelA-substring-accuracy.md,
+>         replace
+>         se
+>         star (* 0.1 ** 0.05 *** 0.01)
+>         keep(
+>                 1.opposition
+>                 pc1_objectivity
+>                 pc1_polarity
+>                 pc1_readability
+>                 pc1_lexical
+>         )
+>         coeflabel($coeff_labels)
+>     b(%9.2f)
+>     se(%9.2f)
+>     nonumbers
+>         style(mmd)
+>     mtitle("(1) Baseline" "(2) +Objectivity" "(3) +Polarity" "(4) +Readability" "(5) +Lexical" "(6) +All")
+> ;
+(output written to ../results/tables/add-linguistics-panelA-substring-accuracy.md)
+
+. #delimit cr                     
+delimiter now cr
+. 
+. *--------------------------------------------------------------------------------------------------
+. * Panel B. String similarity 2 with PC controls
+. *--------------------------------------------------------------------------------------------------
+. eststo clear
+
+. 
+. eststo: qui reg ss2_quote_to_speech i.opposition $length_s $base_controls_min,                                                                      
+>                                         vce(cluster article_id) 
+(est1 stored)
+
+. eststo: qui reg ss2_quote_to_speech i.opposition $length_s $base_controls_min pc1_objectivity,                                                      
+>                         vce(cluster article_id) 
+(est2 stored)
+
+. eststo: qui reg ss2_quote_to_speech i.opposition $length_s $base_controls_min                             pc1_polarity,                             
+>                             vce(cluster article_id) 
+(est3 stored)
+
+. eststo: qui reg ss2_quote_to_speech i.opposition $length_s $base_controls_min                                                      pc1_readability, 
+>                     vce(cluster article_id) 
+(est4 stored)
+
+. eststo: qui reg ss2_quote_to_speech i.opposition $length_s $base_controls_min                                                                       
+>                pc1_lexical, vce(cluster article_id) 
+(est5 stored)
+
+. eststo: qui reg ss2_quote_to_speech i.opposition $length_s $base_controls_min pc1_objectivity pc1_polarity pc1_readability pc1_lexical, vce(cluster 
+> article_id) 
+(est6 stored)
+
+. 
+. #delimit ;
+delimiter now ;
+. esttab, keep(
+>                         1.opposition
+>                         pc1_objectivity
+>                         pc1_polarity
+>                         pc1_readability
+>                         pc1_lexical
+>                 )
+>                 coeflabel(`my_coeflabel')
+>                 `esttab_options'
+>                 order(`keep_coeff') 
+> ;
+
+------------------------------------------------------------------------------------------------------------
+                      (1)             (2)             (3)             (4)             (5)             (6)   
+             ss2_quote~ch    ss2_quote~ch    ss2_quote~ch    ss2_quote~ch    ss2_quote~ch    ss2_quote~ch   
+------------------------------------------------------------------------------------------------------------
+1.opposition       -2.149**        -2.124**        -2.145**        -2.238**        -2.151**        -2.226** 
+                  (-3.07)         (-3.03)         (-3.07)         (-3.19)         (-3.09)         (-3.18)   
+
+pc1_object~y                      -0.0790                                                         -0.0787   
+                                  (-1.58)                                                         (-1.55)   
+
+pc1_polarity                                       0.0234                                         0.00837   
+                                                   (0.50)                                          (0.17)   
+
+pc1_readab~y                                                        0.219**                         0.221** 
+                                                                   (2.99)                          (2.83)   
+
+pc1_lexical                                                                         0.136           0.117   
+                                                                                   (1.78)          (1.49)   
+------------------------------------------------------------------------------------------------------------
+N                   14901           14899           14899           14890           14848           14836   
+------------------------------------------------------------------------------------------------------------
+t statistics in parentheses
+* p<0.05, ** p<0.01, *** p<0.001
+
+. esttab using $TABSAVEDIR/add-linguistics-panelB-bow-accuracy.tex,       
+>         replace
+>         booktabs
+>         fragment
+>         keep(
+>                 1.opposition
+>                 pc1_objectivity
+>                 pc1_polarity
+>                 pc1_readability
+>                 pc1_lexical
+>         )
+>         coeflabel($coeff_labels)
+>         b(%9.2fc)
+>         se(%9.2fc)
+>         star (* 0.1 ** 0.05 *** 0.01)
+>         label
+>         noobs
+>         nomtitle
+>         nonumbers
+>         nolines
+>         nogaps
+>         noeqlines
+>         nodepvars
+> ;
+(output written to ../results/tables/add-linguistics-panelB-bow-accuracy.tex)
+
+. esttab using $TABSAVEDIR/add-linguistics-panelB-bow-accuracy.md,
+>         replace
+>         se
+>         star (* 0.1 ** 0.05 *** 0.01)
+>         keep(
+>                 1.opposition
+>                 pc1_objectivity
+>                 pc1_polarity
+>                 pc1_readability
+>                 pc1_lexical
+>         )
+>         coeflabel($coeff_labels)
+>     b(%9.2f)
+>     se(%9.2f)
+>     nonumbers
+>         style(mmd)
+>     mtitle("(1) Baseline" "(2) +Objectivity" "(3) +Polarity" "(4) +Readability" "(5) +Lexical" "(6) +All")
+> ;
+(output written to ../results/tables/add-linguistics-panelB-bow-accuracy.md)
+
+. #delimit cr                     
+delimiter now cr
+. 
+. *--------------------------------------------------------------------------------------------------
+. * Panel C. Semantic similarity with PC controls
+. *--------------------------------------------------------------------------------------------------
+. eststo clear
+
+. eststo: qui reg ce_max_quote2speech i.opposition $length_s $base_controls_min,                                                                      
+>                                         vce(cluster article_id)
+(est1 stored)
+
+. eststo: qui reg ce_max_quote2speech i.opposition $length_s $base_controls_min pc1_objectivity,                                                      
+>                         vce(cluster article_id)
+(est2 stored)
+
+. eststo: qui reg ce_max_quote2speech i.opposition $length_s $base_controls_min                             pc1_polarity,                             
+>                             vce(cluster article_id)
+(est3 stored)
+
+. eststo: qui reg ce_max_quote2speech i.opposition $length_s $base_controls_min                                                      pc1_readability, 
+>                     vce(cluster article_id)
+(est4 stored)
+
+. eststo: qui reg ce_max_quote2speech i.opposition $length_s $base_controls_min                                                                       
+>                pc1_lexical, vce(cluster article_id)
+(est5 stored)
+
+. eststo: qui reg ce_max_quote2speech i.opposition $length_s $base_controls_min pc1_objectivity pc1_polarity pc1_readability pc1_lexical, vce(cluster 
+> article_id)
+(est6 stored)
+
+. 
+. #delimit ;
+delimiter now ;
+. esttab, keep(
+>                         1.opposition
+>                         pc1_objectivity
+>                         pc1_polarity
+>                         pc1_readability
+>                         pc1_lexical
+>                 )               coeflabel(`my_coeflabel')
+>                 `esttab_options'
+>                 order(`keep_coeff')
+> ;
+
+------------------------------------------------------------------------------------------------------------
+                      (1)             (2)             (3)             (4)             (5)             (6)   
+             ce_max_quo~h    ce_max_quo~h    ce_max_quo~h    ce_max_quo~h    ce_max_quo~h    ce_max_quo~h   
+------------------------------------------------------------------------------------------------------------
+1.opposition       -4.053**        -4.104**        -4.097**        -4.078**        -3.882**        -3.969** 
+                  (-2.78)         (-2.81)         (-2.81)         (-2.80)         (-2.65)         (-2.71)   
+
+pc1_object~y                       0.0897                                                          0.0787   
+                                   (0.73)                                                          (0.62)   
+
+pc1_polarity                                       -0.100                                         -0.0739   
+                                                  (-0.82)                                         (-0.58)   
+
+pc1_readab~y                                                       0.0911                          0.0550   
+                                                                   (0.57)                          (0.33)   
+
+pc1_lexical                                                                         0.420**         0.414** 
+                                                                                   (2.75)          (2.68)   
+------------------------------------------------------------------------------------------------------------
+N                   14901           14899           14899           14890           14848           14836   
+------------------------------------------------------------------------------------------------------------
+t statistics in parentheses
+* p<0.05, ** p<0.01, *** p<0.001
+
+. esttab using $TABSAVEDIR/add-linguistics-panelC-semantic-accuracy.tex,
+>         replace
+>         booktabs
+>         fragment
+>         keep(
+>                 1.opposition
+>                 pc1_objectivity
+>                 pc1_polarity
+>                 pc1_readability
+>                 pc1_lexical
+>         )
+>         coeflabel($coeff_labels)
+>         b(%9.2fc)
+>         se(%9.2fc)
+>         star (* 0.1 ** 0.05 *** 0.01)
+>         label
+>         noobs
+>         nomtitle
+>         nonumbers
+>         nolines
+>         nogaps
+>         noeqlines
+>         nodepvars
+> ;
+(output written to ../results/tables/add-linguistics-panelC-semantic-accuracy.tex)
+
+. esttab using $TABSAVEDIR/add-linguistics-panelC-semantic-accuracy.md,
+>         replace
+>         se
+>         star (* 0.1 ** 0.05 *** 0.01)
+>         keep(
+>                 1.opposition
+>                 pc1_objectivity
+>                 pc1_polarity
+>                 pc1_readability
+>                 pc1_lexical
+>         )
+>         coeflabel($coeff_labels)
+>     b(%9.2f)
+>     se(%9.2f)
+>     nonumbers
+>         style(mmd)
+>     mtitle("(1) Baseline" "(2) +Objectivity" "(3) +Polarity" "(4) +Readability" "(5) +Lexical" "(6) +All")
+> ;
+(output written to ../results/tables/add-linguistics-panelC-semantic-accuracy.md)
+
+. #delimit cr
+delimiter now cr
+. 
+. 
+. tictoc toc 1
+------------------------------------------------------------------------------------------------------------------------------------------------------
+----------- Time log -----------
+Start time:  2 Dec 2025 12:20:45
+End time:  2 Dec 2025 12:21:54
+Elapsed seconds:        68
+Elapsed minutes:         1
+Elapsed hours:       .02
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+. beepme 2
+
+. log close
+      name:  <unnamed>
+       log:  \\wsl.localhost\Debian\home\lsys\neutrality\analysis\logs/table3.smcl
+  log type:  smcl
+ closed on:   2 Dec 2025, 12:21:56
+------------------------------------------------------------------------------------------------------------------------------------------------------

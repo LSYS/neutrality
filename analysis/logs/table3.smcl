@@ -1,0 +1,1483 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}\\wsl.localhost\Debian\home\lsys\neutrality\analysis\logs/table3.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res} 2 Dec 2025, 12:20:44
+{txt}
+{com}. 
+. do init.do
+{txt}
+{com}. cls                                     // Clear results window
+{txt}
+{com}. clear all               // Start with a clean slate
+{txt}
+{com}. set more off, perm      // Disable partitioned output
+{txt}({cmd:set more} preference recorded)
+
+{com}. macro drop _all         // Clear all macros to avoid namespace conflicts
+{txt}
+{com}. set linesize 150        // Line size limit to make output more readable, affects logs
+{txt}
+{com}. set varabbrev off, perm // Turn off variable abbreviation
+{txt}({cmd:set varabbrev} preference recorded)
+
+{com}. // pause on                // Enable pause mode for debugging
+. version 13.1            // Set Stata version to 13.1
+{txt}
+{com}. set matsize 10000
+{txt}
+{com}. 
+. *==============================================================================
+. // Set root path
+. // cap net install here, from("https://raw.githubusercontent.com/korenmiklos/here/master/")
+. cap here
+{txt}
+{com}. if _rc == 0 {c -(}
+.         here, set
+.         cd ${c -(}here{c )-}
+. {c )-}
+{txt}
+{com}. else {c -(}
+.         global here "\\wsl.localhost\Debian\home\lsys\neutrality\analysis"
+.         cd $here
+{res}\\wsl.localhost\Debian\home\lsys\neutrality\analysis
+{com}. {c )-}
+{txt}
+{com}. 
+. *==============================================================================
+. // Point to ado programs
+. adopath ++ ./ado
+{txt}  [1]              "{res}./ado{txt}"
+  [2]  (BASE)      "{res}C:\Program Files (x86)\Stata13\ado\base/{txt}"
+  [3]  (SITE)      "{res}C:\Program Files (x86)\Stata13\ado\site/{txt}"
+  [4]              "{res}.{txt}"
+  [5]  (PERSONAL)  "{res}c:\ado\personal/{txt}"
+  [6]  (PLUS)      "{res}c:\ado\plus/{txt}"
+  [7]  (OLDPLACE)  "{res}c:\ado/{txt}"
+
+{com}. 
+. use "../pipeline/out/media.dta", clear
+{txt}
+{com}. do preamble
+{txt}
+{com}. *-----------------------------------------------------------------------
+. * IDENTIFIERS AND METADATA
+. *-----------------------------------------------------------------------
+. label var qid         "Quote ID"
+{txt}
+{com}. label var article_id  "News article ID (title-date tuple)"
+{txt}
+{com}. label var speech_id   "Speech ID"
+{txt}
+{com}. 
+. label var date        "Publication date"
+{txt}
+{com}. label var matched_date "Matched speech date"
+{txt}
+{com}. label var matched_score "Matched score in semi-automated assessing"
+{txt}
+{com}. 
+. label var mp          "MP ID"
+{txt}
+{com}. label var party       "Party of politician (string code)"
+{txt}
+{com}. label var opposition  "=1 if from an opposition party"
+{txt}
+{com}. gen ruling = (party == "pap")
+{txt}
+{com}. label var ruling  "=1 if from the government party"
+{txt}
+{com}. label var non_partisan "=1 if non-partisan MP"
+{txt}
+{com}. assert (1 == opposition + ruling + non_partisan)
+{txt}
+{com}. label var speaker     "=1 if making speech in capacity of speaker"
+{txt}
+{com}. 
+. label var section     "Original article section"
+{txt}
+{com}. 
+. *======================================================================
+. * MP CAREER
+. *======================================================================
+. label var start "Start date of MP's parliamentary service"
+{txt}
+{com}. rename _end end
+{res}{txt}
+{com}. label var end   "End date of MP's parliamentary service"
+{txt}
+{com}. 
+. *--- Rank of MP --------------------------------------------------------
+. label define rank_label ///
+>     1 "pm" 2 "dpm" 3 "minister" 4 "sms" 5 "mos" 6 "mayor" 7 "sps" ///
+>     8 "parl sec" 9 "speaker" 10 "mp" 11 "ncmp" 12 "nmp"
+{txt}
+{com}. encode rank, gen(mp_rank) label(rank_label)
+{txt}
+{com}. drop rank
+{txt}
+{com}. rename mp_rank rank
+{res}{txt}
+{com}. label var rank "Rank of MP at time of speech"
+{txt}
+{com}. fvset base 10 rank   // base: Member of Parliament
+{txt}
+{com}. 
+. *--- Tenunre -----------------------------------------------------------
+. gen _tenure = tenure / 365
+{txt}
+{com}. drop tenure
+{txt}
+{com}. rename _tenure tenure
+{res}{txt}
+{com}. label var tenure "Seniority of politician at time of speech (years)"
+{txt}
+{com}. 
+. gen tenure2 = tenure^2
+{txt}
+{com}. label var tenure2 "Square of tenure"
+{txt}
+{com}. 
+. *======================================================================
+. * INDIVIDUAL DEMOGRAPHICS
+. *======================================================================
+. label var dob   "Date of birth of MP"
+{txt}
+{com}. label var yob   "Year of birth of MP"
+{txt}
+{com}. 
+. *--- Gender (0 = male, 1 = female) ------------------------------------
+. label define gender_label 0 "male" 1 "female"
+{txt}
+{com}. encode gender, gen(sex) label(gender_label)
+{txt}
+{com}. drop gender
+{txt}
+{com}. rename sex gender
+{res}{txt}
+{com}. fvset base 0 gender
+{txt}
+{com}. label var gender "Gender of politician"
+{txt}
+{com}. 
+. *--- Race --------------------------------------------------------------
+. label define race_label 0 "chinese" 1 "malay" 2 "indian" 3 "eurasian"
+{txt}
+{com}. encode race, gen(ethnic) label(race_label)
+{txt}
+{com}. drop race
+{txt}
+{com}. rename ethnic race
+{res}{txt}
+{com}. fvset base 0 race
+{txt}
+{com}. label var race "Race of politician (Chinese, Malay, Indian, Eurasian/other)"
+{txt}
+{com}. 
+. *--- Age ---------------------------------------------------------------
+. gen _age = age / 365
+{txt}
+{com}. drop age
+{txt}
+{com}. rename _age age
+{res}{txt}
+{com}. label var age "Age of politician at time of speech (years)"
+{txt}
+{com}. 
+. gen age2    = age^2
+{txt}
+{com}. label var age2 "Square of age"
+{txt}
+{com}. 
+. *======================================================================
+. * MINISTRY
+. *======================================================================
+. label var MND    "=1 if speech made while at Ministry of National Development"
+{txt}
+{com}. label var MinDef "=1 if speech made while at Ministry of Defence"
+{txt}
+{com}. label var MFA    "=1 if speech made while at Ministry of Foreign Affairs"
+{txt}
+{com}. label var MinLaw "=1 if speech made while at Ministry of Law"
+{txt}
+{com}. label var MHA    "=1 if speech made while at Ministry of Home Affairs"
+{txt}
+{com}. label var MOT    "=1 if speech made while at Ministry of Transport"
+{txt}
+{com}. label var MOF    "=1 if speech made while at Ministry of Finance"
+{txt}
+{com}. label var MOM    "=1 if speech made while at Ministry of Manpower"
+{txt}
+{com}. label var MTI    "=1 if speech made while at Ministry of Trade and Industry"
+{txt}
+{com}. label var MCCY   "=1 if speech made while at Ministry of Culture, Community and Youth"
+{txt}
+{com}. label var MSF    "=1 if speech made while at Ministry of Social and Family Development"
+{txt}
+{com}. label var MOH    "=1 if speech made while at Ministry of Health"
+{txt}
+{com}. label var PMO    "=1 if speech made while at Prime Minister's Office"
+{txt}
+{com}. label var MEWR   "=1 if speech made while at Ministry of the Environment and Water Resources"
+{txt}
+{com}. label var MCI    "=1 if speech made while at Ministry of Communications and Information"
+{txt}
+{com}. label var MOE    "=1 if speech made while at Ministry of Education"
+{txt}
+{com}. 
+. recode MFA PMO MEWR MCI MTI MHA MCCY MinLaw MOH MOM MinDef MSF MOT MND MOF MOE (. = 0)
+{txt}(MFA: 13913 changes made)
+(PMO: 14288 changes made)
+(MEWR: 14348 changes made)
+(MCI: 14173 changes made)
+(MTI: 14135 changes made)
+(MHA: 13392 changes made)
+(MCCY: 14301 changes made)
+(MinLaw: 13971 changes made)
+(MOH: 14054 changes made)
+(MOM: 14058 changes made)
+(MinDef: 13790 changes made)
+(MSF: 14693 changes made)
+(MOT: 13884 changes made)
+(MND: 13741 changes made)
+(MOF: 13401 changes made)
+(MOE: 13792 changes made)
+
+{com}. 
+. *======================================================================
+. * STRING SIMILARITY AND SEMANTIC MATCHING
+. *======================================================================
+. 
+. *--- String similarity 1 (partialscore) -------------------------------
+. rename partialscore_quote_to_fullspeech  ss1_quote_to_speech
+{res}{txt}
+{com}. label var ss1_quote_to_speech            "String similarity score 1 for quote to speech"
+{txt}
+{com}. 
+. rename partialscore_quote_to_paragraph   ss1_quote_to_paragraph
+{res}{txt}
+{com}. label var ss1_quote_to_paragraph         "String similarity score 1 for quote to paragraph"
+{txt}
+{com}. 
+. rename partialscore_quote_to_sentence    ss1_quote_to_sentence
+{res}{txt}
+{com}. label var ss1_quote_to_sentence          "String similarity score 1 for quote to sentence"
+{txt}
+{com}. 
+. rename _partialscore_speech              _ss1_quote_to_speech
+{res}{txt}
+{com}. label var _ss1_quote_to_speech           "(no stopwords) string similarity score 1 for quote to speech"
+{txt}
+{com}. 
+. rename _partialscore_paragraph           _ss1_quote_to_paragraph
+{res}{txt}
+{com}. label var _ss1_quote_to_paragraph        "(no stopwords) string similarity score 1 for quote to paragraph"
+{txt}
+{com}. 
+. rename _partialscore_sentence            _ss1_quote_to_sentence
+{res}{txt}
+{com}. label var _ss1_quote_to_sentence         "(no stopwords) string similarity score 1 for quote to sentence"
+{txt}
+{com}. 
+. *--- String similarity 2 (tokensetscore) ------------------------------
+. rename tokensetscore_quote_to_sentence   ss2_quote_to_sentence
+{res}{txt}
+{com}. label var ss2_quote_to_sentence          "String similarity score 2 for quote to sentence"
+{txt}
+{com}. 
+. rename tokensetscore_quote_to_paragraph  ss2_quote_to_paragraph
+{res}{txt}
+{com}. label var ss2_quote_to_paragraph         "String similarity score 2 for quote to paragraph"
+{txt}
+{com}. 
+. rename tokensetscore_quote_to_fullspeec  ss2_quote_to_speech
+{res}{txt}
+{com}. label var ss2_quote_to_speech            "String similarity score 2 for quote to speech"
+{txt}
+{com}. 
+. rename tokensetscore_quote_to_sentence_  _ss2_quote_to_sentence
+{res}{txt}
+{com}. label var _ss2_quote_to_sentence         "(no stopwords) string similarity score 2 for quote to sentence"
+{txt}
+{com}. 
+. rename _0tokensetscore_quote_to_paragra  _ss2_quote_to_paragraph
+{res}{txt}
+{com}. label var _ss2_quote_to_paragraph        "(no stopwords) string similarity score 2 for quote to paragraph"
+{txt}
+{com}. 
+. rename _1tokensetscore_quote_to_fullspe  _ss2_quote_to_speech
+{res}{txt}
+{com}. label var _ss2_quote_to_speech           "(no stopwords) string similarity score 2 for quote to speech"
+{txt}
+{com}. 
+. *--- Semantic matching scores -----------------------------------------
+. replace ce_max_quote2speech = 100 * ce_max_quote2speech
+{txt}(14903 real changes made)
+
+{com}. label var be_max_quote2speech "Best embedding-based biencoder score for quote to speech"
+{txt}
+{com}. label var ce_max_quote2speech "Cross-encoder semantic score for quote to speech (0-100)"
+{txt}
+{com}. 
+. *======================================================================
+. * CONSTITUENCY AND ELECTORAL VARIABLES
+. *======================================================================
+. rename num group_size
+{res}{txt}
+{com}. label var group_size             "Politician size of constituency (1 to 6)"
+{txt}
+{com}. 
+. label var voters                 "Electoral size of constituency for current parliament"
+{txt}
+{com}. label var valid_votes            "Number of valid votes in constituency"
+{txt}
+{com}. label var winners_majority       "Number of votes for winning party/candidate"
+{txt}
+{com}. label var vote                   "Number of votes for current parliament"
+{txt}
+{com}. label var vote_share             "Percentage of votes for current parliament"
+{txt}
+{com}. label var winners_majority_share "Winners' majority share (percent of valid votes)"
+{txt}
+{com}. label var swing                  "Electoral swing in ruling party vote share (percentage points)"
+{txt}
+{com}. 
+. *======================================================================
+. * PARLIAMENT, YEAR, ELECTION TIMING, WEEKDAY
+. *======================================================================
+. *--- Parliament life: dummies + factor ---------------------------------
+. label var parl10 "=1 if speech occurred in 10th Parliament"
+{txt}
+{com}. label var parl11 "=1 if speech occurred in 11th Parliament"
+{txt}
+{com}. label var parl12 "=1 if speech occurred in 12th Parliament"
+{txt}
+{com}. label var parl13 "=1 if speech occurred in 13th Parliament"
+{txt}
+{com}. 
+. label define parl_label 0 "10th parliament" 1 "11th parliament" 2 "12th parliament" 3 "13th parliament"
+{txt}
+{com}. encode parl, gen(parliament) label(parl_label)
+{txt}
+{com}. drop parl
+{txt}
+{com}. rename parliament parl
+{res}{txt}
+{com}. fvset base 0 parl
+{txt}
+{com}. label var parl "Parliament life (categorical)"
+{txt}
+{com}. 
+. *======================================================================
+. * ELECTION TIMING INDICATORS
+. *======================================================================
+. *--- General elections -------------------------------------------------
+. label var ge2006       "=1 if article published in year of General Election 2006"
+{txt}
+{com}. label var ge2011       "=1 if article published in year of General Election 2011"
+{txt}
+{com}. label var ge2015       "=1 if article published in year of General Election 2015"
+{txt}
+{com}. 
+. label var ge2006_1mth  "=1 if article within 1 month of General Election 2006"
+{txt}
+{com}. label var ge2006_3mths "=1 if article within 3 months of General Election 2006"
+{txt}
+{com}. label var ge2006_6mths "=1 if article within 6 months of General Election 2006"
+{txt}
+{com}. 
+. label var ge2011_1mth  "=1 if article within 1 month of General Election 2011"
+{txt}
+{com}. label var ge2011_3mths "=1 if article within 3 months of General Election 2011"
+{txt}
+{com}. label var ge2011_6mths "=1 if article within 6 months of General Election 2011"
+{txt}
+{com}. 
+. label var ge2015_1mth  "=1 if article within 1 month of General Election 2015"
+{txt}
+{com}. label var ge2015_3mths "=1 if article within 3 months of General Election 2015"
+{txt}
+{com}. label var ge2015_6mths "=1 if article within 6 months of General Election 2015"
+{txt}
+{com}. 
+. *--- By-elections ------------------------------------------------------
+. label var be2012       "=1 if article published in year of By-election 2012"
+{txt}
+{com}. label var be2013       "=1 if article published in year of By-election 2013"
+{txt}
+{com}. label var be2016       "=1 if article published in year of By-election 2016"
+{txt}
+{com}. 
+. label var be2012_1mth  "=1 if article within 1 month of By-election 2012"
+{txt}
+{com}. label var be2012_3mths "=1 if article within 3 months of By-election 2012"
+{txt}
+{com}. label var be2013_1mth  "=1 if article within 1 month of By-election 2013"
+{txt}
+{com}. label var be2013_3mths "=1 if article within 3 months of By-election 2013"
+{txt}
+{com}. label var be2016_1mth  "=1 if article within 1 month of By-election 2016"
+{txt}
+{com}. label var be2016_3mths "=1 if article within 3 months of By-election 2016"
+{txt}
+{com}. 
+. *--- Presidential elections --------------------------------------------
+. label var pe2005       "=1 if article published in year of Presidential Election 2005"
+{txt}
+{com}. label var pe2011       "=1 if article published in year of Presidential Election 2011"
+{txt}
+{com}. 
+. label var pe2005_1mth  "=1 if article within 1 month of Presidential Election 2005"
+{txt}
+{com}. label var pe2005_3mths "=1 if article within 3 months of Presidential Election 2005"
+{txt}
+{com}. label var pe2005_6mths "=1 if article within 6 months of Presidential Election 2005"
+{txt}
+{com}. 
+. label var pe2011_1mth  "=1 if article within 1 month of Presidential Election 2011"
+{txt}
+{com}. label var pe2011_3mths "=1 if article within 3 months of Presidential Election 2011"
+{txt}
+{com}. label var pe2011_6mths "=1 if article within 6 months of Presidential Election 2011"
+{txt}
+{com}. 
+. *======================================================================
+. * ARTICLE-LEVEL VARIABLES: SECTION, AUTHOR, LANGUAGE, BEAT
+. *======================================================================
+. * Encoded section with 'others' as base
+. label define section2_label ///
+>     1 "home" 2 "insight" 3 "money" 4 "news" 5 "opinion" 6 "others" ///
+>     7 "prime news" 8 "review - insight" 9 "singapore" 10 "sports" ///
+>     11 "st" 12 "think" 13 "top of the news" 14 "world"
+{txt}
+{com}. encode section2, gen(sect2) label(section2_label)
+{txt}
+{com}. drop section2
+{txt}
+{com}. rename sect2 section2
+{res}{txt}
+{com}. fvset base 6 section2
+{txt}
+{com}. label var section2 "Section of article (base: others)"
+{txt}
+{com}. 
+. * Language / translation flags
+. label var malay        "=1 if quote is in Malay"
+{txt}
+{com}. label var mandarin     "=1 if quote is in Mandarin"
+{txt}
+{com}. label var tamil        "=1 if quote is in Tamil"
+{txt}
+{com}. label var vernacular   "=1 if quote is in a non-English vernacular language"
+{txt}
+{com}. label var translations "=1 if quote translated from vernacular to English"
+{txt}
+{com}. 
+. * Author and beat
+. rename author_cleaned2 authorID
+{res}{txt}
+{com}. label var authorID "Author ID"
+{txt}
+{com}. 
+. encode beat, gen(beat2)
+{txt}
+{com}. drop beat
+{txt}
+{com}. rename beat2 beat
+{res}{txt}
+{com}. label var beat "Beat assignment of reporter"
+{txt}
+{com}. 
+. *--- Weekday of publication -------------------------------------------
+. label define weekday_label ///
+>     1 "monday" 2 "tuesday" 3 "wednesday" 4 "thursday" 5 "friday" 6 "saturday" 7 "sunday"
+{txt}
+{com}. encode weekday, gen(dayofweek) label(weekday_label)
+{txt}
+{com}. drop weekday
+{txt}
+{com}. rename dayofweek weekday
+{res}{txt}
+{com}. fvset base 1 weekday
+{txt}
+{com}. label var weekday "Day of week of article publication"
+{txt}
+{com}. 
+. *======================================================================
+. * TEXT LENGTH
+. *======================================================================
+. * Word counts
+. rename wordcount_quote      quote
+{res}{txt}
+{com}. label var quote             "Word count of quote"
+{txt}
+{com}. 
+. rename wordcount_paragraph  paragraph
+{res}{txt}
+{com}. label var paragraph         "Word count of paragraph"
+{txt}
+{com}. 
+. rename wordcount_fullspeech speech
+{res}{txt}
+{com}. label var speech            "Word count of full speech"
+{txt}
+{com}. 
+. rename wordcount            article
+{res}{txt}
+{com}. label var article           "Article length (words)"
+{txt}
+{com}. 
+. * Character counts
+. rename char_count_quote     quote_char
+{res}{txt}
+{com}. label var quote_char        "Character count of quote"
+{txt}
+{com}. 
+. rename char_count_paragraph paragraph_char
+{res}{txt}
+{com}. label var paragraph_char    "Character count of paragraph"
+{txt}
+{com}. 
+. rename char_count_fullspeech speech_char
+{res}{txt}
+{com}. label var speech_char       "Character count of speech"
+{txt}
+{com}. 
+. rename article_len_char     article_char
+{res}{txt}
+{com}. label var article_char      "Article length (characters)"
+{txt}
+{com}. 
+. * Log transformations
+. #delimit ;
+{txt}delimiter now ;
+{com}. global log_variables "
+>     quote 
+>     quote_char 
+>     paragraph 
+>     paragraph_char
+>     speech
+>     speech_char 
+>     article
+>     article_char
+> ";
+{txt}
+{com}. #delimit cr
+{txt}delimiter now cr
+{com}. 
+. foreach var in $log_variables {c -(}
+{txt}  2{com}.     gen ln_`var' = ln(`var')
+{txt}  3{com}.     label var ln_`var' "ln of `var'"
+{txt}  4{com}. {c )-}
+{txt}(2 missing values generated)
+(2 missing values generated)
+
+{com}. 
+. *======================================================================
+. * TOPIC DISTRIBUTIONS
+. *======================================================================
+. 
+. * 50-topic models: quote, speech, article
+. forvalues i = 1/50 {c -(}
+{txt}  2{com}.     label var quote_50K_`i'   "Probability for topic `i'/50 for quote"
+{txt}  3{com}.     label var speech_50K_`i'  "Probability for topic `i'/50 for speech"
+{txt}  4{com}.     label var article_50K_`i' "Probability for topic `i'/50 for article"
+{txt}  5{com}. {c )-}
+{txt}
+{com}. 
+. * 92-topic models: quote, speech, sentence
+. forvalues i = 1/92 {c -(}
+{txt}  2{com}.     label var quote_92K_`i'    "Probability for topic `i'/92 for quote"
+{txt}  3{com}.     label var speech_92K_`i'   "Probability for topic `i'/92 for speech"
+{txt}  4{com}.     label var sentence_92K_`i' "Probability for topic `i'/92 for sentence"
+{txt}  5{com}. {c )-}
+{txt}
+{com}. 
+. * 100-topic models: quote, speech
+. forvalues i = 1/100 {c -(}
+{txt}  2{com}.     label var quote_100K_`i'  "Probability for topic `i'/100 for quote"
+{txt}  3{com}.     label var speech_100K_`i' "Probability for topic `i'/100 for speech"
+{txt}  4{com}. {c )-}
+{txt}
+{com}. 
+. * Article-level topic models (30 and 40 topics)
+. forvalues i = 1/30 {c -(}
+{txt}  2{com}.     label var article_30K_`i' "Probability for topic `i'/30 for article"
+{txt}  3{com}. {c )-}
+{txt}
+{com}. 
+. forvalues i = 1/40 {c -(}
+{txt}  2{com}.     label var article_40K_`i' "Probability for topic `i'/40 for article"
+{txt}  3{com}. {c )-}
+{txt}
+{com}. 
+. *======================================================================
+. * LEXICAL RICHNESS
+. *======================================================================
+. label var ttr    "Type-token ratio"
+{txt}
+{com}. label var rttr   "Root type-token ratio"
+{txt}
+{com}. label var cttr   "Corrected type-token ratio"
+{txt}
+{com}. label var herdan "Herdan's C lexical diversity"
+{txt}
+{com}. label var summer "Summer lexical diversity index"
+{txt}
+{com}. label var dugast "Dugast lexical diversity index"
+{txt}
+{com}. label var maas   "Maas lexical diversity index"
+{txt}
+{com}. label var msttr  "Mean segmental type-token ratio"
+{txt}
+{com}. label var mattr  "Moving-average type-token ratio"
+{txt}
+{com}. label var mtld   "Measure of textual lexical diversity"
+{txt}
+{com}. label var hdd    "Hypergeometric distribution diversity"
+{txt}
+{com}. 
+. *======================================================================
+. * READABILITY
+. *======================================================================
+. label var dalechall     "Dale-Chall readability index"
+{txt}
+{com}. label var flesch        "Flesch reading easse score"
+{txt}
+{com}. label var fleschkincaid "Flesch-Kincaid grade level"
+{txt}
+{com}. label var gunningfog    "Gunning-Fog readability index"
+{txt}
+{com}. label var smog          "SMOG readability index"
+{txt}
+{com}. label var notdalechall  "Share of difficult words (not in Dale-Chall list)"
+{txt}
+{com}. label var polysyllable  "Number of polysyllabic words (more than 3 syllables)"
+{txt}
+{com}. label var syllables     "Total number of syllables"
+{txt}
+{com}. label var sentences     "Total number of sentences"
+{txt}
+{com}. 
+. *======================================================================
+. * SUBJECTIVITY, OBJECTIVITY, POLARITY
+. *======================================================================
+. * Subjectivity (0 = objective, 1 = subjective)
+. gen speech_objectivity         = 1 - speech_subjectivity
+{txt}
+{com}. label var speech_subjectivity  "Speech subjectivity (0 objective - 1 subjective)"
+{txt}
+{com}. 
+. gen para_objectivity           = 1 - para_subjectivity
+{txt}(2 missing values generated)
+
+{com}. label var para_subjectivity    "Paragraph subjectivity (0-1)"
+{txt}
+{com}. 
+. gen sentence_objectivity       = 1 - sentence_subjectivity
+{txt}(2 missing values generated)
+
+{com}. label var sentence_subjectivity "Sentence subjectivity (0-1)"
+{txt}
+{com}. 
+. gen quote_objectivity          = 1 - quote_subjectivity
+{txt}
+{com}. label var quote_subjectivity   "Quote subjectivity (0-1)"
+{txt}
+{com}. 
+. gen quote_sentence_objectivity = 1 - quote_sentence_subjectivity
+{txt}(1 missing value generated)
+
+{com}. label var quote_sentence_subjectivity "Quote sentence subjectivity (0-1)"
+{txt}
+{com}. 
+. label var speech_objectivity         "Speech objectivity (0 objective - 1 subjective)"
+{txt}
+{com}. label var para_objectivity           "Paragraph objectivity (0-1)"
+{txt}
+{com}. label var sentence_objectivity       "Sentence objectivity (0-1)"
+{txt}
+{com}. label var quote_objectivity          "Quote objectivity (0-1)"
+{txt}
+{com}. label var quote_sentence_objectivity "Quote sentence objectivity (0-1)"
+{txt}
+{com}. 
+. * Polarity (-1 = negative, +1 = positive)
+. label var speech_polarity         "Speech polarity (-1 negative to +1 positive), PatternAnalyzer"
+{txt}
+{com}. label var para_polarity           "Paragraph polarity (-1 to +1), PatternAnalyzer"
+{txt}
+{com}. label var sentence_polarity       "Sentence polarity (-1 to +1), PatternAnalyzer"
+{txt}
+{com}. label var quote_polarity          "Quote polarity (-1 to +1), PatternAnalyzer"
+{txt}
+{com}. label var quote_sentence_polarity "Quote sentence polarity (-1 to +1), PatternAnalyzer"
+{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. 
+. global TABSAVEDIR ../results/tables
+{txt}
+{com}. global FIGSAVEDIR ../results/figures
+{txt}
+{com}. global graphformats png pdf eps tif
+{txt}
+{com}. 
+. 
+. *==============================================================================
+. * Global macros
+. *==============================================================================
+. #delimit;
+{txt}delimiter now ;
+{com}. global time
+>         i.parl
+>         i.year
+> ;
+{txt}
+{com}. global ind
+>     i.gender
+>     i.race
+>     c.age
+>     c.age2
+>     c.tenure
+>     c.tenure2
+> ;
+{txt}
+{com}.     global article
+>     i.weekday
+>     i.section2
+>     translations
+> ;
+{txt}
+{com}.     global portfolio
+>     MFA
+>     PMO
+>     MEWR
+>     MCI
+>     MTI
+>     MHA
+>     MCCY
+>     MinLaw
+>     MOH
+>     MOM
+>     MinDef
+>     MSF
+>     MOT
+>     MND
+>     MOF
+>     MOE
+>     speaker
+> ;
+{txt}
+{com}.     global electoral
+>     c.group_size
+>     c.voters
+>     c.vote_share
+>     c.winners_majority_share
+> ;
+{txt}
+{com}.     global topics
+>     speech_92K*
+>     quote_92K*
+>     article_40K*
+> ;
+{txt}
+{com}.     global objectivity
+>     speech_objectivity
+>     para_objectivity
+>     sentence_objectivity
+>     quote_objectivity
+>     quote_sentence_objectivity
+> ;
+{txt}
+{com}.     global polarity
+>     speech_polarity
+>     para_polarity
+>     sentence_polarity
+>     quote_polarity
+>     quote_sentence_polarity
+> ;
+{txt}
+{com}.     global readability
+>     flesch
+>     fleschkincaid
+>     gunningfog
+>     smog
+>     dalechall
+>     notdalechall
+>     sentences
+>     syllables
+>     polysyllable
+> ;
+{txt}
+{com}.     global lexical
+>     ttr
+>     rttr
+>     cttr
+>     herdan
+>     summer
+>     dugast
+>     maas
+>     msttr
+>     mattr
+>     mtld
+>     hdd
+> ;
+{txt}
+{com}.     global length_s
+>     quote
+>     speech
+>     article
+> ;
+{txt}
+{com}. global length_s
+>     ln_quote
+>     ln_speech
+>     ln_article
+> ;
+{txt}
+{com}. assert_macros "portfolio time ind article topics";
+Checking portfolio:
+portfolio contains: MFA     PMO     MEWR     MCI     MTI     MHA     MCCY     MinLaw     MOH     MOM     MinDef     MSF     MOT     MND     MOF     MOE     speaker
+Checking time:
+time contains: i.parl         i.year
+Checking ind:
+ind contains: i.gender     i.race     c.age     c.age2     c.tenure     c.tenure2
+Checking article:
+article contains: i.weekday     i.section2     translations
+Checking topics:
+topics contains: speech_92K*     quote_92K*     article_40K*
+{txt}
+{com}. global min
+>     i.rank
+>     $portfolio
+>     i.rank#($portfolio)
+>     ;
+{txt}
+{com}.     global base_controls
+>     $time
+>     $ind
+>     $article
+>     $topics
+>     ;
+{txt}
+{com}.     global base_controls_min
+>     $time
+>     $ind
+>     $article
+>     $topics
+>     $min
+>     ;
+{txt}
+{com}. #delimit cr
+{txt}delimiter now cr
+{com}. 
+. *==============================================================================
+. * COEFFICIENT LABELS
+. *==============================================================================
+. #delimit;
+{txt}delimiter now ;
+{com}. global coeff_labels
+>         "
+>     1.opposition "Opposition"
+>     1.opposition#c.trend "Opposition $\times$ Year"
+>     trend "Year"
+>         pc1_objectivity "Objectivity of speech and quote"
+>         pc1_polarity "Polarity of speech and quote"
+>         pc1_readability "Grade/readability score of speech transcipt"
+>         pc1_lexical "Lexical richness of speech transcipt"
+>     "
+> ;
+{txt}
+{com}. #delimit cr
+{txt}delimiter now cr
+{com}. 
+{txt}end of do-file
+
+{com}. 
+. tictoc tic 1
+{res}{hline}
+{txt}----------- Time log -----------
+Start time:  2 Dec 2025 12:20:45
+{res}{hline}
+{txt}
+{com}. assert_macros "objectivity polarity readability"
+Checking objectivity:
+objectivity contains: speech_objectivity     para_objectivity     sentence_objectivity     quote_objectivity     quote_sentence_objectivity
+Checking polarity:
+polarity contains: speech_polarity     para_polarity     sentence_polarity     quote_polarity     quote_sentence_polarity
+Checking readability:
+readability contains: flesch     fleschkincaid     gunningfog     smog     dalechall     notdalechall     sentences     syllables     polysyllable
+{txt}
+{com}. 
+. pca $objectivity
+
+{txt}Principal components/correlation{col 51}Number of obs    = {res}    14901
+{col 51}{txt}Number of comp.  = {res}        5
+{col 51}{txt}Trace            {col 68}= {res}        5
+{col 5}{txt}Rotation: (unrotated = principal){col 51}Rho              = {res}   1.0000
+
+{txt}{col 5}{hline 13}{c TT}{hline 60}
+{col 5}   Component {c |}   Eigenvalue   Difference         Proportion   Cumulative
+{col 5}{hline 13}{c +}{hline 60}
+{col 5}{ralign 12:Comp1} {c |}{res}      2.78163      1.69215             0.5563       0.5563
+{txt}{col 5}{ralign 12:Comp2} {c |}{res}      1.08948      .546644             0.2179       0.7742
+{txt}{col 5}{ralign 12:Comp3} {c |}{res}      .542831      .186271             0.1086       0.8828
+{txt}{col 5}{ralign 12:Comp4} {c |}{res}      .356561      .127054             0.0713       0.9541
+{txt}{col 5}{ralign 12:Comp5} {c |}{res}      .229507            .             0.0459       1.0000
+{txt}{col 5}{hline 13}{c BT}{hline 60}
+
+Principal components (eigenvectors) 
+
+{space 4}{hline 13}{c  TT}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{c  TT}{hline 13}
+{space 4}{space 0}{ralign 12:Variable}{space 1}{c |}{space 1}{ralign 8:Comp1}{space 1}{space 1}{ralign 8:Comp2}{space 1}{space 1}{ralign 8:Comp3}{space 1}{space 1}{ralign 8:Comp4}{space 1}{space 1}{ralign 8:Comp5}{space 1}{c |}{space 1}{ralign 11:Unexplained}{space 1}
+{space 4}{hline 13}{c   +}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{c   +}{hline 13}
+{space 4}{space 0}{ralign 12:speech_obj~y}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.2489}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.7656}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.5843}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1023}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0005}}}{space 1}{c |}{space 1}{center 11:{res:{sf:          0}}}{space 1}
+{space 4}{space 0}{ralign 12:para_objec~y}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.3922}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.4756}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.7521}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.2187}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0806}}}{space 1}{c |}{space 1}{center 11:{res:{sf:          0}}}{space 1}
+{space 4}{space 0}{ralign 12:sentence_o~y}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.5076}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.1857}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.1111}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.7910}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.2643}}}{space 1}{c |}{space 1}{center 11:{res:{sf:          0}}}{space 1}
+{space 4}{space 0}{ralign 12:quote_obje~y}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.5157}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.3013}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1949}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.1174}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.7691}}}{space 1}{c |}{space 1}{center 11:{res:{sf:          0}}}{space 1}
+{space 4}{space 0}{ralign 12:quote_sent..}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.5105}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.2497}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.2064}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.5497}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.5764}}}{space 1}{c |}{space 1}{center 11:{res:{sf:          0}}}{space 1}
+{space 4}{hline 13}{c  BT}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{c  BT}{hline 13}
+
+{com}. predict pc1_objectivity, score
+{txt}(4 components skipped)
+
+Scoring coefficients 
+{col 5}sum of squares(column-loading) = 1
+
+{space 4}{hline 13}{c  TT}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}
+{space 4}{space 0}{ralign 12:Variable}{space 1}{c |}{space 1}{ralign 8:Comp1}{space 1}{space 1}{ralign 8:Comp2}{space 1}{space 1}{ralign 8:Comp3}{space 1}{space 1}{ralign 8:Comp4}{space 1}{space 1}{ralign 8:Comp5}{space 1}
+{space 4}{hline 13}{c   +}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}
+{space 4}{space 0}{ralign 12:speech_obj~y}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.2489}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.7656}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.5843}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1023}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0005}}}{space 1}
+{space 4}{space 0}{ralign 12:para_objec~y}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.3922}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.4756}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.7521}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.2187}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0806}}}{space 1}
+{space 4}{space 0}{ralign 12:sentence_o~y}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.5076}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.1857}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.1111}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.7910}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.2643}}}{space 1}
+{space 4}{space 0}{ralign 12:quote_obje~y}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.5157}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.3013}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1949}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.1174}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.7691}}}{space 1}
+{space 4}{space 0}{ralign 12:quote_sent..}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.5105}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.2497}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.2064}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.5497}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.5764}}}{space 1}
+{space 4}{hline 13}{c  BT}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}
+
+{com}. label variable pc1_objectivity  "1st PC of objectivity scores"
+{txt}
+{com}. 
+. pca $polarity
+
+{txt}Principal components/correlation{col 51}Number of obs    = {res}    14901
+{col 51}{txt}Number of comp.  = {res}        5
+{col 51}{txt}Trace            {col 68}= {res}        5
+{col 5}{txt}Rotation: (unrotated = principal){col 51}Rho              = {res}   1.0000
+
+{txt}{col 5}{hline 13}{c TT}{hline 60}
+{col 5}   Component {c |}   Eigenvalue   Difference         Proportion   Cumulative
+{col 5}{hline 13}{c +}{hline 60}
+{col 5}{ralign 12:Comp1} {c |}{res}      3.06248      2.05593             0.6125       0.6125
+{txt}{col 5}{ralign 12:Comp2} {c |}{res}      1.00655      .528862             0.2013       0.8138
+{txt}{col 5}{ralign 12:Comp3} {c |}{res}      .477687      .183807             0.0955       0.9093
+{txt}{col 5}{ralign 12:Comp4} {c |}{res}      .293879      .134476             0.0588       0.9681
+{txt}{col 5}{ralign 12:Comp5} {c |}{res}      .159404            .             0.0319       1.0000
+{txt}{col 5}{hline 13}{c BT}{hline 60}
+
+Principal components (eigenvectors) 
+
+{space 4}{hline 13}{c  TT}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{c  TT}{hline 13}
+{space 4}{space 0}{ralign 12:Variable}{space 1}{c |}{space 1}{ralign 8:Comp1}{space 1}{space 1}{ralign 8:Comp2}{space 1}{space 1}{ralign 8:Comp3}{space 1}{space 1}{ralign 8:Comp4}{space 1}{space 1}{ralign 8:Comp5}{space 1}{c |}{space 1}{ralign 11:Unexplained}{space 1}
+{space 4}{hline 13}{c   +}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{c   +}{hline 13}
+{space 4}{space 0}{ralign 12:speech_pol~y}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.2633}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.8066}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.5246}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0700}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0010}}}{space 1}{c |}{space 1}{center 11:{res:{sf:          0}}}{space 1}
+{space 4}{space 0}{ralign 12:para_polar~y}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.4172}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.3945}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.7878}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.2115}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0709}}}{space 1}{c |}{space 1}{center 11:{res:{sf:          0}}}{space 1}
+{space 4}{space 0}{ralign 12:sentence_p~y}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.4995}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.1874}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0681}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.7958}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.2783}}}{space 1}{c |}{space 1}{center 11:{res:{sf:          0}}}{space 1}
+{space 4}{space 0}{ralign 12:quote_pola~y}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.5079}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.2985}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.2160}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1006}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.7721}}}{space 1}{c |}{space 1}{center 11:{res:{sf:          0}}}{space 1}
+{space 4}{space 0}{ralign 12:quote_s~rity}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.4992}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.2638}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.2300}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.5540}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.5669}}}{space 1}{c |}{space 1}{center 11:{res:{sf:          0}}}{space 1}
+{space 4}{hline 13}{c  BT}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{c  BT}{hline 13}
+
+{com}. predict pc1_polarity, score
+{txt}(4 components skipped)
+
+Scoring coefficients 
+{col 5}sum of squares(column-loading) = 1
+
+{space 4}{hline 13}{c  TT}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}
+{space 4}{space 0}{ralign 12:Variable}{space 1}{c |}{space 1}{ralign 8:Comp1}{space 1}{space 1}{ralign 8:Comp2}{space 1}{space 1}{ralign 8:Comp3}{space 1}{space 1}{ralign 8:Comp4}{space 1}{space 1}{ralign 8:Comp5}{space 1}
+{space 4}{hline 13}{c   +}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}
+{space 4}{space 0}{ralign 12:speech_pol~y}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.2633}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.8066}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.5246}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0700}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0010}}}{space 1}
+{space 4}{space 0}{ralign 12:para_polar~y}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.4172}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.3945}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.7878}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.2115}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0709}}}{space 1}
+{space 4}{space 0}{ralign 12:sentence_p~y}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.4995}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.1874}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0681}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.7958}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.2783}}}{space 1}
+{space 4}{space 0}{ralign 12:quote_pola~y}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.5079}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.2985}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.2160}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1006}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.7721}}}{space 1}
+{space 4}{space 0}{ralign 12:quote_s~rity}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.4992}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.2638}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.2300}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.5540}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.5669}}}{space 1}
+{space 4}{hline 13}{c  BT}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}
+
+{com}. label variable pc1_polarity     "1st PC of polarity scores"
+{txt}
+{com}. 
+. pca $readability
+
+{txt}Principal components/correlation{col 51}Number of obs    = {res}    14892
+{col 51}{txt}Number of comp.  = {res}        9
+{col 51}{txt}Trace            {col 68}= {res}        9
+{col 5}{txt}Rotation: (unrotated = principal){col 51}Rho              = {res}   1.0000
+
+{txt}{col 5}{hline 13}{c TT}{hline 60}
+{col 5}   Component {c |}   Eigenvalue   Difference         Proportion   Cumulative
+{col 5}{hline 13}{c +}{hline 60}
+{col 5}{ralign 12:Comp1} {c |}{res}      4.66346      .918432             0.5182       0.5182
+{txt}{col 5}{ralign 12:Comp2} {c |}{res}      3.74502      3.36503             0.4161       0.9343
+{txt}{col 5}{ralign 12:Comp3} {c |}{res}      .379996      .290044             0.0422       0.9765
+{txt}{col 5}{ralign 12:Comp4} {c |}{res}     .0899524     .0314177             0.0100       0.9865
+{txt}{col 5}{ralign 12:Comp5} {c |}{res}     .0585347     .0128057             0.0065       0.9930
+{txt}{col 5}{ralign 12:Comp6} {c |}{res}      .045729     .0363148             0.0051       0.9981
+{txt}{col 5}{ralign 12:Comp7} {c |}{res}    .00941423    .00384603             0.0010       0.9991
+{txt}{col 5}{ralign 12:Comp8} {c |}{res}     .0055682    .00324227             0.0006       0.9997
+{txt}{col 5}{ralign 12:Comp9} {c |}{res}    .00232593            .             0.0003       1.0000
+{txt}{col 5}{hline 13}{c BT}{hline 60}
+
+Principal components (eigenvectors) 
+
+{space 4}{hline 13}{c  TT}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{c  TT}{hline 13}
+{space 4}{space 0}{ralign 12:Variable}{space 1}{c |}{space 1}{ralign 8:Comp1}{space 1}{space 1}{ralign 8:Comp2}{space 1}{space 1}{ralign 8:Comp3}{space 1}{space 1}{ralign 8:Comp4}{space 1}{space 1}{ralign 8:Comp5}{space 1}{space 1}{ralign 8:Comp6}{space 1}{space 1}{ralign 8:Comp7}{space 1}{space 1}{ralign 8:Comp8}{space 1}{space 1}{ralign 8:Comp9}{space 1}{c |}{space 1}{ralign 11:Unexplained}{space 1}
+{space 4}{hline 13}{c   +}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{c   +}{hline 13}
+{space 4}{space 0}{ralign 12:flesch}{space 1}{c |}{space 1}{ralign 8:{res:{sf: -0.4214}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.1897}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0939}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.2212}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0950}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.7910}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0655}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1126}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.2776}}}{space 1}{c |}{space 1}{center 11:{res:{sf:          0}}}{space 1}
+{space 4}{space 0}{ralign 12:fleschkinc~d}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.4241}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1467}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.3530}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.5914}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0282}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.1558}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0078}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1404}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.5286}}}{space 1}{c |}{space 1}{center 11:{res:{sf:          0}}}{space 1}
+{space 4}{space 0}{ralign 12:gunningfog}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.4267}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1482}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.3901}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1310}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0042}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.4146}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1582}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.2599}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.6018}}}{space 1}{c |}{space 1}{center 11:{res:{sf:          0}}}{space 1}
+{space 4}{space 0}{ralign 12:smog}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.4181}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1883}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1086}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.6787}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0938}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.3241}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.2152}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1716}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.3573}}}{space 1}{c |}{space 1}{center 11:{res:{sf:          0}}}{space 1}
+{space 4}{space 0}{ralign 12:dalechall}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.3409}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.2257}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.8242}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.2474}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0786}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.2546}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1299}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0670}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0031}}}{space 1}{c |}{space 1}{center 11:{res:{sf:          0}}}{space 1}
+{space 4}{space 0}{ralign 12:notdalechall}{space 1}{c |}{space 1}{ralign 8:{res:{sf: -0.1712}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.4759}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0546}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1282}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.3507}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0584}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.6913}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.3470}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0009}}}{space 1}{c |}{space 1}{center 11:{res:{sf:          0}}}{space 1}
+{space 4}{space 0}{ralign 12:sentences}{space 1}{c |}{space 1}{ralign 8:{res:{sf: -0.2673}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.4103}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0765}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0194}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.7534}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0132}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1498}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.3685}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1676}}}{space 1}{c |}{space 1}{center 11:{res:{sf:          0}}}{space 1}
+{space 4}{space 0}{ralign 12:syllables}{space 1}{c |}{space 1}{ralign 8:{res:{sf: -0.2158}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.4542}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1161}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0766}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1299}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0170}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0851}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.7756}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.3191}}}{space 1}{c |}{space 1}{center 11:{res:{sf:          0}}}{space 1}
+{space 4}{space 0}{ralign 12:polysyllable}{space 1}{c |}{space 1}{ralign 8:{res:{sf: -0.1490}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.4828}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0324}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.1989}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.5174}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0673}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.6323}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0915}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1540}}}{space 1}{c |}{space 1}{center 11:{res:{sf:          0}}}{space 1}
+{space 4}{hline 13}{c  BT}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{c  BT}{hline 13}
+
+{com}. predict pc1_readability, score
+{txt}(8 components skipped)
+
+Scoring coefficients 
+{col 5}sum of squares(column-loading) = 1
+
+{space 4}{hline 13}{c  TT}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}
+{space 4}{space 0}{ralign 12:Variable}{space 1}{c |}{space 1}{ralign 8:Comp1}{space 1}{space 1}{ralign 8:Comp2}{space 1}{space 1}{ralign 8:Comp3}{space 1}{space 1}{ralign 8:Comp4}{space 1}{space 1}{ralign 8:Comp5}{space 1}{space 1}{ralign 8:Comp6}{space 1}{space 1}{ralign 8:Comp7}{space 1}{space 1}{ralign 8:Comp8}{space 1}{space 1}{ralign 8:Comp9}{space 1}
+{space 4}{hline 13}{c   +}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}
+{space 4}{space 0}{ralign 12:flesch}{space 1}{c |}{space 1}{ralign 8:{res:{sf: -0.4214}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.1897}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0939}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.2212}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0950}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.7910}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0655}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1126}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.2776}}}{space 1}
+{space 4}{space 0}{ralign 12:fleschkinc~d}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.4241}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1467}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.3530}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.5914}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0282}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.1558}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0078}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1404}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.5286}}}{space 1}
+{space 4}{space 0}{ralign 12:gunningfog}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.4267}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1482}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.3901}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1310}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0042}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.4146}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1582}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.2599}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.6018}}}{space 1}
+{space 4}{space 0}{ralign 12:smog}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.4181}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1883}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1086}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.6787}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0938}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.3241}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.2152}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1716}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.3573}}}{space 1}
+{space 4}{space 0}{ralign 12:dalechall}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.3409}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.2257}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.8242}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.2474}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0786}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.2546}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1299}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0670}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0031}}}{space 1}
+{space 4}{space 0}{ralign 12:notdalechall}{space 1}{c |}{space 1}{ralign 8:{res:{sf: -0.1712}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.4759}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0546}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1282}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.3507}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0584}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.6913}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.3470}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0009}}}{space 1}
+{space 4}{space 0}{ralign 12:sentences}{space 1}{c |}{space 1}{ralign 8:{res:{sf: -0.2673}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.4103}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0765}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0194}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.7534}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0132}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1498}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.3685}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1676}}}{space 1}
+{space 4}{space 0}{ralign 12:syllables}{space 1}{c |}{space 1}{ralign 8:{res:{sf: -0.2158}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.4542}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1161}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0766}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1299}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0170}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0851}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.7756}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.3191}}}{space 1}
+{space 4}{space 0}{ralign 12:polysyllable}{space 1}{c |}{space 1}{ralign 8:{res:{sf: -0.1490}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.4828}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0324}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.1989}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.5174}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0673}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.6323}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0915}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.1540}}}{space 1}
+{space 4}{hline 13}{c  BT}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}
+
+{com}. label variable pc1_readability  "1st PC of readability scores"
+{txt}
+{com}. 
+. pca cttr msttr mattr mtld hdd maas // rttr and cttr are perfectly correlated, so rttr is removed, herdan, ttr, and summer are removed because their kmo < 0.5
+
+{txt}Principal components/correlation{col 51}Number of obs    = {res}    14850
+{col 51}{txt}Number of comp.  = {res}        6
+{col 51}{txt}Trace            {col 68}= {res}        6
+{col 5}{txt}Rotation: (unrotated = principal){col 51}Rho              = {res}   1.0000
+
+{txt}{col 5}{hline 13}{c TT}{hline 60}
+{col 5}   Component {c |}   Eigenvalue   Difference         Proportion   Cumulative
+{col 5}{hline 13}{c +}{hline 60}
+{col 5}{ralign 12:Comp1} {c |}{res}      4.42888      3.53813             0.7381       0.7381
+{txt}{col 5}{ralign 12:Comp2} {c |}{res}       .89075      .609435             0.1485       0.8866
+{txt}{col 5}{ralign 12:Comp3} {c |}{res}      .281314      .106136             0.0469       0.9335
+{txt}{col 5}{ralign 12:Comp4} {c |}{res}      .175178    .00385213             0.0292       0.9627
+{txt}{col 5}{ralign 12:Comp5} {c |}{res}      .171326      .118774             0.0286       0.9912
+{txt}{col 5}{ralign 12:Comp6} {c |}{res}     .0525522            .             0.0088       1.0000
+{txt}{col 5}{hline 13}{c BT}{hline 60}
+
+Principal components (eigenvectors) 
+
+{space 4}{hline 13}{c  TT}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{c  TT}{hline 13}
+{space 4}{space 0}{ralign 12:Variable}{space 1}{c |}{space 1}{ralign 8:Comp1}{space 1}{space 1}{ralign 8:Comp2}{space 1}{space 1}{ralign 8:Comp3}{space 1}{space 1}{ralign 8:Comp4}{space 1}{space 1}{ralign 8:Comp5}{space 1}{space 1}{ralign 8:Comp6}{space 1}{c |}{space 1}{ralign 11:Unexplained}{space 1}
+{space 4}{hline 13}{c   +}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{c   +}{hline 13}
+{space 4}{space 0}{ralign 12:cttr}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.2980}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.7855}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.2293}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.4612}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.1698}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0103}}}{space 1}{c |}{space 1}{center 11:{res:{sf:          0}}}{space 1}
+{space 4}{space 0}{ralign 12:msttr}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.4420}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.2432}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0978}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.3595}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.4571}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.6306}}}{space 1}{c |}{space 1}{center 11:{res:{sf:          0}}}{space 1}
+{space 4}{space 0}{ralign 12:mattr}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.4492}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.2339}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0407}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.2271}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.3147}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.7689}}}{space 1}{c |}{space 1}{center 11:{res:{sf:          0}}}{space 1}
+{space 4}{space 0}{ralign 12:mtld}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.4271}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.1620}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.5502}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0179}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.6971}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0479}}}{space 1}{c |}{space 1}{center 11:{res:{sf:          0}}}{space 1}
+{space 4}{space 0}{ralign 12:hdd}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.4071}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.4021}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.2079}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.7320}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.3037}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0346}}}{space 1}{c |}{space 1}{center 11:{res:{sf:          0}}}{space 1}
+{space 4}{space 0}{ralign 12:maas}{space 1}{c |}{space 1}{ralign 8:{res:{sf: -0.4072}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.2850}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.7683}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.2652}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.2915}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0863}}}{space 1}{c |}{space 1}{center 11:{res:{sf:          0}}}{space 1}
+{space 4}{hline 13}{c  BT}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{c  BT}{hline 13}
+
+{com}. predict pc1_lexical, score
+{txt}(5 components skipped)
+
+Scoring coefficients 
+{col 5}sum of squares(column-loading) = 1
+
+{space 4}{hline 13}{c  TT}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}
+{space 4}{space 0}{ralign 12:Variable}{space 1}{c |}{space 1}{ralign 8:Comp1}{space 1}{space 1}{ralign 8:Comp2}{space 1}{space 1}{ralign 8:Comp3}{space 1}{space 1}{ralign 8:Comp4}{space 1}{space 1}{ralign 8:Comp5}{space 1}{space 1}{ralign 8:Comp6}{space 1}
+{space 4}{hline 13}{c   +}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}
+{space 4}{space 0}{ralign 12:cttr}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.2980}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.7855}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.2293}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.4612}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.1698}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0103}}}{space 1}
+{space 4}{space 0}{ralign 12:msttr}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.4420}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.2432}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0978}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.3595}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.4571}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.6306}}}{space 1}
+{space 4}{space 0}{ralign 12:mattr}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.4492}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.2339}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0407}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.2271}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.3147}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.7689}}}{space 1}
+{space 4}{space 0}{ralign 12:mtld}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.4271}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.1620}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.5502}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0179}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.6971}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0479}}}{space 1}
+{space 4}{space 0}{ralign 12:hdd}{space 1}{c |}{space 1}{ralign 8:{res:{sf:  0.4071}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.4021}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.2079}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.7320}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.3037}}}{space 1}{space 1}{ralign 8:{res:{sf: -0.0346}}}{space 1}
+{space 4}{space 0}{ralign 12:maas}{space 1}{c |}{space 1}{ralign 8:{res:{sf: -0.4072}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.2850}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.7683}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.2652}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.2915}}}{space 1}{space 1}{ralign 8:{res:{sf:  0.0863}}}{space 1}
+{space 4}{hline 13}{c  BT}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}{hline 10}
+
+{com}. label variable pc1_lexical              "1st PC of lexical richness scores"
+{txt}
+{com}. 
+. 
+. assert_macros "length_s base_controls_min"
+Checking length_s:
+length_s contains: ln_quote     ln_speech     ln_article
+Checking base_controls_min:
+base_controls_min contains: i.parl         i.year     i.gender     i.race     c.age     c.age2     c.tenure     c.tenure2     i.weekday     i.section2     translations     speech_92K*     quote_92K*     article_40K*     i.rank     MFA     PMO     MEWR     MCI     MTI     MHA     MCCY     MinLaw     MOH     MOM     MinDef     MSF     MOT     MND     MOF     MOE     speaker     i.rank#(MFA     PMO     MEWR     MCI     MTI     MHA     MCCY     MinLaw     MOH     MOM     MinDef     MSF     MOT     MND     MOF     MOE     speaker)
+{txt}
+{com}. *--------------------------------------------------------------------------------------------------
+. * Panel A. String simlarity 1 with PC controls
+. *--------------------------------------------------------------------------------------------------
+. eststo clear
+{txt}
+{com}. 
+. eststo: qui reg ss1_quote_to_speech i.opposition $length_s $base_controls_min,                                                                                                              vce(cluster article_id) 
+{txt}({res}est1{txt} stored)
+
+{com}. eststo: qui reg ss1_quote_to_speech i.opposition $length_s $base_controls_min pc1_objectivity,                                                                              vce(cluster article_id) 
+{txt}({res}est2{txt} stored)
+
+{com}. eststo: qui reg ss1_quote_to_speech i.opposition $length_s $base_controls_min                             pc1_polarity,                                                         vce(cluster article_id) 
+{txt}({res}est3{txt} stored)
+
+{com}. eststo: qui reg ss1_quote_to_speech i.opposition $length_s $base_controls_min                                                      pc1_readability,                     vce(cluster article_id) 
+{txt}({res}est4{txt} stored)
+
+{com}. eststo: qui reg ss1_quote_to_speech i.opposition $length_s $base_controls_min                                                                                      pc1_lexical, vce(cluster article_id) 
+{txt}({res}est5{txt} stored)
+
+{com}. eststo: qui reg ss1_quote_to_speech i.opposition $length_s $base_controls_min pc1_objectivity pc1_polarity pc1_readability pc1_lexical, vce(cluster article_id) 
+{txt}({res}est6{txt} stored)
+
+{com}. 
+. #delimit ;
+{txt}delimiter now ;
+{com}. esttab, keep(
+>                         1.opposition
+>                         pc1_objectivity
+>                         pc1_polarity
+>                         pc1_readability
+>                         pc1_lexical
+>                 )
+>                 coeflabel(`my_coeflabel')
+>                 `esttab_options'
+>                 order(`keep_coeff') 
+> ;
+{res}
+{txt}{hline 108}
+{txt}                      (1)             (2)             (3)             (4)             (5)             (6)   
+{txt}             ss1_quote~ch    ss1_quote~ch    ss1_quote~ch    ss1_quote~ch    ss1_quote~ch    ss1_quote~ch   
+{txt}{hline 108}
+{txt}1.opposition{res}       -1.858**        -1.808*         -1.855**        -2.120**        -1.764*         -2.024** {txt}
+            {res} {ralign 12:{txt:(}-2.61{txt:)}}    {ralign 12:{txt:(}-2.54{txt:)}}    {ralign 12:{txt:(}-2.61{txt:)}}    {ralign 12:{txt:(}-2.97{txt:)}}    {ralign 12:{txt:(}-2.48{txt:)}}    {ralign 12:{txt:(}-2.83{txt:)}}   {txt}
+
+{txt}pc1_object~y{res}                       -0.127*                                                         -0.129*  {txt}
+            {res}                 {ralign 12:{txt:(}-2.03{txt:)}}                                                    {ralign 12:{txt:(}-2.04{txt:)}}   {txt}
+
+{txt}pc1_polarity{res}                                      -0.0183                                         -0.0287   {txt}
+            {res}                                 {ralign 12:{txt:(}-0.30{txt:)}}                                    {ralign 12:{txt:(}-0.47{txt:)}}   {txt}
+
+{txt}pc1_readab~y{res}                                                        0.649***                        0.642***{txt}
+            {res}                                                 {ralign 12:{txt:(}7.73{txt:)}}                    {ralign 12:{txt:(}7.35{txt:)}}   {txt}
+
+{txt}pc1_lexical {res}                                                                        0.361***        0.309***{txt}
+            {res}                                                                 {ralign 12:{txt:(}4.72{txt:)}}    {ralign 12:{txt:(}4.00{txt:)}}   {txt}
+{txt}{hline 108}
+{txt}N           {res}        14901           14899           14899           14890           14848           14836   {txt}
+{txt}{hline 108}
+{txt}t statistics in parentheses
+{txt}* p<0.05, ** p<0.01, *** p<0.001
+
+{com}. esttab using $TABSAVEDIR/add-linguistics-panelA-substring-accuracy.tex,         
+>         replace
+>         booktabs
+>         fragment
+>         keep(
+>                 1.opposition
+>                 pc1_objectivity
+>                 pc1_polarity
+>                 pc1_readability
+>                 pc1_lexical
+>         )
+>         coeflabel($coeff_labels)
+>         b(%9.2fc)
+>         se(%9.2fc)
+>         star (* 0.1 ** 0.05 *** 0.01)
+>         label
+>         noobs
+>         nomtitle
+>         nonumbers
+>         nolines
+>         nogaps
+>         noeqlines
+>         nodepvars
+> ;
+{res}{txt}(output written to {browse  `"../results/tables/add-linguistics-panelA-substring-accuracy.tex"'})
+
+{com}. esttab using $TABSAVEDIR/add-linguistics-panelA-substring-accuracy.md,
+>         replace
+>         se
+>         star (* 0.1 ** 0.05 *** 0.01)
+>         keep(
+>                 1.opposition
+>                 pc1_objectivity
+>                 pc1_polarity
+>                 pc1_readability
+>                 pc1_lexical
+>         )
+>         coeflabel($coeff_labels)
+>     b(%9.2f)
+>     se(%9.2f)
+>     nonumbers
+>         style(mmd)
+>     mtitle("(1) Baseline" "(2) +Objectivity" "(3) +Polarity" "(4) +Readability" "(5) +Lexical" "(6) +All")
+> ;
+{res}{txt}(output written to {browse  `"../results/tables/add-linguistics-panelA-substring-accuracy.md"'})
+
+{com}. #delimit cr                     
+{txt}delimiter now cr
+{com}. 
+. *--------------------------------------------------------------------------------------------------
+. * Panel B. String similarity 2 with PC controls
+. *--------------------------------------------------------------------------------------------------
+. eststo clear
+{txt}
+{com}. 
+. eststo: qui reg ss2_quote_to_speech i.opposition $length_s $base_controls_min,                                                                                                              vce(cluster article_id) 
+{txt}({res}est1{txt} stored)
+
+{com}. eststo: qui reg ss2_quote_to_speech i.opposition $length_s $base_controls_min pc1_objectivity,                                                                              vce(cluster article_id) 
+{txt}({res}est2{txt} stored)
+
+{com}. eststo: qui reg ss2_quote_to_speech i.opposition $length_s $base_controls_min                             pc1_polarity,                                                         vce(cluster article_id) 
+{txt}({res}est3{txt} stored)
+
+{com}. eststo: qui reg ss2_quote_to_speech i.opposition $length_s $base_controls_min                                                      pc1_readability,                     vce(cluster article_id) 
+{txt}({res}est4{txt} stored)
+
+{com}. eststo: qui reg ss2_quote_to_speech i.opposition $length_s $base_controls_min                                                                                      pc1_lexical, vce(cluster article_id) 
+{txt}({res}est5{txt} stored)
+
+{com}. eststo: qui reg ss2_quote_to_speech i.opposition $length_s $base_controls_min pc1_objectivity pc1_polarity pc1_readability pc1_lexical, vce(cluster article_id) 
+{txt}({res}est6{txt} stored)
+
+{com}. 
+. #delimit ;
+{txt}delimiter now ;
+{com}. esttab, keep(
+>                         1.opposition
+>                         pc1_objectivity
+>                         pc1_polarity
+>                         pc1_readability
+>                         pc1_lexical
+>                 )
+>                 coeflabel(`my_coeflabel')
+>                 `esttab_options'
+>                 order(`keep_coeff') 
+> ;
+{res}
+{txt}{hline 108}
+{txt}                      (1)             (2)             (3)             (4)             (5)             (6)   
+{txt}             ss2_quote~ch    ss2_quote~ch    ss2_quote~ch    ss2_quote~ch    ss2_quote~ch    ss2_quote~ch   
+{txt}{hline 108}
+{txt}1.opposition{res}       -2.149**        -2.124**        -2.145**        -2.238**        -2.151**        -2.226** {txt}
+            {res} {ralign 12:{txt:(}-3.07{txt:)}}    {ralign 12:{txt:(}-3.03{txt:)}}    {ralign 12:{txt:(}-3.07{txt:)}}    {ralign 12:{txt:(}-3.19{txt:)}}    {ralign 12:{txt:(}-3.09{txt:)}}    {ralign 12:{txt:(}-3.18{txt:)}}   {txt}
+
+{txt}pc1_object~y{res}                      -0.0790                                                         -0.0787   {txt}
+            {res}                 {ralign 12:{txt:(}-1.58{txt:)}}                                                    {ralign 12:{txt:(}-1.55{txt:)}}   {txt}
+
+{txt}pc1_polarity{res}                                       0.0234                                         0.00837   {txt}
+            {res}                                 {ralign 12:{txt:(}0.50{txt:)}}                                    {ralign 12:{txt:(}0.17{txt:)}}   {txt}
+
+{txt}pc1_readab~y{res}                                                        0.219**                         0.221** {txt}
+            {res}                                                 {ralign 12:{txt:(}2.99{txt:)}}                    {ralign 12:{txt:(}2.83{txt:)}}   {txt}
+
+{txt}pc1_lexical {res}                                                                        0.136           0.117   {txt}
+            {res}                                                                 {ralign 12:{txt:(}1.78{txt:)}}    {ralign 12:{txt:(}1.49{txt:)}}   {txt}
+{txt}{hline 108}
+{txt}N           {res}        14901           14899           14899           14890           14848           14836   {txt}
+{txt}{hline 108}
+{txt}t statistics in parentheses
+{txt}* p<0.05, ** p<0.01, *** p<0.001
+
+{com}. esttab using $TABSAVEDIR/add-linguistics-panelB-bow-accuracy.tex,       
+>         replace
+>         booktabs
+>         fragment
+>         keep(
+>                 1.opposition
+>                 pc1_objectivity
+>                 pc1_polarity
+>                 pc1_readability
+>                 pc1_lexical
+>         )
+>         coeflabel($coeff_labels)
+>         b(%9.2fc)
+>         se(%9.2fc)
+>         star (* 0.1 ** 0.05 *** 0.01)
+>         label
+>         noobs
+>         nomtitle
+>         nonumbers
+>         nolines
+>         nogaps
+>         noeqlines
+>         nodepvars
+> ;
+{res}{txt}(output written to {browse  `"../results/tables/add-linguistics-panelB-bow-accuracy.tex"'})
+
+{com}. esttab using $TABSAVEDIR/add-linguistics-panelB-bow-accuracy.md,
+>         replace
+>         se
+>         star (* 0.1 ** 0.05 *** 0.01)
+>         keep(
+>                 1.opposition
+>                 pc1_objectivity
+>                 pc1_polarity
+>                 pc1_readability
+>                 pc1_lexical
+>         )
+>         coeflabel($coeff_labels)
+>     b(%9.2f)
+>     se(%9.2f)
+>     nonumbers
+>         style(mmd)
+>     mtitle("(1) Baseline" "(2) +Objectivity" "(3) +Polarity" "(4) +Readability" "(5) +Lexical" "(6) +All")
+> ;
+{res}{txt}(output written to {browse  `"../results/tables/add-linguistics-panelB-bow-accuracy.md"'})
+
+{com}. #delimit cr                     
+{txt}delimiter now cr
+{com}. 
+. *--------------------------------------------------------------------------------------------------
+. * Panel C. Semantic similarity with PC controls
+. *--------------------------------------------------------------------------------------------------
+. eststo clear
+{txt}
+{com}. eststo: qui reg ce_max_quote2speech i.opposition $length_s $base_controls_min,                                                                                                              vce(cluster article_id)
+{txt}({res}est1{txt} stored)
+
+{com}. eststo: qui reg ce_max_quote2speech i.opposition $length_s $base_controls_min pc1_objectivity,                                                                              vce(cluster article_id)
+{txt}({res}est2{txt} stored)
+
+{com}. eststo: qui reg ce_max_quote2speech i.opposition $length_s $base_controls_min                             pc1_polarity,                                                         vce(cluster article_id)
+{txt}({res}est3{txt} stored)
+
+{com}. eststo: qui reg ce_max_quote2speech i.opposition $length_s $base_controls_min                                                      pc1_readability,                     vce(cluster article_id)
+{txt}({res}est4{txt} stored)
+
+{com}. eststo: qui reg ce_max_quote2speech i.opposition $length_s $base_controls_min                                                                                      pc1_lexical, vce(cluster article_id)
+{txt}({res}est5{txt} stored)
+
+{com}. eststo: qui reg ce_max_quote2speech i.opposition $length_s $base_controls_min pc1_objectivity pc1_polarity pc1_readability pc1_lexical, vce(cluster article_id)
+{txt}({res}est6{txt} stored)
+
+{com}. 
+. #delimit ;
+{txt}delimiter now ;
+{com}. esttab, keep(
+>                         1.opposition
+>                         pc1_objectivity
+>                         pc1_polarity
+>                         pc1_readability
+>                         pc1_lexical
+>                 )               coeflabel(`my_coeflabel')
+>                 `esttab_options'
+>                 order(`keep_coeff')
+> ;
+{res}
+{txt}{hline 108}
+{txt}                      (1)             (2)             (3)             (4)             (5)             (6)   
+{txt}             ce_max_quo~h    ce_max_quo~h    ce_max_quo~h    ce_max_quo~h    ce_max_quo~h    ce_max_quo~h   
+{txt}{hline 108}
+{txt}1.opposition{res}       -4.053**        -4.104**        -4.097**        -4.078**        -3.882**        -3.969** {txt}
+            {res} {ralign 12:{txt:(}-2.78{txt:)}}    {ralign 12:{txt:(}-2.81{txt:)}}    {ralign 12:{txt:(}-2.81{txt:)}}    {ralign 12:{txt:(}-2.80{txt:)}}    {ralign 12:{txt:(}-2.65{txt:)}}    {ralign 12:{txt:(}-2.71{txt:)}}   {txt}
+
+{txt}pc1_object~y{res}                       0.0897                                                          0.0787   {txt}
+            {res}                 {ralign 12:{txt:(}0.73{txt:)}}                                                    {ralign 12:{txt:(}0.62{txt:)}}   {txt}
+
+{txt}pc1_polarity{res}                                       -0.100                                         -0.0739   {txt}
+            {res}                                 {ralign 12:{txt:(}-0.82{txt:)}}                                    {ralign 12:{txt:(}-0.58{txt:)}}   {txt}
+
+{txt}pc1_readab~y{res}                                                       0.0911                          0.0550   {txt}
+            {res}                                                 {ralign 12:{txt:(}0.57{txt:)}}                    {ralign 12:{txt:(}0.33{txt:)}}   {txt}
+
+{txt}pc1_lexical {res}                                                                        0.420**         0.414** {txt}
+            {res}                                                                 {ralign 12:{txt:(}2.75{txt:)}}    {ralign 12:{txt:(}2.68{txt:)}}   {txt}
+{txt}{hline 108}
+{txt}N           {res}        14901           14899           14899           14890           14848           14836   {txt}
+{txt}{hline 108}
+{txt}t statistics in parentheses
+{txt}* p<0.05, ** p<0.01, *** p<0.001
+
+{com}. esttab using $TABSAVEDIR/add-linguistics-panelC-semantic-accuracy.tex,
+>         replace
+>         booktabs
+>         fragment
+>         keep(
+>                 1.opposition
+>                 pc1_objectivity
+>                 pc1_polarity
+>                 pc1_readability
+>                 pc1_lexical
+>         )
+>         coeflabel($coeff_labels)
+>         b(%9.2fc)
+>         se(%9.2fc)
+>         star (* 0.1 ** 0.05 *** 0.01)
+>         label
+>         noobs
+>         nomtitle
+>         nonumbers
+>         nolines
+>         nogaps
+>         noeqlines
+>         nodepvars
+> ;
+{res}{txt}(output written to {browse  `"../results/tables/add-linguistics-panelC-semantic-accuracy.tex"'})
+
+{com}. esttab using $TABSAVEDIR/add-linguistics-panelC-semantic-accuracy.md,
+>         replace
+>         se
+>         star (* 0.1 ** 0.05 *** 0.01)
+>         keep(
+>                 1.opposition
+>                 pc1_objectivity
+>                 pc1_polarity
+>                 pc1_readability
+>                 pc1_lexical
+>         )
+>         coeflabel($coeff_labels)
+>     b(%9.2f)
+>     se(%9.2f)
+>     nonumbers
+>         style(mmd)
+>     mtitle("(1) Baseline" "(2) +Objectivity" "(3) +Polarity" "(4) +Readability" "(5) +Lexical" "(6) +All")
+> ;
+{res}{txt}(output written to {browse  `"../results/tables/add-linguistics-panelC-semantic-accuracy.md"'})
+
+{com}. #delimit cr
+{txt}delimiter now cr
+{com}. 
+. 
+. tictoc toc 1
+{res}{hline}
+{txt}----------- Time log -----------
+Start time:  2 Dec 2025 12:20:45
+End time:  2 Dec 2025 12:21:54
+Elapsed seconds: {res}       68
+{txt}Elapsed minutes: {res}        1
+{txt}Elapsed hours: {res}      .02
+{hline}
+{txt}
+{com}. beepme 2
+{txt}
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}\\wsl.localhost\Debian\home\lsys\neutrality\analysis\logs/table3.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res} 2 Dec 2025, 12:21:56
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

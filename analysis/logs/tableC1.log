@@ -1,0 +1,4614 @@
+------------------------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  \\wsl.localhost\Debian\home\lsys\neutrality\analysis\logs/tableC1.smcl
+  log type:  smcl
+ opened on:   2 Dec 2025, 12:13:49
+
+. 
+. do init.do
+
+. cls                                     // Clear results window
+
+. clear all               // Start with a clean slate
+
+. set more off, perm      // Disable partitioned output
+(set more preference recorded)
+
+. macro drop _all         // Clear all macros to avoid namespace conflicts
+
+. set linesize 150        // Line size limit to make output more readable, affects logs
+
+. set varabbrev off, perm // Turn off variable abbreviation
+(set varabbrev preference recorded)
+
+. // pause on                // Enable pause mode for debugging
+. version 13.1            // Set Stata version to 13.1
+
+. set matsize 10000
+
+. 
+. *==============================================================================
+. // Set root path
+. // cap net install here, from("https://raw.githubusercontent.com/korenmiklos/here/master/")
+. cap here
+
+. if _rc == 0 {
+.         here, set
+.         cd ${here}
+. }
+
+. else {
+.         global here "\\wsl.localhost\Debian\home\lsys\neutrality\analysis"
+.         cd $here
+\\wsl.localhost\Debian\home\lsys\neutrality\analysis
+. }
+
+. 
+. *==============================================================================
+. // Point to ado programs
+. adopath ++ ./ado
+  [1]              "./ado"
+  [2]  (BASE)      "C:\Program Files (x86)\Stata13\ado\base/"
+  [3]  (SITE)      "C:\Program Files (x86)\Stata13\ado\site/"
+  [4]              "."
+  [5]  (PERSONAL)  "c:\ado\personal/"
+  [6]  (PLUS)      "c:\ado\plus/"
+  [7]  (OLDPLACE)  "c:\ado/"
+
+. 
+. use "../pipeline/out/media.dta", clear
+
+. do preamble
+
+. *-----------------------------------------------------------------------
+. * IDENTIFIERS AND METADATA
+. *-----------------------------------------------------------------------
+. label var qid         "Quote ID"
+
+. label var article_id  "News article ID (title-date tuple)"
+
+. label var speech_id   "Speech ID"
+
+. 
+. label var date        "Publication date"
+
+. label var matched_date "Matched speech date"
+
+. label var matched_score "Matched score in semi-automated assessing"
+
+. 
+. label var mp          "MP ID"
+
+. label var party       "Party of politician (string code)"
+
+. label var opposition  "=1 if from an opposition party"
+
+. gen ruling = (party == "pap")
+
+. label var ruling  "=1 if from the government party"
+
+. label var non_partisan "=1 if non-partisan MP"
+
+. assert (1 == opposition + ruling + non_partisan)
+
+. label var speaker     "=1 if making speech in capacity of speaker"
+
+. 
+. label var section     "Original article section"
+
+. 
+. *======================================================================
+. * MP CAREER
+. *======================================================================
+. label var start "Start date of MP's parliamentary service"
+
+. rename _end end
+
+. label var end   "End date of MP's parliamentary service"
+
+. 
+. *--- Rank of MP --------------------------------------------------------
+. label define rank_label ///
+>     1 "pm" 2 "dpm" 3 "minister" 4 "sms" 5 "mos" 6 "mayor" 7 "sps" ///
+>     8 "parl sec" 9 "speaker" 10 "mp" 11 "ncmp" 12 "nmp"
+
+. encode rank, gen(mp_rank) label(rank_label)
+
+. drop rank
+
+. rename mp_rank rank
+
+. label var rank "Rank of MP at time of speech"
+
+. fvset base 10 rank   // base: Member of Parliament
+
+. 
+. *--- Tenunre -----------------------------------------------------------
+. gen _tenure = tenure / 365
+
+. drop tenure
+
+. rename _tenure tenure
+
+. label var tenure "Seniority of politician at time of speech (years)"
+
+. 
+. gen tenure2 = tenure^2
+
+. label var tenure2 "Square of tenure"
+
+. 
+. *======================================================================
+. * INDIVIDUAL DEMOGRAPHICS
+. *======================================================================
+. label var dob   "Date of birth of MP"
+
+. label var yob   "Year of birth of MP"
+
+. 
+. *--- Gender (0 = male, 1 = female) ------------------------------------
+. label define gender_label 0 "male" 1 "female"
+
+. encode gender, gen(sex) label(gender_label)
+
+. drop gender
+
+. rename sex gender
+
+. fvset base 0 gender
+
+. label var gender "Gender of politician"
+
+. 
+. *--- Race --------------------------------------------------------------
+. label define race_label 0 "chinese" 1 "malay" 2 "indian" 3 "eurasian"
+
+. encode race, gen(ethnic) label(race_label)
+
+. drop race
+
+. rename ethnic race
+
+. fvset base 0 race
+
+. label var race "Race of politician (Chinese, Malay, Indian, Eurasian/other)"
+
+. 
+. *--- Age ---------------------------------------------------------------
+. gen _age = age / 365
+
+. drop age
+
+. rename _age age
+
+. label var age "Age of politician at time of speech (years)"
+
+. 
+. gen age2    = age^2
+
+. label var age2 "Square of age"
+
+. 
+. *======================================================================
+. * MINISTRY
+. *======================================================================
+. label var MND    "=1 if speech made while at Ministry of National Development"
+
+. label var MinDef "=1 if speech made while at Ministry of Defence"
+
+. label var MFA    "=1 if speech made while at Ministry of Foreign Affairs"
+
+. label var MinLaw "=1 if speech made while at Ministry of Law"
+
+. label var MHA    "=1 if speech made while at Ministry of Home Affairs"
+
+. label var MOT    "=1 if speech made while at Ministry of Transport"
+
+. label var MOF    "=1 if speech made while at Ministry of Finance"
+
+. label var MOM    "=1 if speech made while at Ministry of Manpower"
+
+. label var MTI    "=1 if speech made while at Ministry of Trade and Industry"
+
+. label var MCCY   "=1 if speech made while at Ministry of Culture, Community and Youth"
+
+. label var MSF    "=1 if speech made while at Ministry of Social and Family Development"
+
+. label var MOH    "=1 if speech made while at Ministry of Health"
+
+. label var PMO    "=1 if speech made while at Prime Minister's Office"
+
+. label var MEWR   "=1 if speech made while at Ministry of the Environment and Water Resources"
+
+. label var MCI    "=1 if speech made while at Ministry of Communications and Information"
+
+. label var MOE    "=1 if speech made while at Ministry of Education"
+
+. 
+. recode MFA PMO MEWR MCI MTI MHA MCCY MinLaw MOH MOM MinDef MSF MOT MND MOF MOE (. = 0)
+(MFA: 13913 changes made)
+(PMO: 14288 changes made)
+(MEWR: 14348 changes made)
+(MCI: 14173 changes made)
+(MTI: 14135 changes made)
+(MHA: 13392 changes made)
+(MCCY: 14301 changes made)
+(MinLaw: 13971 changes made)
+(MOH: 14054 changes made)
+(MOM: 14058 changes made)
+(MinDef: 13790 changes made)
+(MSF: 14693 changes made)
+(MOT: 13884 changes made)
+(MND: 13741 changes made)
+(MOF: 13401 changes made)
+(MOE: 13792 changes made)
+
+. 
+. *======================================================================
+. * STRING SIMILARITY AND SEMANTIC MATCHING
+. *======================================================================
+. 
+. *--- String similarity 1 (partialscore) -------------------------------
+. rename partialscore_quote_to_fullspeech  ss1_quote_to_speech
+
+. label var ss1_quote_to_speech            "String similarity score 1 for quote to speech"
+
+. 
+. rename partialscore_quote_to_paragraph   ss1_quote_to_paragraph
+
+. label var ss1_quote_to_paragraph         "String similarity score 1 for quote to paragraph"
+
+. 
+. rename partialscore_quote_to_sentence    ss1_quote_to_sentence
+
+. label var ss1_quote_to_sentence          "String similarity score 1 for quote to sentence"
+
+. 
+. rename _partialscore_speech              _ss1_quote_to_speech
+
+. label var _ss1_quote_to_speech           "(no stopwords) string similarity score 1 for quote to speech"
+
+. 
+. rename _partialscore_paragraph           _ss1_quote_to_paragraph
+
+. label var _ss1_quote_to_paragraph        "(no stopwords) string similarity score 1 for quote to paragraph"
+
+. 
+. rename _partialscore_sentence            _ss1_quote_to_sentence
+
+. label var _ss1_quote_to_sentence         "(no stopwords) string similarity score 1 for quote to sentence"
+
+. 
+. *--- String similarity 2 (tokensetscore) ------------------------------
+. rename tokensetscore_quote_to_sentence   ss2_quote_to_sentence
+
+. label var ss2_quote_to_sentence          "String similarity score 2 for quote to sentence"
+
+. 
+. rename tokensetscore_quote_to_paragraph  ss2_quote_to_paragraph
+
+. label var ss2_quote_to_paragraph         "String similarity score 2 for quote to paragraph"
+
+. 
+. rename tokensetscore_quote_to_fullspeec  ss2_quote_to_speech
+
+. label var ss2_quote_to_speech            "String similarity score 2 for quote to speech"
+
+. 
+. rename tokensetscore_quote_to_sentence_  _ss2_quote_to_sentence
+
+. label var _ss2_quote_to_sentence         "(no stopwords) string similarity score 2 for quote to sentence"
+
+. 
+. rename _0tokensetscore_quote_to_paragra  _ss2_quote_to_paragraph
+
+. label var _ss2_quote_to_paragraph        "(no stopwords) string similarity score 2 for quote to paragraph"
+
+. 
+. rename _1tokensetscore_quote_to_fullspe  _ss2_quote_to_speech
+
+. label var _ss2_quote_to_speech           "(no stopwords) string similarity score 2 for quote to speech"
+
+. 
+. *--- Semantic matching scores -----------------------------------------
+. replace ce_max_quote2speech = 100 * ce_max_quote2speech
+(14903 real changes made)
+
+. label var be_max_quote2speech "Best embedding-based biencoder score for quote to speech"
+
+. label var ce_max_quote2speech "Cross-encoder semantic score for quote to speech (0-100)"
+
+. 
+. *======================================================================
+. * CONSTITUENCY AND ELECTORAL VARIABLES
+. *======================================================================
+. rename num group_size
+
+. label var group_size             "Politician size of constituency (1 to 6)"
+
+. 
+. label var voters                 "Electoral size of constituency for current parliament"
+
+. label var valid_votes            "Number of valid votes in constituency"
+
+. label var winners_majority       "Number of votes for winning party/candidate"
+
+. label var vote                   "Number of votes for current parliament"
+
+. label var vote_share             "Percentage of votes for current parliament"
+
+. label var winners_majority_share "Winners' majority share (percent of valid votes)"
+
+. label var swing                  "Electoral swing in ruling party vote share (percentage points)"
+
+. 
+. *======================================================================
+. * PARLIAMENT, YEAR, ELECTION TIMING, WEEKDAY
+. *======================================================================
+. *--- Parliament life: dummies + factor ---------------------------------
+. label var parl10 "=1 if speech occurred in 10th Parliament"
+
+. label var parl11 "=1 if speech occurred in 11th Parliament"
+
+. label var parl12 "=1 if speech occurred in 12th Parliament"
+
+. label var parl13 "=1 if speech occurred in 13th Parliament"
+
+. 
+. label define parl_label 0 "10th parliament" 1 "11th parliament" 2 "12th parliament" 3 "13th parliament"
+
+. encode parl, gen(parliament) label(parl_label)
+
+. drop parl
+
+. rename parliament parl
+
+. fvset base 0 parl
+
+. label var parl "Parliament life (categorical)"
+
+. 
+. *======================================================================
+. * ELECTION TIMING INDICATORS
+. *======================================================================
+. *--- General elections -------------------------------------------------
+. label var ge2006       "=1 if article published in year of General Election 2006"
+
+. label var ge2011       "=1 if article published in year of General Election 2011"
+
+. label var ge2015       "=1 if article published in year of General Election 2015"
+
+. 
+. label var ge2006_1mth  "=1 if article within 1 month of General Election 2006"
+
+. label var ge2006_3mths "=1 if article within 3 months of General Election 2006"
+
+. label var ge2006_6mths "=1 if article within 6 months of General Election 2006"
+
+. 
+. label var ge2011_1mth  "=1 if article within 1 month of General Election 2011"
+
+. label var ge2011_3mths "=1 if article within 3 months of General Election 2011"
+
+. label var ge2011_6mths "=1 if article within 6 months of General Election 2011"
+
+. 
+. label var ge2015_1mth  "=1 if article within 1 month of General Election 2015"
+
+. label var ge2015_3mths "=1 if article within 3 months of General Election 2015"
+
+. label var ge2015_6mths "=1 if article within 6 months of General Election 2015"
+
+. 
+. *--- By-elections ------------------------------------------------------
+. label var be2012       "=1 if article published in year of By-election 2012"
+
+. label var be2013       "=1 if article published in year of By-election 2013"
+
+. label var be2016       "=1 if article published in year of By-election 2016"
+
+. 
+. label var be2012_1mth  "=1 if article within 1 month of By-election 2012"
+
+. label var be2012_3mths "=1 if article within 3 months of By-election 2012"
+
+. label var be2013_1mth  "=1 if article within 1 month of By-election 2013"
+
+. label var be2013_3mths "=1 if article within 3 months of By-election 2013"
+
+. label var be2016_1mth  "=1 if article within 1 month of By-election 2016"
+
+. label var be2016_3mths "=1 if article within 3 months of By-election 2016"
+
+. 
+. *--- Presidential elections --------------------------------------------
+. label var pe2005       "=1 if article published in year of Presidential Election 2005"
+
+. label var pe2011       "=1 if article published in year of Presidential Election 2011"
+
+. 
+. label var pe2005_1mth  "=1 if article within 1 month of Presidential Election 2005"
+
+. label var pe2005_3mths "=1 if article within 3 months of Presidential Election 2005"
+
+. label var pe2005_6mths "=1 if article within 6 months of Presidential Election 2005"
+
+. 
+. label var pe2011_1mth  "=1 if article within 1 month of Presidential Election 2011"
+
+. label var pe2011_3mths "=1 if article within 3 months of Presidential Election 2011"
+
+. label var pe2011_6mths "=1 if article within 6 months of Presidential Election 2011"
+
+. 
+. *======================================================================
+. * ARTICLE-LEVEL VARIABLES: SECTION, AUTHOR, LANGUAGE, BEAT
+. *======================================================================
+. * Encoded section with 'others' as base
+. label define section2_label ///
+>     1 "home" 2 "insight" 3 "money" 4 "news" 5 "opinion" 6 "others" ///
+>     7 "prime news" 8 "review - insight" 9 "singapore" 10 "sports" ///
+>     11 "st" 12 "think" 13 "top of the news" 14 "world"
+
+. encode section2, gen(sect2) label(section2_label)
+
+. drop section2
+
+. rename sect2 section2
+
+. fvset base 6 section2
+
+. label var section2 "Section of article (base: others)"
+
+. 
+. * Language / translation flags
+. label var malay        "=1 if quote is in Malay"
+
+. label var mandarin     "=1 if quote is in Mandarin"
+
+. label var tamil        "=1 if quote is in Tamil"
+
+. label var vernacular   "=1 if quote is in a non-English vernacular language"
+
+. label var translations "=1 if quote translated from vernacular to English"
+
+. 
+. * Author and beat
+. rename author_cleaned2 authorID
+
+. label var authorID "Author ID"
+
+. 
+. encode beat, gen(beat2)
+
+. drop beat
+
+. rename beat2 beat
+
+. label var beat "Beat assignment of reporter"
+
+. 
+. *--- Weekday of publication -------------------------------------------
+. label define weekday_label ///
+>     1 "monday" 2 "tuesday" 3 "wednesday" 4 "thursday" 5 "friday" 6 "saturday" 7 "sunday"
+
+. encode weekday, gen(dayofweek) label(weekday_label)
+
+. drop weekday
+
+. rename dayofweek weekday
+
+. fvset base 1 weekday
+
+. label var weekday "Day of week of article publication"
+
+. 
+. *======================================================================
+. * TEXT LENGTH
+. *======================================================================
+. * Word counts
+. rename wordcount_quote      quote
+
+. label var quote             "Word count of quote"
+
+. 
+. rename wordcount_paragraph  paragraph
+
+. label var paragraph         "Word count of paragraph"
+
+. 
+. rename wordcount_fullspeech speech
+
+. label var speech            "Word count of full speech"
+
+. 
+. rename wordcount            article
+
+. label var article           "Article length (words)"
+
+. 
+. * Character counts
+. rename char_count_quote     quote_char
+
+. label var quote_char        "Character count of quote"
+
+. 
+. rename char_count_paragraph paragraph_char
+
+. label var paragraph_char    "Character count of paragraph"
+
+. 
+. rename char_count_fullspeech speech_char
+
+. label var speech_char       "Character count of speech"
+
+. 
+. rename article_len_char     article_char
+
+. label var article_char      "Article length (characters)"
+
+. 
+. * Log transformations
+. #delimit ;
+delimiter now ;
+. global log_variables "
+>     quote 
+>     quote_char 
+>     paragraph 
+>     paragraph_char
+>     speech
+>     speech_char 
+>     article
+>     article_char
+> ";
+
+. #delimit cr
+delimiter now cr
+. 
+. foreach var in $log_variables {
+  2.     gen ln_`var' = ln(`var')
+  3.     label var ln_`var' "ln of `var'"
+  4. }
+(2 missing values generated)
+(2 missing values generated)
+
+. 
+. *======================================================================
+. * TOPIC DISTRIBUTIONS
+. *======================================================================
+. 
+. * 50-topic models: quote, speech, article
+. forvalues i = 1/50 {
+  2.     label var quote_50K_`i'   "Probability for topic `i'/50 for quote"
+  3.     label var speech_50K_`i'  "Probability for topic `i'/50 for speech"
+  4.     label var article_50K_`i' "Probability for topic `i'/50 for article"
+  5. }
+
+. 
+. * 92-topic models: quote, speech, sentence
+. forvalues i = 1/92 {
+  2.     label var quote_92K_`i'    "Probability for topic `i'/92 for quote"
+  3.     label var speech_92K_`i'   "Probability for topic `i'/92 for speech"
+  4.     label var sentence_92K_`i' "Probability for topic `i'/92 for sentence"
+  5. }
+
+. 
+. * 100-topic models: quote, speech
+. forvalues i = 1/100 {
+  2.     label var quote_100K_`i'  "Probability for topic `i'/100 for quote"
+  3.     label var speech_100K_`i' "Probability for topic `i'/100 for speech"
+  4. }
+
+. 
+. * Article-level topic models (30 and 40 topics)
+. forvalues i = 1/30 {
+  2.     label var article_30K_`i' "Probability for topic `i'/30 for article"
+  3. }
+
+. 
+. forvalues i = 1/40 {
+  2.     label var article_40K_`i' "Probability for topic `i'/40 for article"
+  3. }
+
+. 
+. *======================================================================
+. * LEXICAL RICHNESS
+. *======================================================================
+. label var ttr    "Type-token ratio"
+
+. label var rttr   "Root type-token ratio"
+
+. label var cttr   "Corrected type-token ratio"
+
+. label var herdan "Herdan's C lexical diversity"
+
+. label var summer "Summer lexical diversity index"
+
+. label var dugast "Dugast lexical diversity index"
+
+. label var maas   "Maas lexical diversity index"
+
+. label var msttr  "Mean segmental type-token ratio"
+
+. label var mattr  "Moving-average type-token ratio"
+
+. label var mtld   "Measure of textual lexical diversity"
+
+. label var hdd    "Hypergeometric distribution diversity"
+
+. 
+. *======================================================================
+. * READABILITY
+. *======================================================================
+. label var dalechall     "Dale-Chall readability index"
+
+. label var flesch        "Flesch reading easse score"
+
+. label var fleschkincaid "Flesch-Kincaid grade level"
+
+. label var gunningfog    "Gunning-Fog readability index"
+
+. label var smog          "SMOG readability index"
+
+. label var notdalechall  "Share of difficult words (not in Dale-Chall list)"
+
+. label var polysyllable  "Number of polysyllabic words (more than 3 syllables)"
+
+. label var syllables     "Total number of syllables"
+
+. label var sentences     "Total number of sentences"
+
+. 
+. *======================================================================
+. * SUBJECTIVITY, OBJECTIVITY, POLARITY
+. *======================================================================
+. * Subjectivity (0 = objective, 1 = subjective)
+. gen speech_objectivity         = 1 - speech_subjectivity
+
+. label var speech_subjectivity  "Speech subjectivity (0 objective - 1 subjective)"
+
+. 
+. gen para_objectivity           = 1 - para_subjectivity
+(2 missing values generated)
+
+. label var para_subjectivity    "Paragraph subjectivity (0-1)"
+
+. 
+. gen sentence_objectivity       = 1 - sentence_subjectivity
+(2 missing values generated)
+
+. label var sentence_subjectivity "Sentence subjectivity (0-1)"
+
+. 
+. gen quote_objectivity          = 1 - quote_subjectivity
+
+. label var quote_subjectivity   "Quote subjectivity (0-1)"
+
+. 
+. gen quote_sentence_objectivity = 1 - quote_sentence_subjectivity
+(1 missing value generated)
+
+. label var quote_sentence_subjectivity "Quote sentence subjectivity (0-1)"
+
+. 
+. label var speech_objectivity         "Speech objectivity (0 objective - 1 subjective)"
+
+. label var para_objectivity           "Paragraph objectivity (0-1)"
+
+. label var sentence_objectivity       "Sentence objectivity (0-1)"
+
+. label var quote_objectivity          "Quote objectivity (0-1)"
+
+. label var quote_sentence_objectivity "Quote sentence objectivity (0-1)"
+
+. 
+. * Polarity (-1 = negative, +1 = positive)
+. label var speech_polarity         "Speech polarity (-1 negative to +1 positive), PatternAnalyzer"
+
+. label var para_polarity           "Paragraph polarity (-1 to +1), PatternAnalyzer"
+
+. label var sentence_polarity       "Sentence polarity (-1 to +1), PatternAnalyzer"
+
+. label var quote_polarity          "Quote polarity (-1 to +1), PatternAnalyzer"
+
+. label var quote_sentence_polarity "Quote sentence polarity (-1 to +1), PatternAnalyzer"
+
+. 
+end of do-file
+
+. 
+. global TABSAVEDIR ../results/tables
+
+. global FIGSAVEDIR ../results/figures
+
+. global graphformats png pdf eps tif
+
+. 
+. 
+. *==============================================================================
+. * Global macros
+. *==============================================================================
+. #delimit;
+delimiter now ;
+. global time
+>         i.parl
+>         i.year
+> ;
+
+. global ind
+>     i.gender
+>     i.race
+>     c.age
+>     c.age2
+>     c.tenure
+>     c.tenure2
+> ;
+
+.     global article
+>     i.weekday
+>     i.section2
+>     translations
+> ;
+
+.     global portfolio
+>     MFA
+>     PMO
+>     MEWR
+>     MCI
+>     MTI
+>     MHA
+>     MCCY
+>     MinLaw
+>     MOH
+>     MOM
+>     MinDef
+>     MSF
+>     MOT
+>     MND
+>     MOF
+>     MOE
+>     speaker
+> ;
+
+.     global electoral
+>     c.group_size
+>     c.voters
+>     c.vote_share
+>     c.winners_majority_share
+> ;
+
+.     global topics
+>     speech_92K*
+>     quote_92K*
+>     article_40K*
+> ;
+
+.     global objectivity
+>     speech_objectivity
+>     para_objectivity
+>     sentence_objectivity
+>     quote_objectivity
+>     quote_sentence_objectivity
+> ;
+
+.     global polarity
+>     speech_polarity
+>     para_polarity
+>     sentence_polarity
+>     quote_polarity
+>     quote_sentence_polarity
+> ;
+
+.     global readability
+>     flesch
+>     fleschkincaid
+>     gunningfog
+>     smog
+>     dalechall
+>     notdalechall
+>     sentences
+>     syllables
+>     polysyllable
+> ;
+
+.     global lexical
+>     ttr
+>     rttr
+>     cttr
+>     herdan
+>     summer
+>     dugast
+>     maas
+>     msttr
+>     mattr
+>     mtld
+>     hdd
+> ;
+
+.     global length_s
+>     quote
+>     speech
+>     article
+> ;
+
+. global length_s
+>     ln_quote
+>     ln_speech
+>     ln_article
+> ;
+
+. assert_macros "portfolio time ind article topics";
+Checking portfolio:
+portfolio contains: MFA     PMO     MEWR     MCI     MTI     MHA     MCCY     MinLaw     MOH     MOM     MinDef     MSF     MOT     MND     MOF     MO
+> E     speaker
+Checking time:
+time contains: i.parl         i.year
+Checking ind:
+ind contains: i.gender     i.race     c.age     c.age2     c.tenure     c.tenure2
+Checking article:
+article contains: i.weekday     i.section2     translations
+Checking topics:
+topics contains: speech_92K*     quote_92K*     article_40K*
+
+. global min
+>     i.rank
+>     $portfolio
+>     i.rank#($portfolio)
+>     ;
+
+.     global base_controls
+>     $time
+>     $ind
+>     $article
+>     $topics
+>     ;
+
+.     global base_controls_min
+>     $time
+>     $ind
+>     $article
+>     $topics
+>     $min
+>     ;
+
+. #delimit cr
+delimiter now cr
+. 
+. *==============================================================================
+. * COEFFICIENT LABELS
+. *==============================================================================
+. #delimit;
+delimiter now ;
+. global coeff_labels
+>         "
+>     1.opposition "Opposition"
+>     1.opposition#c.trend "Opposition $\times$ Year"
+>     trend "Year"
+>         pc1_objectivity "Objectivity of speech and quote"
+>         pc1_polarity "Polarity of speech and quote"
+>         pc1_readability "Grade/readability score of speech transcipt"
+>         pc1_lexical "Lexical richness of speech transcipt"
+>     "
+> ;
+
+. #delimit cr
+delimiter now cr
+. 
+end of do-file
+
+. 
+. tictoc tic 1
+------------------------------------------------------------------------------------------------------------------------------------------------------
+----------- Time log -----------
+Start time:  2 Dec 2025 12:13:50
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+. assert_macros "portfolio topics base_controls min electoral"
+Checking portfolio:
+portfolio contains: MFA     PMO     MEWR     MCI     MTI     MHA     MCCY     MinLaw     MOH     MOM     MinDef     MSF     MOT     MND     MOF     MO
+> E     speaker
+Checking topics:
+topics contains: speech_92K*     quote_92K*     article_40K*
+Checking base_controls:
+base_controls contains: i.parl         i.year     i.gender     i.race     c.age     c.age2     c.tenure     c.tenure2     i.weekday     i.section2    
+>  translations     speech_92K*     quote_92K*     article_40K*
+Checking min:
+min contains: i.rank     MFA     PMO     MEWR     MCI     MTI     MHA     MCCY     MinLaw     MOH     MOM     MinDef     MSF     MOT     MND     MOF  
+>    MOE     speaker     i.rank#(MFA     PMO     MEWR     MCI     MTI     MHA     MCCY     MinLaw     MOH     MOM     MinDef     MSF     MOT     MND  
+>    MOF     MOE     speaker)
+Checking electoral:
+electoral contains: c.group_size     c.voters     c.vote_share     c.winners_majority_share
+
+. 
+. preserve
+
+. collapse        (sum) quote quote_char ///
+>                         (count) fragments = quote ///
+>                         (first) opposition ///
+>                         (first) speech speech_char ///
+>                         (first) article article_char ///
+>                         (first) parl ///
+>                         (first) gender race age* tenure* ///
+>                         (first) weekday section2 translations ///
+>                         (first) rank $portfolio ///
+>                         (first) group_size voters vote vote_share winners_majority_share ///
+>                         (mean)  $topics ///
+>                         ,by(article_id speech_id mp year)
+
+. 
+. #delimit ;
+delimiter now ;
+. global log_variables    "
+>                                                 quote 
+>                                                 quote_char 
+>                                                 speech
+>                                                 speech_char
+>                                                 article
+>                                                 article_char
+>                                                 ";
+
+. #delimit cr
+delimiter now cr
+. 
+. foreach var in $log_variables   {
+  2.         gen ln_`var' = ln(`var')
+  3.         label variable ln_`var' "ln of `var'"
+  4. }
+
+.                                                         
+. eststo clear
+
+. local length ln_speech ln_article
+
+. eststo: reg ln_quote                    i.opposition `length'      $base_controls $min,            vce(cluster article_id)
+note: 2016.year omitted because of collinearity
+note: speech_92K_92 omitted because of collinearity
+note: quote_92K_92 omitted because of collinearity
+note: article_40K_40 omitted because of collinearity
+note: 1b.rank#1.MFA identifies no observations in the sample
+note: 2.rank#1.MFA identifies no observations in the sample
+note: 6.rank#1.MFA omitted because of collinearity
+note: 7.rank#1.MFA identifies no observations in the sample
+note: 8.rank#1.MFA identifies no observations in the sample
+note: 9.rank#1.MFA identifies no observations in the sample
+note: 10.rank#1.MFA identifies no observations in the sample
+note: 11.rank#1.MFA identifies no observations in the sample
+note: 12.rank#1.MFA identifies no observations in the sample
+note: 1b.rank#1.PMO identifies no observations in the sample
+note: 2.rank#1.PMO identifies no observations in the sample
+note: 5.rank#1.PMO omitted because of collinearity
+note: 6.rank#1.PMO identifies no observations in the sample
+note: 7.rank#1.PMO identifies no observations in the sample
+note: 8.rank#1.PMO identifies no observations in the sample
+note: 9.rank#1.PMO identifies no observations in the sample
+note: 10.rank#1.PMO identifies no observations in the sample
+note: 11.rank#1.PMO identifies no observations in the sample
+note: 12.rank#1.PMO identifies no observations in the sample
+note: 1b.rank#1.MEWR identifies no observations in the sample
+note: 2.rank#1.MEWR identifies no observations in the sample
+note: 7.rank#1.MEWR omitted because of collinearity
+note: 8.rank#1.MEWR identifies no observations in the sample
+note: 9.rank#1.MEWR identifies no observations in the sample
+note: 10.rank#1.MEWR identifies no observations in the sample
+note: 11.rank#1.MEWR identifies no observations in the sample
+note: 12.rank#1.MEWR identifies no observations in the sample
+note: 1b.rank#1.MCI identifies no observations in the sample
+note: 2.rank#1.MCI identifies no observations in the sample
+note: 6.rank#1.MCI identifies no observations in the sample
+note: 8.rank#1.MCI omitted because of collinearity
+note: 9.rank#1.MCI identifies no observations in the sample
+note: 10.rank#1.MCI identifies no observations in the sample
+note: 11.rank#1.MCI identifies no observations in the sample
+note: 12.rank#1.MCI identifies no observations in the sample
+note: 1b.rank#1.MTI identifies no observations in the sample
+note: 2.rank#1.MTI identifies no observations in the sample
+note: 7.rank#1.MTI omitted because of collinearity
+note: 8.rank#1.MTI omitted because of collinearity
+note: 9.rank#1.MTI identifies no observations in the sample
+note: 10.rank#1.MTI identifies no observations in the sample
+note: 11.rank#1.MTI identifies no observations in the sample
+note: 12.rank#1.MTI identifies no observations in the sample
+note: 1b.rank#1.MHA identifies no observations in the sample
+note: 6.rank#1.MHA identifies no observations in the sample
+note: 8.rank#1.MHA omitted because of collinearity
+note: 9.rank#1.MHA identifies no observations in the sample
+note: 10.rank#1.MHA identifies no observations in the sample
+note: 11.rank#1.MHA identifies no observations in the sample
+note: 12.rank#1.MHA identifies no observations in the sample
+note: 1b.rank#1.MCCY identifies no observations in the sample
+note: 2.rank#1.MCCY identifies no observations in the sample
+note: 8.rank#1.MCCY omitted because of collinearity
+note: 9.rank#1.MCCY identifies no observations in the sample
+note: 10.rank#1.MCCY identifies no observations in the sample
+note: 11.rank#1.MCCY identifies no observations in the sample
+note: 12.rank#1.MCCY identifies no observations in the sample
+note: 1b.rank#1.MinLaw identifies no observations in the sample
+note: 5.rank#1.MinLaw identifies no observations in the sample
+note: 6.rank#1.MinLaw identifies no observations in the sample
+note: 7.rank#1.MinLaw omitted because of collinearity
+note: 8.rank#1.MinLaw identifies no observations in the sample
+note: 9.rank#1.MinLaw identifies no observations in the sample
+note: 10.rank#1.MinLaw identifies no observations in the sample
+note: 11.rank#1.MinLaw identifies no observations in the sample
+note: 12.rank#1.MinLaw identifies no observations in the sample
+note: 1b.rank#1.MOH identifies no observations in the sample
+note: 2.rank#1.MOH identifies no observations in the sample
+note: 6.rank#1.MOH identifies no observations in the sample
+note: 8.rank#1.MOH omitted because of collinearity
+note: 9.rank#1.MOH identifies no observations in the sample
+note: 10.rank#1.MOH identifies no observations in the sample
+note: 11.rank#1.MOH identifies no observations in the sample
+note: 12.rank#1.MOH identifies no observations in the sample
+note: 1b.rank#1.MOM identifies no observations in the sample
+note: 6.rank#1.MOM identifies no observations in the sample
+note: 7.rank#1.MOM omitted because of collinearity
+note: 8.rank#1.MOM identifies no observations in the sample
+note: 9.rank#1.MOM identifies no observations in the sample
+note: 10.rank#1.MOM identifies no observations in the sample
+note: 11.rank#1.MOM identifies no observations in the sample
+note: 12.rank#1.MOM identifies no observations in the sample
+note: 1b.rank#1.MinDef identifies no observations in the sample
+note: 6.rank#1.MinDef omitted because of collinearity
+note: 7.rank#1.MinDef omitted because of collinearity
+note: 8.rank#1.MinDef identifies no observations in the sample
+note: 9.rank#1.MinDef identifies no observations in the sample
+note: 10.rank#1.MinDef identifies no observations in the sample
+note: 11.rank#1.MinDef identifies no observations in the sample
+note: 12.rank#1.MinDef identifies no observations in the sample
+note: 1b.rank#1.MSF identifies no observations in the sample
+note: 2.rank#1.MSF identifies no observations in the sample
+note: 7.rank#1.MSF identifies no observations in the sample
+note: 8.rank#1.MSF omitted because of collinearity
+note: 9.rank#1.MSF identifies no observations in the sample
+note: 10.rank#1.MSF identifies no observations in the sample
+note: 11.rank#1.MSF identifies no observations in the sample
+note: 12.rank#1.MSF identifies no observations in the sample
+note: 1b.rank#1.MOT identifies no observations in the sample
+note: 2.rank#1.MOT identifies no observations in the sample
+note: 6.rank#1.MOT omitted because of collinearity
+note: 7.rank#1.MOT omitted because of collinearity
+note: 8.rank#1.MOT omitted because of collinearity
+note: 9.rank#1.MOT identifies no observations in the sample
+note: 10.rank#1.MOT identifies no observations in the sample
+note: 11.rank#1.MOT identifies no observations in the sample
+note: 12.rank#1.MOT identifies no observations in the sample
+note: 1b.rank#1.MND identifies no observations in the sample
+note: 2.rank#1.MND identifies no observations in the sample
+note: 6.rank#1.MND omitted because of collinearity
+note: 8.rank#1.MND omitted because of collinearity
+note: 9.rank#1.MND identifies no observations in the sample
+note: 10.rank#1.MND identifies no observations in the sample
+note: 11.rank#1.MND identifies no observations in the sample
+note: 12.rank#1.MND identifies no observations in the sample
+note: 4.rank#1.MOF omitted because of collinearity
+note: 5.rank#1.MOF omitted because of collinearity
+note: 6.rank#1.MOF identifies no observations in the sample
+note: 7.rank#1.MOF identifies no observations in the sample
+note: 8.rank#1.MOF identifies no observations in the sample
+note: 9.rank#1.MOF identifies no observations in the sample
+note: 10.rank#1.MOF identifies no observations in the sample
+note: 11.rank#1.MOF identifies no observations in the sample
+note: 12.rank#1.MOF identifies no observations in the sample
+note: 1b.rank#1.MOE identifies no observations in the sample
+note: 2.rank#1.MOE identifies no observations in the sample
+note: 6.rank#1.MOE omitted because of collinearity
+note: 8.rank#1.MOE omitted because of collinearity
+note: 9.rank#1.MOE identifies no observations in the sample
+note: 10.rank#1.MOE identifies no observations in the sample
+note: 11.rank#1.MOE identifies no observations in the sample
+note: 12.rank#1.MOE identifies no observations in the sample
+note: 1b.rank#1.speaker identifies no observations in the sample
+note: 2.rank#1.speaker identifies no observations in the sample
+note: 3.rank#1.speaker identifies no observations in the sample
+note: 5.rank#1.speaker identifies no observations in the sample
+note: 6.rank#1.speaker identifies no observations in the sample
+note: 7.rank#1.speaker identifies no observations in the sample
+note: 8.rank#1.speaker identifies no observations in the sample
+note: 10.rank#1.speaker omitted because of collinearity
+note: 11.rank#1.speaker identifies no observations in the sample
+note: 12.rank#1.speaker identifies no observations in the sample
+
+Linear regression                                      Number of obs =    7094
+                                                       F(350,  3420) =       .
+                                                       Prob > F      =       .
+                                                       R-squared     =  0.1797
+                                                       Root MSE      =  1.0012
+
+                            (Std. Err. adjusted for 3421 clusters in article_id)
+--------------------------------------------------------------------------------
+               |               Robust
+      ln_quote |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+---------------+----------------------------------------------------------------
+  1.opposition |   .0354475   .0639469     0.55   0.579    -.0899305    .1608255
+     ln_speech |   .1557381    .014029    11.10   0.000     .1282321    .1832441
+    ln_article |   .1649281   .0427817     3.86   0.000     .0810479    .2488083
+               |
+          parl |
+            1  |   .0988779   .1273573     0.78   0.438    -.1508262    .3485819
+            2  |   .1575127   .1640953     0.96   0.337    -.1642221    .4792475
+            3  |   .0029655   .0963193     0.03   0.975    -.1858836    .1918146
+               |
+          year |
+         2006  |  -.0209837   .0892619    -0.24   0.814    -.1959958    .1540283
+         2007  |   -.020703   .1460255    -0.14   0.887    -.3070091     .265603
+         2008  |   .0224458   .1503822     0.15   0.881    -.2724022    .3172938
+         2009  |   .1410551   .1501178     0.94   0.347    -.1532745    .4353846
+         2010  |  -.0942028   .1489006    -0.63   0.527     -.386146    .1977403
+         2011  |  -.1206724   .1520297    -0.79   0.427    -.4187506    .1774058
+         2012  |  -.1566643   .1793926    -0.87   0.383    -.5083917    .1950632
+         2013  |  -.3215833   .1786511    -1.80   0.072    -.6718571    .0286904
+         2014  |  -.1254127   .1799264    -0.70   0.486    -.4781868    .2273613
+         2015  |  -.0559782   .1807494    -0.31   0.757    -.4103659    .2984095
+         2016  |          0  (omitted)
+               |
+      1.gender |   .0075744   .0401347     0.19   0.850     -.071116    .0862648
+               |
+          race |
+            1  |  -.0290865   .0517684    -0.56   0.574    -.1305867    .0724137
+            2  |  -.0139336   .0494963    -0.28   0.778    -.1109789    .0831117
+            3  |   .0096686   .1147258     0.08   0.933    -.2152695    .2346067
+               |
+           age |  -.0165273   .0215099    -0.77   0.442    -.0587009    .0256463
+          age2 |   .0001825   .0002208     0.83   0.408    -.0002503    .0006153
+        tenure |    .002212   .0069117     0.32   0.749    -.0113395    .0157636
+       tenure2 |    .000012   .0002345     0.05   0.959    -.0004477    .0004717
+               |
+       weekday |
+            2  |   .0387118   .1195013     0.32   0.746    -.1955895     .273013
+            3  |   .0739803   .1220034     0.61   0.544    -.1652267    .3131872
+            4  |   .1285355   .1251407     1.03   0.304    -.1168227    .3738937
+            5  |   .0407725   .1291465     0.32   0.752    -.2124397    .2939846
+            6  |   .0663064   .1282661     0.52   0.605    -.1851794    .3177923
+            7  |   .4938203   .2321701     2.13   0.033     .0386142    .9490263
+               |
+      section2 |
+            2  |  -.5410308   .2392555    -2.26   0.024    -1.010129   -.0719327
+            3  |   .3703715   .1424846     2.60   0.009      .091008     .649735
+            4  |  -.4296962   .3675836    -1.17   0.242    -1.150402    .2910094
+            5  |  -.3196645   .3470351    -0.92   0.357    -1.000082    .3607526
+            6  |  -.6871142   .4136192    -1.66   0.097     -1.49808    .1238516
+            7  |   .2000673    .095205     2.10   0.036     .0134029    .3867318
+            8  |   .4796623   .1760524     2.72   0.006     .1344837    .8248408
+            9  |   .1170293   .0821692     1.42   0.154    -.0440763    .2781349
+           10  |   .4182281   .5113828     0.82   0.414    -.5844187    1.420875
+           11  |   .4221637   .0938111     4.50   0.000     .2382321    .6060953
+           12  |  -.6960012   .3346934    -2.08   0.038     -1.35222   -.0397819
+           13  |   .0811863   .0733164     1.11   0.268    -.0625621    .2249347
+           14  |   .2492931   .2504023     1.00   0.320    -.2416603    .7402464
+               |
+  translations |  -.0208383   .1026912    -0.20   0.839    -.2221805    .1805039
+  speech_92K_1 |    .176897   .8694047     0.20   0.839    -1.527708    1.881502
+  speech_92K_2 |  -.3626414   .3411633    -1.06   0.288    -1.031546    .3062632
+  speech_92K_3 |   .3740668   .3273605     1.14   0.253    -.2677751    1.015909
+  speech_92K_4 |   .0166377   .4702978     0.04   0.972    -.9054554    .9387309
+  speech_92K_5 |    .063153   .7404779     0.09   0.932    -1.388671    1.514977
+  speech_92K_6 |  -.0010427   .4464327    -0.00   0.998    -.8763444    .8742591
+  speech_92K_7 |  -.1348668   .3002576    -0.45   0.653    -.7235693    .4538356
+  speech_92K_8 |  -.2167301   .3657009    -0.59   0.553    -.9337445    .5002843
+  speech_92K_9 |  -1.053243   .7442852    -1.42   0.157    -2.512531    .4060457
+ speech_92K_10 |    .440448   .3892246     1.13   0.258    -.3226883    1.203584
+ speech_92K_11 |  -.0991007   .3171557    -0.31   0.755    -.7209345    .5227331
+ speech_92K_12 |   .4579784   .9470383     0.48   0.629     -1.39884    2.314797
+ speech_92K_13 |   .0441066   .4553125     0.10   0.923    -.8486055    .9368186
+ speech_92K_14 |   .2087167   .3040846     0.69   0.493    -.3874892    .8049225
+ speech_92K_15 |   .4758049   .3405254     1.40   0.162    -.1918488    1.143459
+ speech_92K_16 |   -.185609   .4428932    -0.42   0.675    -1.053971    .6827531
+ speech_92K_17 |  -1.299737   .4862326    -2.67   0.008    -2.253073   -.3464013
+ speech_92K_18 |   -2.36965   .7701212    -3.08   0.002    -3.879595   -.8597062
+ speech_92K_19 |   .0151967    .382513     0.04   0.968    -.7347804    .7651739
+ speech_92K_20 |   .2362041   .3384298     0.70   0.485    -.4273409     .899749
+ speech_92K_21 |   .1702226   .3164072     0.54   0.591    -.4501436    .7905889
+ speech_92K_22 |  -.0014109   .4668997    -0.00   0.998    -.9168415    .9140197
+ speech_92K_23 |   .3936126   .2451629     1.61   0.108     -.087068    .8742933
+ speech_92K_24 |  -.1351813   .2904472    -0.47   0.642    -.7046488    .4342862
+ speech_92K_25 |   .5845847   .4670977     1.25   0.211    -.3312341    1.500404
+ speech_92K_26 |   .0956453   .4496671     0.21   0.832     -.785998    .9772886
+ speech_92K_27 |   .3961811   .6136558     0.65   0.519    -.8069879     1.59935
+ speech_92K_28 |  -.5260018   .5184176    -1.01   0.310    -1.542441    .4904377
+ speech_92K_29 |  -.4011015    .356934    -1.12   0.261    -1.100927     .298724
+ speech_92K_30 |  -.3220107   .4274497    -0.75   0.451    -1.160093    .5160719
+ speech_92K_31 |   .6490956   .2981591     2.18   0.030     .0645076    1.233684
+ speech_92K_32 |   .4874878   .4169555     1.17   0.242    -.3300192    1.304995
+ speech_92K_33 |   .5914282   .3657348     1.62   0.106    -.1256526    1.308509
+ speech_92K_34 |   .1057821   .3555654     0.30   0.766      -.59136    .8029243
+ speech_92K_35 |   .4757309    .369496     1.29   0.198    -.2487243    1.200186
+ speech_92K_36 |   .2859102   .3397124     0.84   0.400    -.3801496      .95197
+ speech_92K_37 |   .5028483   .4352882     1.16   0.248    -.3506029    1.356299
+ speech_92K_38 |  -.3564916   .5940837    -0.60   0.548    -1.521286    .8083032
+ speech_92K_39 |   .5157144   .6098698     0.85   0.398    -.6800317     1.71146
+ speech_92K_40 |  -.2393384   .3962764    -0.60   0.546    -1.016301     .537624
+ speech_92K_41 |   .0748663   .3638015     0.21   0.837    -.6384241    .7881566
+ speech_92K_42 |   1.052503   .4680891     2.25   0.025     .1347407    1.970266
+ speech_92K_43 |   .1852817   .4941547     0.37   0.708    -.7835867     1.15415
+ speech_92K_44 |    .202533      .3468     0.58   0.559    -.4774231    .8824891
+ speech_92K_45 |  -.3000602   .5516656    -0.54   0.587    -1.381688    .7815672
+ speech_92K_46 |  -1.745196   .8221076    -2.12   0.034    -3.357067   -.1333239
+ speech_92K_47 |    .160507   .4056541     0.40   0.692    -.6348418    .9558559
+ speech_92K_48 |  -.3233348   .4981106    -0.65   0.516    -1.299959    .6532897
+ speech_92K_49 |   .5525933    .454313     1.22   0.224    -.3381591    1.443346
+ speech_92K_50 |  -.6323025   .6493944    -0.97   0.330    -1.905543    .6409377
+ speech_92K_51 |   .5188971   .2864312     1.81   0.070    -.0426965    1.080491
+ speech_92K_52 |  -.0363989   .2931042    -0.12   0.901    -.6110761    .5382782
+ speech_92K_53 |  -.6293405   .4499255    -1.40   0.162    -1.511491    .2528095
+ speech_92K_54 |   .3028476   .3816653     0.79   0.428    -.4454675    1.051163
+ speech_92K_55 |   .4639716   .3465675     1.34   0.181    -.2155287    1.143472
+ speech_92K_56 |   .1295325   .6549904     0.20   0.843     -1.15468    1.413745
+ speech_92K_57 |   .3591366   .3462378     1.04   0.300    -.3197172     1.03799
+ speech_92K_58 |   .5767453    .473532     1.22   0.223    -.3516888     1.50518
+ speech_92K_59 |  -.0812848   .3270612    -0.25   0.804    -.7225399    .5599703
+ speech_92K_60 |   .3424777   .3583148     0.96   0.339     -.360055    1.045011
+ speech_92K_61 |  -.1218494   .5801714    -0.21   0.834    -1.259367    1.015668
+ speech_92K_62 |  -.1550881   .3788573    -0.41   0.682    -.8978976    .5877215
+ speech_92K_63 |  -1.064949   1.079179    -0.99   0.324    -3.180849    1.050951
+ speech_92K_64 |   .7727874   .4921052     1.57   0.116    -.1920625    1.737637
+ speech_92K_65 |   .0828141   .4758665     0.17   0.862    -.8501973    1.015826
+ speech_92K_66 |  -.2863594   .3285262    -0.87   0.383    -.9304869     .357768
+ speech_92K_67 |    .173843   .3272612     0.53   0.595    -.4678042    .8154902
+ speech_92K_68 |  -1.198718   .6890455    -1.74   0.082    -2.549701     .152264
+ speech_92K_69 |    1.11862   .3870309     2.89   0.004     .3597848    1.877455
+ speech_92K_70 |  -.4492852   .3648149    -1.23   0.218    -1.164562    .2659919
+ speech_92K_71 |  -.0690012   .5780867    -0.12   0.905    -1.202431    1.064429
+ speech_92K_72 |   .4440554   .3847847     1.15   0.249    -.3103759    1.198487
+ speech_92K_73 |   .5229724   .3344062     1.56   0.118    -.1326838    1.178629
+ speech_92K_74 |   .8265535   .5867812     1.41   0.159    -.3239237    1.977031
+ speech_92K_75 |  -.4724098   .7847303    -0.60   0.547    -2.010997    1.066178
+ speech_92K_76 |   1.026195   .3069309     3.34   0.001     .4244086    1.627982
+ speech_92K_77 |   .1431138   .4340401     0.33   0.742    -.7078903    .9941179
+ speech_92K_78 |   .5073541   .7858633     0.65   0.519    -1.033455    2.048163
+ speech_92K_79 |   -.091041   .5279355    -0.17   0.863    -1.126142    .9440599
+ speech_92K_80 |  -.2674589   .3076797    -0.87   0.385    -.8707135    .3357957
+ speech_92K_81 |  -.2629886   .3997273    -0.66   0.511    -1.046717    .5207399
+ speech_92K_82 |   1.564189   .7314923     2.14   0.033     .1299825    2.998395
+ speech_92K_83 |   .1870528   .5174282     0.36   0.718    -.8274469    1.201553
+ speech_92K_84 |  -.0313867   .4920396    -0.06   0.949    -.9961081    .9333346
+ speech_92K_85 |   .7517483   .3928749     1.91   0.056     -.018545    1.522042
+ speech_92K_86 |  -1.066478   .4379664    -2.44   0.015     -1.92518   -.2077753
+ speech_92K_87 |  -.2226974   .4938214    -0.45   0.652    -1.190912    .7455173
+ speech_92K_88 |  -.0076639   .3697959    -0.02   0.983    -.7327071    .7173793
+ speech_92K_89 |  -.7654614   .3858761    -1.98   0.047    -1.522032   -.0088904
+ speech_92K_90 |  -.3216112   .6116386    -0.53   0.599    -1.520825    .8776029
+ speech_92K_91 |  -.2779824   .6519426    -0.43   0.670    -1.556219    1.000254
+ speech_92K_92 |          0  (omitted)
+   quote_92K_1 |  -.0426831    .549506    -0.08   0.938    -1.120076     1.03471
+   quote_92K_2 |   .2896459   .2512849     1.15   0.249    -.2030378    .7823295
+   quote_92K_3 |  -.2325275   .2321519    -1.00   0.317    -.6876979     .222643
+   quote_92K_4 |   .3460221   .2761847     1.25   0.210    -.1954815    .8875258
+   quote_92K_5 |    .889554   .3855546     2.31   0.021     .1336133    1.645495
+   quote_92K_6 |  -.0606901   .3903273    -0.16   0.876    -.8259884    .7046082
+   quote_92K_7 |  -.1085015   .2272724    -0.48   0.633     -.554105    .3371019
+   quote_92K_8 |  -.3048235   .3488524    -0.87   0.382    -.9888038    .3791568
+   quote_92K_9 |   .0098689   .5015605     0.02   0.984    -.9735196    .9932574
+  quote_92K_10 |  -.1954374   .2472208    -0.79   0.429    -.6801529     .289278
+  quote_92K_11 |   .1265102   .2505391     0.50   0.614    -.3647113    .6177317
+  quote_92K_12 |  -.0559224    .451952    -0.12   0.902    -.9420457    .8302009
+  quote_92K_13 |  -.3805156   .3260803    -1.17   0.243    -1.019847    .2588162
+  quote_92K_14 |   .2761112    .223937     1.23   0.218    -.1629526    .7151749
+  quote_92K_15 |   .6367539   .2655364     2.40   0.017     .1161279     1.15738
+  quote_92K_16 |   .1384612   .2851638     0.49   0.627    -.4206476    .6975699
+  quote_92K_17 |   .3591098   .3592519     1.00   0.318    -.3452602     1.06348
+  quote_92K_18 |   1.249692   .4859624     2.57   0.010     .2968863    2.202498
+  quote_92K_19 |   .1236947   .2484534     0.50   0.619    -.3634374    .6108268
+  quote_92K_20 |  -.2238262   .2965803    -0.75   0.450    -.8053187    .3576663
+  quote_92K_21 |   .2157044   .2459914     0.88   0.381    -.2666006    .6980095
+  quote_92K_22 |   .5524874   .3172789     1.74   0.082    -.0695881    1.174563
+  quote_92K_23 |   .3949074   .2179305     1.81   0.070    -.0323797    .8221945
+  quote_92K_24 |  -.1626069   .2329177    -0.70   0.485    -.6192788     .294065
+  quote_92K_25 |  -.1999425   .4078527    -0.49   0.624     -.999602     .599717
+  quote_92K_26 |   .2320434   .3222404     0.72   0.472    -.3997597    .8638466
+  quote_92K_27 |   .5668975   .3754513     1.51   0.131    -.1692341    1.303029
+  quote_92K_28 |   .3660338   .4461333     0.82   0.412    -.5086809    1.240748
+  quote_92K_29 |    -.11842   .2987961    -0.40   0.692    -.7042569    .4674168
+  quote_92K_30 |   .3889975   .4842008     0.80   0.422    -.5603546     1.33835
+  quote_92K_31 |  -.0649549   .2292211    -0.28   0.777    -.5143791    .3844693
+  quote_92K_32 |  -.1524632   .2673925    -0.57   0.569    -.6767283    .3718019
+  quote_92K_33 |  -.2711961   .2710605    -1.00   0.317     -.802653    .2602607
+  quote_92K_34 |  -.1404242   .3356316    -0.42   0.676     -.798483    .5176346
+  quote_92K_35 |  -.0661707   .2880272    -0.23   0.818    -.6308936    .4985521
+  quote_92K_36 |  -.2190333   .3196355    -0.69   0.493    -.8457292    .4076626
+  quote_92K_37 |  -.4364884   .3182652    -1.37   0.170    -1.060497    .1875207
+  quote_92K_38 |  -.0538857    .372917    -0.14   0.885    -.7850483     .677277
+  quote_92K_39 |   .1467942   .3462394     0.42   0.672    -.5320628    .8256513
+  quote_92K_40 |  -.1388005   .3351251    -0.41   0.679    -.7958662    .5182652
+  quote_92K_41 |  -.0936659   .2477602    -0.38   0.705    -.5794388    .3921071
+  quote_92K_42 |  -.2932683   .2964267    -0.99   0.323    -.8744596    .2879229
+  quote_92K_43 |  -.1828066   .2949941    -0.62   0.535    -.7611891     .395576
+  quote_92K_44 |   .0350535   .2491808     0.14   0.888    -.4535047    .5236117
+  quote_92K_45 |   .2042473   .3154112     0.65   0.517    -.4141662    .8226608
+  quote_92K_46 |  -.1980392    .379852    -0.52   0.602    -.9427991    .5467207
+  quote_92K_47 |  -.0672955   .2984361    -0.23   0.822    -.6524267    .5178356
+  quote_92K_48 |   .1546584   .3476929     0.44   0.656    -.5270484    .8363652
+  quote_92K_49 |   .1481354   .3175943     0.47   0.641    -.4745583    .7708291
+  quote_92K_50 |  -.2224497   .3881221    -0.57   0.567    -.9834243    .5385249
+  quote_92K_51 |   .0271273    .239863     0.11   0.910     -.443162    .4974165
+  quote_92K_52 |  -.1982319   .2484876    -0.80   0.425    -.6854311    .2889673
+  quote_92K_53 |   -.011258   .2813913    -0.04   0.968    -.5629699     .540454
+  quote_92K_54 |   .0743979    .326736     0.23   0.820    -.5662195    .7150154
+  quote_92K_55 |  -.1257652   .2651895    -0.47   0.635    -.6457111    .3941807
+  quote_92K_56 |   .0448936   .3365879     0.13   0.894    -.6150402    .7048274
+  quote_92K_57 |   .0032799   .2893431     0.01   0.991    -.5640229    .5705826
+  quote_92K_58 |   .2570685    .333244     0.77   0.441     -.396309     .910446
+  quote_92K_59 |   .3853779    .227257     1.70   0.090    -.0601953    .8309511
+  quote_92K_60 |   .2991126   .2433033     1.23   0.219    -.1779219    .7761471
+  quote_92K_61 |   .4866319   .2952733     1.65   0.099     -.092298    1.065562
+  quote_92K_62 |   .1813223   .2605258     0.70   0.486    -.3294798    .6921243
+  quote_92K_63 |   .1192805   .4747652     0.25   0.802    -.8115716    1.050133
+  quote_92K_64 |  -.0163382   .2970368    -0.06   0.956    -.5987258    .5660494
+  quote_92K_65 |   .1372017    .299734     0.46   0.647    -.4504741    .7248774
+  quote_92K_66 |    .155114   .2362232     0.66   0.511    -.3080389    .6182668
+  quote_92K_67 |   .2063588   .2664066     0.77   0.439    -.3159735     .728691
+  quote_92K_68 |  -.3186265   .3357986    -0.95   0.343    -.9770127    .3397597
+  quote_92K_69 |  -.2317438   .3237761    -0.72   0.474    -.8665579    .4030703
+  quote_92K_70 |   .1390055    .281433     0.49   0.621    -.4127883    .6907993
+  quote_92K_71 |  -.1463958   .3374729    -0.43   0.664    -.8080647     .515273
+  quote_92K_72 |  -.3071645   .2648172    -1.16   0.246    -.8263804    .2120514
+  quote_92K_73 |  -.1517323   .2868349    -0.53   0.597    -.7141175    .4106528
+  quote_92K_74 |  -.5565393   .3552988    -1.57   0.117    -1.253159      .14008
+  quote_92K_75 |  -.4368421   .3755771    -1.16   0.245     -1.17322    .2995361
+  quote_92K_76 |   .0995728   .2363141     0.42   0.674    -.3637584    .5629039
+  quote_92K_77 |  -.0358216   .3269332    -0.11   0.913    -.6768256    .6051825
+  quote_92K_78 |   .0263379   .3984216     0.07   0.947    -.7548304    .8075063
+  quote_92K_79 |   -.010745   .3714028    -0.03   0.977    -.7389389    .7174489
+  quote_92K_80 |   .0684009   .2886992     0.24   0.813    -.4976395    .6344413
+  quote_92K_81 |  -.0148056   .2783416    -0.05   0.958    -.5605382     .530927
+  quote_92K_82 |   .1452437   .3084306     0.47   0.638    -.4594831    .7499705
+  quote_92K_83 |  -.4233381   .3597144    -1.18   0.239    -1.128615    .2819387
+  quote_92K_84 |  -.2330606   .3322267    -0.70   0.483    -.8844436    .4183224
+  quote_92K_85 |   -.164575   .2899568    -0.57   0.570    -.7330811     .403931
+  quote_92K_86 |   -.197682   .2896422    -0.68   0.495    -.7655712    .3702073
+  quote_92K_87 |   .1321062   .3145743     0.42   0.675    -.4846664    .7488788
+  quote_92K_88 |  -.1685822   .2458185    -0.69   0.493    -.6505481    .3133837
+  quote_92K_89 |   .0498469   .2858699     0.17   0.862    -.5106461      .61034
+  quote_92K_90 |   -.248849   .3766881    -0.66   0.509    -.9874054    .4897075
+  quote_92K_91 |  -.6320043    .423626    -1.49   0.136     -1.46259    .1985814
+  quote_92K_92 |          0  (omitted)
+ article_40K_1 |   1.583345   .6479072     2.44   0.015     .3130203    2.853669
+ article_40K_2 |    .134964   .6975566     0.19   0.847    -1.232706    1.502634
+ article_40K_3 |    2.71926   .7688966     3.54   0.000     1.211717    4.226803
+ article_40K_4 |   1.127625   1.045334     1.08   0.281     -.921918    3.177167
+ article_40K_5 |   1.149384    .845712     1.36   0.174    -.5087676    2.807536
+ article_40K_6 |   1.819635   .8594554     2.12   0.034     .1345373    3.504733
+ article_40K_7 |   .7004154   .6746595     1.04   0.299     -.622361    2.023192
+ article_40K_8 |   2.793912   .8065355     3.46   0.001     1.212572    4.375252
+ article_40K_9 |   .6042755   .8058236     0.75   0.453    -.9756689     2.18422
+article_40K_10 |    1.05918   .6690371     1.58   0.113    -.2525727    2.370933
+article_40K_11 |   1.052287   .7627463     1.38   0.168    -.4431977    2.547771
+article_40K_12 |   1.931647   .6630924     2.91   0.004     .6315497    3.231744
+article_40K_13 |   .9952155   .6765148     1.47   0.141    -.3311986     2.32163
+article_40K_14 |   1.222686   .7653691     1.60   0.110     -.277941    2.723313
+article_40K_15 |   .7686962   .6980285     1.10   0.271    -.5998989    2.137291
+article_40K_16 |   1.250646   .8708982     1.44   0.151    -.4568878    2.958179
+article_40K_17 |   .7191926   .6584302     1.09   0.275    -.5717637    2.010149
+article_40K_18 |   .5773058   .6577893     0.88   0.380     -.712394    1.867006
+article_40K_19 |   .9836292   .6693514     1.47   0.142    -.3287399    2.295998
+article_40K_20 |   2.087133   .7729326     2.70   0.007     .5716763    3.602589
+article_40K_21 |   .2791061   .8205636     0.34   0.734    -1.329738    1.887951
+article_40K_22 |   1.153585   .7783852     1.48   0.138    -.3725617    2.679732
+article_40K_23 |   .9480685   .6861616     1.38   0.167    -.3972597    2.293397
+article_40K_24 |   1.683108   .8068713     2.09   0.037     .1011098    3.265107
+article_40K_25 |   .6531642   .8084972     0.81   0.419    -.9320222    2.238351
+article_40K_26 |   .6891732   .7456405     0.92   0.355    -.7727728    2.151119
+article_40K_27 |   1.725105   .7579277     2.28   0.023     .2390682    3.211142
+article_40K_28 |   1.256534   .7564648     1.66   0.097    -.2266349    2.739702
+article_40K_29 |   1.223936   .6850894     1.79   0.074      -.11929    2.567162
+article_40K_30 |   1.116488    .734119     1.52   0.128    -.3228681    2.555844
+article_40K_31 |   .9691689   .7824034     1.24   0.216    -.5648566    2.503194
+article_40K_32 |  -.7683396   .6986084    -1.10   0.271    -2.138072    .6013925
+article_40K_33 |   .9927019   .6813392     1.46   0.145    -.3431711    2.328575
+article_40K_34 |   1.237371   .7241282     1.71   0.088    -.1823971    2.657138
+article_40K_35 |   1.073386   .6695267     1.60   0.109    -.2393272    2.386098
+article_40K_36 |   .9279584   .6463038     1.44   0.151    -.3392222    2.195139
+article_40K_37 |   .9089483   .6974575     1.30   0.193    -.4585272    2.276424
+article_40K_38 |   2.181145   .7812088     2.79   0.005     .6494616    3.712828
+article_40K_39 |  -.0323294   .7348366    -0.04   0.965    -1.473093    1.408434
+article_40K_40 |          0  (omitted)
+               |
+          rank |
+            2  |  -.3242221   .2524563    -1.28   0.199    -.8192025    .1707584
+            3  |  -.0108647   .2002567    -0.05   0.957    -.4034995    .3817701
+            4  |  -.3600805   .3220918    -1.12   0.264    -.9915924    .2714313
+            5  |  -.9427214   .3652432    -2.58   0.010    -1.658838   -.2266045
+            6  |  -.5446926   .2203129    -2.47   0.013    -.9766508   -.1127345
+            7  |  -.1781125    .930346    -0.19   0.848    -2.002203    1.645978
+            8  |   -.984437   .4387397    -2.24   0.025    -1.844655   -.1242186
+            9  |   1.199095   .2704858     4.43   0.000     .6687654    1.729426
+           10  |  -.4874798   .1957842    -2.49   0.013    -.8713458   -.1036139
+           11  |  -.6341907   .2270294    -2.79   0.005    -1.079318   -.1890638
+           12  |  -.5234747    .208053    -2.52   0.012    -.9313954    -.115554
+               |
+           MFA |   2.098961   1.251742     1.68   0.094    -.3552777    4.553199
+           PMO |   .8965676   .3458142     2.59   0.010     .2185443    1.574591
+          MEWR |   .2334658   1.007444     0.23   0.817    -1.741788    2.208719
+           MCI |   2.566277   1.398729     1.83   0.067    -.1761522    5.308707
+           MTI |  -1.854319   1.173718    -1.58   0.114    -4.155578    .4469394
+           MHA |   .5792917   .5702072     1.02   0.310    -.5386896    1.697273
+          MCCY |   .5880167   .3239077     1.82   0.070    -.0470556    1.223089
+        MinLaw |    .180863   .9537685     0.19   0.850    -1.689151    2.050877
+           MOH |  -1.783007   1.042307    -1.71   0.087    -3.826615    .2606005
+           MOM |     .40558   .8777745     0.46   0.644    -1.315435    2.126595
+        MinDef |   .0323704   .3447898     0.09   0.925    -.6436444    .7083852
+           MSF |   .8525669   .4861595     1.75   0.080    -.1006256    1.805759
+           MOT |   2.496172   1.177153     2.12   0.034     .1881774    4.804166
+           MND |   .4343755   .2918781     1.49   0.137    -.1378975    1.006649
+           MOF |   .1569859   .1922832     0.82   0.414    -.2200156    .5339874
+           MOE |  -.7853503   .6478212    -1.21   0.225    -2.055506    .4848054
+       speaker |    .431244   .1722735     2.50   0.012     .0934746    .7690134
+               |
+      rank#MFA |
+          1 1  |          0  (empty)
+          2 1  |          0  (empty)
+          3 1  |  -2.115719   1.254704    -1.69   0.092    -4.575765    .3443269
+          4 1  |  -1.928927    1.26723    -1.52   0.128    -4.413531    .5556762
+          5 1  |  -.9484923   1.302319    -0.73   0.466    -3.501894    1.604909
+          6 1  |          0  (omitted)
+          7 1  |          0  (empty)
+          8 1  |          0  (empty)
+          9 1  |          0  (empty)
+         10 1  |          0  (empty)
+         11 1  |          0  (empty)
+         12 1  |          0  (empty)
+               |
+      rank#PMO |
+          1 1  |          0  (empty)
+          2 1  |          0  (empty)
+          3 1  |   -.942194   .3582762    -2.63   0.009    -1.644651   -.2397369
+          4 1  |  -1.180756   .4250957    -2.78   0.006    -2.014223   -.3472886
+          5 1  |          0  (omitted)
+          6 1  |          0  (empty)
+          7 1  |          0  (empty)
+          8 1  |          0  (empty)
+          9 1  |          0  (empty)
+         10 1  |          0  (empty)
+         11 1  |          0  (empty)
+         12 1  |          0  (empty)
+               |
+     rank#MEWR |
+          1 1  |          0  (empty)
+          2 1  |          0  (empty)
+          3 1  |  -.3446742   1.012946    -0.34   0.734    -2.330715    1.641366
+          4 1  |  -.1732232   1.037074    -0.17   0.867    -2.206571    1.860125
+          5 1  |   .3182618    1.09083     0.29   0.770    -1.820483    2.457006
+          6 1  |  -.3314614   1.042414    -0.32   0.751    -2.375279    1.712356
+          7 1  |          0  (omitted)
+          8 1  |          0  (empty)
+          9 1  |          0  (empty)
+         10 1  |          0  (empty)
+         11 1  |          0  (empty)
+         12 1  |          0  (empty)
+               |
+      rank#MCI |
+          1 1  |          0  (empty)
+          2 1  |          0  (empty)
+          3 1  |  -2.675381   1.408262    -1.90   0.058    -5.436501     .085738
+          4 1  |  -2.436854   1.422234    -1.71   0.087    -5.225368    .3516594
+          5 1  |  -1.907448   1.421621    -1.34   0.180     -4.69476     .879865
+          6 1  |          0  (empty)
+          7 1  |  -1.550258   1.303206    -1.19   0.234    -4.105399    1.004882
+          8 1  |          0  (omitted)
+          9 1  |          0  (empty)
+         10 1  |          0  (empty)
+         11 1  |          0  (empty)
+         12 1  |          0  (empty)
+               |
+      rank#MTI |
+          1 1  |          0  (empty)
+          2 1  |          0  (empty)
+          3 1  |   1.679798   1.179735     1.42   0.155    -.6332584    3.992854
+          4 1  |   1.872654   1.193861     1.57   0.117    -.4680995    4.213407
+          5 1  |   2.094556    1.19412     1.75   0.080    -.2467045    4.435817
+          6 1  |   3.176555   1.368743     2.32   0.020     .4929174    5.860193
+          7 1  |          0  (omitted)
+          8 1  |          0  (omitted)
+          9 1  |          0  (empty)
+         10 1  |          0  (empty)
+         11 1  |          0  (empty)
+         12 1  |          0  (empty)
+               |
+      rank#MHA |
+          1 1  |          0  (empty)
+          2 1  |   -.517749   .5992117    -0.86   0.388    -1.692598    .6571002
+          3 1  |  -.4361083   .5806243    -0.75   0.453    -1.574514    .7022974
+          4 1  |  -.7260877   .6035105    -1.20   0.229    -1.909365    .4571899
+          5 1  |  -.4580607    .663444    -0.69   0.490    -1.758847    .8427261
+          6 1  |          0  (empty)
+          7 1  |   .4220322   1.005229     0.42   0.675    -1.548877    2.392942
+          8 1  |          0  (omitted)
+          9 1  |          0  (empty)
+         10 1  |          0  (empty)
+         11 1  |          0  (empty)
+         12 1  |          0  (empty)
+               |
+     rank#MCCY |
+          1 1  |          0  (empty)
+          2 1  |          0  (empty)
+          3 1  |  -.7285919   .3377815    -2.16   0.031    -1.390866   -.0663179
+          4 1  |  -.5293528   .4575606    -1.16   0.247    -1.426473    .3677669
+          5 1  |  -.7883694   .5095481    -1.55   0.122    -1.787419    .2106802
+          6 1  |  -2.587227   1.363449    -1.90   0.058    -5.260484    .0860297
+          7 1  |  -3.648305   1.631659    -2.24   0.025     -6.84743   -.4491813
+          8 1  |          0  (omitted)
+          9 1  |          0  (empty)
+         10 1  |          0  (empty)
+         11 1  |          0  (empty)
+         12 1  |          0  (empty)
+               |
+   rank#MinLaw |
+          1 1  |          0  (empty)
+          2 1  |    .105665   1.015605     0.10   0.917    -1.885589    2.096919
+          3 1  |  -.4174792   .9620588    -0.43   0.664    -2.303747    1.468789
+          4 1  |   .0568425   .9761397     0.06   0.954    -1.857033    1.970718
+          5 1  |          0  (empty)
+          6 1  |          0  (empty)
+          7 1  |          0  (omitted)
+          8 1  |          0  (empty)
+          9 1  |          0  (empty)
+         10 1  |          0  (empty)
+         11 1  |          0  (empty)
+         12 1  |          0  (empty)
+               |
+      rank#MOH |
+          1 1  |          0  (empty)
+          2 1  |          0  (empty)
+          3 1  |   1.565935   1.046792     1.50   0.135    -.4864662    3.618335
+          4 1  |   2.170501   1.084792     2.00   0.045     .0435944    4.297408
+          5 1  |   2.451636   1.086842     2.26   0.024     .3207116    4.582561
+          6 1  |          0  (empty)
+          7 1  |   1.012598   1.111486     0.91   0.362    -1.166646    3.191843
+          8 1  |          0  (omitted)
+          9 1  |          0  (empty)
+         10 1  |          0  (empty)
+         11 1  |          0  (empty)
+         12 1  |          0  (empty)
+               |
+      rank#MOM |
+          1 1  |          0  (empty)
+          2 1  |  -.4923794   .9010149    -0.55   0.585    -2.258961    1.274203
+          3 1  |  -.6171311   .8793744    -0.70   0.483    -2.341284    1.107021
+          4 1  |  -.9604423   .9029605    -1.06   0.288    -2.730839    .8099542
+          5 1  |  -.2622328   .8931761    -0.29   0.769    -2.013446     1.48898
+          6 1  |          0  (empty)
+          7 1  |          0  (omitted)
+          8 1  |          0  (empty)
+          9 1  |          0  (empty)
+         10 1  |          0  (empty)
+         11 1  |          0  (empty)
+         12 1  |          0  (empty)
+               |
+   rank#MinDef |
+          1 1  |          0  (empty)
+          2 1  |   .3032637   .4498761     0.67   0.500    -.5787895    1.185317
+          3 1  |   -.062892   .3520804    -0.18   0.858    -.7532013    .6274173
+          4 1  |   .0631255   .4662607     0.14   0.892    -.8510522    .9773032
+          5 1  |   .1585351   .4375926     0.36   0.717    -.6994343    1.016504
+          6 1  |          0  (omitted)
+          7 1  |          0  (omitted)
+          8 1  |          0  (empty)
+          9 1  |          0  (empty)
+         10 1  |          0  (empty)
+         11 1  |          0  (empty)
+         12 1  |          0  (empty)
+               |
+      rank#MSF |
+          1 1  |          0  (empty)
+          2 1  |          0  (empty)
+          3 1  |  -.9283082   .5084079    -1.83   0.068    -1.925122    .0685058
+          4 1  |  -.8326144   .6594939    -1.26   0.207    -2.125656    .4604276
+          5 1  |   .2557383   .7159638     0.36   0.721    -1.148022    1.659498
+          6 1  |   .6133487   1.275074     0.48   0.631    -1.886635    3.113332
+          7 1  |          0  (empty)
+          8 1  |          0  (omitted)
+          9 1  |          0  (empty)
+         10 1  |          0  (empty)
+         11 1  |          0  (empty)
+         12 1  |          0  (empty)
+               |
+      rank#MOT |
+          1 1  |          0  (empty)
+          2 1  |          0  (empty)
+          3 1  |  -2.643696   1.180813    -2.24   0.025    -4.958865    -.328526
+          4 1  |  -2.473048   1.207822    -2.05   0.041    -4.841175   -.1049221
+          5 1  |  -2.020989   1.236035    -1.64   0.102    -4.444431    .4024538
+          6 1  |          0  (omitted)
+          7 1  |          0  (omitted)
+          8 1  |          0  (omitted)
+          9 1  |          0  (empty)
+         10 1  |          0  (empty)
+         11 1  |          0  (empty)
+         12 1  |          0  (empty)
+               |
+      rank#MND |
+          1 1  |          0  (empty)
+          2 1  |          0  (empty)
+          3 1  |  -.5431608   .3147867    -1.73   0.085     -1.16035    .0740282
+          4 1  |  -.0907902   .3486691    -0.26   0.795    -.7744111    .5928306
+          5 1  |   .0669917   .4007803     0.17   0.867    -.7188014    .8527848
+          6 1  |          0  (omitted)
+          7 1  |  -.5887454   1.101872    -0.53   0.593    -2.749139    1.571648
+          8 1  |          0  (omitted)
+          9 1  |          0  (empty)
+         10 1  |          0  (empty)
+         11 1  |          0  (empty)
+         12 1  |          0  (empty)
+               |
+      rank#MOF |
+          1 1  |   -.165834    .304197    -0.55   0.586    -.7622603    .4305923
+          2 1  |    .130097   .2897406     0.45   0.653    -.4379851    .6981791
+          3 1  |  -.1718327   .2183957    -0.79   0.431     -.600032    .2563666
+          4 1  |          0  (omitted)
+          5 1  |          0  (omitted)
+          6 1  |          0  (empty)
+          7 1  |          0  (empty)
+          8 1  |          0  (empty)
+          9 1  |          0  (empty)
+         10 1  |          0  (empty)
+         11 1  |          0  (empty)
+         12 1  |          0  (empty)
+               |
+      rank#MOE |
+          1 1  |          0  (empty)
+          2 1  |          0  (empty)
+          3 1  |   .8141673   .6531865     1.25   0.213     -.466508    2.094843
+          4 1  |    .762578   .6710709     1.14   0.256    -.5531624    2.078318
+          5 1  |   1.272573   .7053764     1.80   0.071    -.1104286    2.655575
+          6 1  |          0  (omitted)
+          7 1  |  -.0801713    .753306    -0.11   0.915    -1.557147    1.396804
+          8 1  |          0  (omitted)
+          9 1  |          0  (empty)
+         10 1  |          0  (empty)
+         11 1  |          0  (empty)
+         12 1  |          0  (empty)
+               |
+  rank#speaker |
+          1 1  |          0  (empty)
+          2 1  |          0  (empty)
+          3 1  |          0  (empty)
+          4 1  |  -.4116831   .3668611    -1.12   0.262    -1.130972    .3076059
+          5 1  |          0  (empty)
+          6 1  |          0  (empty)
+          7 1  |          0  (empty)
+          8 1  |          0  (empty)
+          9 1  |   -1.09674   .4355522    -2.52   0.012    -1.950709   -.2427708
+         10 1  |          0  (omitted)
+         11 1  |          0  (empty)
+         12 1  |          0  (empty)
+               |
+         _cons |   .5906083   .9636819     0.61   0.540    -1.298842    2.480059
+--------------------------------------------------------------------------------
+(est1 stored)
+
+.         add_scalars
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{    7,094}"
+
+. 
+. eststo: reg ln_quote                    i.opposition `length'      $base_controls $min $electoral, vce(cluster article_id)
+note: 2016.year omitted because of collinearity
+note: speech_92K_92 omitted because of collinearity
+note: quote_92K_92 omitted because of collinearity
+note: article_40K_40 omitted because of collinearity
+note: 1b.rank#1.MFA identifies no observations in the sample
+note: 2.rank#1.MFA identifies no observations in the sample
+note: 5.rank#1.MFA identifies no observations in the sample
+note: 6.rank#1.MFA omitted because of collinearity
+note: 7.rank#1.MFA identifies no observations in the sample
+note: 8.rank#1.MFA identifies no observations in the sample
+note: 9.rank#1.MFA identifies no observations in the sample
+note: 10.rank#1.MFA identifies no observations in the sample
+note: 1b.rank#1.PMO identifies no observations in the sample
+note: 2.rank#1.PMO identifies no observations in the sample
+note: 5.rank#1.PMO omitted because of collinearity
+note: 6.rank#1.PMO identifies no observations in the sample
+note: 7.rank#1.PMO identifies no observations in the sample
+note: 8.rank#1.PMO identifies no observations in the sample
+note: 9.rank#1.PMO identifies no observations in the sample
+note: 10.rank#1.PMO identifies no observations in the sample
+note: 1b.rank#1.MEWR identifies no observations in the sample
+note: 2.rank#1.MEWR identifies no observations in the sample
+note: 4.rank#1.MEWR omitted because of collinearity
+note: 5.rank#1.MEWR identifies no observations in the sample
+note: 6.rank#1.MEWR identifies no observations in the sample
+note: 7.rank#1.MEWR identifies no observations in the sample
+note: 8.rank#1.MEWR identifies no observations in the sample
+note: 9.rank#1.MEWR identifies no observations in the sample
+note: 10.rank#1.MEWR identifies no observations in the sample
+note: 1b.rank#1.MCI identifies no observations in the sample
+note: 2.rank#1.MCI identifies no observations in the sample
+note: 6.rank#1.MCI identifies no observations in the sample
+note: 7.rank#1.MCI omitted because of collinearity
+note: 8.rank#1.MCI identifies no observations in the sample
+note: 9.rank#1.MCI identifies no observations in the sample
+note: 10.rank#1.MCI identifies no observations in the sample
+note: 1b.rank#1.MTI identifies no observations in the sample
+note: 2.rank#1.MTI identifies no observations in the sample
+note: 6.rank#1.MTI omitted because of collinearity
+note: 7.rank#1.MTI identifies no observations in the sample
+note: 8.rank#1.MTI identifies no observations in the sample
+note: 9.rank#1.MTI identifies no observations in the sample
+note: 10.rank#1.MTI identifies no observations in the sample
+note: 1b.rank#1.MHA identifies no observations in the sample
+note: 6.rank#1.MHA identifies no observations in the sample
+note: 8.rank#1.MHA omitted because of collinearity
+note: 9.rank#1.MHA identifies no observations in the sample
+note: 10.rank#1.MHA identifies no observations in the sample
+note: 1b.rank#1.MCCY identifies no observations in the sample
+note: 2.rank#1.MCCY identifies no observations in the sample
+note: 8.rank#1.MCCY omitted because of collinearity
+note: 9.rank#1.MCCY identifies no observations in the sample
+note: 10.rank#1.MCCY identifies no observations in the sample
+note: 1b.rank#1.MinLaw identifies no observations in the sample
+note: 5.rank#1.MinLaw identifies no observations in the sample
+note: 6.rank#1.MinLaw identifies no observations in the sample
+note: 7.rank#1.MinLaw omitted because of collinearity
+note: 8.rank#1.MinLaw identifies no observations in the sample
+note: 9.rank#1.MinLaw identifies no observations in the sample
+note: 10.rank#1.MinLaw identifies no observations in the sample
+note: 1b.rank#1.MOH identifies no observations in the sample
+note: 2.rank#1.MOH identifies no observations in the sample
+note: 6.rank#1.MOH identifies no observations in the sample
+note: 8.rank#1.MOH omitted because of collinearity
+note: 9.rank#1.MOH identifies no observations in the sample
+note: 10.rank#1.MOH identifies no observations in the sample
+note: 1b.rank#1.MOM identifies no observations in the sample
+note: 6.rank#1.MOM identifies no observations in the sample
+note: 7.rank#1.MOM omitted because of collinearity
+note: 8.rank#1.MOM identifies no observations in the sample
+note: 9.rank#1.MOM identifies no observations in the sample
+note: 10.rank#1.MOM identifies no observations in the sample
+note: 1b.rank#1.MinDef identifies no observations in the sample
+note: 6.rank#1.MinDef omitted because of collinearity
+note: 7.rank#1.MinDef identifies no observations in the sample
+note: 8.rank#1.MinDef identifies no observations in the sample
+note: 9.rank#1.MinDef identifies no observations in the sample
+note: 10.rank#1.MinDef identifies no observations in the sample
+note: 1b.rank#1.MSF identifies no observations in the sample
+note: 2.rank#1.MSF identifies no observations in the sample
+note: 4.rank#1.MSF identifies no observations in the sample
+note: 7.rank#1.MSF identifies no observations in the sample
+note: 8.rank#1.MSF omitted because of collinearity
+note: 9.rank#1.MSF identifies no observations in the sample
+note: 10.rank#1.MSF identifies no observations in the sample
+note: 1b.rank#1.MOT identifies no observations in the sample
+note: 2.rank#1.MOT identifies no observations in the sample
+note: 5.rank#1.MOT omitted because of collinearity
+note: 6.rank#1.MOT omitted because of collinearity
+note: 7.rank#1.MOT omitted because of collinearity
+note: 8.rank#1.MOT omitted because of collinearity
+note: 9.rank#1.MOT identifies no observations in the sample
+note: 10.rank#1.MOT identifies no observations in the sample
+note: 1b.rank#1.MND identifies no observations in the sample
+note: 2.rank#1.MND identifies no observations in the sample
+note: 6.rank#1.MND omitted because of collinearity
+note: 8.rank#1.MND omitted because of collinearity
+note: 9.rank#1.MND identifies no observations in the sample
+note: 10.rank#1.MND identifies no observations in the sample
+note: 4.rank#1.MOF omitted because of collinearity
+note: 5.rank#1.MOF omitted because of collinearity
+note: 6.rank#1.MOF identifies no observations in the sample
+note: 7.rank#1.MOF identifies no observations in the sample
+note: 8.rank#1.MOF identifies no observations in the sample
+note: 9.rank#1.MOF identifies no observations in the sample
+note: 10.rank#1.MOF identifies no observations in the sample
+note: 1b.rank#1.MOE identifies no observations in the sample
+note: 2.rank#1.MOE identifies no observations in the sample
+note: 5.rank#1.MOE omitted because of collinearity
+note: 6.rank#1.MOE omitted because of collinearity
+note: 7.rank#1.MOE omitted because of collinearity
+note: 8.rank#1.MOE omitted because of collinearity
+note: 9.rank#1.MOE identifies no observations in the sample
+note: 10.rank#1.MOE identifies no observations in the sample
+note: 1b.rank#1.speaker identifies no observations in the sample
+note: 2.rank#1.speaker identifies no observations in the sample
+note: 3.rank#1.speaker identifies no observations in the sample
+note: 5.rank#1.speaker identifies no observations in the sample
+note: 6.rank#1.speaker identifies no observations in the sample
+note: 7.rank#1.speaker identifies no observations in the sample
+note: 8.rank#1.speaker identifies no observations in the sample
+note: 10.rank#1.speaker omitted because of collinearity
+
+Linear regression                                      Number of obs =    5140
+                                                       F(344,  2752) =       .
+                                                       Prob > F      =       .
+                                                       R-squared     =  0.1934
+                                                       Root MSE      =   1.009
+
+                                    (Std. Err. adjusted for 2753 clusters in article_id)
+----------------------------------------------------------------------------------------
+                       |               Robust
+              ln_quote |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-----------------------+----------------------------------------------------------------
+          1.opposition |   .0176976   .0761858     0.23   0.816    -.1316896    .1670848
+             ln_speech |   .1603973   .0165972     9.66   0.000     .1278531    .1929414
+            ln_article |   .1567295   .0486041     3.22   0.001     .0614253    .2520337
+                       |
+                  parl |
+                    1  |   .2698283   .1857797     1.45   0.147    -.0944534      .63411
+                    2  |     .24974   .2279101     1.10   0.273    -.1971521     .696632
+                    3  |  -.0332732    .125787    -0.26   0.791    -.2799196    .2133732
+                       |
+                  year |
+                 2006  |  -.1549609   .1418048    -1.09   0.275    -.4330154    .1230936
+                 2007  |  -.2569011   .2096924    -1.23   0.221    -.6680714    .1542692
+                 2008  |  -.2293754   .2168717    -1.06   0.290    -.6546231    .1958724
+                 2009  |  -.1032678   .2149221    -0.48   0.631    -.5246927     .318157
+                 2010  |  -.3492832   .2134803    -1.64   0.102    -.7678811    .0693147
+                 2011  |  -.2533751   .2141401    -1.18   0.237    -.6732666    .1665165
+                 2012  |  -.2782761   .2370682    -1.17   0.241    -.7431257    .1865735
+                 2013  |   -.441287   .2373936    -1.86   0.063    -.9067746    .0242006
+                 2014  |  -.2597148   .2372723    -1.09   0.274    -.7249647     .205535
+                 2015  |  -.2108835   .2400483    -0.88   0.380    -.6815766    .2598096
+                 2016  |          0  (omitted)
+                       |
+              1.gender |   .0332806   .0524153     0.63   0.526    -.0694967     .136058
+                       |
+                  race |
+                    1  |  -.0722792   .0673141    -1.07   0.283    -.2042705    .0597121
+                    2  |  -.0770876   .0728674    -1.06   0.290    -.2199679    .0657927
+                    3  |    .010769    .151364     0.07   0.943    -.2860295    .3075674
+                       |
+                   age |  -.0131181   .0297233    -0.44   0.659    -.0714004    .0451642
+                  age2 |   .0001959   .0002967     0.66   0.509    -.0003859    .0007778
+                tenure |  -.0029255   .0116648    -0.25   0.802    -.0257982    .0199472
+               tenure2 |   .0000482   .0004436     0.11   0.914    -.0008216    .0009179
+                       |
+               weekday |
+                    2  |  -.0056218    .125513    -0.04   0.964     -.251731    .2404873
+                    3  |  -.0071304   .1288558    -0.06   0.956    -.2597941    .2455334
+                    4  |   .1199779   .1321854     0.91   0.364    -.1392147    .3791705
+                    5  |   .0033105    .136847     0.02   0.981    -.2650228    .2716438
+                    6  |   .0403345   .1368212     0.29   0.768    -.2279482    .3086171
+                    7  |   .2289949   .2606501     0.88   0.380    -.2820947    .7400844
+                       |
+              section2 |
+                    2  |  -.4056533   .2651104    -1.53   0.126    -.9254887    .1141821
+                    3  |   .4894646   .1468566     3.33   0.001     .2015044    .7774249
+                    4  |   -.190311   .4281251    -0.44   0.657     -1.02979     .649168
+                    5  |  -.3604751   .3570423    -1.01   0.313    -1.060573    .3396228
+                    6  |   -.120367   .5723052    -0.21   0.833    -1.242558    1.001824
+                    7  |   .2132678   .1046628     2.04   0.042     .0080422    .4184934
+                    8  |   .3440139   .1961975     1.75   0.080    -.0406953    .7287231
+                    9  |   .1183293   .0855609     1.38   0.167    -.0494408    .2860994
+                   10  |  -.1096523   .4327134    -0.25   0.800     -.958128    .7388235
+                   11  |   .4057841   .0962442     4.22   0.000     .2170659    .5945023
+                   12  |  -.5569511   .3965974    -1.40   0.160     -1.33461    .2207075
+                   13  |   .0955166   .0761416     1.25   0.210     -.053784    .2448171
+                   14  |   .2892889   .2753031     1.05   0.293    -.2505328    .8291105
+                       |
+          translations |  -.1478982   .1382036    -1.07   0.285    -.4188914     .123095
+          speech_92K_1 |    .543973   .8605936     0.63   0.527    -1.143502    2.231448
+          speech_92K_2 |  -.3641581   .3595359    -1.01   0.311    -1.069145    .3408293
+          speech_92K_3 |   .7516828   .3877583     1.94   0.053    -.0086439     1.51201
+          speech_92K_4 |   .1672144   .5454896     0.31   0.759    -.9023961    1.236825
+          speech_92K_5 |    .264088   .8782582     0.30   0.764    -1.458024      1.9862
+          speech_92K_6 |  -.1629687    .497044    -0.33   0.743    -1.137586    .8116484
+          speech_92K_7 |   .1020857   .3413233     0.30   0.765    -.5671899    .7713614
+          speech_92K_8 |  -.0412098   .4212855    -0.10   0.922    -.8672775     .784858
+          speech_92K_9 |  -.5176682   .8567361    -0.60   0.546    -2.197579    1.162243
+         speech_92K_10 |   .1049128   .4529974     0.23   0.817    -.7833364     .993162
+         speech_92K_11 |   -.215896   .3739606    -0.58   0.564    -.9491678    .5173759
+         speech_92K_12 |   2.322175   .6967361     3.33   0.001      .955997    3.688354
+         speech_92K_13 |  -.0612486   .4990762    -0.12   0.902     -1.03985    .9173532
+         speech_92K_14 |   -.023343    .353922    -0.07   0.947    -.7173226    .6706365
+         speech_92K_15 |   .5384069   .4354806     1.24   0.216    -.3154951    1.392309
+         speech_92K_16 |  -.4977994   .5642598    -0.88   0.378    -1.604215     .608616
+         speech_92K_17 |  -1.231746   .5350471    -2.30   0.021    -2.280881   -.1826118
+         speech_92K_18 |  -1.470452   1.059916    -1.39   0.165    -3.548763    .6078602
+         speech_92K_19 |  -.2510642    .428454    -0.59   0.558    -1.091188    .5890598
+         speech_92K_20 |   .2245973   .3751188     0.60   0.549    -.5109456    .9601402
+         speech_92K_21 |   .0759528   .3535229     0.21   0.830    -.6172443    .7691498
+         speech_92K_22 |  -.2308977   .6420125    -0.36   0.719    -1.489773    1.027977
+         speech_92K_23 |   .3346084   .2708148     1.24   0.217    -.1964124    .8656292
+         speech_92K_24 |   .0200061   .3329326     0.06   0.952    -.6328169    .6728291
+         speech_92K_25 |   .6244144   .5435089     1.15   0.251    -.4413121    1.690141
+         speech_92K_26 |  -.2193368   .6047564    -0.36   0.717    -1.405159    .9664856
+         speech_92K_27 |   .0585845   .7531982     0.08   0.938    -1.418306    1.535475
+         speech_92K_28 |  -.0883875   .5501634    -0.16   0.872    -1.167162    .9903874
+         speech_92K_29 |  -.9365253   .4265916    -2.20   0.028    -1.772997   -.1000533
+         speech_92K_30 |  -.4643456   .4735745    -0.98   0.327    -1.392943    .4642518
+         speech_92K_31 |   .4593583   .3410638     1.35   0.178    -.2094086    1.128125
+         speech_92K_32 |   .6605452    .463473     1.43   0.154    -.2482449    1.569335
+         speech_92K_33 |   .6697762   .3767308     1.78   0.076    -.0689274     1.40848
+         speech_92K_34 |   .2052356   .3979529     0.52   0.606    -.5750808    .9855521
+         speech_92K_35 |   .4621185   .4426891     1.04   0.297     -.405918    1.330155
+         speech_92K_36 |   .2063731   .4130094     0.50   0.617    -.6034666    1.016213
+         speech_92K_37 |   .3680261   .4656213     0.79   0.429    -.5449764    1.281029
+         speech_92K_38 |  -.9325186   .7446633    -1.25   0.211    -2.392674    .5276368
+         speech_92K_39 |    .584873   .7553456     0.77   0.439    -.8962286    2.065975
+         speech_92K_40 |  -.2933453   .4513678    -0.65   0.516    -1.178399    .5917085
+         speech_92K_41 |   .0020325   .3967233     0.01   0.996     -.775873    .7799379
+         speech_92K_42 |   .6895986   .5878154     1.17   0.241    -.4630053    1.842202
+         speech_92K_43 |   .3723613   .5501925     0.68   0.499    -.7064707    1.451193
+         speech_92K_44 |   .2256549    .389985     0.58   0.563     -.539038    .9903479
+         speech_92K_45 |  -.7673934    .635359    -1.21   0.227    -2.013222    .4784352
+         speech_92K_46 |  -2.225799   .9084731    -2.45   0.014    -4.007158   -.4444414
+         speech_92K_47 |   .3677756   .5240594     0.70   0.483     -.659814    1.395365
+         speech_92K_48 |  -.4305586   .5249137    -0.82   0.412    -1.459823     .598706
+         speech_92K_49 |   .7264711   .6130853     1.18   0.236    -.4756827    1.928625
+         speech_92K_50 |  -1.121298   .8021452    -1.40   0.162    -2.694165    .4515696
+         speech_92K_51 |   .5183232   .3136137     1.65   0.098    -.0966188    1.133265
+         speech_92K_52 |  -.2456838   .3278283    -0.75   0.454    -.8884981    .3971305
+         speech_92K_53 |  -.7989046   .4867966    -1.64   0.101    -1.753428    .1556191
+         speech_92K_54 |    .413531   .4667269     0.89   0.376    -.5016394    1.328702
+         speech_92K_55 |   .2769406   .4881483     0.57   0.571    -.6802334    1.234115
+         speech_92K_56 |   .0052321   .7815608     0.01   0.995    -1.527273    1.537737
+         speech_92K_57 |   .4367785   .3939891     1.11   0.268    -.3357657    1.209323
+         speech_92K_58 |    .556286   .4871134     1.14   0.254    -.3988588    1.511431
+         speech_92K_59 |  -.1971064   .3784379    -0.52   0.603    -.9391573    .5449446
+         speech_92K_60 |   .0009115   .3887432     0.00   0.998    -.7613464    .7631694
+         speech_92K_61 |  -.5044478   .6592931    -0.77   0.444    -1.797207    .7883115
+         speech_92K_62 |   .0237671   .4188334     0.06   0.955    -.7974925    .8450267
+         speech_92K_63 |  -1.236827   1.181526    -1.05   0.295    -3.553594    1.079939
+         speech_92K_64 |   .6682387   .5514286     1.21   0.226     -.413017    1.749494
+         speech_92K_65 |   .2996921   .5032082     0.60   0.552    -.6870118    1.286396
+         speech_92K_66 |  -.3467268   .3770926    -0.92   0.358     -1.08614    .3926864
+         speech_92K_67 |   .1540222   .3674936     0.42   0.675    -.5665689    .8746132
+         speech_92K_68 |  -1.639695   .8446674    -1.94   0.052    -3.295941    .0165512
+         speech_92K_69 |   1.089221   .4341402     2.51   0.012     .2379477    1.940495
+         speech_92K_70 |  -.8642106   .4453024    -1.94   0.052    -1.737371    .0089502
+         speech_92K_71 |   .0270903   .7074078     0.04   0.969    -1.360014    1.414194
+         speech_92K_72 |   .3621793   .4501966     0.80   0.421     -.520578    1.244937
+         speech_92K_73 |   .6739307   .4414322     1.53   0.127    -.1916411    1.539503
+         speech_92K_74 |   .7490253   .6202432     1.21   0.227     -.467164    1.965215
+         speech_92K_75 |  -.4599274   .9192412    -0.50   0.617      -2.2624    1.342545
+         speech_92K_76 |   .9000085   .3548943     2.54   0.011     .2041223    1.595895
+         speech_92K_77 |   .2092587   .4776891     0.44   0.661    -.7274067    1.145924
+         speech_92K_78 |   .1895371   .9170432     0.21   0.836    -1.608625    1.987699
+         speech_92K_79 |  -.6146726    .583406    -1.05   0.292     -1.75863    .5292853
+         speech_92K_80 |  -.2619281   .3457805    -0.76   0.449    -.9399437    .4160875
+         speech_92K_81 |  -.3927432   .4219952    -0.93   0.352    -1.220203    .4347162
+         speech_92K_82 |   1.965395   .9005376     2.18   0.029     .1995974    3.731193
+         speech_92K_83 |   .1728665   .6110899     0.28   0.777    -1.025375    1.371108
+         speech_92K_84 |   .1852695   .6060464     0.31   0.760    -1.003082    1.373621
+         speech_92K_85 |   .6327628    .421345     1.50   0.133    -.1934215    1.458947
+         speech_92K_86 |   -1.30183   .5042836    -2.58   0.010    -2.290643   -.3130173
+         speech_92K_87 |  -.6387743   .5678739    -1.12   0.261    -1.752276    .4747279
+         speech_92K_88 |   -.363284   .4343857    -0.84   0.403    -1.215039    .4884709
+         speech_92K_89 |  -1.077501   .4558389    -2.36   0.018    -1.971322   -.1836802
+         speech_92K_90 |  -1.010247   .7781003    -1.30   0.194    -2.535966    .5154728
+         speech_92K_91 |  -.4695416   .7863125    -0.60   0.550    -2.011364    1.072281
+         speech_92K_92 |          0  (omitted)
+           quote_92K_1 |   .0067506   .5693025     0.01   0.991    -1.109553    1.123054
+           quote_92K_2 |    .213919   .2870191     0.75   0.456    -.3488755    .7767136
+           quote_92K_3 |  -.1673886    .265335    -0.63   0.528    -.6876645    .3528873
+           quote_92K_4 |   .4446009    .331197     1.34   0.180    -.2048189    1.094021
+           quote_92K_5 |   .7050817   .4085277     1.73   0.084    -.0959701    1.506134
+           quote_92K_6 |  -.0154585   .4437119    -0.03   0.972    -.8855004    .8545835
+           quote_92K_7 |  -.1308584   .2639771    -0.50   0.620    -.6484717    .3867549
+           quote_92K_8 |  -.0415403   .3841165    -0.11   0.914     -.794726    .7116454
+           quote_92K_9 |  -.0789765   .5723167    -0.14   0.890     -1.20119    1.043237
+          quote_92K_10 |   .0293916   .2792282     0.11   0.916    -.5181265    .5769097
+          quote_92K_11 |    .064603   .2873756     0.22   0.822    -.4988906    .6280966
+          quote_92K_12 |  -.2113998   .5135593    -0.41   0.681      -1.2184    .7956007
+          quote_92K_13 |  -.2907072   .3605199    -0.81   0.420    -.9976242    .4162098
+          quote_92K_14 |   .2664285   .2562762     1.04   0.299    -.2360847    .7689418
+          quote_92K_15 |    .870627     .36016     2.42   0.016     .1644157    1.576838
+          quote_92K_16 |   .1639009   .3480632     0.47   0.638    -.5185905    .8463923
+          quote_92K_17 |   .4751906   .4566876     1.04   0.298    -.4202944    1.370676
+          quote_92K_18 |   1.557875   .6354329     2.45   0.014     .3119013    2.803849
+          quote_92K_19 |   .1950112   .2796144     0.70   0.486    -.3532641    .7432864
+          quote_92K_20 |  -.0925733   .3335149    -0.28   0.781    -.7465381    .5613914
+          quote_92K_21 |   .1644837   .2719303     0.60   0.545    -.3687243    .6976918
+          quote_92K_22 |   .6886326   .3725135     1.85   0.065    -.0418017    1.419067
+          quote_92K_23 |    .354899    .242928     1.46   0.144    -.1214407    .8312387
+          quote_92K_24 |  -.0600457   .2797864    -0.21   0.830    -.6086584    .4885669
+          quote_92K_25 |  -.2489458   .4611241    -0.54   0.589     -1.15313    .6552385
+          quote_92K_26 |   .2284159   .3823564     0.60   0.550    -.5213185    .9781503
+          quote_92K_27 |   .6051499   .4287113     1.41   0.158    -.2354785    1.445778
+          quote_92K_28 |   .3959371   .4975832     0.80   0.426    -.5797371    1.371611
+          quote_92K_29 |    .054005   .3237709     0.17   0.868    -.5808534    .6888634
+          quote_92K_30 |   .1339355   .6154242     0.22   0.828    -1.072804    1.340676
+          quote_92K_31 |   .1990608   .2733649     0.73   0.467    -.3369604    .7350819
+          quote_92K_32 |   .0741307   .3136391     0.24   0.813    -.5408611    .6891225
+          quote_92K_33 |  -.3462534   .3053866    -1.13   0.257    -.9450634    .2525567
+          quote_92K_34 |  -.2982916   .4128077    -0.72   0.470    -1.107736    .5111526
+          quote_92K_35 |  -.0193103   .3265978    -0.06   0.953    -.6597119    .6210914
+          quote_92K_36 |  -.3178783   .3602899    -0.88   0.378    -1.024344    .3885875
+          quote_92K_37 |  -.4467109   .3589311    -1.24   0.213    -1.150512    .2570907
+          quote_92K_38 |  -.1720546   .4209856    -0.41   0.683    -.9975343    .6534251
+          quote_92K_39 |   .2228077   .3932093     0.57   0.571    -.5482075    .9938229
+          quote_92K_40 |  -.1298121    .379825    -0.34   0.733     -.874583    .6149588
+          quote_92K_41 |  -.1714053   .2947834    -0.58   0.561    -.7494243    .4066138
+          quote_92K_42 |   -.164496   .3526709    -0.47   0.641    -.8560223    .5270304
+          quote_92K_43 |  -.0632738   .3253373    -0.19   0.846    -.7012038    .5746562
+          quote_92K_44 |  -.0829984   .2833413    -0.29   0.770    -.6385814    .4725847
+          quote_92K_45 |   .2426669   .4016361     0.60   0.546    -.5448718    1.030206
+          quote_92K_46 |  -.0768485    .441729    -0.17   0.862    -.9430025    .7893055
+          quote_92K_47 |  -.2245242   .3513406    -0.64   0.523    -.9134422    .4643937
+          quote_92K_48 |    .061191   .3337865     0.18   0.855    -.5933064    .7156884
+          quote_92K_49 |   .0597673   .4105418     0.15   0.884    -.7452339    .8647684
+          quote_92K_50 |  -.3047025   .4341819    -0.70   0.483    -1.156058    .5466529
+          quote_92K_51 |   .0064818    .272089     0.02   0.981    -.5270375     .540001
+          quote_92K_52 |  -.1702494   .2934755    -0.58   0.562    -.7457038    .4052051
+          quote_92K_53 |  -.0492743    .324797    -0.15   0.879    -.6861447    .5875962
+          quote_92K_54 |   .2468722   .3671048     0.67   0.501    -.4729566    .9667009
+          quote_92K_55 |  -.0853054   .3571486    -0.24   0.811    -.7856118    .6150011
+          quote_92K_56 |   .0138779   .4141164     0.03   0.973    -.7981324    .8258882
+          quote_92K_57 |   .0808937   .3268388     0.25   0.805    -.5599805    .7217679
+          quote_92K_58 |   .1700903   .4552628     0.37   0.709     -.722601    1.062782
+          quote_92K_59 |    .542884   .2728103     1.99   0.047     .0079503    1.077818
+          quote_92K_60 |   .4244678   .2902129     1.46   0.144    -.1445894     .993525
+          quote_92K_61 |   .5465344   .3723694     1.47   0.142    -.1836172    1.276686
+          quote_92K_62 |    .277561   .2899864     0.96   0.339     -.291052    .8461739
+          quote_92K_63 |   .0194149   .4827044     0.04   0.968    -.9270847    .9659145
+          quote_92K_64 |  -.0312875   .3211487    -0.10   0.922    -.6610044    .5984294
+          quote_92K_65 |   .1077215   .3490069     0.31   0.758    -.5766205    .7920634
+          quote_92K_66 |   .2673904   .2794299     0.96   0.339    -.2805232     .815304
+          quote_92K_67 |   .0615293   .2972413     0.21   0.836    -.5213092    .6443678
+          quote_92K_68 |  -.0202784   .3572083    -0.06   0.955    -.7207018     .680145
+          quote_92K_69 |  -.0721028    .403913    -0.18   0.858    -.8641061    .7199005
+          quote_92K_70 |   .2165954   .3485465     0.62   0.534    -.4668437    .9000345
+          quote_92K_71 |  -.0041318   .3928121    -0.01   0.992    -.7743681    .7661045
+          quote_92K_72 |  -.2396027   .3044202    -0.79   0.431    -.8365178    .3573124
+          quote_92K_73 |    .151887   .3470787     0.44   0.662    -.5286741    .8324481
+          quote_92K_74 |  -.3510775    .405603    -0.87   0.387    -1.146395    .4442395
+          quote_92K_75 |  -.4991291   .4310103    -1.16   0.247    -1.344266    .3460073
+          quote_92K_76 |   .1155091   .2711794     0.43   0.670    -.4162267    .6472448
+          quote_92K_77 |   .2907795   .3704152     0.79   0.433    -.4355404    1.017099
+          quote_92K_78 |   -.001309   .4273224    -0.00   0.998     -.839214    .8365961
+          quote_92K_79 |  -.4100763   .4475441    -0.92   0.360    -1.287633      .46748
+          quote_92K_80 |    .027014   .3380528     0.08   0.936    -.6358488    .6898768
+          quote_92K_81 |   .0814031   .3016504     0.27   0.787     -.510081    .6728872
+          quote_92K_82 |   .3078529   .3787038     0.81   0.416    -.4347194    1.050425
+          quote_92K_83 |  -.3777477   .4395261    -0.86   0.390    -1.239582    .4840868
+          quote_92K_84 |  -.6160119   .3672152    -1.68   0.094    -1.336057    .1040333
+          quote_92K_85 |  -.2177906   .3251328    -0.67   0.503    -.8553196    .4197384
+          quote_92K_86 |  -.0078169   .3451667    -0.02   0.982    -.6846288     .668995
+          quote_92K_87 |   .0186398   .3748239     0.05   0.960    -.7163248    .7536045
+          quote_92K_88 |  -.1752469    .277162    -0.63   0.527    -.7187134    .3682196
+          quote_92K_89 |   .1576445   .3205343     0.49   0.623    -.4708676    .7861566
+          quote_92K_90 |  -.1329218   .4175466    -0.32   0.750    -.9516581    .6858145
+          quote_92K_91 |  -.5457158   .5250478    -1.04   0.299    -1.575243    .4838118
+          quote_92K_92 |          0  (omitted)
+         article_40K_1 |   .7831595   .7931818     0.99   0.324    -.7721322    2.338451
+         article_40K_2 |   -.178212   .8358421    -0.21   0.831    -1.817153    1.460729
+         article_40K_3 |   1.731274   .9074415     1.91   0.057    -.0480616    3.510609
+         article_40K_4 |   .5506751   1.169101     0.47   0.638    -1.741729    2.843079
+         article_40K_5 |  -.1116837   .9792472    -0.11   0.909    -2.031817     1.80845
+         article_40K_6 |   .6698039   1.004135     0.67   0.505     -1.29913    2.638738
+         article_40K_7 |   .0624466   .7926981     0.08   0.937    -1.491897     1.61679
+         article_40K_8 |   2.291383   .9646545     2.38   0.018     .3998633    4.182903
+         article_40K_9 |  -.3792068   .9627204    -0.39   0.694    -2.266934    1.508521
+        article_40K_10 |   .7486607   .7902241     0.95   0.344    -.8008316    2.298153
+        article_40K_11 |   .5564848   .9102813     0.61   0.541    -1.228419    2.341388
+        article_40K_12 |   1.359728   .7859923     1.73   0.084    -.1814667    2.900922
+        article_40K_13 |   .4497906   .8021708     0.56   0.575    -1.123127    2.022708
+        article_40K_14 |   .9639292   .9290455     1.04   0.300    -.8577677    2.785626
+        article_40K_15 |   .1563899      .8222     0.19   0.849    -1.455802    1.768581
+        article_40K_16 |   .3199787   1.066163     0.30   0.764    -1.770581    2.410538
+        article_40K_17 |   .1761816   .7873017     0.22   0.823     -1.36758    1.719943
+        article_40K_18 |  -.1287075   .7800068    -0.17   0.869    -1.658165     1.40075
+        article_40K_19 |   .2223132   .8036723     0.28   0.782    -1.353549    1.798175
+        article_40K_20 |   1.478768   .9173937     1.61   0.107    -.3200814    3.277618
+        article_40K_21 |  -.6982707   .9519803    -0.73   0.463    -2.564939    1.168397
+        article_40K_22 |   .4944447    .914952     0.54   0.589    -1.299617    2.288507
+        article_40K_23 |   .4684917   .8096667     0.58   0.563    -1.119124    2.056107
+        article_40K_24 |   1.090487   .9465406     1.15   0.249    -.7655151    2.946488
+        article_40K_25 |  -.2911228   .9834814    -0.30   0.767    -2.219559    1.637314
+        article_40K_26 |   .1537553    .885527     0.17   0.862    -1.582609     1.89012
+        article_40K_27 |   1.070201   .8838358     1.21   0.226    -.6628474     2.80325
+        article_40K_28 |    .765886   .8923201     0.86   0.391    -.9837988    2.515571
+        article_40K_29 |   .5482753   .8125808     0.67   0.500    -1.045055    2.141605
+        article_40K_30 |      .3921   .8727595     0.45   0.653     -1.31923     2.10343
+        article_40K_31 |   .4501322   .9367236     0.48   0.631     -1.38662    2.286885
+        article_40K_32 |  -1.338989   .8476019    -1.58   0.114    -3.000989    .3230108
+        article_40K_33 |   .3886914   .8111298     0.48   0.632    -1.201793    1.979176
+        article_40K_34 |   .3255741   .8459375     0.38   0.700    -1.333162    1.984311
+        article_40K_35 |   .2601334   .7961272     0.33   0.744    -1.300934    1.821201
+        article_40K_36 |   .2082433   .7674725     0.27   0.786    -1.296637    1.713124
+        article_40K_37 |   .4133636   .8189206     0.50   0.614    -1.192398    2.019125
+        article_40K_38 |   1.506857   .9212191     1.64   0.102     -.299494    3.313207
+        article_40K_39 |  -.3952408   .8710441    -0.45   0.650    -2.103207    1.312725
+        article_40K_40 |          0  (omitted)
+                       |
+                  rank |
+                    2  |  -.3211082   .2877687    -1.12   0.265    -.8853728    .2431563
+                    3  |  -.0046257   .2394672    -0.02   0.985    -.4741793     .464928
+                    4  |   -.410271   .4388132    -0.93   0.350    -1.270707    .4501654
+                    5  |  -1.076182   .4266737    -2.52   0.012    -1.912815   -.2395492
+                    6  |  -.6011054   .2571833    -2.34   0.019    -1.105397   -.0968135
+                    7  |  -1.524041   .9262273    -1.65   0.100    -3.340212    .2921301
+                    8  |   .2334415   .6504388     0.36   0.720    -1.041956    1.508839
+                    9  |   1.162492   .3199285     3.63   0.000     .5351674    1.789816
+                   10  |  -.5250582   .2285701    -2.30   0.022    -.9732445   -.0768719
+                       |
+                   MFA |    .129033   .6418053     0.20   0.841    -1.129436    1.387502
+                   PMO |   .8908774   .3969634     2.24   0.025     .1125011    1.669254
+                  MEWR |   .2577949   .2675074     0.96   0.335    -.2667406    .7823305
+                   MCI |   1.071766   .5571085     1.92   0.054    -.0206269    2.164159
+                   MTI |    .110293   .4403878     0.25   0.802    -.7532311     .973817
+                   MHA |  -.6360269   .7411623    -0.86   0.391    -2.089318    .8172637
+                  MCCY |  -.6630681   .6537358    -1.01   0.311    -1.944931    .6187944
+                MinLaw |   .0944398   1.000699     0.09   0.925    -1.867758    2.056638
+                   MOH |    -1.2021   .8469887    -1.42   0.156    -2.862897    .4586981
+                   MOM |   1.995197   .9396937     2.12   0.034     .1526203    3.837773
+                MinDef |   1.197945   .6903371     1.74   0.083    -.1556866    2.551576
+                   MSF |  -.4197026   .5275312    -0.80   0.426      -1.4541    .6146945
+                   MOT |   .7105084   .5000402     1.42   0.155    -.2699835       1.691
+                   MND |  -.6715747   .6710996    -1.00   0.317    -1.987484     .644335
+                   MOF |   .0370361   .3035691     0.12   0.903    -.5582103    .6322825
+                   MOE |   .4927149   .3089199     1.59   0.111    -.1130234    1.098453
+               speaker |   .4048772   .1772988     2.28   0.022      .057225    .7525293
+                       |
+              rank#MFA |
+                  1 1  |          0  (empty)
+                  2 1  |          0  (empty)
+                  3 1  |  -.1587972   .6494219    -0.24   0.807    -1.432201    1.114606
+                  4 1  |   .0271794   .6855322     0.04   0.968     -1.31703    1.371389
+                  5 1  |          0  (empty)
+                  6 1  |          0  (omitted)
+                  7 1  |          0  (empty)
+                  8 1  |          0  (empty)
+                  9 1  |          0  (empty)
+                 10 1  |          0  (empty)
+                       |
+              rank#PMO |
+                  1 1  |          0  (empty)
+                  2 1  |          0  (empty)
+                  3 1  |  -1.034491   .4145513    -2.50   0.013    -1.847355   -.2216282
+                  4 1  |  -1.178044   .5294878    -2.22   0.026    -2.216278   -.1398103
+                  5 1  |          0  (omitted)
+                  6 1  |          0  (empty)
+                  7 1  |          0  (empty)
+                  8 1  |          0  (empty)
+                  9 1  |          0  (empty)
+                 10 1  |          0  (empty)
+                       |
+             rank#MEWR |
+                  1 1  |          0  (empty)
+                  2 1  |          0  (empty)
+                  3 1  |  -.2951692   .2878527    -1.03   0.305    -.8595984      .26926
+                  4 1  |          0  (omitted)
+                  5 1  |          0  (empty)
+                  6 1  |          0  (empty)
+                  7 1  |          0  (empty)
+                  8 1  |          0  (empty)
+                  9 1  |          0  (empty)
+                 10 1  |          0  (empty)
+                       |
+              rank#MCI |
+                  1 1  |          0  (empty)
+                  2 1  |          0  (empty)
+                  3 1  |  -1.174187   .5688832    -2.06   0.039    -2.289668    -.058706
+                  4 1  |  -.4248958   .7926011    -0.54   0.592    -1.979049    1.129257
+                  5 1  |   -.224114   .6053653    -0.37   0.711     -1.41113    .9629022
+                  6 1  |          0  (empty)
+                  7 1  |          0  (omitted)
+                  8 1  |          0  (empty)
+                  9 1  |          0  (empty)
+                 10 1  |          0  (empty)
+                       |
+              rank#MTI |
+                  1 1  |          0  (empty)
+                  2 1  |          0  (empty)
+                  3 1  |   -.273622    .462077    -0.59   0.554    -1.179675    .6324307
+                  4 1  |  -.7028084   .6446013    -1.09   0.276     -1.96676    .5611428
+                  5 1  |   .1106107   .5871383     0.19   0.851    -1.040666    1.261887
+                  6 1  |          0  (omitted)
+                  7 1  |          0  (empty)
+                  8 1  |          0  (empty)
+                  9 1  |          0  (empty)
+                 10 1  |          0  (empty)
+                       |
+              rank#MHA |
+                  1 1  |          0  (empty)
+                  2 1  |   .7509072   .7735249     0.97   0.332    -.7658408    2.267655
+                  3 1  |   .8832712   .7399929     1.19   0.233    -.5677265    2.334269
+                  4 1  |   .2533081   .8401704     0.30   0.763     -1.39412    1.900736
+                  5 1  |   .9380323   .8097968     1.16   0.247    -.6498386    2.525903
+                  6 1  |          0  (empty)
+                  7 1  |   1.736631   1.147059     1.51   0.130    -.5125531    3.985816
+                  8 1  |          0  (omitted)
+                  9 1  |          0  (empty)
+                 10 1  |          0  (empty)
+                       |
+             rank#MCCY |
+                  1 1  |          0  (empty)
+                  2 1  |          0  (empty)
+                  3 1  |   .5110801   .6687661     0.76   0.445    -.8002542    1.822414
+                  4 1  |   1.260118   .7586274     1.66   0.097    -.2274188    2.747654
+                  5 1  |   .4564223    .811978     0.56   0.574    -1.135726     2.04857
+                  6 1  |   .5627696     .73824     0.76   0.446    -.8847909     2.01033
+                  7 1  |   .7318427   1.188671     0.62   0.538    -1.598935     3.06262
+                  8 1  |          0  (omitted)
+                  9 1  |          0  (empty)
+                 10 1  |          0  (empty)
+                       |
+           rank#MinLaw |
+                  1 1  |          0  (empty)
+                  2 1  |   .0916069   1.081199     0.08   0.932    -2.028437    2.211651
+                  3 1  |   -.290518    1.01427    -0.29   0.775    -2.279325    1.698289
+                  4 1  |   .4651863    1.03479     0.45   0.653    -1.563857     2.49423
+                  5 1  |          0  (empty)
+                  6 1  |          0  (empty)
+                  7 1  |          0  (omitted)
+                  8 1  |          0  (empty)
+                  9 1  |          0  (empty)
+                 10 1  |          0  (empty)
+                       |
+              rank#MOH |
+                  1 1  |          0  (empty)
+                  2 1  |          0  (empty)
+                  3 1  |   1.068491   .8606568     1.24   0.215    -.6191079    2.756089
+                  4 1  |   1.248512    .914457     1.37   0.172    -.5445796    3.041603
+                  5 1  |    1.89465   1.123085     1.69   0.092    -.3075258    4.096825
+                  6 1  |          0  (empty)
+                  7 1  |    .278438    .953558     0.29   0.770    -1.591324      2.1482
+                  8 1  |          0  (omitted)
+                  9 1  |          0  (empty)
+                 10 1  |          0  (empty)
+                       |
+              rank#MOM |
+                  1 1  |          0  (empty)
+                  2 1  |  -2.112605   .9620223    -2.20   0.028    -3.998963   -.2262459
+                  3 1  |  -2.278623   .9465651    -2.41   0.016    -4.134672   -.4225726
+                  4 1  |  -2.205724   .9573283    -2.30   0.021    -4.082879   -.3285693
+                  5 1  |  -1.767256   .9399258    -1.88   0.060    -3.610287    .0757757
+                  6 1  |          0  (empty)
+                  7 1  |          0  (omitted)
+                  8 1  |          0  (empty)
+                  9 1  |          0  (empty)
+                 10 1  |          0  (empty)
+                       |
+           rank#MinDef |
+                  1 1  |          0  (empty)
+                  2 1  |  -.8782028   .7563106    -1.16   0.246    -2.361197    .6047909
+                  3 1  |  -1.243665   .6958758    -1.79   0.074    -2.608156     .120827
+                  4 1  |  -1.156907   .8581647    -1.35   0.178    -2.839619    .5258049
+                  5 1  |  -.8554002   .7479197    -1.14   0.253    -2.321941    .6111405
+                  6 1  |          0  (omitted)
+                  7 1  |          0  (empty)
+                  8 1  |          0  (empty)
+                  9 1  |          0  (empty)
+                 10 1  |          0  (empty)
+                       |
+              rank#MSF |
+                  1 1  |          0  (empty)
+                  2 1  |          0  (empty)
+                  3 1  |   .3365138   .5518439     0.61   0.542    -.7455563    1.418584
+                  4 1  |          0  (empty)
+                  5 1  |    1.72662   .8525862     2.03   0.043     .0548463    3.398393
+                  6 1  |  -.0100358   1.028492    -0.01   0.992    -2.026729    2.006658
+                  7 1  |          0  (empty)
+                  8 1  |          0  (omitted)
+                  9 1  |          0  (empty)
+                 10 1  |          0  (empty)
+                       |
+              rank#MOT |
+                  1 1  |          0  (empty)
+                  2 1  |          0  (empty)
+                  3 1  |  -.8662481   .5088187    -1.70   0.089    -1.863953     .131457
+                  4 1  |  -.5352833   .5519136    -0.97   0.332     -1.61749    .5469234
+                  5 1  |          0  (omitted)
+                  6 1  |          0  (omitted)
+                  7 1  |          0  (omitted)
+                  8 1  |          0  (omitted)
+                  9 1  |          0  (empty)
+                 10 1  |          0  (empty)
+                       |
+              rank#MND |
+                  1 1  |          0  (empty)
+                  2 1  |          0  (empty)
+                  3 1  |   .5612007   .6750921     0.83   0.406    -.7625377    1.884939
+                  4 1  |   1.470537    .712018     2.07   0.039     .0743929     2.86668
+                  5 1  |   1.442481    .808734     1.78   0.075    -.1433058    3.028268
+                  6 1  |          0  (omitted)
+                  7 1  |   1.983015   1.373656     1.44   0.149    -.7104861    4.676516
+                  8 1  |          0  (omitted)
+                  9 1  |          0  (empty)
+                 10 1  |          0  (empty)
+                       |
+              rank#MOF |
+                  1 1  |   -.035879   .4295533    -0.08   0.933    -.8781586    .8064005
+                  2 1  |   .2479261   .3860288     0.64   0.521    -.5090094    1.004862
+                  3 1  |   .0157419    .341428     0.05   0.963    -.6537392     .685223
+                  4 1  |          0  (omitted)
+                  5 1  |          0  (omitted)
+                  6 1  |          0  (empty)
+                  7 1  |          0  (empty)
+                  8 1  |          0  (empty)
+                  9 1  |          0  (empty)
+                 10 1  |          0  (empty)
+                       |
+              rank#MOE |
+                  1 1  |          0  (empty)
+                  2 1  |          0  (empty)
+                  3 1  |  -.4571518   .3151051    -1.45   0.147    -1.075018    .1607147
+                  4 1  |  -1.647524   .7769814    -2.12   0.034     -3.17105   -.1239988
+                  5 1  |          0  (omitted)
+                  6 1  |          0  (omitted)
+                  7 1  |          0  (omitted)
+                  8 1  |          0  (omitted)
+                  9 1  |          0  (empty)
+                 10 1  |          0  (empty)
+                       |
+          rank#speaker |
+                  1 1  |          0  (empty)
+                  2 1  |          0  (empty)
+                  3 1  |          0  (empty)
+                  4 1  |  -.2928587   .3823706    -0.77   0.444    -1.042621    .4569036
+                  5 1  |          0  (empty)
+                  6 1  |          0  (empty)
+                  7 1  |          0  (empty)
+                  8 1  |          0  (empty)
+                  9 1  |  -1.258623   .5439385    -2.31   0.021    -2.325192   -.1920544
+                 10 1  |          0  (omitted)
+                       |
+            group_size |  -.0177421   .0464903    -0.38   0.703    -.1089015    .0734172
+                voters |   4.18e-07   1.48e-06     0.28   0.778    -2.49e-06    3.33e-06
+            vote_share |  -.0024891    .088248    -0.03   0.978     -.175528    .1705499
+winners_majority_share |  -.0001576   .0439082    -0.00   0.997    -.0862539    .0859388
+                 _cons |   1.412864   4.607388     0.31   0.759    -7.621424    10.44715
+----------------------------------------------------------------------------------------
+(est2 stored)
+
+.         add_scalars, w_electoral
+
+added macro:
+               e(nobs) : "\multicolumn{1}{c}{    5,140}"
+
+. 
+. #delimit ;
+delimiter now ;
+. esttab, keep(`keep_coeff')
+>                 coeflabel(`my_coeflabel')
+>                 scalars("df_m df-model" "clustvar cluster-variable" "N_clust cluster-N")
+>                 `esttab_options'
+>                 mtitles(`model_title')
+>                 title(Panel A. string similarity 1 robustness checks)
+> ;
+
+Panel A. string similarity 1 robustness checks
+--------------------------------------------
+                      (1)             (2)   
+                 ln_quote        ln_quote   
+--------------------------------------------
+0.opposition            0               0   
+                      (.)             (.)   
+
+1.opposition       0.0354          0.0177   
+                   (0.55)          (0.23)   
+
+ln_speech           0.156***        0.160***
+                  (11.10)          (9.66)   
+
+ln_article          0.165***        0.157** 
+                   (3.86)          (3.22)   
+
+0.parl                  0               0   
+                      (.)             (.)   
+
+1.parl             0.0989           0.270   
+                   (0.78)          (1.45)   
+
+2.parl              0.158           0.250   
+                   (0.96)          (1.10)   
+
+3.parl            0.00297         -0.0333   
+                   (0.03)         (-0.26)   
+
+2005.year               0               0   
+                      (.)             (.)   
+
+2006.year         -0.0210          -0.155   
+                  (-0.24)         (-1.09)   
+
+2007.year         -0.0207          -0.257   
+                  (-0.14)         (-1.23)   
+
+2008.year          0.0224          -0.229   
+                   (0.15)         (-1.06)   
+
+2009.year           0.141          -0.103   
+                   (0.94)         (-0.48)   
+
+2010.year         -0.0942          -0.349   
+                  (-0.63)         (-1.64)   
+
+2011.year          -0.121          -0.253   
+                  (-0.79)         (-1.18)   
+
+2012.year          -0.157          -0.278   
+                  (-0.87)         (-1.17)   
+
+2013.year          -0.322          -0.441   
+                  (-1.80)         (-1.86)   
+
+2014.year          -0.125          -0.260   
+                  (-0.70)         (-1.09)   
+
+2015.year         -0.0560          -0.211   
+                  (-0.31)         (-0.88)   
+
+2016.year               0               0   
+                      (.)             (.)   
+
+0.gender                0               0   
+                      (.)             (.)   
+
+1.gender          0.00757          0.0333   
+                   (0.19)          (0.63)   
+
+0.race                  0               0   
+                      (.)             (.)   
+
+1.race            -0.0291         -0.0723   
+                  (-0.56)         (-1.07)   
+
+2.race            -0.0139         -0.0771   
+                  (-0.28)         (-1.06)   
+
+3.race            0.00967          0.0108   
+                   (0.08)          (0.07)   
+
+age               -0.0165         -0.0131   
+                  (-0.77)         (-0.44)   
+
+age2             0.000183        0.000196   
+                   (0.83)          (0.66)   
+
+tenure            0.00221        -0.00293   
+                   (0.32)         (-0.25)   
+
+tenure2         0.0000120       0.0000482   
+                   (0.05)          (0.11)   
+
+1.weekday               0               0   
+                      (.)             (.)   
+
+2.weekday          0.0387        -0.00562   
+                   (0.32)         (-0.04)   
+
+3.weekday          0.0740        -0.00713   
+                   (0.61)         (-0.06)   
+
+4.weekday           0.129           0.120   
+                   (1.03)          (0.91)   
+
+5.weekday          0.0408         0.00331   
+                   (0.32)          (0.02)   
+
+6.weekday          0.0663          0.0403   
+                   (0.52)          (0.29)   
+
+7.weekday           0.494*          0.229   
+                   (2.13)          (0.88)   
+
+1.section2              0               0   
+                      (.)             (.)   
+
+2.section2         -0.541*         -0.406   
+                  (-2.26)         (-1.53)   
+
+3.section2          0.370**         0.489***
+                   (2.60)          (3.33)   
+
+4.section2         -0.430          -0.190   
+                  (-1.17)         (-0.44)   
+
+5.section2         -0.320          -0.360   
+                  (-0.92)         (-1.01)   
+
+6.section2         -0.687          -0.120   
+                  (-1.66)         (-0.21)   
+
+7.section2          0.200*          0.213*  
+                   (2.10)          (2.04)   
+
+8.section2          0.480**         0.344   
+                   (2.72)          (1.75)   
+
+9.section2          0.117           0.118   
+                   (1.42)          (1.38)   
+
+10.section2         0.418          -0.110   
+                   (0.82)         (-0.25)   
+
+11.section2         0.422***        0.406***
+                   (4.50)          (4.22)   
+
+12.section2        -0.696*         -0.557   
+                  (-2.08)         (-1.40)   
+
+13.section2        0.0812          0.0955   
+                   (1.11)          (1.25)   
+
+14.section2         0.249           0.289   
+                   (1.00)          (1.05)   
+
+translations      -0.0208          -0.148   
+                  (-0.20)         (-1.07)   
+
+speech_92K_1        0.177           0.544   
+                   (0.20)          (0.63)   
+
+speech_92K_2       -0.363          -0.364   
+                  (-1.06)         (-1.01)   
+
+speech_92K_3        0.374           0.752   
+                   (1.14)          (1.94)   
+
+speech_92K_4       0.0166           0.167   
+                   (0.04)          (0.31)   
+
+speech_92K_5       0.0632           0.264   
+                   (0.09)          (0.30)   
+
+speech_92K_6     -0.00104          -0.163   
+                  (-0.00)         (-0.33)   
+
+speech_92K_7       -0.135           0.102   
+                  (-0.45)          (0.30)   
+
+speech_92K_8       -0.217         -0.0412   
+                  (-0.59)         (-0.10)   
+
+speech_92K_9       -1.053          -0.518   
+                  (-1.42)         (-0.60)   
+
+speech_92~10        0.440           0.105   
+                   (1.13)          (0.23)   
+
+speech_92~11      -0.0991          -0.216   
+                  (-0.31)         (-0.58)   
+
+speech_92~12        0.458           2.322***
+                   (0.48)          (3.33)   
+
+speech_92~13       0.0441         -0.0612   
+                   (0.10)         (-0.12)   
+
+speech_92~14        0.209         -0.0233   
+                   (0.69)         (-0.07)   
+
+speech_92~15        0.476           0.538   
+                   (1.40)          (1.24)   
+
+speech_92~16       -0.186          -0.498   
+                  (-0.42)         (-0.88)   
+
+speech_92~17       -1.300**        -1.232*  
+                  (-2.67)         (-2.30)   
+
+speech_92~18       -2.370**        -1.470   
+                  (-3.08)         (-1.39)   
+
+speech_92~19       0.0152          -0.251   
+                   (0.04)         (-0.59)   
+
+speech_92~20        0.236           0.225   
+                   (0.70)          (0.60)   
+
+speech_92~21        0.170          0.0760   
+                   (0.54)          (0.21)   
+
+speech_92~22     -0.00141          -0.231   
+                  (-0.00)         (-0.36)   
+
+speech_92~23        0.394           0.335   
+                   (1.61)          (1.24)   
+
+speech_92~24       -0.135          0.0200   
+                  (-0.47)          (0.06)   
+
+speech_92~25        0.585           0.624   
+                   (1.25)          (1.15)   
+
+speech_92~26       0.0956          -0.219   
+                   (0.21)         (-0.36)   
+
+speech_92~27        0.396          0.0586   
+                   (0.65)          (0.08)   
+
+speech_92~28       -0.526         -0.0884   
+                  (-1.01)         (-0.16)   
+
+speech_92~29       -0.401          -0.937*  
+                  (-1.12)         (-2.20)   
+
+speech_92~30       -0.322          -0.464   
+                  (-0.75)         (-0.98)   
+
+speech_92~31        0.649*          0.459   
+                   (2.18)          (1.35)   
+
+speech_92~32        0.487           0.661   
+                   (1.17)          (1.43)   
+
+speech_92~33        0.591           0.670   
+                   (1.62)          (1.78)   
+
+speech_92~34        0.106           0.205   
+                   (0.30)          (0.52)   
+
+speech_92~35        0.476           0.462   
+                   (1.29)          (1.04)   
+
+speech_92~36        0.286           0.206   
+                   (0.84)          (0.50)   
+
+speech_92~37        0.503           0.368   
+                   (1.16)          (0.79)   
+
+speech_92~38       -0.356          -0.933   
+                  (-0.60)         (-1.25)   
+
+speech_92~39        0.516           0.585   
+                   (0.85)          (0.77)   
+
+speech_92~40       -0.239          -0.293   
+                  (-0.60)         (-0.65)   
+
+speech_92~41       0.0749         0.00203   
+                   (0.21)          (0.01)   
+
+speech_92~42        1.053*          0.690   
+                   (2.25)          (1.17)   
+
+speech_92~43        0.185           0.372   
+                   (0.37)          (0.68)   
+
+speech_92~44        0.203           0.226   
+                   (0.58)          (0.58)   
+
+speech_92~45       -0.300          -0.767   
+                  (-0.54)         (-1.21)   
+
+speech_92~46       -1.745*         -2.226*  
+                  (-2.12)         (-2.45)   
+
+speech_92~47        0.161           0.368   
+                   (0.40)          (0.70)   
+
+speech_92~48       -0.323          -0.431   
+                  (-0.65)         (-0.82)   
+
+speech_92~49        0.553           0.726   
+                   (1.22)          (1.18)   
+
+speech_92~50       -0.632          -1.121   
+                  (-0.97)         (-1.40)   
+
+speech_92~51        0.519           0.518   
+                   (1.81)          (1.65)   
+
+speech_92~52      -0.0364          -0.246   
+                  (-0.12)         (-0.75)   
+
+speech_92~53       -0.629          -0.799   
+                  (-1.40)         (-1.64)   
+
+speech_92~54        0.303           0.414   
+                   (0.79)          (0.89)   
+
+speech_92~55        0.464           0.277   
+                   (1.34)          (0.57)   
+
+speech_92~56        0.130         0.00523   
+                   (0.20)          (0.01)   
+
+speech_92~57        0.359           0.437   
+                   (1.04)          (1.11)   
+
+speech_92~58        0.577           0.556   
+                   (1.22)          (1.14)   
+
+speech_92~59      -0.0813          -0.197   
+                  (-0.25)         (-0.52)   
+
+speech_92~60        0.342        0.000912   
+                   (0.96)          (0.00)   
+
+speech_92~61       -0.122          -0.504   
+                  (-0.21)         (-0.77)   
+
+speech_92~62       -0.155          0.0238   
+                  (-0.41)          (0.06)   
+
+speech_92~63       -1.065          -1.237   
+                  (-0.99)         (-1.05)   
+
+speech_92~64        0.773           0.668   
+                   (1.57)          (1.21)   
+
+speech_92~65       0.0828           0.300   
+                   (0.17)          (0.60)   
+
+speech_92~66       -0.286          -0.347   
+                  (-0.87)         (-0.92)   
+
+speech_92~67        0.174           0.154   
+                   (0.53)          (0.42)   
+
+speech_92~68       -1.199          -1.640   
+                  (-1.74)         (-1.94)   
+
+speech_92~69        1.119**         1.089*  
+                   (2.89)          (2.51)   
+
+speech_92~70       -0.449          -0.864   
+                  (-1.23)         (-1.94)   
+
+speech_92~71      -0.0690          0.0271   
+                  (-0.12)          (0.04)   
+
+speech_92~72        0.444           0.362   
+                   (1.15)          (0.80)   
+
+speech_92~73        0.523           0.674   
+                   (1.56)          (1.53)   
+
+speech_92~74        0.827           0.749   
+                   (1.41)          (1.21)   
+
+speech_92~75       -0.472          -0.460   
+                  (-0.60)         (-0.50)   
+
+speech_92~76        1.026***        0.900*  
+                   (3.34)          (2.54)   
+
+speech_92~77        0.143           0.209   
+                   (0.33)          (0.44)   
+
+speech_92~78        0.507           0.190   
+                   (0.65)          (0.21)   
+
+speech_92~79      -0.0910          -0.615   
+                  (-0.17)         (-1.05)   
+
+speech_92~80       -0.267          -0.262   
+                  (-0.87)         (-0.76)   
+
+speech_92~81       -0.263          -0.393   
+                  (-0.66)         (-0.93)   
+
+speech_92~82        1.564*          1.965*  
+                   (2.14)          (2.18)   
+
+speech_92~83        0.187           0.173   
+                   (0.36)          (0.28)   
+
+speech_92~84      -0.0314           0.185   
+                  (-0.06)          (0.31)   
+
+speech_92~85        0.752           0.633   
+                   (1.91)          (1.50)   
+
+speech_92~86       -1.066*         -1.302** 
+                  (-2.44)         (-2.58)   
+
+speech_92~87       -0.223          -0.639   
+                  (-0.45)         (-1.12)   
+
+speech_92~88     -0.00766          -0.363   
+                  (-0.02)         (-0.84)   
+
+speech_92~89       -0.765*         -1.078*  
+                  (-1.98)         (-2.36)   
+
+speech_92~90       -0.322          -1.010   
+                  (-0.53)         (-1.30)   
+
+speech_92~91       -0.278          -0.470   
+                  (-0.43)         (-0.60)   
+
+speech_92~92            0               0   
+                      (.)             (.)   
+
+quote_92K_1       -0.0427         0.00675   
+                  (-0.08)          (0.01)   
+
+quote_92K_2         0.290           0.214   
+                   (1.15)          (0.75)   
+
+quote_92K_3        -0.233          -0.167   
+                  (-1.00)         (-0.63)   
+
+quote_92K_4         0.346           0.445   
+                   (1.25)          (1.34)   
+
+quote_92K_5         0.890*          0.705   
+                   (2.31)          (1.73)   
+
+quote_92K_6       -0.0607         -0.0155   
+                  (-0.16)         (-0.03)   
+
+quote_92K_7        -0.109          -0.131   
+                  (-0.48)         (-0.50)   
+
+quote_92K_8        -0.305         -0.0415   
+                  (-0.87)         (-0.11)   
+
+quote_92K_9       0.00987         -0.0790   
+                   (0.02)         (-0.14)   
+
+quote_92K_10       -0.195          0.0294   
+                  (-0.79)          (0.11)   
+
+quote_92K_11        0.127          0.0646   
+                   (0.50)          (0.22)   
+
+quote_92K_12      -0.0559          -0.211   
+                  (-0.12)         (-0.41)   
+
+quote_92K_13       -0.381          -0.291   
+                  (-1.17)         (-0.81)   
+
+quote_92K_14        0.276           0.266   
+                   (1.23)          (1.04)   
+
+quote_92K_15        0.637*          0.871*  
+                   (2.40)          (2.42)   
+
+quote_92K_16        0.138           0.164   
+                   (0.49)          (0.47)   
+
+quote_92K_17        0.359           0.475   
+                   (1.00)          (1.04)   
+
+quote_92K_18        1.250*          1.558*  
+                   (2.57)          (2.45)   
+
+quote_92K_19        0.124           0.195   
+                   (0.50)          (0.70)   
+
+quote_92K_20       -0.224         -0.0926   
+                  (-0.75)         (-0.28)   
+
+quote_92K_21        0.216           0.164   
+                   (0.88)          (0.60)   
+
+quote_92K_22        0.552           0.689   
+                   (1.74)          (1.85)   
+
+quote_92K_23        0.395           0.355   
+                   (1.81)          (1.46)   
+
+quote_92K_24       -0.163         -0.0600   
+                  (-0.70)         (-0.21)   
+
+quote_92K_25       -0.200          -0.249   
+                  (-0.49)         (-0.54)   
+
+quote_92K_26        0.232           0.228   
+                   (0.72)          (0.60)   
+
+quote_92K_27        0.567           0.605   
+                   (1.51)          (1.41)   
+
+quote_92K_28        0.366           0.396   
+                   (0.82)          (0.80)   
+
+quote_92K_29       -0.118          0.0540   
+                  (-0.40)          (0.17)   
+
+quote_92K_30        0.389           0.134   
+                   (0.80)          (0.22)   
+
+quote_92K_31      -0.0650           0.199   
+                  (-0.28)          (0.73)   
+
+quote_92K_32       -0.152          0.0741   
+                  (-0.57)          (0.24)   
+
+quote_92K_33       -0.271          -0.346   
+                  (-1.00)         (-1.13)   
+
+quote_92K_34       -0.140          -0.298   
+                  (-0.42)         (-0.72)   
+
+quote_92K_35      -0.0662         -0.0193   
+                  (-0.23)         (-0.06)   
+
+quote_92K_36       -0.219          -0.318   
+                  (-0.69)         (-0.88)   
+
+quote_92K_37       -0.436          -0.447   
+                  (-1.37)         (-1.24)   
+
+quote_92K_38      -0.0539          -0.172   
+                  (-0.14)         (-0.41)   
+
+quote_92K_39        0.147           0.223   
+                   (0.42)          (0.57)   
+
+quote_92K_40       -0.139          -0.130   
+                  (-0.41)         (-0.34)   
+
+quote_92K_41      -0.0937          -0.171   
+                  (-0.38)         (-0.58)   
+
+quote_92K_42       -0.293          -0.164   
+                  (-0.99)         (-0.47)   
+
+quote_92K_43       -0.183         -0.0633   
+                  (-0.62)         (-0.19)   
+
+quote_92K_44       0.0351         -0.0830   
+                   (0.14)         (-0.29)   
+
+quote_92K_45        0.204           0.243   
+                   (0.65)          (0.60)   
+
+quote_92K_46       -0.198         -0.0768   
+                  (-0.52)         (-0.17)   
+
+quote_92K_47      -0.0673          -0.225   
+                  (-0.23)         (-0.64)   
+
+quote_92K_48        0.155          0.0612   
+                   (0.44)          (0.18)   
+
+quote_92K_49        0.148          0.0598   
+                   (0.47)          (0.15)   
+
+quote_92K_50       -0.222          -0.305   
+                  (-0.57)         (-0.70)   
+
+quote_92K_51       0.0271         0.00648   
+                   (0.11)          (0.02)   
+
+quote_92K_52       -0.198          -0.170   
+                  (-0.80)         (-0.58)   
+
+quote_92K_53      -0.0113         -0.0493   
+                  (-0.04)         (-0.15)   
+
+quote_92K_54       0.0744           0.247   
+                   (0.23)          (0.67)   
+
+quote_92K_55       -0.126         -0.0853   
+                  (-0.47)         (-0.24)   
+
+quote_92K_56       0.0449          0.0139   
+                   (0.13)          (0.03)   
+
+quote_92K_57      0.00328          0.0809   
+                   (0.01)          (0.25)   
+
+quote_92K_58        0.257           0.170   
+                   (0.77)          (0.37)   
+
+quote_92K_59        0.385           0.543*  
+                   (1.70)          (1.99)   
+
+quote_92K_60        0.299           0.424   
+                   (1.23)          (1.46)   
+
+quote_92K_61        0.487           0.547   
+                   (1.65)          (1.47)   
+
+quote_92K_62        0.181           0.278   
+                   (0.70)          (0.96)   
+
+quote_92K_63        0.119          0.0194   
+                   (0.25)          (0.04)   
+
+quote_92K_64      -0.0163         -0.0313   
+                  (-0.06)         (-0.10)   
+
+quote_92K_65        0.137           0.108   
+                   (0.46)          (0.31)   
+
+quote_92K_66        0.155           0.267   
+                   (0.66)          (0.96)   
+
+quote_92K_67        0.206          0.0615   
+                   (0.77)          (0.21)   
+
+quote_92K_68       -0.319         -0.0203   
+                  (-0.95)         (-0.06)   
+
+quote_92K_69       -0.232         -0.0721   
+                  (-0.72)         (-0.18)   
+
+quote_92K_70        0.139           0.217   
+                   (0.49)          (0.62)   
+
+quote_92K_71       -0.146        -0.00413   
+                  (-0.43)         (-0.01)   
+
+quote_92K_72       -0.307          -0.240   
+                  (-1.16)         (-0.79)   
+
+quote_92K_73       -0.152           0.152   
+                  (-0.53)          (0.44)   
+
+quote_92K_74       -0.557          -0.351   
+                  (-1.57)         (-0.87)   
+
+quote_92K_75       -0.437          -0.499   
+                  (-1.16)         (-1.16)   
+
+quote_92K_76       0.0996           0.116   
+                   (0.42)          (0.43)   
+
+quote_92K_77      -0.0358           0.291   
+                  (-0.11)          (0.79)   
+
+quote_92K_78       0.0263        -0.00131   
+                   (0.07)         (-0.00)   
+
+quote_92K_79      -0.0107          -0.410   
+                  (-0.03)         (-0.92)   
+
+quote_92K_80       0.0684          0.0270   
+                   (0.24)          (0.08)   
+
+quote_92K_81      -0.0148          0.0814   
+                  (-0.05)          (0.27)   
+
+quote_92K_82        0.145           0.308   
+                   (0.47)          (0.81)   
+
+quote_92K_83       -0.423          -0.378   
+                  (-1.18)         (-0.86)   
+
+quote_92K_84       -0.233          -0.616   
+                  (-0.70)         (-1.68)   
+
+quote_92K_85       -0.165          -0.218   
+                  (-0.57)         (-0.67)   
+
+quote_92K_86       -0.198        -0.00782   
+                  (-0.68)         (-0.02)   
+
+quote_92K_87        0.132          0.0186   
+                   (0.42)          (0.05)   
+
+quote_92K_88       -0.169          -0.175   
+                  (-0.69)         (-0.63)   
+
+quote_92K_89       0.0498           0.158   
+                   (0.17)          (0.49)   
+
+quote_92K_90       -0.249          -0.133   
+                  (-0.66)         (-0.32)   
+
+quote_92K_91       -0.632          -0.546   
+                  (-1.49)         (-1.04)   
+
+quote_92K_92            0               0   
+                      (.)             (.)   
+
+article_4~_1        1.583*          0.783   
+                   (2.44)          (0.99)   
+
+article_4~_2        0.135          -0.178   
+                   (0.19)         (-0.21)   
+
+article_4~_3        2.719***        1.731   
+                   (3.54)          (1.91)   
+
+article_4~_4        1.128           0.551   
+                   (1.08)          (0.47)   
+
+article_4~_5        1.149          -0.112   
+                   (1.36)         (-0.11)   
+
+article_4~_6        1.820*          0.670   
+                   (2.12)          (0.67)   
+
+article_4~_7        0.700          0.0624   
+                   (1.04)          (0.08)   
+
+article_4~_8        2.794***        2.291*  
+                   (3.46)          (2.38)   
+
+article_4~_9        0.604          -0.379   
+                   (0.75)         (-0.39)   
+
+article_4~10        1.059           0.749   
+                   (1.58)          (0.95)   
+
+article_4~11        1.052           0.556   
+                   (1.38)          (0.61)   
+
+article_4~12        1.932**         1.360   
+                   (2.91)          (1.73)   
+
+article_4~13        0.995           0.450   
+                   (1.47)          (0.56)   
+
+article_4~14        1.223           0.964   
+                   (1.60)          (1.04)   
+
+article_4~15        0.769           0.156   
+                   (1.10)          (0.19)   
+
+article_4~16        1.251           0.320   
+                   (1.44)          (0.30)   
+
+article_4~17        0.719           0.176   
+                   (1.09)          (0.22)   
+
+article_4~18        0.577          -0.129   
+                   (0.88)         (-0.17)   
+
+article_4~19        0.984           0.222   
+                   (1.47)          (0.28)   
+
+article_4~20        2.087**         1.479   
+                   (2.70)          (1.61)   
+
+article_4~21        0.279          -0.698   
+                   (0.34)         (-0.73)   
+
+article_4~22        1.154           0.494   
+                   (1.48)          (0.54)   
+
+article_4~23        0.948           0.468   
+                   (1.38)          (0.58)   
+
+article_4~24        1.683*          1.090   
+                   (2.09)          (1.15)   
+
+article_4~25        0.653          -0.291   
+                   (0.81)         (-0.30)   
+
+article_4~26        0.689           0.154   
+                   (0.92)          (0.17)   
+
+article_4~27        1.725*          1.070   
+                   (2.28)          (1.21)   
+
+article_4~28        1.257           0.766   
+                   (1.66)          (0.86)   
+
+article_4~29        1.224           0.548   
+                   (1.79)          (0.67)   
+
+article_4~30        1.116           0.392   
+                   (1.52)          (0.45)   
+
+article_4~31        0.969           0.450   
+                   (1.24)          (0.48)   
+
+article_4~32       -0.768          -1.339   
+                  (-1.10)         (-1.58)   
+
+article_4~33        0.993           0.389   
+                   (1.46)          (0.48)   
+
+article_4~34        1.237           0.326   
+                   (1.71)          (0.38)   
+
+article_4~35        1.073           0.260   
+                   (1.60)          (0.33)   
+
+article_4~36        0.928           0.208   
+                   (1.44)          (0.27)   
+
+article_4~37        0.909           0.413   
+                   (1.30)          (0.50)   
+
+article_4~38        2.181**         1.507   
+                   (2.79)          (1.64)   
+
+article_4~39      -0.0323          -0.395   
+                  (-0.04)         (-0.45)   
+
+article_4~40            0               0   
+                      (.)             (.)   
+
+1.rank                  0               0   
+                      (.)             (.)   
+
+2.rank             -0.324          -0.321   
+                  (-1.28)         (-1.12)   
+
+3.rank            -0.0109        -0.00463   
+                  (-0.05)         (-0.02)   
+
+4.rank             -0.360          -0.410   
+                  (-1.12)         (-0.93)   
+
+5.rank             -0.943**        -1.076*  
+                  (-2.58)         (-2.52)   
+
+6.rank             -0.545*         -0.601*  
+                  (-2.47)         (-2.34)   
+
+7.rank             -0.178          -1.524   
+                  (-0.19)         (-1.65)   
+
+8.rank             -0.984*          0.233   
+                  (-2.24)          (0.36)   
+
+9.rank              1.199***        1.162***
+                   (4.43)          (3.63)   
+
+10.rank            -0.487*         -0.525*  
+                  (-2.49)         (-2.30)   
+
+11.rank            -0.634**                 
+                  (-2.79)                   
+
+12.rank            -0.523*                  
+                  (-2.52)                   
+
+MFA                 2.099           0.129   
+                   (1.68)          (0.20)   
+
+PMO                 0.897**         0.891*  
+                   (2.59)          (2.24)   
+
+MEWR                0.233           0.258   
+                   (0.23)          (0.96)   
+
+MCI                 2.566           1.072   
+                   (1.83)          (1.92)   
+
+MTI                -1.854           0.110   
+                  (-1.58)          (0.25)   
+
+MHA                 0.579          -0.636   
+                   (1.02)         (-0.86)   
+
+MCCY                0.588          -0.663   
+                   (1.82)         (-1.01)   
+
+MinLaw              0.181          0.0944   
+                   (0.19)          (0.09)   
+
+MOH                -1.783          -1.202   
+                  (-1.71)         (-1.42)   
+
+MOM                 0.406           1.995*  
+                   (0.46)          (2.12)   
+
+MinDef             0.0324           1.198   
+                   (0.09)          (1.74)   
+
+MSF                 0.853          -0.420   
+                   (1.75)         (-0.80)   
+
+MOT                 2.496*          0.711   
+                   (2.12)          (1.42)   
+
+MND                 0.434          -0.672   
+                   (1.49)         (-1.00)   
+
+MOF                 0.157          0.0370   
+                   (0.82)          (0.12)   
+
+MOE                -0.785           0.493   
+                  (-1.21)          (1.59)   
+
+speaker             0.431*          0.405*  
+                   (2.50)          (2.28)   
+
+1.rank#0.MFA            0               0   
+                      (.)             (.)   
+
+1.rank#1.MFA            0               0   
+                      (.)             (.)   
+
+2.rank#0.MFA            0               0   
+                      (.)             (.)   
+
+2.rank#1.MFA            0               0   
+                      (.)             (.)   
+
+3.rank#0.MFA            0               0   
+                      (.)             (.)   
+
+3.rank#1.MFA       -2.116          -0.159   
+                  (-1.69)         (-0.24)   
+
+4.rank#0.MFA            0               0   
+                      (.)             (.)   
+
+4.rank#1.MFA       -1.929          0.0272   
+                  (-1.52)          (0.04)   
+
+5.rank#0.MFA            0               0   
+                      (.)             (.)   
+
+5.rank#1.MFA       -0.948               0   
+                  (-0.73)             (.)   
+
+6.rank#0.MFA            0               0   
+                      (.)             (.)   
+
+6.rank#1.MFA            0               0   
+                      (.)             (.)   
+
+7.rank#0.MFA            0               0   
+                      (.)             (.)   
+
+7.rank#1.MFA            0               0   
+                      (.)             (.)   
+
+8.rank#0.MFA            0               0   
+                      (.)             (.)   
+
+8.rank#1.MFA            0               0   
+                      (.)             (.)   
+
+9.rank#0.MFA            0               0   
+                      (.)             (.)   
+
+9.rank#1.MFA            0               0   
+                      (.)             (.)   
+
+10.rank#0.~A            0               0   
+                      (.)             (.)   
+
+10.rank#1.~A            0               0   
+                      (.)             (.)   
+
+11.rank#0.~A            0                   
+                      (.)                   
+
+11.rank#1.~A            0                   
+                      (.)                   
+
+12.rank#0.~A            0                   
+                      (.)                   
+
+12.rank#1.~A            0                   
+                      (.)                   
+
+1.rank#0.PMO            0               0   
+                      (.)             (.)   
+
+1.rank#1.PMO            0               0   
+                      (.)             (.)   
+
+2.rank#0.PMO            0               0   
+                      (.)             (.)   
+
+2.rank#1.PMO            0               0   
+                      (.)             (.)   
+
+3.rank#0.PMO            0               0   
+                      (.)             (.)   
+
+3.rank#1.PMO       -0.942**        -1.034*  
+                  (-2.63)         (-2.50)   
+
+4.rank#0.PMO            0               0   
+                      (.)             (.)   
+
+4.rank#1.PMO       -1.181**        -1.178*  
+                  (-2.78)         (-2.22)   
+
+5.rank#0.PMO            0               0   
+                      (.)             (.)   
+
+5.rank#1.PMO            0               0   
+                      (.)             (.)   
+
+6.rank#0.PMO            0               0   
+                      (.)             (.)   
+
+6.rank#1.PMO            0               0   
+                      (.)             (.)   
+
+7.rank#0.PMO            0               0   
+                      (.)             (.)   
+
+7.rank#1.PMO            0               0   
+                      (.)             (.)   
+
+8.rank#0.PMO            0               0   
+                      (.)             (.)   
+
+8.rank#1.PMO            0               0   
+                      (.)             (.)   
+
+9.rank#0.PMO            0               0   
+                      (.)             (.)   
+
+9.rank#1.PMO            0               0   
+                      (.)             (.)   
+
+10.rank#0.~O            0               0   
+                      (.)             (.)   
+
+10.rank#1.~O            0               0   
+                      (.)             (.)   
+
+11.rank#0.~O            0                   
+                      (.)                   
+
+11.rank#1.~O            0                   
+                      (.)                   
+
+12.rank#0.~O            0                   
+                      (.)                   
+
+12.rank#1.~O            0                   
+                      (.)                   
+
+1.rank#0.M~R            0               0   
+                      (.)             (.)   
+
+1.rank#1.M~R            0               0   
+                      (.)             (.)   
+
+2.rank#0.M~R            0               0   
+                      (.)             (.)   
+
+2.rank#1.M~R            0               0   
+                      (.)             (.)   
+
+3.rank#0.M~R            0               0   
+                      (.)             (.)   
+
+3.rank#1.M~R       -0.345          -0.295   
+                  (-0.34)         (-1.03)   
+
+4.rank#0.M~R            0               0   
+                      (.)             (.)   
+
+4.rank#1.M~R       -0.173               0   
+                  (-0.17)             (.)   
+
+5.rank#0.M~R            0               0   
+                      (.)             (.)   
+
+5.rank#1.M~R        0.318               0   
+                   (0.29)             (.)   
+
+6.rank#0.M~R            0               0   
+                      (.)             (.)   
+
+6.rank#1.M~R       -0.331               0   
+                  (-0.32)             (.)   
+
+7.rank#0.M~R            0               0   
+                      (.)             (.)   
+
+7.rank#1.M~R            0               0   
+                      (.)             (.)   
+
+8.rank#0.M~R            0               0   
+                      (.)             (.)   
+
+8.rank#1.M~R            0               0   
+                      (.)             (.)   
+
+9.rank#0.M~R            0               0   
+                      (.)             (.)   
+
+9.rank#1.M~R            0               0   
+                      (.)             (.)   
+
+10.rank#0.~R            0               0   
+                      (.)             (.)   
+
+10.rank#1.~R            0               0   
+                      (.)             (.)   
+
+11.rank#0.~R            0                   
+                      (.)                   
+
+11.rank#1.~R            0                   
+                      (.)                   
+
+12.rank#0.~R            0                   
+                      (.)                   
+
+12.rank#1.~R            0                   
+                      (.)                   
+
+1.rank#0.MCI            0               0   
+                      (.)             (.)   
+
+1.rank#1.MCI            0               0   
+                      (.)             (.)   
+
+2.rank#0.MCI            0               0   
+                      (.)             (.)   
+
+2.rank#1.MCI            0               0   
+                      (.)             (.)   
+
+3.rank#0.MCI            0               0   
+                      (.)             (.)   
+
+3.rank#1.MCI       -2.675          -1.174*  
+                  (-1.90)         (-2.06)   
+
+4.rank#0.MCI            0               0   
+                      (.)             (.)   
+
+4.rank#1.MCI       -2.437          -0.425   
+                  (-1.71)         (-0.54)   
+
+5.rank#0.MCI            0               0   
+                      (.)             (.)   
+
+5.rank#1.MCI       -1.907          -0.224   
+                  (-1.34)         (-0.37)   
+
+6.rank#0.MCI            0               0   
+                      (.)             (.)   
+
+6.rank#1.MCI            0               0   
+                      (.)             (.)   
+
+7.rank#0.MCI            0               0   
+                      (.)             (.)   
+
+7.rank#1.MCI       -1.550               0   
+                  (-1.19)             (.)   
+
+8.rank#0.MCI            0               0   
+                      (.)             (.)   
+
+8.rank#1.MCI            0               0   
+                      (.)             (.)   
+
+9.rank#0.MCI            0               0   
+                      (.)             (.)   
+
+9.rank#1.MCI            0               0   
+                      (.)             (.)   
+
+10.rank#0.~I            0               0   
+                      (.)             (.)   
+
+10.rank#1.~I            0               0   
+                      (.)             (.)   
+
+11.rank#0.~I            0                   
+                      (.)                   
+
+11.rank#1.~I            0                   
+                      (.)                   
+
+12.rank#0.~I            0                   
+                      (.)                   
+
+12.rank#1.~I            0                   
+                      (.)                   
+
+1.rank#0.MTI            0               0   
+                      (.)             (.)   
+
+1.rank#1.MTI            0               0   
+                      (.)             (.)   
+
+2.rank#0.MTI            0               0   
+                      (.)             (.)   
+
+2.rank#1.MTI            0               0   
+                      (.)             (.)   
+
+3.rank#0.MTI            0               0   
+                      (.)             (.)   
+
+3.rank#1.MTI        1.680          -0.274   
+                   (1.42)         (-0.59)   
+
+4.rank#0.MTI            0               0   
+                      (.)             (.)   
+
+4.rank#1.MTI        1.873          -0.703   
+                   (1.57)         (-1.09)   
+
+5.rank#0.MTI            0               0   
+                      (.)             (.)   
+
+5.rank#1.MTI        2.095           0.111   
+                   (1.75)          (0.19)   
+
+6.rank#0.MTI            0               0   
+                      (.)             (.)   
+
+6.rank#1.MTI        3.177*              0   
+                   (2.32)             (.)   
+
+7.rank#0.MTI            0               0   
+                      (.)             (.)   
+
+7.rank#1.MTI            0               0   
+                      (.)             (.)   
+
+8.rank#0.MTI            0               0   
+                      (.)             (.)   
+
+8.rank#1.MTI            0               0   
+                      (.)             (.)   
+
+9.rank#0.MTI            0               0   
+                      (.)             (.)   
+
+9.rank#1.MTI            0               0   
+                      (.)             (.)   
+
+10.rank#0.~I            0               0   
+                      (.)             (.)   
+
+10.rank#1.~I            0               0   
+                      (.)             (.)   
+
+11.rank#0.~I            0                   
+                      (.)                   
+
+11.rank#1.~I            0                   
+                      (.)                   
+
+12.rank#0.~I            0                   
+                      (.)                   
+
+12.rank#1.~I            0                   
+                      (.)                   
+
+1.rank#0.MHA            0               0   
+                      (.)             (.)   
+
+1.rank#1.MHA            0               0   
+                      (.)             (.)   
+
+2.rank#0.MHA            0               0   
+                      (.)             (.)   
+
+2.rank#1.MHA       -0.518           0.751   
+                  (-0.86)          (0.97)   
+
+3.rank#0.MHA            0               0   
+                      (.)             (.)   
+
+3.rank#1.MHA       -0.436           0.883   
+                  (-0.75)          (1.19)   
+
+4.rank#0.MHA            0               0   
+                      (.)             (.)   
+
+4.rank#1.MHA       -0.726           0.253   
+                  (-1.20)          (0.30)   
+
+5.rank#0.MHA            0               0   
+                      (.)             (.)   
+
+5.rank#1.MHA       -0.458           0.938   
+                  (-0.69)          (1.16)   
+
+6.rank#0.MHA            0               0   
+                      (.)             (.)   
+
+6.rank#1.MHA            0               0   
+                      (.)             (.)   
+
+7.rank#0.MHA            0               0   
+                      (.)             (.)   
+
+7.rank#1.MHA        0.422           1.737   
+                   (0.42)          (1.51)   
+
+8.rank#0.MHA            0               0   
+                      (.)             (.)   
+
+8.rank#1.MHA            0               0   
+                      (.)             (.)   
+
+9.rank#0.MHA            0               0   
+                      (.)             (.)   
+
+9.rank#1.MHA            0               0   
+                      (.)             (.)   
+
+10.rank#0.~A            0               0   
+                      (.)             (.)   
+
+10.rank#1.~A            0               0   
+                      (.)             (.)   
+
+11.rank#0.~A            0                   
+                      (.)                   
+
+11.rank#1.~A            0                   
+                      (.)                   
+
+12.rank#0.~A            0                   
+                      (.)                   
+
+12.rank#1.~A            0                   
+                      (.)                   
+
+1.rank#0.M~Y            0               0   
+                      (.)             (.)   
+
+1.rank#1.M~Y            0               0   
+                      (.)             (.)   
+
+2.rank#0.M~Y            0               0   
+                      (.)             (.)   
+
+2.rank#1.M~Y            0               0   
+                      (.)             (.)   
+
+3.rank#0.M~Y            0               0   
+                      (.)             (.)   
+
+3.rank#1.M~Y       -0.729*          0.511   
+                  (-2.16)          (0.76)   
+
+4.rank#0.M~Y            0               0   
+                      (.)             (.)   
+
+4.rank#1.M~Y       -0.529           1.260   
+                  (-1.16)          (1.66)   
+
+5.rank#0.M~Y            0               0   
+                      (.)             (.)   
+
+5.rank#1.M~Y       -0.788           0.456   
+                  (-1.55)          (0.56)   
+
+6.rank#0.M~Y            0               0   
+                      (.)             (.)   
+
+6.rank#1.M~Y       -2.587           0.563   
+                  (-1.90)          (0.76)   
+
+7.rank#0.M~Y            0               0   
+                      (.)             (.)   
+
+7.rank#1.M~Y       -3.648*          0.732   
+                  (-2.24)          (0.62)   
+
+8.rank#0.M~Y            0               0   
+                      (.)             (.)   
+
+8.rank#1.M~Y            0               0   
+                      (.)             (.)   
+
+9.rank#0.M~Y            0               0   
+                      (.)             (.)   
+
+9.rank#1.M~Y            0               0   
+                      (.)             (.)   
+
+10.rank#0.~Y            0               0   
+                      (.)             (.)   
+
+10.rank#1.~Y            0               0   
+                      (.)             (.)   
+
+11.rank#0.~Y            0                   
+                      (.)                   
+
+11.rank#1.~Y            0                   
+                      (.)                   
+
+12.rank#0.~Y            0                   
+                      (.)                   
+
+12.rank#1.~Y            0                   
+                      (.)                   
+
+1.rank#0.M~w            0               0   
+                      (.)             (.)   
+
+1.rank#1.M~w            0               0   
+                      (.)             (.)   
+
+2.rank#0.M~w            0               0   
+                      (.)             (.)   
+
+2.rank#1.M~w        0.106          0.0916   
+                   (0.10)          (0.08)   
+
+3.rank#0.M~w            0               0   
+                      (.)             (.)   
+
+3.rank#1.M~w       -0.417          -0.291   
+                  (-0.43)         (-0.29)   
+
+4.rank#0.M~w            0               0   
+                      (.)             (.)   
+
+4.rank#1.M~w       0.0568           0.465   
+                   (0.06)          (0.45)   
+
+5.rank#0.M~w            0               0   
+                      (.)             (.)   
+
+5.rank#1.M~w            0               0   
+                      (.)             (.)   
+
+6.rank#0.M~w            0               0   
+                      (.)             (.)   
+
+6.rank#1.M~w            0               0   
+                      (.)             (.)   
+
+7.rank#0.M~w            0               0   
+                      (.)             (.)   
+
+7.rank#1.M~w            0               0   
+                      (.)             (.)   
+
+8.rank#0.M~w            0               0   
+                      (.)             (.)   
+
+8.rank#1.M~w            0               0   
+                      (.)             (.)   
+
+9.rank#0.M~w            0               0   
+                      (.)             (.)   
+
+9.rank#1.M~w            0               0   
+                      (.)             (.)   
+
+10.rank#0.~w            0               0   
+                      (.)             (.)   
+
+10.rank#1.~w            0               0   
+                      (.)             (.)   
+
+11.rank#0.~w            0                   
+                      (.)                   
+
+11.rank#1.~w            0                   
+                      (.)                   
+
+12.rank#0.~w            0                   
+                      (.)                   
+
+12.rank#1.~w            0                   
+                      (.)                   
+
+1.rank#0.MOH            0               0   
+                      (.)             (.)   
+
+1.rank#1.MOH            0               0   
+                      (.)             (.)   
+
+2.rank#0.MOH            0               0   
+                      (.)             (.)   
+
+2.rank#1.MOH            0               0   
+                      (.)             (.)   
+
+3.rank#0.MOH            0               0   
+                      (.)             (.)   
+
+3.rank#1.MOH        1.566           1.068   
+                   (1.50)          (1.24)   
+
+4.rank#0.MOH            0               0   
+                      (.)             (.)   
+
+4.rank#1.MOH        2.171*          1.249   
+                   (2.00)          (1.37)   
+
+5.rank#0.MOH            0               0   
+                      (.)             (.)   
+
+5.rank#1.MOH        2.452*          1.895   
+                   (2.26)          (1.69)   
+
+6.rank#0.MOH            0               0   
+                      (.)             (.)   
+
+6.rank#1.MOH            0               0   
+                      (.)             (.)   
+
+7.rank#0.MOH            0               0   
+                      (.)             (.)   
+
+7.rank#1.MOH        1.013           0.278   
+                   (0.91)          (0.29)   
+
+8.rank#0.MOH            0               0   
+                      (.)             (.)   
+
+8.rank#1.MOH            0               0   
+                      (.)             (.)   
+
+9.rank#0.MOH            0               0   
+                      (.)             (.)   
+
+9.rank#1.MOH            0               0   
+                      (.)             (.)   
+
+10.rank#0.~H            0               0   
+                      (.)             (.)   
+
+10.rank#1.~H            0               0   
+                      (.)             (.)   
+
+11.rank#0.~H            0                   
+                      (.)                   
+
+11.rank#1.~H            0                   
+                      (.)                   
+
+12.rank#0.~H            0                   
+                      (.)                   
+
+12.rank#1.~H            0                   
+                      (.)                   
+
+1.rank#0.MOM            0               0   
+                      (.)             (.)   
+
+1.rank#1.MOM            0               0   
+                      (.)             (.)   
+
+2.rank#0.MOM            0               0   
+                      (.)             (.)   
+
+2.rank#1.MOM       -0.492          -2.113*  
+                  (-0.55)         (-2.20)   
+
+3.rank#0.MOM            0               0   
+                      (.)             (.)   
+
+3.rank#1.MOM       -0.617          -2.279*  
+                  (-0.70)         (-2.41)   
+
+4.rank#0.MOM            0               0   
+                      (.)             (.)   
+
+4.rank#1.MOM       -0.960          -2.206*  
+                  (-1.06)         (-2.30)   
+
+5.rank#0.MOM            0               0   
+                      (.)             (.)   
+
+5.rank#1.MOM       -0.262          -1.767   
+                  (-0.29)         (-1.88)   
+
+6.rank#0.MOM            0               0   
+                      (.)             (.)   
+
+6.rank#1.MOM            0               0   
+                      (.)             (.)   
+
+7.rank#0.MOM            0               0   
+                      (.)             (.)   
+
+7.rank#1.MOM            0               0   
+                      (.)             (.)   
+
+8.rank#0.MOM            0               0   
+                      (.)             (.)   
+
+8.rank#1.MOM            0               0   
+                      (.)             (.)   
+
+9.rank#0.MOM            0               0   
+                      (.)             (.)   
+
+9.rank#1.MOM            0               0   
+                      (.)             (.)   
+
+10.rank#0.~M            0               0   
+                      (.)             (.)   
+
+10.rank#1.~M            0               0   
+                      (.)             (.)   
+
+11.rank#0.~M            0                   
+                      (.)                   
+
+11.rank#1.~M            0                   
+                      (.)                   
+
+12.rank#0.~M            0                   
+                      (.)                   
+
+12.rank#1.~M            0                   
+                      (.)                   
+
+1.rank#0.M~f            0               0   
+                      (.)             (.)   
+
+1.rank#1.M~f            0               0   
+                      (.)             (.)   
+
+2.rank#0.M~f            0               0   
+                      (.)             (.)   
+
+2.rank#1.M~f        0.303          -0.878   
+                   (0.67)         (-1.16)   
+
+3.rank#0.M~f            0               0   
+                      (.)             (.)   
+
+3.rank#1.M~f      -0.0629          -1.244   
+                  (-0.18)         (-1.79)   
+
+4.rank#0.M~f            0               0   
+                      (.)             (.)   
+
+4.rank#1.M~f       0.0631          -1.157   
+                   (0.14)         (-1.35)   
+
+5.rank#0.M~f            0               0   
+                      (.)             (.)   
+
+5.rank#1.M~f        0.159          -0.855   
+                   (0.36)         (-1.14)   
+
+6.rank#0.M~f            0               0   
+                      (.)             (.)   
+
+6.rank#1.M~f            0               0   
+                      (.)             (.)   
+
+7.rank#0.M~f            0               0   
+                      (.)             (.)   
+
+7.rank#1.M~f            0               0   
+                      (.)             (.)   
+
+8.rank#0.M~f            0               0   
+                      (.)             (.)   
+
+8.rank#1.M~f            0               0   
+                      (.)             (.)   
+
+9.rank#0.M~f            0               0   
+                      (.)             (.)   
+
+9.rank#1.M~f            0               0   
+                      (.)             (.)   
+
+10.rank#0.~f            0               0   
+                      (.)             (.)   
+
+10.rank#1.~f            0               0   
+                      (.)             (.)   
+
+11.rank#0.~f            0                   
+                      (.)                   
+
+11.rank#1.~f            0                   
+                      (.)                   
+
+12.rank#0.~f            0                   
+                      (.)                   
+
+12.rank#1.~f            0                   
+                      (.)                   
+
+1.rank#0.MSF            0               0   
+                      (.)             (.)   
+
+1.rank#1.MSF            0               0   
+                      (.)             (.)   
+
+2.rank#0.MSF            0               0   
+                      (.)             (.)   
+
+2.rank#1.MSF            0               0   
+                      (.)             (.)   
+
+3.rank#0.MSF            0               0   
+                      (.)             (.)   
+
+3.rank#1.MSF       -0.928           0.337   
+                  (-1.83)          (0.61)   
+
+4.rank#0.MSF            0               0   
+                      (.)             (.)   
+
+4.rank#1.MSF       -0.833               0   
+                  (-1.26)             (.)   
+
+5.rank#0.MSF            0               0   
+                      (.)             (.)   
+
+5.rank#1.MSF        0.256           1.727*  
+                   (0.36)          (2.03)   
+
+6.rank#0.MSF            0               0   
+                      (.)             (.)   
+
+6.rank#1.MSF        0.613         -0.0100   
+                   (0.48)         (-0.01)   
+
+7.rank#0.MSF            0               0   
+                      (.)             (.)   
+
+7.rank#1.MSF            0               0   
+                      (.)             (.)   
+
+8.rank#0.MSF            0               0   
+                      (.)             (.)   
+
+8.rank#1.MSF            0               0   
+                      (.)             (.)   
+
+9.rank#0.MSF            0               0   
+                      (.)             (.)   
+
+9.rank#1.MSF            0               0   
+                      (.)             (.)   
+
+10.rank#0.~F            0               0   
+                      (.)             (.)   
+
+10.rank#1.~F            0               0   
+                      (.)             (.)   
+
+11.rank#0.~F            0                   
+                      (.)                   
+
+11.rank#1.~F            0                   
+                      (.)                   
+
+12.rank#0.~F            0                   
+                      (.)                   
+
+12.rank#1.~F            0                   
+                      (.)                   
+
+1.rank#0.MOT            0               0   
+                      (.)             (.)   
+
+1.rank#1.MOT            0               0   
+                      (.)             (.)   
+
+2.rank#0.MOT            0               0   
+                      (.)             (.)   
+
+2.rank#1.MOT            0               0   
+                      (.)             (.)   
+
+3.rank#0.MOT            0               0   
+                      (.)             (.)   
+
+3.rank#1.MOT       -2.644*         -0.866   
+                  (-2.24)         (-1.70)   
+
+4.rank#0.MOT            0               0   
+                      (.)             (.)   
+
+4.rank#1.MOT       -2.473*         -0.535   
+                  (-2.05)         (-0.97)   
+
+5.rank#0.MOT            0               0   
+                      (.)             (.)   
+
+5.rank#1.MOT       -2.021               0   
+                  (-1.64)             (.)   
+
+6.rank#0.MOT            0               0   
+                      (.)             (.)   
+
+6.rank#1.MOT            0               0   
+                      (.)             (.)   
+
+7.rank#0.MOT            0               0   
+                      (.)             (.)   
+
+7.rank#1.MOT            0               0   
+                      (.)             (.)   
+
+8.rank#0.MOT            0               0   
+                      (.)             (.)   
+
+8.rank#1.MOT            0               0   
+                      (.)             (.)   
+
+9.rank#0.MOT            0               0   
+                      (.)             (.)   
+
+9.rank#1.MOT            0               0   
+                      (.)             (.)   
+
+10.rank#0.~T            0               0   
+                      (.)             (.)   
+
+10.rank#1.~T            0               0   
+                      (.)             (.)   
+
+11.rank#0.~T            0                   
+                      (.)                   
+
+11.rank#1.~T            0                   
+                      (.)                   
+
+12.rank#0.~T            0                   
+                      (.)                   
+
+12.rank#1.~T            0                   
+                      (.)                   
+
+1.rank#0.MND            0               0   
+                      (.)             (.)   
+
+1.rank#1.MND            0               0   
+                      (.)             (.)   
+
+2.rank#0.MND            0               0   
+                      (.)             (.)   
+
+2.rank#1.MND            0               0   
+                      (.)             (.)   
+
+3.rank#0.MND            0               0   
+                      (.)             (.)   
+
+3.rank#1.MND       -0.543           0.561   
+                  (-1.73)          (0.83)   
+
+4.rank#0.MND            0               0   
+                      (.)             (.)   
+
+4.rank#1.MND      -0.0908           1.471*  
+                  (-0.26)          (2.07)   
+
+5.rank#0.MND            0               0   
+                      (.)             (.)   
+
+5.rank#1.MND       0.0670           1.442   
+                   (0.17)          (1.78)   
+
+6.rank#0.MND            0               0   
+                      (.)             (.)   
+
+6.rank#1.MND            0               0   
+                      (.)             (.)   
+
+7.rank#0.MND            0               0   
+                      (.)             (.)   
+
+7.rank#1.MND       -0.589           1.983   
+                  (-0.53)          (1.44)   
+
+8.rank#0.MND            0               0   
+                      (.)             (.)   
+
+8.rank#1.MND            0               0   
+                      (.)             (.)   
+
+9.rank#0.MND            0               0   
+                      (.)             (.)   
+
+9.rank#1.MND            0               0   
+                      (.)             (.)   
+
+10.rank#0.~D            0               0   
+                      (.)             (.)   
+
+10.rank#1.~D            0               0   
+                      (.)             (.)   
+
+11.rank#0.~D            0                   
+                      (.)                   
+
+11.rank#1.~D            0                   
+                      (.)                   
+
+12.rank#0.~D            0                   
+                      (.)                   
+
+12.rank#1.~D            0                   
+                      (.)                   
+
+1.rank#0.MOF            0               0   
+                      (.)             (.)   
+
+1.rank#1.MOF       -0.166         -0.0359   
+                  (-0.55)         (-0.08)   
+
+2.rank#0.MOF            0               0   
+                      (.)             (.)   
+
+2.rank#1.MOF        0.130           0.248   
+                   (0.45)          (0.64)   
+
+3.rank#0.MOF            0               0   
+                      (.)             (.)   
+
+3.rank#1.MOF       -0.172          0.0157   
+                  (-0.79)          (0.05)   
+
+4.rank#0.MOF            0               0   
+                      (.)             (.)   
+
+4.rank#1.MOF            0               0   
+                      (.)             (.)   
+
+5.rank#0.MOF            0               0   
+                      (.)             (.)   
+
+5.rank#1.MOF            0               0   
+                      (.)             (.)   
+
+6.rank#0.MOF            0               0   
+                      (.)             (.)   
+
+6.rank#1.MOF            0               0   
+                      (.)             (.)   
+
+7.rank#0.MOF            0               0   
+                      (.)             (.)   
+
+7.rank#1.MOF            0               0   
+                      (.)             (.)   
+
+8.rank#0.MOF            0               0   
+                      (.)             (.)   
+
+8.rank#1.MOF            0               0   
+                      (.)             (.)   
+
+9.rank#0.MOF            0               0   
+                      (.)             (.)   
+
+9.rank#1.MOF            0               0   
+                      (.)             (.)   
+
+10.rank#0.~F            0               0   
+                      (.)             (.)   
+
+10.rank#1.~F            0               0   
+                      (.)             (.)   
+
+11.rank#0.~F            0                   
+                      (.)                   
+
+11.rank#1.~F            0                   
+                      (.)                   
+
+12.rank#0.~F            0                   
+                      (.)                   
+
+12.rank#1.~F            0                   
+                      (.)                   
+
+1.rank#0.MOE            0               0   
+                      (.)             (.)   
+
+1.rank#1.MOE            0               0   
+                      (.)             (.)   
+
+2.rank#0.MOE            0               0   
+                      (.)             (.)   
+
+2.rank#1.MOE            0               0   
+                      (.)             (.)   
+
+3.rank#0.MOE            0               0   
+                      (.)             (.)   
+
+3.rank#1.MOE        0.814          -0.457   
+                   (1.25)         (-1.45)   
+
+4.rank#0.MOE            0               0   
+                      (.)             (.)   
+
+4.rank#1.MOE        0.763          -1.648*  
+                   (1.14)         (-2.12)   
+
+5.rank#0.MOE            0               0   
+                      (.)             (.)   
+
+5.rank#1.MOE        1.273               0   
+                   (1.80)             (.)   
+
+6.rank#0.MOE            0               0   
+                      (.)             (.)   
+
+6.rank#1.MOE            0               0   
+                      (.)             (.)   
+
+7.rank#0.MOE            0               0   
+                      (.)             (.)   
+
+7.rank#1.MOE      -0.0802               0   
+                  (-0.11)             (.)   
+
+8.rank#0.MOE            0               0   
+                      (.)             (.)   
+
+8.rank#1.MOE            0               0   
+                      (.)             (.)   
+
+9.rank#0.MOE            0               0   
+                      (.)             (.)   
+
+9.rank#1.MOE            0               0   
+                      (.)             (.)   
+
+10.rank#0.~E            0               0   
+                      (.)             (.)   
+
+10.rank#1.~E            0               0   
+                      (.)             (.)   
+
+11.rank#0.~E            0                   
+                      (.)                   
+
+11.rank#1.~E            0                   
+                      (.)                   
+
+12.rank#0.~E            0                   
+                      (.)                   
+
+12.rank#1.~E            0                   
+                      (.)                   
+
+1.rank#0.s~r            0               0   
+                      (.)             (.)   
+
+1.rank#1.s~r            0               0   
+                      (.)             (.)   
+
+2.rank#0.s~r            0               0   
+                      (.)             (.)   
+
+2.rank#1.s~r            0               0   
+                      (.)             (.)   
+
+3.rank#0.s~r            0               0   
+                      (.)             (.)   
+
+3.rank#1.s~r            0               0   
+                      (.)             (.)   
+
+4.rank#0.s~r            0               0   
+                      (.)             (.)   
+
+4.rank#1.s~r       -0.412          -0.293   
+                  (-1.12)         (-0.77)   
+
+5.rank#0.s~r            0               0   
+                      (.)             (.)   
+
+5.rank#1.s~r            0               0   
+                      (.)             (.)   
+
+6.rank#0.s~r            0               0   
+                      (.)             (.)   
+
+6.rank#1.s~r            0               0   
+                      (.)             (.)   
+
+7.rank#0.s~r            0               0   
+                      (.)             (.)   
+
+7.rank#1.s~r            0               0   
+                      (.)             (.)   
+
+8.rank#0.s~r            0               0   
+                      (.)             (.)   
+
+8.rank#1.s~r            0               0   
+                      (.)             (.)   
+
+9.rank#0.s~r            0               0   
+                      (.)             (.)   
+
+9.rank#1.s~r       -1.097*         -1.259*  
+                  (-2.52)         (-2.31)   
+
+10.rank#0.~r            0               0   
+                      (.)             (.)   
+
+10.rank#1.~r            0               0   
+                      (.)             (.)   
+
+11.rank#0.~r            0                   
+                      (.)                   
+
+11.rank#1.~r            0                   
+                      (.)                   
+
+12.rank#0.~r            0                   
+                      (.)                   
+
+12.rank#1.~r            0                   
+                      (.)                   
+
+group_size                        -0.0177   
+                                  (-0.38)   
+
+voters                        0.000000418   
+                                   (0.28)   
+
+vote_share                       -0.00249   
+                                  (-0.03)   
+
+winners_ma~e                    -0.000158   
+                                  (-0.00)   
+
+_cons               0.591           1.413   
+                   (0.61)          (0.31)   
+--------------------------------------------
+N                    7094            5140   
+df-model              350             344   
+cluster-va~e   article_id      article_id   
+cluster-N            3421            2753   
+--------------------------------------------
+t statistics in parentheses
+* p<0.05, ** p<0.01, *** p<0.001
+
+. esttab using $TABSAVEDIR/main-article-speech-quote-coverage.tex,
+>         replace 
+>         fragment
+>         booktabs
+>         keep(1.opposition)
+>         coeflabel($coeff_labels)
+>         b(%9.3fc)
+>         se(%9.3fc)
+>         star (* 0.1 ** 0.05 *** 0.01)
+>         scalars(
+>                 "time_F F-statistic, time fixed-effects" 
+>                 "ind_F F-statistic, individual controls" 
+>                 "topic_F F-statistic, topic controls" 
+>                 "min_F F-statistic, ministerial controls" 
+>                 "elec_F F-statistic, electoral controls" 
+>                 "ymean Mean of dependent variable"
+>                 "nobs N"
+>         )
+>         label
+>         noobs
+>         nobase
+>         noomitted
+>         nomtitle
+>         varwidth(17)
+>         modelwidth(15)
+>         interaction(*)
+>         alignment(D{.}{.}{-1})
+>         substitute(\_ _)
+>         indicate(
+>                 "Time fixed-effects=*year"
+>                 "Individual controls=*gender *race age* tenure*"
+>                 "Article controls=*weekday *section2 translations"
+>                 "Topic controls=speech_92* quote_92* article_40*"
+>                 "Ministerial controls=*rank $portfolio"
+>                 "Electoral controls=group_size voters vote_share winners_majority_share", 
+>                 labels(\checkmark \text{--})
+>         )
+>         r2
+> ;
+(output written to ../results/tables/main-article-speech-quote-coverage.tex)
+
+. esttab using $TABSAVEDIR/main-article-speech-quote-coverage.md,
+>         replace
+>         se
+>         star (* 0.1 ** 0.05 *** 0.01)
+>         keep(1.opposition)
+>         coeflabel($coeff_labels)
+>     b(%9.2f)
+>     se(%9.2f)
+>     nonumbers
+>         style(mmd)
+>         r2
+>         indicate(
+>                 "Time fixed-effects=*year"
+>                 "Individual controls=*gender *race age* tenure*"
+>                 "Article controls=*weekday *section2 translations"
+>                 "Topic controls=speech_92* quote_92* article_40*"
+>                 "Ministerial controls=*rank $portfolio"
+>                 "Electoral controls=group_size voters vote_share winners_majority_share", 
+>                 labels(x)
+>         )
+>     mtitle("(1)" "(2)")
+> ;
+(output written to ../results/tables/main-article-speech-quote-coverage.md)
+
+. #delimit cr
+delimiter now cr
+. restore
+
+. 
+. 
+. tictoc toc 1
+------------------------------------------------------------------------------------------------------------------------------------------------------
+----------- Time log -----------
+Start time:  2 Dec 2025 12:13:50
+End time:  2 Dec 2025 12:14:14
+Elapsed seconds:        23
+Elapsed minutes:         0
+Elapsed hours:       .01
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+. beepme 2
+
+. log close
+      name:  <unnamed>
+       log:  \\wsl.localhost\Debian\home\lsys\neutrality\analysis\logs/tableC1.smcl
+  log type:  smcl
+ closed on:   2 Dec 2025, 12:14:16
+------------------------------------------------------------------------------------------------------------------------------------------------------
