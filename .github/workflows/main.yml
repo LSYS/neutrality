@@ -1,0 +1,41 @@
+name: Lint
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:  # Enables manual triggering
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./pipeline
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'  # Adjust to your Python version
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install mypy pyflakes isort black
+      working-directory: .  # Override for this step to run from root
+    
+    - name: Run mypy
+      run: mypy --ignore-missing-imports --check-untyped-defs --exclude='.*__init__\.py$' utilities.py
+    
+    - name: Run pyflakes
+      run: pyflakes utilities.py
+    
+    - name: Run isort
+      run: isort --check-only utilities.py
+    
+    - name: Run black
+      run: black --check -l 88 utilities.py
