@@ -29,7 +29,7 @@ warnings.filterwarnings("ignore")
 
 from utilities import load_input_data, clean_quote_speech, return_token, get_topics
 
-SAVEPATH = "intermediate/build-speech-topics.csv"
+SAVEPATH = "intermediate/build-speech-topics.parquet"
 
 from sys import stdout
 import spacy
@@ -311,6 +311,7 @@ df_quote_k100 = get_topics(vectorized_quotes, lda_100, "quote")
 # %%
 df_out = pd.concat(
     [
+        df["qid"],
         df_speech_k92,
         df_quote_k92,
         df_speech_k50,
@@ -325,6 +326,6 @@ display(df_out.head())
 df_out.info(verbose=True)
 
 # %%
-df_out.to_csv(SAVEPATH, index=False)
+df_out.to_parquet(SAVEPATH, index=False)
 
 # %%

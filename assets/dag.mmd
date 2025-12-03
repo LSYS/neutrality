@@ -1,0 +1,196 @@
+%%{
+  init: {
+    "theme": "neutral",
+    "themeVariables": {
+      "clusterBkg": "#ffffff",
+      "clusterBorder": "#cccccc",
+      "clusterFontSize": "14px",
+      "clusterFontWeight": "bold",
+      "primaryColor": "#e9f2ff",
+      "lineColor": "#7daee6"
+    }
+  }
+}%%
+
+graph LR
+
+%% ======================
+%% Inputs
+%% ======================
+subgraph INPUTS
+    direction TB
+    input_dir["./input"]
+    topic_saves["./topic/saves"]
+end
+
+%% ======================
+%% Python Build Scripts
+%% ======================
+subgraph DATA PIPELINE
+    direction TB
+    build_linguistics["build-linguistics.py"]
+    build_speech_topics["build-speech-topics.py"]
+    build_article_topics["build-article-topics.py"]
+    build_semsim["build-semsim.py"]
+    build_verbatim_accuracy["build-verbatim-accuracy.py"]
+    build_article["build-article.py"]
+    build_mp["build-mp.py"]
+    intermediate_dir["../intermediate"]
+    build_main["build.py"]
+end
+
+%% ======================
+%% Outputs
+%% ======================
+subgraph OUTPUTS
+    direction TB
+    media_parquet["out/media.parquet"]
+    media_dta["out/media.dta"]
+end
+
+%% ======================
+%% APPLIED STATISTICAL ANALYSIS
+%% ======================
+subgraph APPLIED STATISTICAL ANALYSIS
+    direction TB
+    ado_dir["./ado"]
+    init_do["init.do"]
+    preamble_do["preamble.do"]
+    media_do["media.do"]
+    summ_do["summ.do"]
+    psa_do["psa.do"]
+    tableD2_do["tableD2.do"]
+    tableD1_do["tableD1.do"]
+    table3_do["table3.do"]
+    tableC1_do["tableC1.do"]
+    figure3_do["figure3.do"]
+    figureC2_do["figureC2.do"]
+
+    subgraph FIGURE D2
+        direction TB
+        figD2_est["figureD2/estimates.do"]
+        figD2_graph["figureD2/graph.do"]
+    end
+
+    subgraph FIGURE D1
+        direction TB
+        figD1_est["figureD1/estimates.do"]
+        figD1_graph["figureD1/graph.do"]
+    end
+
+    subgraph FIGURE 4
+        direction TB
+        fig4_est["figure4/estimates.do"]
+        fig4_graph["figure4/graph.do"]
+    end
+end
+
+%% ======================
+%% Stata Outputs
+%% ======================
+subgraph RESULTS
+    direction TB
+    logs_dir["./logs"]
+    results_figures["./results/figures"]
+    results_tables["./results/tables"]
+end
+
+%% ===== Edges: Inputs → Build Scripts =====
+input_dir --> build_mp
+input_dir --> build_verbatim_accuracy
+input_dir --> build_semsim
+input_dir --> build_linguistics
+input_dir --> build_speech_topics
+input_dir --> build_article
+input_dir --> build_article_topics
+
+topic_saves --> build_speech_topics
+topic_saves --> build_article_topics
+
+%% ===== Build Scripts → Intermediate → build.py =====
+build_mp --> intermediate_dir
+build_verbatim_accuracy --> intermediate_dir
+build_semsim --> intermediate_dir
+build_linguistics --> intermediate_dir
+build_speech_topics --> intermediate_dir
+build_article --> intermediate_dir
+build_article_topics --> intermediate_dir
+
+intermediate_dir --> build_main
+
+%% ===== build.py → Outputs =====
+build_main --> media_parquet
+build_main --> media_dta
+
+%% ===== Outputs → Stata =====
+media_dta --> init_do
+ado_dir --> init_do
+init_do --> preamble_do
+
+preamble_do --> summ_do
+preamble_do --> table3_do
+preamble_do --> psa_do
+preamble_do --> tableC1_do
+preamble_do --> tableD1_do
+preamble_do --> tableD2_do
+preamble_do --> figure3_do
+preamble_do --> figureC2_do
+preamble_do --> fig4_est
+preamble_do --> figD1_est
+preamble_do --> figD2_est
+
+media_do --> summ_do
+media_do --> table3_do
+media_do --> psa_do
+media_do --> tableC1_do
+media_do --> tableD1_do
+media_do --> tableD2_do
+media_do --> figure3_do
+media_do --> figureC2_do
+media_do --> fig4_est
+media_do --> figD1_est
+media_do --> figD2_est
+
+%% ===== estimates.do → graph.do =====
+fig4_est --> fig4_graph
+figD1_est --> figD1_graph
+figD2_est --> figD2_graph
+
+%% ===== Stata Scripts → Logs / Results =====
+media_do --> logs_dir
+
+table3_do --> results_tables
+tableC1_do --> results_tables
+tableD1_do --> results_tables
+tableD2_do --> results_tables
+
+figure3_do --> results_figures
+figureC2_do --> results_figures
+fig4_graph --> results_figures
+figD1_graph --> results_figures
+figD2_graph --> results_figures
+
+%% =====================================
+%% Node Styling (Professional / Subtle)
+%% =====================================
+
+%% Inputs = neutral white
+style input_dir fill:#ffffff,stroke:#cccccc,color:#333333
+style topic_saves fill:#ffffff,stroke:#cccccc,color:#333333
+
+%% Python = light blue
+classDef python fill:#e9f2ff,stroke:#7daee6,color:#1f3d63,border-radius:6px;
+class build_mp,build_verbatim_accuracy,build_semsim,build_linguistics,build_speech_topics,build_article,build_article_topics,build_main,intermediate_dir python;
+
+%% Outputs = soft grey-blue
+style media_parquet fill:#eef0f4,stroke:#9aa7b8,color:#2c3e50
+style media_dta fill:#eef0f4,stroke:#9aa7b8,color:#2c3e50
+
+%% Stata scripts = light beige
+classDef stata fill:#fff2e5,stroke:#e0b182,color:#6a4c1f,border-radius:6px;
+class ado_dir,init_do,preamble_do,media_do,summ_do,table3_do,psa_do,tableC1_do,tableD1_do,tableD2_do,figure3_do,figureC2_do,fig4_est,figD1_est,figD2_est,fig4_graph,figD1_graph,figD2_graph stata;
+
+%% Stata outputs = soft green
+style logs_dir fill:#e6f7e6,stroke:#8acb8a,color:#2f5f2f
+style results_figures fill:#e6f7e6,stroke:#8acb8a,color:#2f5f2f
+style results_tables fill:#e6f7e6,stroke:#8acb8a,color:#2f5f2f

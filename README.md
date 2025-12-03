@@ -81,6 +81,7 @@ The pipeline consists of **two main stages**: (1) Python data processing, and (2
 | `build-semsim.py` | Semantic similarity (transformer-based) |
 | `build.py` | Integration into final panel dataset |
 
+ ![DAG](./assets/dag.png)
 
 #### Running the Pipeline
 ```bash

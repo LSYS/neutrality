@@ -25,7 +25,6 @@ warnings.filterwarnings("ignore")
 
 # %%
 MERGE_OPTS = dict(on="qid", how="inner", validate="1:1")
-MERGE_TOPICS_OPTS = dict(left_index=True, right_index=True, how="inner", validate="1:1")
 
 df = (
     pd.read_csv("intermediate/build-mp.csv")
@@ -33,14 +32,14 @@ df = (
     .merge(pd.read_parquet("intermediate/build-2stage-semsim.parquet"), **MERGE_OPTS)
     .merge(pd.read_csv("intermediate/build-article.csv"), **MERGE_OPTS)
     .merge(pd.read_csv("intermediate/build-article-topics.csv"), **MERGE_OPTS)
-    .merge(pd.read_csv("intermediate/build-speech-topics.csv"), **MERGE_TOPICS_OPTS)
+    .merge(pd.read_parquet("intermediate/build-speech-topics.parquet"), **MERGE_OPTS)
     .merge(pd.read_csv("intermediate/build-linguistics.csv"), **MERGE_OPTS)
 )
 
 display(df.head())
 
 # %%
-df.to_csv("./out/media.parquet", index=False)
+df.to_parquet("./out/media.parquet", index=False)
 df.to_stata("./out/media.dta", write_index=False, version=114)
 
 # %%
