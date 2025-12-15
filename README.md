@@ -124,4 +124,4 @@ Results saved to [`./results/`](./results/):
 
 See [results](https://github.com/LSYS/neutrality/tree/main/results)
 
-[![Retracted Articles Check (references.bib)](https://github.com/LSYS/neutrality/actions/workflows/retraction_checker.yml/badge.svg)](https://github.com/LSYS/neutrality/actions/workflows/retraction_checker.yml)
+[![Retracted Citations Check (references.bib)](https://github.com/LSYS/neutrality/actions/workflows/retraction_checker.yml/badge.svg)](https://github.com/LSYS/neutrality/actions/workflows/retraction_checker.yml)

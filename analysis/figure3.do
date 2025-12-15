@@ -48,7 +48,7 @@ foreach acc of varlist ss1_quote_to_speech ss2_quote_to_speech ce_max_quote2spee
 		legend(
 		    order(
 		    	2 "Opposition" 
-		    	1 `"Government"' `"(baseline)"' 
+		    	1 `"Ruling party"' `"(baseline)"' 
 		    )
 		    position(4)
 		    ring(0)
