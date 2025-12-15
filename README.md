@@ -17,8 +17,6 @@ A natural starting point in the study of political media bias has been to examin
 .
 ├── .github/
 │   └── workflows/
-│       ├── main.yml
-│       └── retraction_checker.yml
 │
 ├── analysis/             # Stata analysis scripts
 │   ├── ado/              # Custom Stata programs
@@ -73,8 +71,6 @@ A natural starting point in the study of political media bias has been to examin
 │   ├── requirements-locked.txt
 │   └── requirements.txt
 │
-├── .gitattributes
-├── .gitignore
 ├── Makefile              
 ├── README.md             
 └── references.bib        
