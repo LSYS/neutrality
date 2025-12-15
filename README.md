@@ -1,15 +1,14 @@
 # Shades of Neutrality: Detecting Media Slant Using Quotation Accuracy
 
 ## 📄 Summary
- A natural starting point in the study of political media bias has been to examine differences in coverage intensity.
- This study develops a notion of quotation accuracy as a dimension of media bias.
+A natural starting point in the study of political media bias has been to examine differences in coverage intensity.
+ This study develops a notion of quotation accuracy as a dimension of media slant.
  Using natural language processing (NLP), I operationalize three measures of quotation accuracy---substring alignment, bag-of-words overlap, and a two-stage transformer-based semantic measure.
- I combine the measures with applied econometrics to analyze coverage of parliamentary speeches in Singapore's flagship daily newspaper, a setting where coverage intensity shows no bias.
- Across all three measures, opposition speeches are quoted less accurately than those of the ruling party, demonstrating accuracy as a crucial yet underappreciated dimension of bias.
+ I combine the measures with applied econometrics to analyze coverage of parliamentary speeches in Singapore's flagship daily newspaper, a setting where coverage intensity shows no slant.
+ Across all three measures, opposition speeches are quoted less accurately than those of the ruling party, demonstrating accuracy as a crucial yet underappreciated dimension of slant.
  NLP and machine learning features, and bounding analyses rule out competing explanations such as topical composition, ignorable tokens, or linguistic coherence.
  I then contextualize the findings in the government-media machinery, where transcript circulations (or lack thereof) could explain lapses in quotation accuracy.
- I theorize that these partisan differences in media engagement embed private information about bias.
- These results highlight the value of integrating computational and statistical methods with institution-specific considerations.
+ I theorize that these partisan differences in media engagement embed private information about slant.
 
  ![Pipeline](./figures/pipeline.png)
 ???
@@ -47,13 +46,13 @@ analysis
 │   ├── build-semsim.py
 │   ├── build-speech-topics.py
 │   ├── build-verbatim-accuracy.py
-│   ├── build.py          # Main integration
+│   ├── build.py          # Builds analysis data
 │   ├── utilities.py      # Helper functions
 │   └── Makefile          # Automation
 │
 ├── results/              # Generated outputs
 │   ├── figures/          # (PDF/PNG/EPS/TIF)
-│   ├── tables/           # (LaTeX/md)
+│   ├── tables/           # (LaTeX/md table fragments)
 │   └── readme.md         
 │
 ├── assets/               # Dependencies & resources
@@ -120,7 +119,7 @@ do media.do
 
 Results saved to [`./results/`](./results/):
 - `tables/` → LaTeX (`.tex`) and text (`.md`) tables
-- `figures/` → PDF and PNG figures
+- `figures/` → PDF/PNG/EPS/TIF figures
 
 See [results](https://github.com/LSYS/neutrality/tree/main/results)
 
