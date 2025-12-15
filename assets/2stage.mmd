@@ -1,0 +1,40 @@
+---
+config:
+  layout: elk
+  theme: base
+  themeVariables:
+    edgeLabelBackground: '#ffffff'
+    primaryColor: '#ffffff'
+    fontFamily: 'Arial, sans-serif'
+    fontSize: 16px
+    primaryTextColor: '#333333'
+---
+flowchart LR
+ subgraph S1["<b>Stage 1</b>: Bi-Encoder Retrieval"]
+        SentenceTokens["<b>Sentence tokens</b><br><i>sent₁ </i> ▓▓▓▓<br><i>sent₂</i> ▓▓▓▓<br>⋮<br><i>sent<sub>L</sub></i> ▓▓▓▓"]
+        Cosine["$$cos(g(q), g(sent_\ell))$$"]
+  end
+ subgraph S2["<b>Stage 2</b>: Cross-Encoder Re-Ranking"]
+        CrossEncoder["Cross-encoder $$(h)$$"]
+        ContextWindow["<b>Retreive context windows</b><br>(top <i>K</i> candidates)<br>w₁ ░░░░░▓▓▓░░░░░░<br>w₂ ░░░░░░▓▓▓░░░░░<br>⋮<br>w<sub>K</sub> ░░░░▓▓▓░░░░░░░"]
+  end
+    Q["quote<br><i>(q)</i>"] --> Cosine
+    S["speech<br><i>(s)</i>"] --> SentenceTokens
+    SentenceTokens --> Cosine
+    %% Cosine -- Top<br>K --> ContextWindow
+    Cosine --> ContextWindow
+    ContextWindow -.-> CrossEncoder
+    Q -.-> CrossEncoder
+    CrossEncoder --> output["max(h(q, w<sub>k</sub>))"]
+     SentenceTokens:::noShadow
+     Cosine:::noShadow
+     CrossEncoder:::noShadow
+     ContextWindow:::noShadow
+     Q:::noShadow
+     S:::noShadow
+     output:::noShadow
+    classDef subgraphStyle stroke:#333,stroke-width:1px,stroke-dasharray: 5 5
+    classDef noShadow filter:none
+
+    class S1,S2 subgraphStyle
+    class Q,S,SentenceTokens,Cosine,CrossEncoder,S1,S2,ContextWindow,output noShadow
