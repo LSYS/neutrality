@@ -10,14 +10,17 @@ A natural starting point in the study of political media bias has been to examin
  I then contextualize the findings in the government-media machinery, where transcript circulations (or lack thereof) could explain lapses in quotation accuracy.
  I theorize that these partisan differences in media engagement embed private information about slant.
 
- ![Pipeline](./figures/pipeline.png)
-???
 
 ## 📁 Repository Structure
 
 ```bash
 .
-analysis
+├── .github/
+│   └── workflows/
+│       ├── main.yml
+│       └── retraction_checker.yml
+│
+├── analysis/             # Stata analysis scripts
 │   ├── ado/              # Custom Stata programs
 │   ├── figure4/          # Figure 4 components
 │   ├── figureD1/         # Appendix figure D1
@@ -34,6 +37,7 @@ analysis
 │   ├── tableC1.do
 │   ├── tableD1.do
 │   └── tableD2.do
+│	
 ├── pipeline/             # Python data processing
 │   ├── input/            # Raw data inputs
 │   ├── intermediate/     # Intermediate outputs
@@ -56,14 +60,29 @@ analysis
 │   └── readme.md         
 │
 ├── assets/               # Dependencies & resources
-│   ├── requirements.txt
-│   └── requirements-locked.txt
+│   ├── 2stage.mmd
+│   ├── 2stage.png
+│   ├── 2stage.svg
+│   ├── dag.mmd
+│   ├── dag.png
+│   ├── dag.svg
+│   ├── media-logistics-drawio.png
+│   ├── media-logistis.drawio.xml
+│   ├── media-pipeline.drawio.xml
+│   ├── media-pipeline.png
+│   ├── requirements-locked.txt
+│   └── requirements.txt
 │
+├── .gitattributes
+├── .gitignore
 ├── Makefile              
-└── README.md             
+├── README.md             
+└── references.bib        
 ```
 
 The pipeline consists of **two main stages**: (1) Python data processing, and (2) statistical analysis.
+
+![Pipeline](./assets/media-pipeline.png)
 
 ### 🔄 Stage 1: Data Processing Pipeline (Python)
 
@@ -123,4 +142,4 @@ Results saved to [`./results/`](./results/):
 
 See [results](https://github.com/LSYS/neutrality/tree/main/results)
 
-[![Retracted Citations Check (references.bib)](https://github.com/LSYS/neutrality/actions/workflows/retraction_checker.yml/badge.svg)](https://github.com/LSYS/neutrality/actions/workflows/retraction_checker.yml)
+[![Retracted Citations Check](https://github.com/LSYS/neutrality/actions/workflows/retraction_checker.yml/badge.svg)](https://github.com/LSYS/neutrality/actions/workflows/retraction_checker.yml)
