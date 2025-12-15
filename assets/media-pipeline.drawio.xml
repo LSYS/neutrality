@@ -1,0 +1,1540 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36" version="28.2.1" pages="16">
+  <diagram name="Page-1" id="x2zpCIa06inWdPtx0a4s">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="mB4fFKszbgQEhxmZjNKr-18" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;opacity=40;glass=0;shadow=0;" vertex="1" parent="1">
+          <mxGeometry x="10" y="190" width="460" height="650" as="geometry" />
+        </mxCell>
+        <mxCell id="mB4fFKszbgQEhxmZjNKr-19" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Matching Quotes to Speeches&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=left;fontColor=#555555;" vertex="1" parent="1">
+          <mxGeometry x="60" y="190" width="310" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="mB4fFKszbgQEhxmZjNKr-21" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;The Straits Times corpus&lt;br&gt;(&lt;i&gt;Factiva&lt;/i&gt;)&lt;/font&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="152.5" y="240" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="mB4fFKszbgQEhxmZjNKr-22" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.documents;" vertex="1" parent="1">
+          <mxGeometry x="130" y="240" width="17.5" height="21.33" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="2" id="MqdefymRXx94qn5MNWtb">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="1HvriHbrS4YomPu3Aa9W-0" />
+        <mxCell id="1HvriHbrS4YomPu3Aa9W-1" parent="1HvriHbrS4YomPu3Aa9W-0" />
+        <mxCell id="1HvriHbrS4YomPu3Aa9W-2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;opacity=40;glass=0;shadow=0;" parent="1HvriHbrS4YomPu3Aa9W-1" vertex="1">
+          <mxGeometry x="10" y="190" width="460" height="650" as="geometry" />
+        </mxCell>
+        <mxCell id="1HvriHbrS4YomPu3Aa9W-3" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Matching Quotes to Speeches&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=left;fontColor=#555555;" parent="1HvriHbrS4YomPu3Aa9W-1" vertex="1">
+          <mxGeometry x="60" y="190" width="310" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="1HvriHbrS4YomPu3Aa9W-4" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;The Straits Times corpus&lt;br&gt;(&lt;i&gt;Factiva&lt;/i&gt;)&lt;/font&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="1HvriHbrS4YomPu3Aa9W-1" vertex="1">
+          <mxGeometry x="152.5" y="240" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="1HvriHbrS4YomPu3Aa9W-5" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.documents;" parent="1HvriHbrS4YomPu3Aa9W-1" vertex="1">
+          <mxGeometry x="130" y="240" width="17.5" height="21.33" as="geometry" />
+        </mxCell>
+        <mxCell id="LJr4MCitYXfk7R8ynAjt-1" value="Random&amp;nbsp;&lt;div&gt;Forest&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1HvriHbrS4YomPu3Aa9W-1">
+          <mxGeometry x="20" y="250" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="LJr4MCitYXfk7R8ynAjt-2" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Quotes of politicians&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;in ST&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" vertex="1" parent="1HvriHbrS4YomPu3Aa9W-1">
+          <mxGeometry x="152.5" y="375" width="157.5" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="LJr4MCitYXfk7R8ynAjt-4" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;quote-speech pair&lt;/span&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" vertex="1" parent="1HvriHbrS4YomPu3Aa9W-1">
+          <mxGeometry x="152.5" y="510" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="LJr4MCitYXfk7R8ynAjt-6" value="Classify and retrieve quotes" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1HvriHbrS4YomPu3Aa9W-1">
+          <mxGeometry x="10" y="380" width="90" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="3" id="NWmU2Mmz_kNIOFgL2qpS">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="X3OBbPXXa0oi86-LOVIE-0" />
+        <mxCell id="X3OBbPXXa0oi86-LOVIE-1" parent="X3OBbPXXa0oi86-LOVIE-0" />
+        <mxCell id="X3OBbPXXa0oi86-LOVIE-2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;opacity=40;glass=0;shadow=0;" parent="X3OBbPXXa0oi86-LOVIE-1" vertex="1">
+          <mxGeometry x="10" y="190" width="460" height="650" as="geometry" />
+        </mxCell>
+        <mxCell id="X3OBbPXXa0oi86-LOVIE-3" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Matching Quotes to Speeches&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=left;fontColor=#555555;" parent="X3OBbPXXa0oi86-LOVIE-1" vertex="1">
+          <mxGeometry x="60" y="190" width="310" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="X3OBbPXXa0oi86-LOVIE-4" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;The Straits Times corpus&lt;br&gt;(&lt;i&gt;Factiva&lt;/i&gt;)&lt;/font&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="X3OBbPXXa0oi86-LOVIE-1" vertex="1">
+          <mxGeometry x="152.5" y="240" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="X3OBbPXXa0oi86-LOVIE-5" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.documents;" parent="X3OBbPXXa0oi86-LOVIE-1" vertex="1">
+          <mxGeometry x="130" y="240" width="17.5" height="21.33" as="geometry" />
+        </mxCell>
+        <mxCell id="X3OBbPXXa0oi86-LOVIE-6" value="Random&amp;nbsp;&lt;div&gt;Forest&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="X3OBbPXXa0oi86-LOVIE-1" vertex="1">
+          <mxGeometry x="20" y="250" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="X3OBbPXXa0oi86-LOVIE-7" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Quotes of politicians&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;in ST&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="X3OBbPXXa0oi86-LOVIE-1" vertex="1">
+          <mxGeometry x="152.5" y="375" width="157.5" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="X3OBbPXXa0oi86-LOVIE-8" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;quote-speech pair&lt;/span&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="X3OBbPXXa0oi86-LOVIE-1" vertex="1">
+          <mxGeometry x="152.5" y="510" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="X3OBbPXXa0oi86-LOVIE-9" value="Classify and retrieve quotes" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="X3OBbPXXa0oi86-LOVIE-1" vertex="1">
+          <mxGeometry x="10" y="380" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="AdUzu1pAXQOoOqf1_px9-0" value="&lt;b&gt;&lt;font style=&quot;color: rgb(109, 109, 109);&quot;&gt;Politician metadata&lt;/font&gt;&lt;/b&gt;&lt;div&gt;&lt;font style=&quot;color: rgb(109, 109, 109);&quot;&gt;(name, age, political portfolio,&amp;nbsp;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;color: rgb(109, 109, 109);&quot;&gt;gender, race, vote share)&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="X3OBbPXXa0oi86-LOVIE-1">
+          <mxGeometry x="82.5" width="297.5" height="120" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="4" id="m3qf2H6BP7kIVMEuBKZc">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="wzfc_PRMglzduaFW3Lnw-0" />
+        <mxCell id="wzfc_PRMglzduaFW3Lnw-1" parent="wzfc_PRMglzduaFW3Lnw-0" />
+        <mxCell id="wzfc_PRMglzduaFW3Lnw-2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;opacity=40;glass=0;shadow=0;" parent="wzfc_PRMglzduaFW3Lnw-1" vertex="1">
+          <mxGeometry x="10" y="190" width="460" height="650" as="geometry" />
+        </mxCell>
+        <mxCell id="wzfc_PRMglzduaFW3Lnw-3" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Matching Quotes to Speeches&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=left;fontColor=#555555;" parent="wzfc_PRMglzduaFW3Lnw-1" vertex="1">
+          <mxGeometry x="60" y="190" width="310" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="wzfc_PRMglzduaFW3Lnw-4" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;The Straits Times corpus&lt;br&gt;(&lt;i&gt;Factiva&lt;/i&gt;)&lt;/font&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="wzfc_PRMglzduaFW3Lnw-1" vertex="1">
+          <mxGeometry x="152.5" y="240" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="wzfc_PRMglzduaFW3Lnw-5" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.documents;" parent="wzfc_PRMglzduaFW3Lnw-1" vertex="1">
+          <mxGeometry x="130" y="240" width="17.5" height="21.33" as="geometry" />
+        </mxCell>
+        <mxCell id="wzfc_PRMglzduaFW3Lnw-6" value="Random&amp;nbsp;&lt;div&gt;Forest&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="wzfc_PRMglzduaFW3Lnw-1" vertex="1">
+          <mxGeometry x="20" y="250" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="wzfc_PRMglzduaFW3Lnw-7" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Quotes of politicians&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;in ST&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="wzfc_PRMglzduaFW3Lnw-1" vertex="1">
+          <mxGeometry x="152.5" y="375" width="157.5" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="wzfc_PRMglzduaFW3Lnw-8" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;quote-speech pair&lt;/span&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="wzfc_PRMglzduaFW3Lnw-1" vertex="1">
+          <mxGeometry x="152.5" y="510" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="wzfc_PRMglzduaFW3Lnw-9" value="Classify and retrieve quotes" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="wzfc_PRMglzduaFW3Lnw-1" vertex="1">
+          <mxGeometry x="10" y="380" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="wzfc_PRMglzduaFW3Lnw-10" value="&lt;b&gt;&lt;font style=&quot;color: rgb(109, 109, 109);&quot;&gt;Politician metadata&lt;/font&gt;&lt;/b&gt;&lt;div&gt;&lt;font style=&quot;color: rgb(109, 109, 109);&quot;&gt;(name, individual profile, political portfolio&lt;/font&gt;&lt;span style=&quot;color: light-dark(rgb(109, 109, 109), rgb(143, 143, 143)); background-color: transparent;&quot;&gt;)&lt;/span&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="wzfc_PRMglzduaFW3Lnw-1" vertex="1">
+          <mxGeometry x="91.25" width="247.5" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="IPvrLCHtljbc1HgXbsIl-0" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Age, gender, race, political tenure,&amp;nbsp;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;constituency, vote share&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" vertex="1" parent="wzfc_PRMglzduaFW3Lnw-1">
+          <mxGeometry x="490" y="10" width="230" height="70" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="5" id="eLjR3bNFMrEd_tTG6iH8">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="vCjQ_hEybWv50N9W1unA-0" />
+        <mxCell id="vCjQ_hEybWv50N9W1unA-1" parent="vCjQ_hEybWv50N9W1unA-0" />
+        <mxCell id="vCjQ_hEybWv50N9W1unA-2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;opacity=40;glass=0;shadow=0;" parent="vCjQ_hEybWv50N9W1unA-1" vertex="1">
+          <mxGeometry x="10" y="190" width="460" height="650" as="geometry" />
+        </mxCell>
+        <mxCell id="vCjQ_hEybWv50N9W1unA-3" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Matching Quotes to Speeches&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=left;fontColor=#555555;" parent="vCjQ_hEybWv50N9W1unA-1" vertex="1">
+          <mxGeometry x="60" y="190" width="310" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="vCjQ_hEybWv50N9W1unA-4" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;The Straits Times corpus&lt;br&gt;(&lt;i&gt;Factiva&lt;/i&gt;)&lt;/font&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="vCjQ_hEybWv50N9W1unA-1" vertex="1">
+          <mxGeometry x="152.5" y="240" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="vCjQ_hEybWv50N9W1unA-5" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.documents;" parent="vCjQ_hEybWv50N9W1unA-1" vertex="1">
+          <mxGeometry x="130" y="240" width="17.5" height="21.33" as="geometry" />
+        </mxCell>
+        <mxCell id="vCjQ_hEybWv50N9W1unA-6" value="Random&amp;nbsp;&lt;div&gt;Forest&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="vCjQ_hEybWv50N9W1unA-1" vertex="1">
+          <mxGeometry x="20" y="250" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="vCjQ_hEybWv50N9W1unA-7" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Quotes of politicians&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;in ST&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="vCjQ_hEybWv50N9W1unA-1" vertex="1">
+          <mxGeometry x="152.5" y="375" width="157.5" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="vCjQ_hEybWv50N9W1unA-8" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;quote-speech pair&lt;/span&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="vCjQ_hEybWv50N9W1unA-1" vertex="1">
+          <mxGeometry x="152.5" y="510" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="vCjQ_hEybWv50N9W1unA-9" value="Classify and retrieve quotes" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="vCjQ_hEybWv50N9W1unA-1" vertex="1">
+          <mxGeometry x="10" y="380" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vCjQ_hEybWv50N9W1unA-10" value="&lt;b&gt;&lt;font style=&quot;color: rgb(109, 109, 109);&quot;&gt;Politician metadata&lt;/font&gt;&lt;/b&gt;&lt;div&gt;&lt;font style=&quot;color: rgb(109, 109, 109);&quot;&gt;(name, individual profile, political portfolio&lt;/font&gt;&lt;span style=&quot;color: light-dark(rgb(109, 109, 109), rgb(143, 143, 143)); background-color: transparent;&quot;&gt;)&lt;/span&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="vCjQ_hEybWv50N9W1unA-1" vertex="1">
+          <mxGeometry x="91.25" width="247.5" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="vCjQ_hEybWv50N9W1unA-11" value="&lt;div&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;Individual Characteristics&lt;/span&gt;&lt;/div&gt;&lt;span style=&quot;font-size: 13px; font-weight: normal;&quot;&gt;age, gender, race, political tenure,&amp;nbsp;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 13px; font-weight: normal;&quot;&gt;constituency, vote share&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="vCjQ_hEybWv50N9W1unA-1" vertex="1">
+          <mxGeometry x="490" y="10" width="230" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="AzO9YU2sgiOR1HFdkKdp-0" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Article speech topics&lt;/span&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" vertex="1" parent="vCjQ_hEybWv50N9W1unA-1">
+          <mxGeometry x="570" y="240" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="AzO9YU2sgiOR1HFdkKdp-1" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Political speech topics&lt;/span&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" vertex="1" parent="vCjQ_hEybWv50N9W1unA-1">
+          <mxGeometry x="550" y="610" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="AzO9YU2sgiOR1HFdkKdp-2" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Article Characteristics&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Day of week, length, news section, translation, author&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" vertex="1" parent="vCjQ_hEybWv50N9W1unA-1">
+          <mxGeometry x="570" y="140" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="AzO9YU2sgiOR1HFdkKdp-3" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Quote accuracy measures&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 13px; font-weight: 400;&quot;&gt;substring, BoW, semantic&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" vertex="1" parent="vCjQ_hEybWv50N9W1unA-1">
+          <mxGeometry x="530" y="450" width="190" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="AzO9YU2sgiOR1HFdkKdp-4" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Language measures&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 13px; font-weight: normal;&quot;&gt;lexical richness, readability,&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-size: 13px; font-weight: 400;&quot;&gt;objectivity, polarity&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" vertex="1" parent="vCjQ_hEybWv50N9W1unA-1">
+          <mxGeometry x="520" y="730" width="190" height="70" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="6" id="AMJfa0Y_ShV5jgvvmFBl">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="WqW9XgD4hHyzW8py-rD7-0" />
+        <mxCell id="WqW9XgD4hHyzW8py-rD7-1" parent="WqW9XgD4hHyzW8py-rD7-0" />
+        <mxCell id="WqW9XgD4hHyzW8py-rD7-2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;opacity=40;glass=0;shadow=0;" parent="WqW9XgD4hHyzW8py-rD7-1" vertex="1">
+          <mxGeometry x="10" y="190" width="440" height="350" as="geometry" />
+        </mxCell>
+        <mxCell id="WqW9XgD4hHyzW8py-rD7-3" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Matching Quotes to Speeches&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=left;fontColor=#555555;" parent="WqW9XgD4hHyzW8py-rD7-1" vertex="1">
+          <mxGeometry x="60" y="190" width="310" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="MslNYgxYdkXyP3k4Nce9-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="WqW9XgD4hHyzW8py-rD7-1" source="WqW9XgD4hHyzW8py-rD7-4" target="WqW9XgD4hHyzW8py-rD7-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WqW9XgD4hHyzW8py-rD7-4" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;The Straits Times corpus&lt;br&gt;(&lt;i&gt;Factiva&lt;/i&gt;)&lt;/font&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="WqW9XgD4hHyzW8py-rD7-1" vertex="1">
+          <mxGeometry x="152.5" y="240" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="WqW9XgD4hHyzW8py-rD7-5" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.documents;" parent="WqW9XgD4hHyzW8py-rD7-1" vertex="1">
+          <mxGeometry x="130" y="240" width="17.5" height="21.33" as="geometry" />
+        </mxCell>
+        <mxCell id="MslNYgxYdkXyP3k4Nce9-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="WqW9XgD4hHyzW8py-rD7-1" source="WqW9XgD4hHyzW8py-rD7-6" target="WqW9XgD4hHyzW8py-rD7-7">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="65" y="400" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WqW9XgD4hHyzW8py-rD7-6" value="Random&amp;nbsp;&lt;div&gt;Forest&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="WqW9XgD4hHyzW8py-rD7-1" vertex="1">
+          <mxGeometry x="20" y="245" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MslNYgxYdkXyP3k4Nce9-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WqW9XgD4hHyzW8py-rD7-1" source="WqW9XgD4hHyzW8py-rD7-7" target="WqW9XgD4hHyzW8py-rD7-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WqW9XgD4hHyzW8py-rD7-7" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Quotes of politicians&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;in ST&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="WqW9XgD4hHyzW8py-rD7-1" vertex="1">
+          <mxGeometry x="155" y="350" width="157.5" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="MslNYgxYdkXyP3k4Nce9-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="WqW9XgD4hHyzW8py-rD7-1" source="WqW9XgD4hHyzW8py-rD7-8" target="WqW9XgD4hHyzW8py-rD7-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WqW9XgD4hHyzW8py-rD7-8" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;quote-speech pair&lt;/span&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="WqW9XgD4hHyzW8py-rD7-1" vertex="1">
+          <mxGeometry x="153.75" y="460" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="WqW9XgD4hHyzW8py-rD7-9" value="Classify and retrieve quotes" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="WqW9XgD4hHyzW8py-rD7-1" vertex="1">
+          <mxGeometry x="62.5" y="370" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="MslNYgxYdkXyP3k4Nce9-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="WqW9XgD4hHyzW8py-rD7-1" source="WqW9XgD4hHyzW8py-rD7-10" target="WqW9XgD4hHyzW8py-rD7-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WqW9XgD4hHyzW8py-rD7-10" value="&lt;b&gt;&lt;font style=&quot;color: rgb(109, 109, 109);&quot;&gt;Politician metadata&lt;/font&gt;&lt;/b&gt;&lt;div&gt;&lt;font style=&quot;color: rgb(109, 109, 109);&quot;&gt;(name, individual profile, political portfolio&lt;/font&gt;&lt;span style=&quot;color: light-dark(rgb(109, 109, 109), rgb(143, 143, 143)); background-color: transparent;&quot;&gt;)&lt;/span&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="WqW9XgD4hHyzW8py-rD7-1" vertex="1">
+          <mxGeometry x="91.25" y="40" width="247.5" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="WqW9XgD4hHyzW8py-rD7-11" value="&lt;div&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;Individual Characteristics&lt;/span&gt;&lt;/div&gt;&lt;span style=&quot;font-size: 13px; font-weight: normal;&quot;&gt;age, gender, race, political tenure,&amp;nbsp;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 13px; font-weight: normal;&quot;&gt;constituency, vote share&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="WqW9XgD4hHyzW8py-rD7-1" vertex="1">
+          <mxGeometry x="480" y="50" width="230" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="WqW9XgD4hHyzW8py-rD7-12" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Article speech topics&lt;/span&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="WqW9XgD4hHyzW8py-rD7-1" vertex="1">
+          <mxGeometry x="515" y="300" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="WqW9XgD4hHyzW8py-rD7-13" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Political speech topics&lt;/span&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="WqW9XgD4hHyzW8py-rD7-1" vertex="1">
+          <mxGeometry x="505" y="530" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="WqW9XgD4hHyzW8py-rD7-14" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Article Characteristics&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Day of week, length, news&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;section, translation, author&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="WqW9XgD4hHyzW8py-rD7-1" vertex="1">
+          <mxGeometry x="500" y="191.33" width="190" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="WqW9XgD4hHyzW8py-rD7-15" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Quote accuracy measures&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 13px; font-weight: 400;&quot;&gt;substring, BoW, semantic&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="WqW9XgD4hHyzW8py-rD7-1" vertex="1">
+          <mxGeometry x="490" y="460" width="190" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="WqW9XgD4hHyzW8py-rD7-16" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Language measures&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 13px; font-weight: normal;&quot;&gt;lexical richness, readability,&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-size: 13px; font-weight: 400;&quot;&gt;objectivity, polarity&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="WqW9XgD4hHyzW8py-rD7-1" vertex="1">
+          <mxGeometry x="490" y="580" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="MslNYgxYdkXyP3k4Nce9-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.391;entryY=-0.04;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="WqW9XgD4hHyzW8py-rD7-1" source="WqW9XgD4hHyzW8py-rD7-10" target="WqW9XgD4hHyzW8py-rD7-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MslNYgxYdkXyP3k4Nce9-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WqW9XgD4hHyzW8py-rD7-1" source="MslNYgxYdkXyP3k4Nce9-13" target="WqW9XgD4hHyzW8py-rD7-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MslNYgxYdkXyP3k4Nce9-13" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;Parliamentary Speech corpus&lt;br&gt;(&lt;i&gt;Hansard&lt;/i&gt;)&lt;/font&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" vertex="1" parent="WqW9XgD4hHyzW8py-rD7-1">
+          <mxGeometry x="153.75" y="570" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="MslNYgxYdkXyP3k4Nce9-14" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.documents;" vertex="1" parent="WqW9XgD4hHyzW8py-rD7-1">
+          <mxGeometry x="131.25" y="570" width="17.5" height="21.33" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="7" id="VuYvBD6Ha52Ochhuclnw">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="5NeI1hNk-FI0MCsvLOZR-0" />
+        <mxCell id="5NeI1hNk-FI0MCsvLOZR-1" parent="5NeI1hNk-FI0MCsvLOZR-0" />
+        <mxCell id="5NeI1hNk-FI0MCsvLOZR-2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;opacity=40;glass=0;shadow=0;" parent="5NeI1hNk-FI0MCsvLOZR-1" vertex="1">
+          <mxGeometry x="10" y="190" width="440" height="340" as="geometry" />
+        </mxCell>
+        <mxCell id="5NeI1hNk-FI0MCsvLOZR-3" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Matching Quotes to Speeches&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=left;fontColor=#555555;" parent="5NeI1hNk-FI0MCsvLOZR-1" vertex="1">
+          <mxGeometry x="40" y="200" width="310" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="5NeI1hNk-FI0MCsvLOZR-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="5NeI1hNk-FI0MCsvLOZR-1" source="5NeI1hNk-FI0MCsvLOZR-5" target="5NeI1hNk-FI0MCsvLOZR-8" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ljT6SReOc9tQIS_rqunB-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="5NeI1hNk-FI0MCsvLOZR-1" source="5NeI1hNk-FI0MCsvLOZR-5" target="5NeI1hNk-FI0MCsvLOZR-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ljT6SReOc9tQIS_rqunB-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="5NeI1hNk-FI0MCsvLOZR-1" source="5NeI1hNk-FI0MCsvLOZR-5" target="5NeI1hNk-FI0MCsvLOZR-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5NeI1hNk-FI0MCsvLOZR-5" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;The Straits Times corpus&lt;br&gt;(&lt;i&gt;Factiva&lt;/i&gt;)&lt;/font&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="5NeI1hNk-FI0MCsvLOZR-1" vertex="1">
+          <mxGeometry x="152.5" y="240" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="5NeI1hNk-FI0MCsvLOZR-6" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.documents;" parent="5NeI1hNk-FI0MCsvLOZR-1" vertex="1">
+          <mxGeometry x="130" y="240" width="17.5" height="21.33" as="geometry" />
+        </mxCell>
+        <mxCell id="ljT6SReOc9tQIS_rqunB-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="5NeI1hNk-FI0MCsvLOZR-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="70" y="268.75" as="sourcePoint" />
+            <mxPoint x="155" y="371.25" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="70" y="371.75" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5NeI1hNk-FI0MCsvLOZR-8" value="Random&amp;nbsp;&lt;div&gt;Forest&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="5NeI1hNk-FI0MCsvLOZR-1" vertex="1">
+          <mxGeometry x="30" y="245" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="5NeI1hNk-FI0MCsvLOZR-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="5NeI1hNk-FI0MCsvLOZR-1" source="5NeI1hNk-FI0MCsvLOZR-10" target="5NeI1hNk-FI0MCsvLOZR-12" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5NeI1hNk-FI0MCsvLOZR-10" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Quotes of politicians&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;in ST&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="5NeI1hNk-FI0MCsvLOZR-1" vertex="1">
+          <mxGeometry x="155" y="350" width="157.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="5NeI1hNk-FI0MCsvLOZR-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="5NeI1hNk-FI0MCsvLOZR-1" source="5NeI1hNk-FI0MCsvLOZR-12" target="5NeI1hNk-FI0MCsvLOZR-20" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5NeI1hNk-FI0MCsvLOZR-12" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;quote-speech pair&lt;/span&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="5NeI1hNk-FI0MCsvLOZR-1" vertex="1">
+          <mxGeometry x="153.75" y="450" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="5NeI1hNk-FI0MCsvLOZR-13" value="Classify and retrieve quotes" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="5NeI1hNk-FI0MCsvLOZR-1" vertex="1">
+          <mxGeometry x="70" y="340" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="5NeI1hNk-FI0MCsvLOZR-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="5NeI1hNk-FI0MCsvLOZR-1" source="5NeI1hNk-FI0MCsvLOZR-15" target="5NeI1hNk-FI0MCsvLOZR-16" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5NeI1hNk-FI0MCsvLOZR-15" value="&lt;b&gt;&lt;font style=&quot;color: rgb(109, 109, 109);&quot;&gt;Politician metadata&lt;/font&gt;&lt;/b&gt;&lt;div&gt;&lt;font style=&quot;color: rgb(109, 109, 109);&quot;&gt;(name, individual profile, political portfolio&lt;/font&gt;&lt;span style=&quot;color: light-dark(rgb(109, 109, 109), rgb(143, 143, 143)); background-color: transparent;&quot;&gt;)&lt;/span&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="5NeI1hNk-FI0MCsvLOZR-1" vertex="1">
+          <mxGeometry x="102.5" y="80" width="247.5" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="5NeI1hNk-FI0MCsvLOZR-16" value="&lt;div&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;Individual Characteristics&lt;/span&gt;&lt;/div&gt;&lt;span style=&quot;font-size: 13px; font-weight: normal;&quot;&gt;age, gender, race, political tenure,&amp;nbsp;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 13px; font-weight: normal;&quot;&gt;constituency, vote share&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="5NeI1hNk-FI0MCsvLOZR-1" vertex="1">
+          <mxGeometry x="492.5" y="75" width="230" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="5NeI1hNk-FI0MCsvLOZR-17" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Article speech topics&lt;/span&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="5NeI1hNk-FI0MCsvLOZR-1" vertex="1">
+          <mxGeometry x="515" y="300" width="185" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="5NeI1hNk-FI0MCsvLOZR-18" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Political speech topics&lt;/span&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="5NeI1hNk-FI0MCsvLOZR-1" vertex="1">
+          <mxGeometry x="505" y="520" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="5NeI1hNk-FI0MCsvLOZR-19" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Article Characteristics&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Day of week, length, news&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;section, translation, author&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="5NeI1hNk-FI0MCsvLOZR-1" vertex="1">
+          <mxGeometry x="515" y="191.33" width="190" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="5NeI1hNk-FI0MCsvLOZR-20" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Quote accuracy measures&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 13px; font-weight: 400;&quot;&gt;substring, BoW, semantic&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="5NeI1hNk-FI0MCsvLOZR-1" vertex="1">
+          <mxGeometry x="490" y="450" width="190" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="5NeI1hNk-FI0MCsvLOZR-21" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Language measures&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 13px; font-weight: normal;&quot;&gt;lexical richness, readability,&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-size: 13px; font-weight: 400;&quot;&gt;objectivity, polarity&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="5NeI1hNk-FI0MCsvLOZR-1" vertex="1">
+          <mxGeometry x="490" y="560" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="5NeI1hNk-FI0MCsvLOZR-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="5NeI1hNk-FI0MCsvLOZR-1" source="5NeI1hNk-FI0MCsvLOZR-24" target="5NeI1hNk-FI0MCsvLOZR-12" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ljT6SReOc9tQIS_rqunB-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="5NeI1hNk-FI0MCsvLOZR-1" source="5NeI1hNk-FI0MCsvLOZR-24" target="5NeI1hNk-FI0MCsvLOZR-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ljT6SReOc9tQIS_rqunB-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="5NeI1hNk-FI0MCsvLOZR-1" source="5NeI1hNk-FI0MCsvLOZR-24" target="5NeI1hNk-FI0MCsvLOZR-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5NeI1hNk-FI0MCsvLOZR-24" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;Parliamentary Speech corpus&lt;br&gt;(&lt;i&gt;Hansard&lt;/i&gt;)&lt;/font&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="5NeI1hNk-FI0MCsvLOZR-1" vertex="1">
+          <mxGeometry x="153.75" y="560" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="5NeI1hNk-FI0MCsvLOZR-25" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.documents;" parent="5NeI1hNk-FI0MCsvLOZR-1" vertex="1">
+          <mxGeometry x="131.25" y="570" width="17.5" height="21.33" as="geometry" />
+        </mxCell>
+        <mxCell id="ljT6SReOc9tQIS_rqunB-3" value="LDA" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="5NeI1hNk-FI0MCsvLOZR-1">
+          <mxGeometry x="410" y="530" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ljT6SReOc9tQIS_rqunB-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.464;entryY=0.012;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="5NeI1hNk-FI0MCsvLOZR-1" source="5NeI1hNk-FI0MCsvLOZR-15" target="5NeI1hNk-FI0MCsvLOZR-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ljT6SReOc9tQIS_rqunB-11" value="LDA" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="5NeI1hNk-FI0MCsvLOZR-1">
+          <mxGeometry x="410" y="300" width="40" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="8" id="dP5AA8z-100hv-rO6jmc">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="4hH3E5_JbcelG1JRG61D-0" />
+        <mxCell id="4hH3E5_JbcelG1JRG61D-1" parent="4hH3E5_JbcelG1JRG61D-0" />
+        <mxCell id="LM2NjZ-WYZ0JH9zGg0lL-6" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;opacity=40;glass=0;shadow=0;" vertex="1" parent="4hH3E5_JbcelG1JRG61D-1">
+          <mxGeometry x="460" y="70" width="290" height="560" as="geometry" />
+        </mxCell>
+        <mxCell id="4hH3E5_JbcelG1JRG61D-2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;opacity=40;glass=0;shadow=0;" parent="4hH3E5_JbcelG1JRG61D-1" vertex="1">
+          <mxGeometry x="30" y="190" width="400" height="340" as="geometry" />
+        </mxCell>
+        <mxCell id="4hH3E5_JbcelG1JRG61D-3" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Matching Quotes to Speeches&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=left;fontColor=#555555;" parent="4hH3E5_JbcelG1JRG61D-1" vertex="1">
+          <mxGeometry x="40" y="200" width="310" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="4hH3E5_JbcelG1JRG61D-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="4hH3E5_JbcelG1JRG61D-1" source="4hH3E5_JbcelG1JRG61D-7" target="4hH3E5_JbcelG1JRG61D-10" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4hH3E5_JbcelG1JRG61D-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="4hH3E5_JbcelG1JRG61D-1" source="4hH3E5_JbcelG1JRG61D-7" target="4hH3E5_JbcelG1JRG61D-19" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4hH3E5_JbcelG1JRG61D-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="4hH3E5_JbcelG1JRG61D-1" source="4hH3E5_JbcelG1JRG61D-7" target="4hH3E5_JbcelG1JRG61D-21" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4hH3E5_JbcelG1JRG61D-7" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;The Straits Times corpus&lt;br&gt;(&lt;i&gt;Factiva&lt;/i&gt;)&lt;/font&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="4hH3E5_JbcelG1JRG61D-1" vertex="1">
+          <mxGeometry x="152.5" y="240" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="4hH3E5_JbcelG1JRG61D-8" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.documents;" parent="4hH3E5_JbcelG1JRG61D-1" vertex="1">
+          <mxGeometry x="130" y="240" width="17.5" height="21.33" as="geometry" />
+        </mxCell>
+        <mxCell id="4hH3E5_JbcelG1JRG61D-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="4hH3E5_JbcelG1JRG61D-1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="70" y="268.75" as="sourcePoint" />
+            <mxPoint x="155" y="371.25" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="80" y="269" />
+              <mxPoint x="80" y="371" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4hH3E5_JbcelG1JRG61D-10" value="Random&amp;nbsp;&lt;div&gt;Forest&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="4hH3E5_JbcelG1JRG61D-1" vertex="1">
+          <mxGeometry x="40" y="245" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="4hH3E5_JbcelG1JRG61D-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="4hH3E5_JbcelG1JRG61D-1" source="4hH3E5_JbcelG1JRG61D-12" target="4hH3E5_JbcelG1JRG61D-14" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4hH3E5_JbcelG1JRG61D-12" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Quotes of politicians&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;in ST&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="4hH3E5_JbcelG1JRG61D-1" vertex="1">
+          <mxGeometry x="155" y="350" width="157.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="4hH3E5_JbcelG1JRG61D-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="4hH3E5_JbcelG1JRG61D-1" source="4hH3E5_JbcelG1JRG61D-14" target="4hH3E5_JbcelG1JRG61D-22" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4hH3E5_JbcelG1JRG61D-14" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;quote-speech pair&lt;/span&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="4hH3E5_JbcelG1JRG61D-1" vertex="1">
+          <mxGeometry x="153.75" y="450" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="4hH3E5_JbcelG1JRG61D-15" value="Classify and retrieve&amp;nbsp;&lt;div&gt;quotes&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="4hH3E5_JbcelG1JRG61D-1" vertex="1">
+          <mxGeometry x="80" y="330" width="75" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="4hH3E5_JbcelG1JRG61D-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="4hH3E5_JbcelG1JRG61D-1" source="4hH3E5_JbcelG1JRG61D-17" target="4hH3E5_JbcelG1JRG61D-18" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4hH3E5_JbcelG1JRG61D-17" value="&lt;b&gt;&lt;font style=&quot;color: rgb(109, 109, 109);&quot;&gt;Politician metadata&lt;/font&gt;&lt;/b&gt;&lt;div&gt;&lt;font style=&quot;color: rgb(109, 109, 109);&quot;&gt;(name, individual profile, political portfolio&lt;/font&gt;&lt;span style=&quot;color: light-dark(rgb(109, 109, 109), rgb(143, 143, 143)); background-color: transparent;&quot;&gt;)&lt;/span&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="4hH3E5_JbcelG1JRG61D-1" vertex="1">
+          <mxGeometry x="102.5" y="80" width="247.5" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="4hH3E5_JbcelG1JRG61D-18" value="&lt;div&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;Individual Characteristics&lt;/span&gt;&lt;/div&gt;&lt;span style=&quot;font-size: 13px; font-weight: normal;&quot;&gt;age, gender, race, political tenure,&amp;nbsp;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 13px; font-weight: normal;&quot;&gt;constituency, vote share&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="4hH3E5_JbcelG1JRG61D-1" vertex="1">
+          <mxGeometry x="490" y="75" width="230" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="4hH3E5_JbcelG1JRG61D-19" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Article speech topics&lt;/span&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="4hH3E5_JbcelG1JRG61D-1" vertex="1">
+          <mxGeometry x="517.5" y="300" width="185" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="4hH3E5_JbcelG1JRG61D-20" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Political speech topics&lt;/span&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="4hH3E5_JbcelG1JRG61D-1" vertex="1">
+          <mxGeometry x="525" y="520" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="4hH3E5_JbcelG1JRG61D-21" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Article Characteristics&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;Day of week, length, news&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;section, translation, author&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="4hH3E5_JbcelG1JRG61D-1" vertex="1">
+          <mxGeometry x="517.5" y="200" width="190" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="4hH3E5_JbcelG1JRG61D-22" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Quote accuracy measures&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 13px; font-weight: 400;&quot;&gt;substring, BoW, semantic&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="4hH3E5_JbcelG1JRG61D-1" vertex="1">
+          <mxGeometry x="510" y="450" width="190" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="4hH3E5_JbcelG1JRG61D-23" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Language measures&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 13px; font-weight: normal;&quot;&gt;lexical richness, readability,&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-size: 13px; font-weight: 400;&quot;&gt;objectivity, polarity&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="4hH3E5_JbcelG1JRG61D-1" vertex="1">
+          <mxGeometry x="510" y="560" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="4hH3E5_JbcelG1JRG61D-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="4hH3E5_JbcelG1JRG61D-1" source="4hH3E5_JbcelG1JRG61D-27" target="4hH3E5_JbcelG1JRG61D-14" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4hH3E5_JbcelG1JRG61D-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="4hH3E5_JbcelG1JRG61D-1" source="4hH3E5_JbcelG1JRG61D-27" target="4hH3E5_JbcelG1JRG61D-23" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4hH3E5_JbcelG1JRG61D-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="4hH3E5_JbcelG1JRG61D-1" source="4hH3E5_JbcelG1JRG61D-27" target="4hH3E5_JbcelG1JRG61D-20" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4hH3E5_JbcelG1JRG61D-27" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;Parliamentary Speech corpus&lt;br&gt;(&lt;i&gt;Hansard&lt;/i&gt;)&lt;/font&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="4hH3E5_JbcelG1JRG61D-1" vertex="1">
+          <mxGeometry x="153.75" y="560" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="4hH3E5_JbcelG1JRG61D-28" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.documents;" parent="4hH3E5_JbcelG1JRG61D-1" vertex="1">
+          <mxGeometry x="131.25" y="570" width="17.5" height="21.33" as="geometry" />
+        </mxCell>
+        <mxCell id="4hH3E5_JbcelG1JRG61D-29" value="LDA" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="4hH3E5_JbcelG1JRG61D-1" vertex="1">
+          <mxGeometry x="420" y="530" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="4hH3E5_JbcelG1JRG61D-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.464;entryY=0.012;entryDx=0;entryDy=0;entryPerimeter=0;" parent="4hH3E5_JbcelG1JRG61D-1" source="4hH3E5_JbcelG1JRG61D-17" target="4hH3E5_JbcelG1JRG61D-7" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="4hH3E5_JbcelG1JRG61D-31" value="LDA" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="4hH3E5_JbcelG1JRG61D-1" vertex="1">
+          <mxGeometry x="410" y="300" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="LM2NjZ-WYZ0JH9zGg0lL-1" value="&lt;font color=&quot;#6d6d6d&quot;&gt;&lt;b&gt;Statistical&lt;/b&gt;&lt;/font&gt;&lt;div&gt;&lt;font color=&quot;#6d6d6d&quot;&gt;&lt;b&gt;Analyses&lt;/b&gt;&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="4hH3E5_JbcelG1JRG61D-1">
+          <mxGeometry x="770" y="285" width="100" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="9" id="24-iHpKtDXzk-biLXx4Y">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="n5c7h9Uky4HguqZj8EhL-0" />
+        <mxCell id="n5c7h9Uky4HguqZj8EhL-1" parent="n5c7h9Uky4HguqZj8EhL-0" />
+        <mxCell id="FWwcb5HMwlqxxSy9Ji3J-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="n5c7h9Uky4HguqZj8EhL-1" source="n5c7h9Uky4HguqZj8EhL-2" target="n5c7h9Uky4HguqZj8EhL-33">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n5c7h9Uky4HguqZj8EhL-2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;opacity=40;glass=0;shadow=0;dashed=1;dashPattern=12 12;fontColor=#333333;" vertex="1" parent="n5c7h9Uky4HguqZj8EhL-1">
+          <mxGeometry x="460" y="100" width="290" height="530" as="geometry" />
+        </mxCell>
+        <mxCell id="n5c7h9Uky4HguqZj8EhL-3" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;opacity=40;glass=0;shadow=0;dashed=1;dashPattern=8 8;" vertex="1" parent="n5c7h9Uky4HguqZj8EhL-1">
+          <mxGeometry x="30" y="190" width="400" height="340" as="geometry" />
+        </mxCell>
+        <mxCell id="n5c7h9Uky4HguqZj8EhL-4" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Matching Quotes to Speeches&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=left;fontColor=#555555;" vertex="1" parent="n5c7h9Uky4HguqZj8EhL-1">
+          <mxGeometry x="60" y="200" width="270" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="n5c7h9Uky4HguqZj8EhL-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="n5c7h9Uky4HguqZj8EhL-1" source="n5c7h9Uky4HguqZj8EhL-8" target="n5c7h9Uky4HguqZj8EhL-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n5c7h9Uky4HguqZj8EhL-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="n5c7h9Uky4HguqZj8EhL-1" source="n5c7h9Uky4HguqZj8EhL-8" target="n5c7h9Uky4HguqZj8EhL-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n5c7h9Uky4HguqZj8EhL-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="n5c7h9Uky4HguqZj8EhL-1" source="n5c7h9Uky4HguqZj8EhL-8" target="n5c7h9Uky4HguqZj8EhL-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n5c7h9Uky4HguqZj8EhL-8" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;The Straits Times corpus&lt;br&gt;(&lt;i&gt;Factiva&lt;/i&gt;)&lt;/font&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" vertex="1" parent="n5c7h9Uky4HguqZj8EhL-1">
+          <mxGeometry x="152.5" y="240" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="n5c7h9Uky4HguqZj8EhL-9" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.documents;" vertex="1" parent="n5c7h9Uky4HguqZj8EhL-1">
+          <mxGeometry x="130" y="240" width="17.5" height="21.33" as="geometry" />
+        </mxCell>
+        <mxCell id="n5c7h9Uky4HguqZj8EhL-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="n5c7h9Uky4HguqZj8EhL-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="70" y="268.75" as="sourcePoint" />
+            <mxPoint x="155" y="371.25" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="80" y="269" />
+              <mxPoint x="80" y="371" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n5c7h9Uky4HguqZj8EhL-11" value="Random&amp;nbsp;&lt;div&gt;Forest&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="n5c7h9Uky4HguqZj8EhL-1">
+          <mxGeometry x="40" y="245" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="n5c7h9Uky4HguqZj8EhL-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="n5c7h9Uky4HguqZj8EhL-1" source="n5c7h9Uky4HguqZj8EhL-13" target="n5c7h9Uky4HguqZj8EhL-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n5c7h9Uky4HguqZj8EhL-13" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Quotes of politicians&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;in ST&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" vertex="1" parent="n5c7h9Uky4HguqZj8EhL-1">
+          <mxGeometry x="155" y="350" width="157.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="n5c7h9Uky4HguqZj8EhL-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="n5c7h9Uky4HguqZj8EhL-1" source="n5c7h9Uky4HguqZj8EhL-15" target="n5c7h9Uky4HguqZj8EhL-23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n5c7h9Uky4HguqZj8EhL-15" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;quote-speech pair&lt;/span&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" vertex="1" parent="n5c7h9Uky4HguqZj8EhL-1">
+          <mxGeometry x="153.75" y="450" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="n5c7h9Uky4HguqZj8EhL-16" value="Classify and retrieve&amp;nbsp;&lt;div&gt;quotes&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="n5c7h9Uky4HguqZj8EhL-1">
+          <mxGeometry x="80" y="330" width="75" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="n5c7h9Uky4HguqZj8EhL-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="n5c7h9Uky4HguqZj8EhL-1" source="n5c7h9Uky4HguqZj8EhL-18" target="n5c7h9Uky4HguqZj8EhL-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n5c7h9Uky4HguqZj8EhL-18" value="&lt;b&gt;&lt;font style=&quot;color: rgb(109, 109, 109);&quot;&gt;Politician metadata&lt;/font&gt;&lt;/b&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;&lt;font style=&quot;color: rgb(109, 109, 109);&quot;&gt;(name, individual profile, political portfolio&lt;/font&gt;&lt;span style=&quot;color: light-dark(rgb(109, 109, 109), rgb(143, 143, 143)); background-color: transparent;&quot;&gt;)&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="n5c7h9Uky4HguqZj8EhL-1">
+          <mxGeometry x="102.5" y="112.5" width="247.5" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="n5c7h9Uky4HguqZj8EhL-19" value="&lt;div&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;Individual Characteristics&lt;/span&gt;&lt;/div&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;age, gender, race, political tenure,&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;constituency, vote share&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" vertex="1" parent="n5c7h9Uky4HguqZj8EhL-1">
+          <mxGeometry x="490" y="110" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="n5c7h9Uky4HguqZj8EhL-20" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Article speech topics&lt;/span&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" vertex="1" parent="n5c7h9Uky4HguqZj8EhL-1">
+          <mxGeometry x="517.5" y="295" width="185" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="n5c7h9Uky4HguqZj8EhL-21" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Political speech topics&lt;/span&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" vertex="1" parent="n5c7h9Uky4HguqZj8EhL-1">
+          <mxGeometry x="515" y="590" width="172.5" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="n5c7h9Uky4HguqZj8EhL-22" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Article Characteristics&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;Day of week, length, news&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;section, translation, author&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" vertex="1" parent="n5c7h9Uky4HguqZj8EhL-1">
+          <mxGeometry x="517.5" y="190" width="190" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="n5c7h9Uky4HguqZj8EhL-23" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Quote accuracy measures&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;substring, BoW, semantic&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" vertex="1" parent="n5c7h9Uky4HguqZj8EhL-1">
+          <mxGeometry x="510" y="450" width="190" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="n5c7h9Uky4HguqZj8EhL-24" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Language measures&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;lexical richness, readability,&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;objectivity, polarity&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" vertex="1" parent="n5c7h9Uky4HguqZj8EhL-1">
+          <mxGeometry x="515" y="515" width="175" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="n5c7h9Uky4HguqZj8EhL-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="n5c7h9Uky4HguqZj8EhL-1" source="n5c7h9Uky4HguqZj8EhL-28" target="n5c7h9Uky4HguqZj8EhL-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n5c7h9Uky4HguqZj8EhL-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="n5c7h9Uky4HguqZj8EhL-1" source="n5c7h9Uky4HguqZj8EhL-28" target="n5c7h9Uky4HguqZj8EhL-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n5c7h9Uky4HguqZj8EhL-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="n5c7h9Uky4HguqZj8EhL-1" source="n5c7h9Uky4HguqZj8EhL-28" target="n5c7h9Uky4HguqZj8EhL-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n5c7h9Uky4HguqZj8EhL-28" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;Parliamentary Speech corpus&lt;br&gt;(&lt;i&gt;Hansard&lt;/i&gt;)&lt;/font&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" vertex="1" parent="n5c7h9Uky4HguqZj8EhL-1">
+          <mxGeometry x="130.63" y="550" width="206.25" height="49.34" as="geometry" />
+        </mxCell>
+        <mxCell id="n5c7h9Uky4HguqZj8EhL-29" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.documents;" vertex="1" parent="n5c7h9Uky4HguqZj8EhL-1">
+          <mxGeometry x="108.75" y="550" width="17.5" height="21.33" as="geometry" />
+        </mxCell>
+        <mxCell id="n5c7h9Uky4HguqZj8EhL-30" value="LDA" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="n5c7h9Uky4HguqZj8EhL-1">
+          <mxGeometry x="430" y="550" width="20" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="n5c7h9Uky4HguqZj8EhL-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.464;entryY=0.012;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="n5c7h9Uky4HguqZj8EhL-1" source="n5c7h9Uky4HguqZj8EhL-18" target="n5c7h9Uky4HguqZj8EhL-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="n5c7h9Uky4HguqZj8EhL-32" value="LDA" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="n5c7h9Uky4HguqZj8EhL-1">
+          <mxGeometry x="410" y="295" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="n5c7h9Uky4HguqZj8EhL-33" value="&lt;font color=&quot;#6d6d6d&quot;&gt;&lt;b&gt;Statistical&lt;/b&gt;&lt;/font&gt;&lt;div&gt;&lt;font color=&quot;#6d6d6d&quot;&gt;&lt;b&gt;Analyses&lt;/b&gt;&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="n5c7h9Uky4HguqZj8EhL-1">
+          <mxGeometry x="780" y="335" width="100" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="10" id="HBF6mGgUWWVxTevmAIWe">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="XlHqUR4n6BIKkumTH1nv-0" />
+        <mxCell id="XlHqUR4n6BIKkumTH1nv-1" parent="XlHqUR4n6BIKkumTH1nv-0" />
+        <mxCell id="XlHqUR4n6BIKkumTH1nv-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="XlHqUR4n6BIKkumTH1nv-1" source="XlHqUR4n6BIKkumTH1nv-3" target="XlHqUR4n6BIKkumTH1nv-34" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XlHqUR4n6BIKkumTH1nv-3" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eeeeee;strokeColor=#36393d;opacity=40;glass=0;shadow=0;dashed=1;dashPattern=8 8;" parent="XlHqUR4n6BIKkumTH1nv-1" vertex="1">
+          <mxGeometry x="460" y="100" width="290" height="430" as="geometry" />
+        </mxCell>
+        <mxCell id="XlHqUR4n6BIKkumTH1nv-4" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;opacity=40;glass=0;shadow=0;dashed=1;dashPattern=8 8;" parent="XlHqUR4n6BIKkumTH1nv-1" vertex="1">
+          <mxGeometry x="30" y="190" width="400" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="XlHqUR4n6BIKkumTH1nv-5" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Matching Quotes to Speeches&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=left;fontColor=#555555;" parent="XlHqUR4n6BIKkumTH1nv-1" vertex="1">
+          <mxGeometry x="60" y="200" width="270" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="XlHqUR4n6BIKkumTH1nv-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="XlHqUR4n6BIKkumTH1nv-1" source="XlHqUR4n6BIKkumTH1nv-9" target="XlHqUR4n6BIKkumTH1nv-12" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XlHqUR4n6BIKkumTH1nv-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="XlHqUR4n6BIKkumTH1nv-1" source="XlHqUR4n6BIKkumTH1nv-9" target="XlHqUR4n6BIKkumTH1nv-21" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XlHqUR4n6BIKkumTH1nv-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="XlHqUR4n6BIKkumTH1nv-1" source="XlHqUR4n6BIKkumTH1nv-9" target="XlHqUR4n6BIKkumTH1nv-23" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XlHqUR4n6BIKkumTH1nv-9" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;The Straits Times corpus&lt;br&gt;(&lt;i&gt;Factiva&lt;/i&gt;)&lt;/font&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="XlHqUR4n6BIKkumTH1nv-1" vertex="1">
+          <mxGeometry x="152.5" y="240" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="XlHqUR4n6BIKkumTH1nv-10" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.documents;" parent="XlHqUR4n6BIKkumTH1nv-1" vertex="1">
+          <mxGeometry x="130" y="240" width="17.5" height="21.33" as="geometry" />
+        </mxCell>
+        <mxCell id="XlHqUR4n6BIKkumTH1nv-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="XlHqUR4n6BIKkumTH1nv-1" edge="1" target="XlHqUR4n6BIKkumTH1nv-14">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="70" y="268.75" as="sourcePoint" />
+            <mxPoint x="130" y="371" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="80" y="269" />
+              <mxPoint x="80" y="320" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="XlHqUR4n6BIKkumTH1nv-12" value="Random&amp;nbsp;&lt;div&gt;Forest&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="XlHqUR4n6BIKkumTH1nv-1" vertex="1">
+          <mxGeometry x="40" y="245" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="lA9ywTmHUPr70XY2PELu-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="XlHqUR4n6BIKkumTH1nv-1" source="XlHqUR4n6BIKkumTH1nv-14" target="XlHqUR4n6BIKkumTH1nv-16">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="240" y="360" />
+              <mxPoint x="240" y="360" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="XlHqUR4n6BIKkumTH1nv-14" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Quotes of politicians&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;in ST&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="XlHqUR4n6BIKkumTH1nv-1" vertex="1">
+          <mxGeometry x="153.75" y="300" width="157.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="XlHqUR4n6BIKkumTH1nv-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="XlHqUR4n6BIKkumTH1nv-1" source="XlHqUR4n6BIKkumTH1nv-16" target="XlHqUR4n6BIKkumTH1nv-24" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XlHqUR4n6BIKkumTH1nv-16" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;quote-speech pair&lt;/span&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="XlHqUR4n6BIKkumTH1nv-1" vertex="1">
+          <mxGeometry x="152.5" y="360" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="XlHqUR4n6BIKkumTH1nv-17" value="Classify and retrieve&amp;nbsp;&lt;div&gt;quotes&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="XlHqUR4n6BIKkumTH1nv-1" vertex="1">
+          <mxGeometry x="77.5" y="330" width="75" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="XlHqUR4n6BIKkumTH1nv-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="XlHqUR4n6BIKkumTH1nv-1" source="XlHqUR4n6BIKkumTH1nv-19" target="XlHqUR4n6BIKkumTH1nv-20" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XlHqUR4n6BIKkumTH1nv-19" value="&lt;b&gt;&lt;font style=&quot;color: rgb(109, 109, 109);&quot;&gt;Politician metadata&lt;/font&gt;&lt;/b&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;&lt;font style=&quot;color: rgb(109, 109, 109);&quot;&gt;(name, individual profile, political portfolio&lt;/font&gt;&lt;span style=&quot;color: light-dark(rgb(109, 109, 109), rgb(143, 143, 143)); background-color: transparent;&quot;&gt;)&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="XlHqUR4n6BIKkumTH1nv-1" vertex="1">
+          <mxGeometry x="108.75" y="115" width="247.5" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="XlHqUR4n6BIKkumTH1nv-20" value="&lt;div&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;Individual Characteristics&lt;/span&gt;&lt;/div&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;age, gender, race, political tenure,&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;constituency, vote share&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="XlHqUR4n6BIKkumTH1nv-1" vertex="1">
+          <mxGeometry x="510" y="112.5" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="XlHqUR4n6BIKkumTH1nv-21" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Article speech topics&lt;/span&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="XlHqUR4n6BIKkumTH1nv-1" vertex="1">
+          <mxGeometry x="517.5" y="295" width="192.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="XlHqUR4n6BIKkumTH1nv-22" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Political speech topics&lt;/span&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="XlHqUR4n6BIKkumTH1nv-1" vertex="1">
+          <mxGeometry x="513.75" y="420" width="172.5" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="XlHqUR4n6BIKkumTH1nv-23" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Article Characteristics&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;Day of week, length, news&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;section, translation, author&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="XlHqUR4n6BIKkumTH1nv-1" vertex="1">
+          <mxGeometry x="517.5" y="190" width="190" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="XlHqUR4n6BIKkumTH1nv-24" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Quote accuracy measures&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;substring, BoW, semantic&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="XlHqUR4n6BIKkumTH1nv-1" vertex="1">
+          <mxGeometry x="510" y="360" width="190" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="XlHqUR4n6BIKkumTH1nv-25" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Language measures&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;lexical richness, readability,&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;objectivity, polarity&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="XlHqUR4n6BIKkumTH1nv-1" vertex="1">
+          <mxGeometry x="513.75" y="470" width="175" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="XlHqUR4n6BIKkumTH1nv-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="XlHqUR4n6BIKkumTH1nv-1" source="XlHqUR4n6BIKkumTH1nv-29" target="XlHqUR4n6BIKkumTH1nv-25" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XlHqUR4n6BIKkumTH1nv-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="XlHqUR4n6BIKkumTH1nv-1" source="XlHqUR4n6BIKkumTH1nv-29" target="XlHqUR4n6BIKkumTH1nv-22" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lA9ywTmHUPr70XY2PELu-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="XlHqUR4n6BIKkumTH1nv-1" source="XlHqUR4n6BIKkumTH1nv-29" target="XlHqUR4n6BIKkumTH1nv-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XlHqUR4n6BIKkumTH1nv-29" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;Parliamentary Speech corpus&lt;br&gt;(&lt;i&gt;Hansard&lt;/i&gt;)&lt;/font&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="XlHqUR4n6BIKkumTH1nv-1" vertex="1">
+          <mxGeometry x="129.37" y="440" width="206.25" height="49.34" as="geometry" />
+        </mxCell>
+        <mxCell id="XlHqUR4n6BIKkumTH1nv-30" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.documents;" parent="XlHqUR4n6BIKkumTH1nv-1" vertex="1">
+          <mxGeometry x="108.75" y="550" width="17.5" height="21.33" as="geometry" />
+        </mxCell>
+        <mxCell id="XlHqUR4n6BIKkumTH1nv-31" value="LDA" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="XlHqUR4n6BIKkumTH1nv-1" vertex="1">
+          <mxGeometry x="430" y="460" width="20" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="XlHqUR4n6BIKkumTH1nv-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="XlHqUR4n6BIKkumTH1nv-1" source="XlHqUR4n6BIKkumTH1nv-19" target="XlHqUR4n6BIKkumTH1nv-9" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XlHqUR4n6BIKkumTH1nv-33" value="LDA" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="XlHqUR4n6BIKkumTH1nv-1" vertex="1">
+          <mxGeometry x="410" y="300" width="40" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="XlHqUR4n6BIKkumTH1nv-34" value="&lt;font color=&quot;#6d6d6d&quot;&gt;&lt;b&gt;Statistical&lt;/b&gt;&lt;/font&gt;&lt;div&gt;&lt;font color=&quot;#6d6d6d&quot;&gt;&lt;b&gt;Analyses&lt;/b&gt;&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="XlHqUR4n6BIKkumTH1nv-1" vertex="1">
+          <mxGeometry x="780" y="285" width="100" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="11" id="dAZJZ9BFRdInlLrvdJlj">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="j6HM8A7XWpjB6svFlldo-0" />
+        <mxCell id="j6HM8A7XWpjB6svFlldo-1" parent="j6HM8A7XWpjB6svFlldo-0" />
+        <mxCell id="j6HM8A7XWpjB6svFlldo-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="j6HM8A7XWpjB6svFlldo-1" source="j6HM8A7XWpjB6svFlldo-3" target="j6HM8A7XWpjB6svFlldo-34" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="j6HM8A7XWpjB6svFlldo-3" value="&#xa;&lt;i style=&quot;forced-color-adjust: none; color: rgb(0, 0, 0); font-family: Helvetica; font-size: 12px; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(236, 236, 236); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;&quot;&gt;&lt;b style=&quot;forced-color-adjust: none;&quot;&gt;&lt;font style=&quot;forced-color-adjust: none; color: light-dark(rgb(89, 89, 89), rgb(161, 161, 161));&quot; data-mx-given-colors=&quot;{&amp;quot;color&amp;quot;:&amp;quot;#595959&amp;quot;}&quot;&gt;Matching quotes&amp;nbsp;&lt;span style=&quot;forced-color-adjust: none; background-color: transparent;&quot;&gt;to speech&lt;/span&gt;&lt;/font&gt;&lt;/b&gt;&lt;/i&gt;&#xa;&#xa;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eeeeee;strokeColor=#36393d;opacity=40;glass=0;shadow=0;dashed=1;dashPattern=8 8;" parent="j6HM8A7XWpjB6svFlldo-1" vertex="1">
+          <mxGeometry x="460" y="100" width="290" height="440" as="geometry" />
+        </mxCell>
+        <mxCell id="j6HM8A7XWpjB6svFlldo-4" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;opacity=40;glass=0;shadow=0;dashed=1;dashPattern=8 8;" parent="j6HM8A7XWpjB6svFlldo-1" vertex="1">
+          <mxGeometry x="30" y="190" width="400" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="j6HM8A7XWpjB6svFlldo-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="j6HM8A7XWpjB6svFlldo-1" source="j6HM8A7XWpjB6svFlldo-9" target="j6HM8A7XWpjB6svFlldo-12" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="j6HM8A7XWpjB6svFlldo-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="j6HM8A7XWpjB6svFlldo-1" source="j6HM8A7XWpjB6svFlldo-9" target="j6HM8A7XWpjB6svFlldo-21" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="j6HM8A7XWpjB6svFlldo-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="j6HM8A7XWpjB6svFlldo-1" source="j6HM8A7XWpjB6svFlldo-9" target="j6HM8A7XWpjB6svFlldo-23" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="j6HM8A7XWpjB6svFlldo-9" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;The Straits Times corpus&lt;br&gt;(&lt;i&gt;Factiva&lt;/i&gt;)&lt;/font&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="j6HM8A7XWpjB6svFlldo-1" vertex="1">
+          <mxGeometry x="152.5" y="240" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="j6HM8A7XWpjB6svFlldo-10" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.documents;" parent="j6HM8A7XWpjB6svFlldo-1" vertex="1">
+          <mxGeometry x="130" y="240" width="17.5" height="21.33" as="geometry" />
+        </mxCell>
+        <mxCell id="j6HM8A7XWpjB6svFlldo-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="j6HM8A7XWpjB6svFlldo-1" target="j6HM8A7XWpjB6svFlldo-14" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="70" y="268.75" as="sourcePoint" />
+            <mxPoint x="130" y="371" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="80" y="269" />
+              <mxPoint x="80" y="320" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="j6HM8A7XWpjB6svFlldo-12" value="Random&amp;nbsp;&lt;div&gt;Forest&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="j6HM8A7XWpjB6svFlldo-1" vertex="1">
+          <mxGeometry x="40" y="245" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="j6HM8A7XWpjB6svFlldo-13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="j6HM8A7XWpjB6svFlldo-1" source="j6HM8A7XWpjB6svFlldo-14" target="j6HM8A7XWpjB6svFlldo-16" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="240" y="360" />
+              <mxPoint x="240" y="360" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="j6HM8A7XWpjB6svFlldo-14" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Quotes of politicians&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;in ST&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="j6HM8A7XWpjB6svFlldo-1" vertex="1">
+          <mxGeometry x="153.75" y="300" width="157.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="j6HM8A7XWpjB6svFlldo-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="j6HM8A7XWpjB6svFlldo-1" source="j6HM8A7XWpjB6svFlldo-16" target="j6HM8A7XWpjB6svFlldo-24" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="j6HM8A7XWpjB6svFlldo-16" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;quote-speech pair&lt;/span&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="j6HM8A7XWpjB6svFlldo-1" vertex="1">
+          <mxGeometry x="152.5" y="360" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="j6HM8A7XWpjB6svFlldo-17" value="Classify and retrieve&amp;nbsp;&lt;div&gt;quotes&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="j6HM8A7XWpjB6svFlldo-1" vertex="1">
+          <mxGeometry x="77.5" y="330" width="75" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="j6HM8A7XWpjB6svFlldo-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="j6HM8A7XWpjB6svFlldo-1" source="j6HM8A7XWpjB6svFlldo-19" target="j6HM8A7XWpjB6svFlldo-20" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="j6HM8A7XWpjB6svFlldo-19" value="&lt;b&gt;&lt;font style=&quot;color: rgb(109, 109, 109);&quot;&gt;Politician metadata&lt;/font&gt;&lt;/b&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;&lt;font style=&quot;color: rgb(109, 109, 109);&quot;&gt;(name, individual profile, political portfolio&lt;/font&gt;&lt;span style=&quot;color: light-dark(rgb(109, 109, 109), rgb(143, 143, 143)); background-color: transparent;&quot;&gt;)&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="j6HM8A7XWpjB6svFlldo-1" vertex="1">
+          <mxGeometry x="108.75" y="115" width="247.5" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="j6HM8A7XWpjB6svFlldo-20" value="&lt;div&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;Individual Characteristics&lt;/span&gt;&lt;/div&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;age, gender, race, political tenure,&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;constituency, vote share&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="j6HM8A7XWpjB6svFlldo-1" vertex="1">
+          <mxGeometry x="510" y="112.5" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="j6HM8A7XWpjB6svFlldo-21" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Article speech topics&lt;/span&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="j6HM8A7XWpjB6svFlldo-1" vertex="1">
+          <mxGeometry x="517.5" y="295" width="192.5" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="j6HM8A7XWpjB6svFlldo-22" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Political speech topics&lt;/span&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="j6HM8A7XWpjB6svFlldo-1" vertex="1">
+          <mxGeometry x="513.75" y="420" width="172.5" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="j6HM8A7XWpjB6svFlldo-23" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Article Characteristics&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;Day of week, length, news&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;section, translation, author&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="j6HM8A7XWpjB6svFlldo-1" vertex="1">
+          <mxGeometry x="517.5" y="190" width="190" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="j6HM8A7XWpjB6svFlldo-24" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Quote accuracy measures&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;substring, BoW, semantic&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="j6HM8A7XWpjB6svFlldo-1" vertex="1">
+          <mxGeometry x="510" y="360" width="190" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="j6HM8A7XWpjB6svFlldo-25" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Language measures&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;lexical richness, readability,&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;objectivity, polarity&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="j6HM8A7XWpjB6svFlldo-1" vertex="1">
+          <mxGeometry x="513.75" y="470" width="175" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="j6HM8A7XWpjB6svFlldo-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="j6HM8A7XWpjB6svFlldo-1" source="j6HM8A7XWpjB6svFlldo-29" target="j6HM8A7XWpjB6svFlldo-25" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="j6HM8A7XWpjB6svFlldo-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="j6HM8A7XWpjB6svFlldo-1" source="j6HM8A7XWpjB6svFlldo-29" target="j6HM8A7XWpjB6svFlldo-22" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="j6HM8A7XWpjB6svFlldo-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="j6HM8A7XWpjB6svFlldo-1" source="j6HM8A7XWpjB6svFlldo-29" target="j6HM8A7XWpjB6svFlldo-16" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="j6HM8A7XWpjB6svFlldo-29" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;Parliamentary Speech corpus&lt;br&gt;(&lt;i&gt;Hansard&lt;/i&gt;)&lt;/font&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="j6HM8A7XWpjB6svFlldo-1" vertex="1">
+          <mxGeometry x="129.37" y="440" width="206.25" height="49.34" as="geometry" />
+        </mxCell>
+        <mxCell id="j6HM8A7XWpjB6svFlldo-30" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.documents;" parent="j6HM8A7XWpjB6svFlldo-1" vertex="1">
+          <mxGeometry x="106.25" y="438.67" width="17.5" height="21.33" as="geometry" />
+        </mxCell>
+        <mxCell id="j6HM8A7XWpjB6svFlldo-31" value="LDA" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="j6HM8A7XWpjB6svFlldo-1" vertex="1">
+          <mxGeometry x="430" y="460" width="20" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="j6HM8A7XWpjB6svFlldo-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="j6HM8A7XWpjB6svFlldo-1" source="j6HM8A7XWpjB6svFlldo-19" target="j6HM8A7XWpjB6svFlldo-9" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="j6HM8A7XWpjB6svFlldo-33" value="LDA" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="j6HM8A7XWpjB6svFlldo-1" vertex="1">
+          <mxGeometry x="410" y="300" width="40" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="j6HM8A7XWpjB6svFlldo-34" value="&lt;font color=&quot;#6d6d6d&quot;&gt;&lt;b&gt;Statistical&lt;/b&gt;&lt;/font&gt;&lt;div&gt;&lt;font color=&quot;#6d6d6d&quot;&gt;&lt;b&gt;Analyses&lt;/b&gt;&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="j6HM8A7XWpjB6svFlldo-1" vertex="1">
+          <mxGeometry x="780" y="290" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="VJMM4hB72f0jrS-Cobud-0" value="&lt;i&gt;&lt;b&gt;&lt;font style=&quot;color: rgb(89, 89, 89);&quot;&gt;Matching quotes&amp;nbsp;&lt;span style=&quot;background-color: transparent;&quot;&gt;to speech&lt;/span&gt;&lt;/font&gt;&lt;/b&gt;&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="j6HM8A7XWpjB6svFlldo-1">
+          <mxGeometry x="250" y="415" width="160" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="VJMM4hB72f0jrS-Cobud-1" value="&lt;font color=&quot;#595959&quot;&gt;&lt;b&gt;&lt;i&gt;Deriving outcomes and covariates&lt;/i&gt;&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="j6HM8A7XWpjB6svFlldo-1">
+          <mxGeometry x="517.5" y="530" width="200" height="10" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="12" id="DqijQJJEWj5ZEcy3y219">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-0" />
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-1" parent="JY5b1UQt5FGE3FhMmiky-0" />
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="JY5b1UQt5FGE3FhMmiky-1" source="JY5b1UQt5FGE3FhMmiky-3" target="JY5b1UQt5FGE3FhMmiky-33" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-3" value="&lt;div&gt;&lt;br/&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eeeeee;strokeColor=#36393d;opacity=40;glass=0;shadow=0;dashed=1;dashPattern=8 8;strokeWidth=1;" parent="JY5b1UQt5FGE3FhMmiky-1" vertex="1">
+          <mxGeometry x="470" y="140" width="280" height="390" as="geometry" />
+        </mxCell>
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-4" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;opacity=40;glass=0;shadow=0;dashed=1;dashPattern=8 8;" parent="JY5b1UQt5FGE3FhMmiky-1" vertex="1">
+          <mxGeometry x="30" y="220" width="400" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;dashed=1;" parent="JY5b1UQt5FGE3FhMmiky-1" source="JY5b1UQt5FGE3FhMmiky-8" target="JY5b1UQt5FGE3FhMmiky-11" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="JY5b1UQt5FGE3FhMmiky-1" source="JY5b1UQt5FGE3FhMmiky-8" target="JY5b1UQt5FGE3FhMmiky-20" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="JY5b1UQt5FGE3FhMmiky-1" source="JY5b1UQt5FGE3FhMmiky-8" target="JY5b1UQt5FGE3FhMmiky-22" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-8" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;The Straits Times corpus&lt;br&gt;(&lt;i&gt;Factiva&lt;/i&gt;)&lt;/font&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="JY5b1UQt5FGE3FhMmiky-1" vertex="1">
+          <mxGeometry x="152.5" y="240" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-9" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.documents;" parent="JY5b1UQt5FGE3FhMmiky-1" vertex="1">
+          <mxGeometry x="130" y="240" width="17.5" height="21.33" as="geometry" />
+        </mxCell>
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" parent="JY5b1UQt5FGE3FhMmiky-1" target="JY5b1UQt5FGE3FhMmiky-13" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="70" y="268.75" as="sourcePoint" />
+            <mxPoint x="130" y="371" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="80" y="269" />
+              <mxPoint x="80" y="320" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-11" value="Random&amp;nbsp;&lt;div&gt;Forest&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="JY5b1UQt5FGE3FhMmiky-1" vertex="1">
+          <mxGeometry x="40" y="245" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="JY5b1UQt5FGE3FhMmiky-1" source="JY5b1UQt5FGE3FhMmiky-13" target="JY5b1UQt5FGE3FhMmiky-15" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="240" y="360" />
+              <mxPoint x="240" y="360" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-13" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Quotes of politicians&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;in ST&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="JY5b1UQt5FGE3FhMmiky-1" vertex="1">
+          <mxGeometry x="153.75" y="300" width="157.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="JY5b1UQt5FGE3FhMmiky-1" source="JY5b1UQt5FGE3FhMmiky-15" target="JY5b1UQt5FGE3FhMmiky-23" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-15" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;quote-speech pair&lt;/span&gt;" style="rounded=1;fontStyle=1;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;fillColor=#cce5ff;strokeColor=#36393d;opacity=40;" parent="JY5b1UQt5FGE3FhMmiky-1" vertex="1">
+          <mxGeometry x="152.5" y="360" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-16" value="Classify and retrieve&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;quotes&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="JY5b1UQt5FGE3FhMmiky-1" vertex="1">
+          <mxGeometry x="60" y="320" width="102.5" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="JY5b1UQt5FGE3FhMmiky-1" source="JY5b1UQt5FGE3FhMmiky-18" target="JY5b1UQt5FGE3FhMmiky-19" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-18" value="&lt;b&gt;&lt;font style=&quot;color: rgb(109, 109, 109);&quot;&gt;Politician metadata&lt;/font&gt;&lt;/b&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;&lt;font style=&quot;color: rgb(109, 109, 109);&quot;&gt;(name, individual profile, political portfolio&lt;/font&gt;&lt;span style=&quot;color: light-dark(rgb(109, 109, 109), rgb(143, 143, 143)); background-color: transparent;&quot;&gt;)&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="JY5b1UQt5FGE3FhMmiky-1" vertex="1">
+          <mxGeometry x="108.74" y="160" width="247.5" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-19" value="&lt;div&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;Individual Characteristics&lt;/span&gt;&lt;/div&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;age, gender, race, political tenure,&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;constituency, vote share&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="JY5b1UQt5FGE3FhMmiky-1" vertex="1">
+          <mxGeometry x="510" y="152.5" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-20" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Article speech topics&lt;/span&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="JY5b1UQt5FGE3FhMmiky-1" vertex="1">
+          <mxGeometry x="513.75" y="302.5" width="192.5" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-21" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Political speech topics&lt;/span&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="JY5b1UQt5FGE3FhMmiky-1" vertex="1">
+          <mxGeometry x="523.75" y="480" width="172.5" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-22" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Article Characteristics&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;Day of week, length, news&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;section, translation, author&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="JY5b1UQt5FGE3FhMmiky-1" vertex="1">
+          <mxGeometry x="515" y="240" width="190" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-23" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Quote accuracy measures&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;substring, BoW, semantic&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;fillColor=#cce5ff;strokeColor=#36393d;opacity=40;" parent="JY5b1UQt5FGE3FhMmiky-1" vertex="1">
+          <mxGeometry x="507.5" y="350" width="205" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-24" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Language measures&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;lexical richness, readability,&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;objectivity, polarity&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="JY5b1UQt5FGE3FhMmiky-1" vertex="1">
+          <mxGeometry x="522.5" y="422.5" width="175" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="JY5b1UQt5FGE3FhMmiky-1" source="JY5b1UQt5FGE3FhMmiky-28" target="JY5b1UQt5FGE3FhMmiky-24" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="JY5b1UQt5FGE3FhMmiky-1" source="JY5b1UQt5FGE3FhMmiky-28" target="JY5b1UQt5FGE3FhMmiky-21" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="JY5b1UQt5FGE3FhMmiky-1" source="JY5b1UQt5FGE3FhMmiky-28" target="JY5b1UQt5FGE3FhMmiky-15" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-28" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;Parliamentary Speech corpus&lt;br&gt;(&lt;i&gt;Hansard&lt;/i&gt;)&lt;/font&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="JY5b1UQt5FGE3FhMmiky-1" vertex="1">
+          <mxGeometry x="129.37" y="425" width="206.25" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-29" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.documents;" parent="JY5b1UQt5FGE3FhMmiky-1" vertex="1">
+          <mxGeometry x="106.25" y="425" width="17.5" height="21.33" as="geometry" />
+        </mxCell>
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-30" value="&lt;i&gt;LDA&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="JY5b1UQt5FGE3FhMmiky-1" vertex="1">
+          <mxGeometry x="485" y="480" width="30" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="JY5b1UQt5FGE3FhMmiky-1" source="JY5b1UQt5FGE3FhMmiky-18" target="JY5b1UQt5FGE3FhMmiky-8" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-32" value="&lt;i&gt;LDA&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="JY5b1UQt5FGE3FhMmiky-1" vertex="1">
+          <mxGeometry x="470" y="305" width="40" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-33" value="&lt;font color=&quot;#6d6d6d&quot;&gt;&lt;b&gt;Statistical&lt;/b&gt;&lt;/font&gt;&lt;div&gt;&lt;font color=&quot;#6d6d6d&quot;&gt;&lt;b&gt;Analyses&lt;/b&gt;&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" parent="JY5b1UQt5FGE3FhMmiky-1" vertex="1">
+          <mxGeometry x="770" y="305" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-34" value="&lt;i&gt;&lt;b&gt;&lt;font style=&quot;color: rgb(89, 89, 89);&quot;&gt;Matching quotes&amp;nbsp;&lt;span style=&quot;background-color: transparent;&quot;&gt;to speech&lt;/span&gt;&lt;/font&gt;&lt;/b&gt;&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="JY5b1UQt5FGE3FhMmiky-1" vertex="1">
+          <mxGeometry x="260" y="400" width="160" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="JY5b1UQt5FGE3FhMmiky-35" value="&lt;font color=&quot;#595959&quot;&gt;&lt;b&gt;&lt;i&gt;Deriving outcomes and covariates&lt;/i&gt;&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="JY5b1UQt5FGE3FhMmiky-1" vertex="1">
+          <mxGeometry x="530" y="520" width="200" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="EidwTuByRBS3U6pHvAlx-1" value="&lt;i&gt;NLP&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="JY5b1UQt5FGE3FhMmiky-1">
+          <mxGeometry x="470" y="360" width="30" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="EidwTuByRBS3U6pHvAlx-2" value="&lt;i&gt;NLP&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="JY5b1UQt5FGE3FhMmiky-1">
+          <mxGeometry x="485" y="430" width="30" height="16.33" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="13" id="8N0XJ1jvC-1j7s01A8kh">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-0" />
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-1" parent="t41ZJS53YwyJFkIyEJHC-0" />
+        <mxCell id="ptaLcDkZa90rErF8NqRM-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="t41ZJS53YwyJFkIyEJHC-1" source="t41ZJS53YwyJFkIyEJHC-3" target="t41ZJS53YwyJFkIyEJHC-33">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="770" y="493" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-3" value="&lt;div&gt;&lt;br/&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eeeeee;strokeColor=#36393d;opacity=40;glass=0;shadow=0;dashed=1;dashPattern=8 8;strokeWidth=1;" vertex="1" parent="t41ZJS53YwyJFkIyEJHC-1">
+          <mxGeometry x="470" y="140" width="280" height="390" as="geometry" />
+        </mxCell>
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-4" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;opacity=40;glass=0;shadow=0;dashed=1;dashPattern=8 8;" vertex="1" parent="t41ZJS53YwyJFkIyEJHC-1">
+          <mxGeometry x="30" y="220" width="400" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;dashed=1;" edge="1" parent="t41ZJS53YwyJFkIyEJHC-1" source="t41ZJS53YwyJFkIyEJHC-8" target="t41ZJS53YwyJFkIyEJHC-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="t41ZJS53YwyJFkIyEJHC-1" source="t41ZJS53YwyJFkIyEJHC-8" target="t41ZJS53YwyJFkIyEJHC-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="t41ZJS53YwyJFkIyEJHC-1" source="t41ZJS53YwyJFkIyEJHC-8" target="t41ZJS53YwyJFkIyEJHC-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-8" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;The Straits Times corpus&lt;br&gt;(&lt;i&gt;Factiva&lt;/i&gt;)&lt;/font&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" vertex="1" parent="t41ZJS53YwyJFkIyEJHC-1">
+          <mxGeometry x="152.5" y="240" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-9" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.documents;" vertex="1" parent="t41ZJS53YwyJFkIyEJHC-1">
+          <mxGeometry x="130" y="240" width="17.5" height="21.33" as="geometry" />
+        </mxCell>
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="t41ZJS53YwyJFkIyEJHC-1" target="t41ZJS53YwyJFkIyEJHC-13">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="70" y="268.75" as="sourcePoint" />
+            <mxPoint x="130" y="371" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="80" y="269" />
+              <mxPoint x="80" y="320" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-11" value="Random&amp;nbsp;&lt;div&gt;Forest&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="t41ZJS53YwyJFkIyEJHC-1">
+          <mxGeometry x="40" y="245" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="t41ZJS53YwyJFkIyEJHC-1" source="t41ZJS53YwyJFkIyEJHC-13" target="t41ZJS53YwyJFkIyEJHC-15">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="240" y="360" />
+              <mxPoint x="240" y="360" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-13" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Quotes of politicians&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;in ST&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" vertex="1" parent="t41ZJS53YwyJFkIyEJHC-1">
+          <mxGeometry x="153.75" y="300" width="157.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="t41ZJS53YwyJFkIyEJHC-1" source="t41ZJS53YwyJFkIyEJHC-15">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="760" y="375" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-15" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;quote-speech pair&lt;/span&gt;" style="rounded=1;fontStyle=1;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#b85450;opacity=10;" vertex="1" parent="t41ZJS53YwyJFkIyEJHC-1">
+          <mxGeometry x="152.5" y="360" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-16" value="Classify and retrieve&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;quotes&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="t41ZJS53YwyJFkIyEJHC-1">
+          <mxGeometry x="60" y="320" width="102.5" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="t41ZJS53YwyJFkIyEJHC-1" source="t41ZJS53YwyJFkIyEJHC-18" target="t41ZJS53YwyJFkIyEJHC-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-18" value="&lt;b&gt;&lt;font style=&quot;color: rgb(109, 109, 109);&quot;&gt;Politician metadata&lt;/font&gt;&lt;/b&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;&lt;font style=&quot;color: rgb(109, 109, 109);&quot;&gt;(name, individual profile, political portfolio&lt;/font&gt;&lt;span style=&quot;color: light-dark(rgb(109, 109, 109), rgb(143, 143, 143)); background-color: transparent;&quot;&gt;)&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="t41ZJS53YwyJFkIyEJHC-1">
+          <mxGeometry x="108.74" y="160" width="247.5" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-19" value="&lt;div&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;Individual Characteristics&lt;/span&gt;&lt;/div&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;age, gender, race, political tenure,&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;constituency, vote share&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" vertex="1" parent="t41ZJS53YwyJFkIyEJHC-1">
+          <mxGeometry x="510" y="152.5" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-20" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Article speech topics&lt;/span&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" vertex="1" parent="t41ZJS53YwyJFkIyEJHC-1">
+          <mxGeometry x="513.75" y="302.5" width="192.5" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-21" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Political speech topics&lt;/span&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" vertex="1" parent="t41ZJS53YwyJFkIyEJHC-1">
+          <mxGeometry x="523.75" y="480" width="172.5" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-22" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Article Characteristics&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;Day of week, length, news&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;section, translation, author&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" vertex="1" parent="t41ZJS53YwyJFkIyEJHC-1">
+          <mxGeometry x="515" y="240" width="190" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="YueYReUqvLQMnyNOU2lN-1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="t41ZJS53YwyJFkIyEJHC-1" target="t41ZJS53YwyJFkIyEJHC-33">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="830" y="412.5" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-24" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Language measures&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;lexical richness, readability,&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;objectivity, polarity&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" vertex="1" parent="t41ZJS53YwyJFkIyEJHC-1">
+          <mxGeometry x="522.5" y="422.5" width="175" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="t41ZJS53YwyJFkIyEJHC-1" source="t41ZJS53YwyJFkIyEJHC-28" target="t41ZJS53YwyJFkIyEJHC-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="t41ZJS53YwyJFkIyEJHC-1" source="t41ZJS53YwyJFkIyEJHC-28" target="t41ZJS53YwyJFkIyEJHC-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="t41ZJS53YwyJFkIyEJHC-1" source="t41ZJS53YwyJFkIyEJHC-28" target="t41ZJS53YwyJFkIyEJHC-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-28" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;Parliamentary Speech corpus&lt;br&gt;(&lt;i&gt;Hansard&lt;/i&gt;)&lt;/font&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" vertex="1" parent="t41ZJS53YwyJFkIyEJHC-1">
+          <mxGeometry x="129.37" y="425" width="206.25" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-29" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.documents;" vertex="1" parent="t41ZJS53YwyJFkIyEJHC-1">
+          <mxGeometry x="106.25" y="425" width="17.5" height="21.33" as="geometry" />
+        </mxCell>
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-30" value="&lt;i&gt;LDA&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="t41ZJS53YwyJFkIyEJHC-1">
+          <mxGeometry x="485" y="480" width="30" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="t41ZJS53YwyJFkIyEJHC-1" source="t41ZJS53YwyJFkIyEJHC-18" target="t41ZJS53YwyJFkIyEJHC-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-32" value="&lt;i&gt;LDA&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="t41ZJS53YwyJFkIyEJHC-1">
+          <mxGeometry x="470" y="305" width="40" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-33" value="&lt;font color=&quot;#6d6d6d&quot;&gt;&lt;b&gt;Statistical&lt;/b&gt;&lt;/font&gt;&lt;div&gt;&lt;font color=&quot;#6d6d6d&quot;&gt;&lt;b&gt;Analyses&lt;/b&gt;&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" vertex="1" parent="t41ZJS53YwyJFkIyEJHC-1">
+          <mxGeometry x="785" y="465" width="90" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-34" value="&lt;i&gt;&lt;b&gt;&lt;font style=&quot;color: rgb(89, 89, 89);&quot;&gt;Matching quotes&amp;nbsp;&lt;span style=&quot;background-color: transparent;&quot;&gt;to speech&lt;/span&gt;&lt;/font&gt;&lt;/b&gt;&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="t41ZJS53YwyJFkIyEJHC-1">
+          <mxGeometry x="250" y="400" width="160" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-35" value="&lt;font color=&quot;#595959&quot;&gt;&lt;b&gt;&lt;i&gt;Deriving covariates&lt;/i&gt;&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="t41ZJS53YwyJFkIyEJHC-1">
+          <mxGeometry x="600" y="520" width="120" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-36" value="&lt;i&gt;NLP&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="t41ZJS53YwyJFkIyEJHC-1">
+          <mxGeometry x="730" y="360" width="30" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="t41ZJS53YwyJFkIyEJHC-37" value="&lt;i&gt;NLP&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="t41ZJS53YwyJFkIyEJHC-1">
+          <mxGeometry x="485" y="430" width="30" height="16.33" as="geometry" />
+        </mxCell>
+        <mxCell id="ptaLcDkZa90rErF8NqRM-6" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Quotation&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px; background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Accuracy&lt;/span&gt;&lt;div&gt;&lt;div&gt;&lt;ol&gt;&lt;li style=&quot;text-align: left;&quot;&gt;substring&lt;br&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;(&lt;/span&gt;&lt;i style=&quot;font-weight: normal;&quot;&gt;verbatim/lexical&lt;/i&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;)&lt;/span&gt;&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;BoW&lt;br&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;(&lt;i&gt;verbatim/lexical&lt;/i&gt;)&lt;/span&gt;&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;2-stage encoder&lt;span style=&quot;font-weight: normal;&quot;&gt; (&lt;i&gt;semantic&lt;/i&gt;)&lt;/span&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/div&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#b85450;opacity=10;" vertex="1" parent="t41ZJS53YwyJFkIyEJHC-1">
+          <mxGeometry x="760" y="250" width="150" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="ptaLcDkZa90rErF8NqRM-9" value="&lt;i&gt;Outcome meaures&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="t41ZJS53YwyJFkIyEJHC-1">
+          <mxGeometry x="840" y="418" width="40" height="15" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="14" id="pKh49JYoPRxwkx6PMV9-">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-0" />
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-1" parent="VRu2_y-rdKp5lAXDsuuq-0" />
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="VRu2_y-rdKp5lAXDsuuq-1" source="VRu2_y-rdKp5lAXDsuuq-3" target="VRu2_y-rdKp5lAXDsuuq-33">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="770" y="458" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-3" value="&lt;div&gt;&lt;br/&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eeeeee;strokeColor=#000000;opacity=15;glass=0;shadow=0;dashed=1;strokeWidth=1;" vertex="1" parent="VRu2_y-rdKp5lAXDsuuq-1">
+          <mxGeometry x="470" y="150" width="280" height="340" as="geometry" />
+        </mxCell>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-4" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#000000;opacity=15;glass=0;shadow=0;dashed=1;" vertex="1" parent="VRu2_y-rdKp5lAXDsuuq-1">
+          <mxGeometry x="30" y="220" width="400" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;dashed=1;" edge="1" parent="VRu2_y-rdKp5lAXDsuuq-1" source="VRu2_y-rdKp5lAXDsuuq-8" target="VRu2_y-rdKp5lAXDsuuq-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="VRu2_y-rdKp5lAXDsuuq-1" source="VRu2_y-rdKp5lAXDsuuq-8" target="VRu2_y-rdKp5lAXDsuuq-20">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="430" y="265" />
+              <mxPoint x="430" y="320" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="VRu2_y-rdKp5lAXDsuuq-1" source="VRu2_y-rdKp5lAXDsuuq-8" target="VRu2_y-rdKp5lAXDsuuq-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-8" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;The Straits Times corpus&lt;br&gt;(&lt;i&gt;Factiva&lt;/i&gt;)&lt;/font&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" vertex="1" parent="VRu2_y-rdKp5lAXDsuuq-1">
+          <mxGeometry x="152.5" y="240" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="VRu2_y-rdKp5lAXDsuuq-1" target="VRu2_y-rdKp5lAXDsuuq-13">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="70" y="268.75" as="sourcePoint" />
+            <mxPoint x="130" y="371" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="80" y="269" />
+              <mxPoint x="80" y="320" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-11" value="Random&amp;nbsp;&lt;div&gt;Forest&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" vertex="1" parent="VRu2_y-rdKp5lAXDsuuq-1">
+          <mxGeometry x="40" y="245" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="VRu2_y-rdKp5lAXDsuuq-1" source="VRu2_y-rdKp5lAXDsuuq-13" target="VRu2_y-rdKp5lAXDsuuq-15">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="240" y="360" />
+              <mxPoint x="240" y="360" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-13" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Quotes of politicians&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;in ST&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" vertex="1" parent="VRu2_y-rdKp5lAXDsuuq-1">
+          <mxGeometry x="153.75" y="300" width="157.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="VRu2_y-rdKp5lAXDsuuq-1" source="VRu2_y-rdKp5lAXDsuuq-15">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="760" y="375" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-15" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;quote-speech pair&lt;/span&gt;" style="rounded=1;fontStyle=1;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#b85450;opacity=10;" vertex="1" parent="VRu2_y-rdKp5lAXDsuuq-1">
+          <mxGeometry x="156.24" y="360" width="152.5" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-16" value="Classify and retrieve&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;quotes&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="VRu2_y-rdKp5lAXDsuuq-1">
+          <mxGeometry x="60" y="320" width="102.5" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="VRu2_y-rdKp5lAXDsuuq-1" source="VRu2_y-rdKp5lAXDsuuq-18" target="VRu2_y-rdKp5lAXDsuuq-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-18" value="&lt;b&gt;&lt;font style=&quot;color: rgb(109, 109, 109);&quot;&gt;Politician metadata&lt;/font&gt;&lt;/b&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;&lt;font style=&quot;color: rgb(109, 109, 109);&quot;&gt;(name, individual profile, political portfolio&lt;/font&gt;&lt;span style=&quot;color: light-dark(rgb(109, 109, 109), rgb(143, 143, 143)); background-color: transparent;&quot;&gt;)&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="VRu2_y-rdKp5lAXDsuuq-1">
+          <mxGeometry x="108.74" y="160" width="247.5" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-19" value="&lt;div&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;Individual Characteristics&lt;/span&gt;&lt;/div&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;age, gender, race, political tenure,&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;constituency, vote share&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;glass=0;arcSize=0;strokeColor=#4D4D4D;" vertex="1" parent="VRu2_y-rdKp5lAXDsuuq-1">
+          <mxGeometry x="510" y="160" width="200" height="46.25" as="geometry" />
+        </mxCell>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-20" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Article speech topics&lt;/span&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;arcSize=0;strokeColor=#4D4D4D;" vertex="1" parent="VRu2_y-rdKp5lAXDsuuq-1">
+          <mxGeometry x="515" y="302.5" width="186.25" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-21" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Political speech topics&lt;/span&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;arcSize=0;strokeColor=#4D4D4D;" vertex="1" parent="VRu2_y-rdKp5lAXDsuuq-1">
+          <mxGeometry x="523.75" y="380" width="172.5" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-22" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Article Characteristics&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;day of week, length, news&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;section, translation, author&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;arcSize=0;strokeColor=#4D4D4D;" vertex="1" parent="VRu2_y-rdKp5lAXDsuuq-1">
+          <mxGeometry x="515" y="240" width="190" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-24" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Language measures&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;lexical richness, readability,&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;objectivity, polarity&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;gradientColor=none;arcSize=0;strokeColor=#4D4D4D;" vertex="1" parent="VRu2_y-rdKp5lAXDsuuq-1">
+          <mxGeometry x="522.5" y="422.5" width="175" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="VRu2_y-rdKp5lAXDsuuq-1" source="VRu2_y-rdKp5lAXDsuuq-28" target="VRu2_y-rdKp5lAXDsuuq-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="VRu2_y-rdKp5lAXDsuuq-1" source="VRu2_y-rdKp5lAXDsuuq-28" target="VRu2_y-rdKp5lAXDsuuq-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="VRu2_y-rdKp5lAXDsuuq-1" source="VRu2_y-rdKp5lAXDsuuq-28" target="VRu2_y-rdKp5lAXDsuuq-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-28" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;Parliamentary Speech corpus&lt;br&gt;(&lt;i&gt;Hansard&lt;/i&gt;)&lt;/font&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" vertex="1" parent="VRu2_y-rdKp5lAXDsuuq-1">
+          <mxGeometry x="130" y="425" width="205.62" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-29" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.documents;" vertex="1" parent="VRu2_y-rdKp5lAXDsuuq-1">
+          <mxGeometry x="110" y="425" width="13.75" height="16.76" as="geometry" />
+        </mxCell>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-30" value="&lt;i&gt;LDA&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="VRu2_y-rdKp5lAXDsuuq-1">
+          <mxGeometry x="485" y="400" width="30" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="VRu2_y-rdKp5lAXDsuuq-1" source="VRu2_y-rdKp5lAXDsuuq-18" target="VRu2_y-rdKp5lAXDsuuq-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-32" value="&lt;i&gt;LDA&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="VRu2_y-rdKp5lAXDsuuq-1">
+          <mxGeometry x="480" y="305" width="30" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-33" value="&lt;font color=&quot;#6d6d6d&quot;&gt;&lt;b&gt;Statistical&lt;/b&gt;&lt;/font&gt;&lt;div&gt;&lt;font color=&quot;#6d6d6d&quot;&gt;&lt;b&gt;Analyses&lt;/b&gt;&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" vertex="1" parent="VRu2_y-rdKp5lAXDsuuq-1">
+          <mxGeometry x="785" y="430" width="90" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-34" value="&lt;i&gt;&lt;b&gt;&lt;font style=&quot;color: rgb(89, 89, 89);&quot;&gt;Matching quotes&amp;nbsp;&lt;span style=&quot;background-color: transparent;&quot;&gt;to speech&lt;/span&gt;&lt;/font&gt;&lt;/b&gt;&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="VRu2_y-rdKp5lAXDsuuq-1">
+          <mxGeometry x="250" y="400" width="160" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-35" value="&lt;font color=&quot;#595959&quot;&gt;&lt;b&gt;&lt;i&gt;Deriving covariates&lt;/i&gt;&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="VRu2_y-rdKp5lAXDsuuq-1">
+          <mxGeometry x="600" y="480" width="120" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-36" value="&lt;i&gt;NLP&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="VRu2_y-rdKp5lAXDsuuq-1">
+          <mxGeometry x="730" y="360" width="30" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-37" value="&lt;i&gt;NLP&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="VRu2_y-rdKp5lAXDsuuq-1">
+          <mxGeometry x="485" y="430" width="30" height="16.33" as="geometry" />
+        </mxCell>
+        <mxCell id="RuH1D5xzOImtyIx0L6dG-0" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="VRu2_y-rdKp5lAXDsuuq-1" source="VRu2_y-rdKp5lAXDsuuq-38" target="VRu2_y-rdKp5lAXDsuuq-33">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-38" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Quotation&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px; background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Accuracy&lt;/span&gt;&lt;div&gt;&lt;div&gt;&lt;ol&gt;&lt;li style=&quot;text-align: left;&quot;&gt;Substring&lt;br&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;(&lt;/span&gt;&lt;i style=&quot;font-weight: normal;&quot;&gt;verbatim/lexical&lt;/i&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;)&lt;/span&gt;&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;BoW&lt;br&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;(&lt;i&gt;verbatim/lexical&lt;/i&gt;)&lt;/span&gt;&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;2-stage encoder&lt;span style=&quot;font-weight: normal;&quot;&gt; (&lt;i&gt;semantic&lt;/i&gt;)&lt;/span&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/div&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#b85450;opacity=8;" vertex="1" parent="VRu2_y-rdKp5lAXDsuuq-1">
+          <mxGeometry x="760" y="230" width="140" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="VRu2_y-rdKp5lAXDsuuq-39" value="&lt;i&gt;Outcome meaures&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="VRu2_y-rdKp5lAXDsuuq-1">
+          <mxGeometry x="837.5" y="395.5" width="40" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="nlQKtGCz-BNa_d5sG2ub-0" value="" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://icons.diagrams.net/icon-cache1/Currency__Cryptocurrency__Blockchain__FinTech__Free_-2217/Cryptocurrency_SHA-256-41-771.svg" vertex="1" parent="VRu2_y-rdKp5lAXDsuuq-1">
+          <mxGeometry x="136.25" y="360" width="17.5" height="17.5" as="geometry" />
+        </mxCell>
+        <mxCell id="nlQKtGCz-BNa_d5sG2ub-1" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.documents;" vertex="1" parent="VRu2_y-rdKp5lAXDsuuq-1">
+          <mxGeometry x="136.25" y="240" width="13.75" height="16.76" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="15" id="ZLLr5M7ESmTbfyAtNqQx">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-0" />
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-1" parent="gC5I-MwX4mxY7iZfyVKU-0" />
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="gC5I-MwX4mxY7iZfyVKU-1" source="gC5I-MwX4mxY7iZfyVKU-3" target="gC5I-MwX4mxY7iZfyVKU-31">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="770" y="463" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-3" value="&lt;div&gt;&lt;br/&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eeeeee;strokeColor=#000000;opacity=20;glass=0;shadow=0;dashed=1;strokeWidth=1;arcSize=0;" vertex="1" parent="gC5I-MwX4mxY7iZfyVKU-1">
+          <mxGeometry x="470" y="150" width="280" height="340" as="geometry" />
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-4" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#000000;opacity=15;glass=0;shadow=0;dashed=1;arcSize=0;" vertex="1" parent="gC5I-MwX4mxY7iZfyVKU-1">
+          <mxGeometry x="50" y="220" width="360" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;dashed=1;" edge="1" parent="gC5I-MwX4mxY7iZfyVKU-1" source="gC5I-MwX4mxY7iZfyVKU-8" target="gC5I-MwX4mxY7iZfyVKU-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="gC5I-MwX4mxY7iZfyVKU-1" source="gC5I-MwX4mxY7iZfyVKU-8" target="gC5I-MwX4mxY7iZfyVKU-19">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="430" y="265" />
+              <mxPoint x="430" y="320" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="gC5I-MwX4mxY7iZfyVKU-1" source="gC5I-MwX4mxY7iZfyVKU-8" target="gC5I-MwX4mxY7iZfyVKU-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-8" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;The Straits Times corpus&lt;br&gt;(&lt;i&gt;Factiva&lt;/i&gt;)&lt;/font&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" vertex="1" parent="gC5I-MwX4mxY7iZfyVKU-1">
+          <mxGeometry x="152.5" y="240" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="gC5I-MwX4mxY7iZfyVKU-1" target="gC5I-MwX4mxY7iZfyVKU-12">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="70" y="268.75" as="sourcePoint" />
+            <mxPoint x="130" y="371" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="90" y="269" />
+              <mxPoint x="90" y="320" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-10" value="Random&amp;nbsp;&lt;div&gt;Forest&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" vertex="1" parent="gC5I-MwX4mxY7iZfyVKU-1">
+          <mxGeometry x="60" y="250" width="60" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="gC5I-MwX4mxY7iZfyVKU-1" source="gC5I-MwX4mxY7iZfyVKU-12" target="gC5I-MwX4mxY7iZfyVKU-14">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="240" y="360" />
+              <mxPoint x="240" y="360" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-12" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Quotes of politicians&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;in ST&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" vertex="1" parent="gC5I-MwX4mxY7iZfyVKU-1">
+          <mxGeometry x="153.75" y="300" width="157.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=1 1;" edge="1" parent="gC5I-MwX4mxY7iZfyVKU-1" source="gC5I-MwX4mxY7iZfyVKU-14">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="760" y="375" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-14" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;quote-speech pair&lt;/span&gt;" style="rounded=1;fontStyle=1;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#b85450;opacity=10;" vertex="1" parent="gC5I-MwX4mxY7iZfyVKU-1">
+          <mxGeometry x="156.24" y="360" width="152.5" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-15" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;Classify and retrieve&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;quotes&lt;/span&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="gC5I-MwX4mxY7iZfyVKU-1">
+          <mxGeometry x="60" y="320" width="102.5" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="gC5I-MwX4mxY7iZfyVKU-1" source="gC5I-MwX4mxY7iZfyVKU-17" target="gC5I-MwX4mxY7iZfyVKU-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-17" value="&lt;b&gt;&lt;font style=&quot;color: rgb(109, 109, 109);&quot;&gt;Politician metadata&lt;/font&gt;&lt;/b&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;&lt;font style=&quot;color: rgb(109, 109, 109);&quot;&gt;(name, individual profile, political portfolio&lt;/font&gt;&lt;span style=&quot;color: light-dark(rgb(109, 109, 109), rgb(143, 143, 143)); background-color: transparent;&quot;&gt;)&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="gC5I-MwX4mxY7iZfyVKU-1">
+          <mxGeometry x="108.74" y="160" width="247.5" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-18" value="&lt;div&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;Individual Characteristics&lt;/span&gt;&lt;/div&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;party, age,&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;span style=&quot;font-size: 11px; font-weight: 400;&quot;&gt;political tenure&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;gender,&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;race,&lt;/font&gt;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(109, 109, 109), rgb(143, 143, 143)); font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(109, 109, 109), rgb(143, 143, 143)); font-size: 11px; font-weight: normal;&quot;&gt;constituency, vote share&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;glass=0;arcSize=0;strokeColor=#4D4D4D;dashed=1;" vertex="1" parent="gC5I-MwX4mxY7iZfyVKU-1">
+          <mxGeometry x="510" y="160" width="200" height="46.25" as="geometry" />
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-19" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Article speech topics&lt;/span&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;arcSize=0;strokeColor=#4D4D4D;dashed=1;" vertex="1" parent="gC5I-MwX4mxY7iZfyVKU-1">
+          <mxGeometry x="515" y="302.5" width="186.25" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-20" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Political speech topics&lt;/span&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;arcSize=0;strokeColor=#4D4D4D;dashed=1;" vertex="1" parent="gC5I-MwX4mxY7iZfyVKU-1">
+          <mxGeometry x="523.75" y="380" width="172.5" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-21" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Article Characteristics&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;day of week, length, news&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;section, translation, author&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;arcSize=0;strokeColor=#4D4D4D;dashed=1;" vertex="1" parent="gC5I-MwX4mxY7iZfyVKU-1">
+          <mxGeometry x="515" y="240" width="190" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-22" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Language measures&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;lexical richness, readability,&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;objectivity, polarity&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;gradientColor=none;arcSize=0;strokeColor=#4D4D4D;dashed=1;" vertex="1" parent="gC5I-MwX4mxY7iZfyVKU-1">
+          <mxGeometry x="522.5" y="422.5" width="175" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="gC5I-MwX4mxY7iZfyVKU-1" source="gC5I-MwX4mxY7iZfyVKU-26" target="gC5I-MwX4mxY7iZfyVKU-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="gC5I-MwX4mxY7iZfyVKU-1" source="gC5I-MwX4mxY7iZfyVKU-26" target="gC5I-MwX4mxY7iZfyVKU-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="gC5I-MwX4mxY7iZfyVKU-1" source="gC5I-MwX4mxY7iZfyVKU-26" target="gC5I-MwX4mxY7iZfyVKU-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-26" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;Parliamentary Speech corpus&lt;br&gt;(&lt;i&gt;Hansard&lt;/i&gt;)&lt;/font&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" vertex="1" parent="gC5I-MwX4mxY7iZfyVKU-1">
+          <mxGeometry x="134.68" y="425" width="195.62" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-27" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.documents;" vertex="1" parent="gC5I-MwX4mxY7iZfyVKU-1">
+          <mxGeometry x="120" y="425" width="13.75" height="16.76" as="geometry" />
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-28" value="&lt;i&gt;LDA&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="gC5I-MwX4mxY7iZfyVKU-1">
+          <mxGeometry x="485" y="400" width="30" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="gC5I-MwX4mxY7iZfyVKU-1" source="gC5I-MwX4mxY7iZfyVKU-17" target="gC5I-MwX4mxY7iZfyVKU-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-30" value="&lt;i&gt;LDA&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="gC5I-MwX4mxY7iZfyVKU-1">
+          <mxGeometry x="480" y="300" width="30" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-31" value="&lt;font color=&quot;#6d6d6d&quot;&gt;&lt;b&gt;Statistical&lt;/b&gt;&lt;/font&gt;&lt;div&gt;&lt;font color=&quot;#6d6d6d&quot;&gt;&lt;b&gt;Analyses&lt;/b&gt;&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;dashPattern=1 1;" vertex="1" parent="gC5I-MwX4mxY7iZfyVKU-1">
+          <mxGeometry x="790" y="435" width="90" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-32" value="&lt;i&gt;&lt;b&gt;&lt;font style=&quot;color: rgb(89, 89, 89);&quot;&gt;Matching quotes&amp;nbsp;&lt;span style=&quot;background-color: transparent;&quot;&gt;to speech&lt;/span&gt;&lt;/font&gt;&lt;/b&gt;&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="gC5I-MwX4mxY7iZfyVKU-1">
+          <mxGeometry x="250" y="400" width="160" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-34" value="&lt;i&gt;NLP&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="gC5I-MwX4mxY7iZfyVKU-1">
+          <mxGeometry x="730" y="360" width="30" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-35" value="&lt;i&gt;NLP&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="gC5I-MwX4mxY7iZfyVKU-1">
+          <mxGeometry x="485" y="430" width="30" height="16.33" as="geometry" />
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-36" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="gC5I-MwX4mxY7iZfyVKU-1" source="gC5I-MwX4mxY7iZfyVKU-37" target="gC5I-MwX4mxY7iZfyVKU-31">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-37" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Quotation&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px; background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Accuracy&lt;/span&gt;&lt;div&gt;&lt;div&gt;&lt;ol&gt;&lt;li style=&quot;text-align: left;&quot;&gt;Substring&lt;br&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;(&lt;/span&gt;&lt;i style=&quot;font-weight: normal;&quot;&gt;verbatim/lexical&lt;/i&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;)&lt;/span&gt;&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;BoW&lt;br&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;(&lt;i&gt;verbatim/lexical&lt;/i&gt;)&lt;/span&gt;&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;2-stage encoder&lt;span style=&quot;font-weight: normal; line-height: 20%;&quot;&gt; (&lt;i&gt;semantic&lt;/i&gt;)&lt;/span&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/div&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#b85450;opacity=8;verticalAlign=bottom;" vertex="1" parent="gC5I-MwX4mxY7iZfyVKU-1">
+          <mxGeometry x="760" y="250" width="150" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-38" value="&lt;i&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;Outcome measures&lt;/font&gt;&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="gC5I-MwX4mxY7iZfyVKU-1">
+          <mxGeometry x="850" y="395" width="30" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-39" value="" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://icons.diagrams.net/icon-cache1/Currency__Cryptocurrency__Blockchain__FinTech__Free_-2217/Cryptocurrency_SHA-256-41-771.svg" vertex="1" parent="gC5I-MwX4mxY7iZfyVKU-1">
+          <mxGeometry x="136.25" y="360" width="17.5" height="17.5" as="geometry" />
+        </mxCell>
+        <mxCell id="gC5I-MwX4mxY7iZfyVKU-40" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.documents;" vertex="1" parent="gC5I-MwX4mxY7iZfyVKU-1">
+          <mxGeometry x="138.13" y="240" width="13.75" height="16.76" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="16" id="BTkL_yxyCjoNHWHiDdb7">
+    <mxGraphModel dx="1218" dy="1144" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-0" />
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-1" parent="ZuAthXwGcjzi5zlEVdFH-0" />
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="ZuAthXwGcjzi5zlEVdFH-1" source="ZuAthXwGcjzi5zlEVdFH-3" target="ZuAthXwGcjzi5zlEVdFH-31" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="770" y="433" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-3" value="&lt;div&gt;&lt;br/&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eeeeee;strokeColor=#000000;opacity=20;glass=0;shadow=0;dashed=1;strokeWidth=1;arcSize=0;" parent="ZuAthXwGcjzi5zlEVdFH-1" vertex="1">
+          <mxGeometry x="470" y="150" width="280" height="310" as="geometry" />
+        </mxCell>
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-4" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#000000;opacity=15;glass=0;shadow=0;dashed=1;arcSize=0;" parent="ZuAthXwGcjzi5zlEVdFH-1" vertex="1">
+          <mxGeometry x="50" y="223.38" width="360" height="156.62" as="geometry" />
+        </mxCell>
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;dashed=1;" parent="ZuAthXwGcjzi5zlEVdFH-1" source="ZuAthXwGcjzi5zlEVdFH-8" target="ZuAthXwGcjzi5zlEVdFH-10" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d8Sz1a53J2-dXKyRDPQy-0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="ZuAthXwGcjzi5zlEVdFH-1" source="ZuAthXwGcjzi5zlEVdFH-8" target="ZuAthXwGcjzi5zlEVdFH-21" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="d8Sz1a53J2-dXKyRDPQy-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="ZuAthXwGcjzi5zlEVdFH-1" source="ZuAthXwGcjzi5zlEVdFH-8" target="ZuAthXwGcjzi5zlEVdFH-19" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-8" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;The Straits Times corpus&lt;br&gt;(&lt;i&gt;Factiva&lt;/i&gt;)&lt;/font&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="ZuAthXwGcjzi5zlEVdFH-1" vertex="1">
+          <mxGeometry x="152.49" y="228.38" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="ZuAthXwGcjzi5zlEVdFH-1" source="ZuAthXwGcjzi5zlEVdFH-10" target="ZuAthXwGcjzi5zlEVdFH-12" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="70" y="268.75" as="sourcePoint" />
+            <mxPoint x="130" y="371" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="90" y="293" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-10" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;Random&amp;nbsp;&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 9px;&quot;&gt;Forest&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" parent="ZuAthXwGcjzi5zlEVdFH-1" vertex="1">
+          <mxGeometry x="60" y="230.88" width="60" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="ZuAthXwGcjzi5zlEVdFH-1" source="ZuAthXwGcjzi5zlEVdFH-12" target="ZuAthXwGcjzi5zlEVdFH-14" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="240" y="360" />
+              <mxPoint x="240" y="360" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-12" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Quotes of politicians&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;in ST&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="ZuAthXwGcjzi5zlEVdFH-1" vertex="1">
+          <mxGeometry x="153.75" y="273.38" width="157.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;dashPattern=1 1;entryX=-0.003;entryY=0.825;entryDx=0;entryDy=0;entryPerimeter=0;" parent="ZuAthXwGcjzi5zlEVdFH-1" source="ZuAthXwGcjzi5zlEVdFH-14" target="ZuAthXwGcjzi5zlEVdFH-36" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="760" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-14" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;quote-speech pair&lt;/span&gt;" style="rounded=1;fontStyle=1;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#b85450;opacity=10;" parent="ZuAthXwGcjzi5zlEVdFH-1" vertex="1">
+          <mxGeometry x="156.24" y="330" width="152.5" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-15" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;Classify and retrieve&amp;nbsp;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;quotes&lt;/span&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="ZuAthXwGcjzi5zlEVdFH-1" vertex="1">
+          <mxGeometry x="70" y="295" width="102.5" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="ZuAthXwGcjzi5zlEVdFH-1" source="ZuAthXwGcjzi5zlEVdFH-17" target="ZuAthXwGcjzi5zlEVdFH-18" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-17" value="&lt;b&gt;&lt;font style=&quot;color: rgb(109, 109, 109);&quot;&gt;Politician metadata&lt;/font&gt;&lt;/b&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;&lt;font style=&quot;color: rgb(109, 109, 109);&quot;&gt;(name, individual profile, political portfolio&lt;/font&gt;&lt;span style=&quot;color: light-dark(rgb(109, 109, 109), rgb(143, 143, 143)); background-color: transparent;&quot;&gt;)&lt;/span&gt;&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="ZuAthXwGcjzi5zlEVdFH-1" vertex="1">
+          <mxGeometry x="108.74" y="160" width="247.5" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-18" value="&lt;div&gt;&lt;span style=&quot;font-size: 13px;&quot;&gt;Individual Characteristics&lt;/span&gt;&lt;/div&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;party, age,&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;span style=&quot;font-size: 11px; font-weight: 400;&quot;&gt;political tenure&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;gender,&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;race,&lt;/font&gt;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(109, 109, 109), rgb(143, 143, 143)); font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(109, 109, 109), rgb(143, 143, 143)); font-size: 11px; font-weight: normal;&quot;&gt;constituency, vote share&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;glass=0;arcSize=0;strokeColor=#4D4D4D;dashed=1;" parent="ZuAthXwGcjzi5zlEVdFH-1" vertex="1">
+          <mxGeometry x="510" y="160" width="200" height="46.25" as="geometry" />
+        </mxCell>
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-19" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Article topics&lt;/span&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;arcSize=0;strokeColor=#4D4D4D;dashed=1;" parent="ZuAthXwGcjzi5zlEVdFH-1" vertex="1">
+          <mxGeometry x="515.63" y="287.5" width="186.25" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-20" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Political speech topics&lt;/span&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;arcSize=0;strokeColor=#4D4D4D;dashed=1;" parent="ZuAthXwGcjzi5zlEVdFH-1" vertex="1">
+          <mxGeometry x="523.75" y="353.75" width="172.5" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-21" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Article Characteristics&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;day of week, length, news&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;section, translation, author&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;arcSize=0;strokeColor=#4D4D4D;dashed=1;" parent="ZuAthXwGcjzi5zlEVdFH-1" vertex="1">
+          <mxGeometry x="515.63" y="223.38" width="190" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-22" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Language measures&lt;/span&gt;&lt;div&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;lexical richness, readability,&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;objectivity, polarity&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;gradientColor=none;arcSize=0;strokeColor=#4D4D4D;dashed=1;" parent="ZuAthXwGcjzi5zlEVdFH-1" vertex="1">
+          <mxGeometry x="521.25" y="391.76" width="175" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="ZuAthXwGcjzi5zlEVdFH-1" source="ZuAthXwGcjzi5zlEVdFH-26" target="ZuAthXwGcjzi5zlEVdFH-22" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="ZuAthXwGcjzi5zlEVdFH-1" source="ZuAthXwGcjzi5zlEVdFH-26" target="ZuAthXwGcjzi5zlEVdFH-20" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="ZuAthXwGcjzi5zlEVdFH-1" source="ZuAthXwGcjzi5zlEVdFH-26" target="ZuAthXwGcjzi5zlEVdFH-14" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-26" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;Parliamentary Speech corpus&lt;br&gt;(&lt;i&gt;Hansard&lt;/i&gt;)&lt;/font&gt;" style="rounded=1;fontStyle=1;fontColor=#6D6D6D;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;" parent="ZuAthXwGcjzi5zlEVdFH-1" vertex="1">
+          <mxGeometry x="134.69" y="394.26000000000005" width="195.62" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-27" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.documents;" parent="ZuAthXwGcjzi5zlEVdFH-1" vertex="1">
+          <mxGeometry x="120" y="394.26" width="13.75" height="16.76" as="geometry" />
+        </mxCell>
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="ZuAthXwGcjzi5zlEVdFH-1" source="ZuAthXwGcjzi5zlEVdFH-17" target="ZuAthXwGcjzi5zlEVdFH-8" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-30" value="&lt;i&gt;topic modeling&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="ZuAthXwGcjzi5zlEVdFH-1" vertex="1">
+          <mxGeometry x="430" y="305" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-31" value="&lt;font color=&quot;#6d6d6d&quot;&gt;&lt;b&gt;Statistical&lt;/b&gt;&lt;/font&gt;&lt;div&gt;&lt;font color=&quot;#6d6d6d&quot;&gt;&lt;b&gt;Analyses&lt;/b&gt;&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;dashPattern=1 1;" parent="ZuAthXwGcjzi5zlEVdFH-1" vertex="1">
+          <mxGeometry x="790" y="405" width="90" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-32" value="&lt;i&gt;&lt;b&gt;&lt;font style=&quot;color: rgb(89, 89, 89);&quot;&gt;Matching quotes&amp;nbsp;&lt;span style=&quot;background-color: transparent;&quot;&gt;to speech&lt;/span&gt;&lt;/font&gt;&lt;/b&gt;&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="ZuAthXwGcjzi5zlEVdFH-1" vertex="1">
+          <mxGeometry x="250" y="370" width="160" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-33" value="&lt;i&gt;NLP&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="ZuAthXwGcjzi5zlEVdFH-1" vertex="1">
+          <mxGeometry x="720" y="350" width="30" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-34" value="&lt;i&gt;NLP&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="ZuAthXwGcjzi5zlEVdFH-1" vertex="1">
+          <mxGeometry x="485.63" y="417" width="30" height="23" as="geometry" />
+        </mxCell>
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-35" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="ZuAthXwGcjzi5zlEVdFH-1" source="ZuAthXwGcjzi5zlEVdFH-36" target="ZuAthXwGcjzi5zlEVdFH-31" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-36" value="&lt;span style=&quot;font-size: 13px;&quot;&gt;Quotation&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-size: 13px; background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;Accuracy&lt;/span&gt;&lt;div&gt;&lt;div&gt;&lt;ol&gt;&lt;li style=&quot;text-align: left;&quot;&gt;Substring&lt;br&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;(&lt;/span&gt;&lt;i style=&quot;font-weight: normal;&quot;&gt;verbatim/lexical&lt;/i&gt;&lt;span style=&quot;font-weight: normal;&quot;&gt;)&lt;/span&gt;&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;BoW&lt;br&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;(&lt;i&gt;verbatim/lexical&lt;/i&gt;)&lt;/span&gt;&lt;/li&gt;&lt;li style=&quot;text-align: left;&quot;&gt;2-stage encoder&lt;span style=&quot;font-weight: normal; line-height: 20%;&quot;&gt; (&lt;i&gt;semantic&lt;/i&gt;)&lt;/span&gt;&lt;/li&gt;&lt;/ol&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" style="rounded=1;fontStyle=1;html=1;labelBorderColor=none;spacing=0;fontSize=12;whiteSpace=wrap;fillColor=#f8cecc;strokeColor=#b85450;opacity=8;verticalAlign=bottom;" parent="ZuAthXwGcjzi5zlEVdFH-1" vertex="1">
+          <mxGeometry x="760" y="213.38" width="150" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-38" value="" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://icons.diagrams.net/icon-cache1/Currency__Cryptocurrency__Blockchain__FinTech__Free_-2217/Cryptocurrency_SHA-256-41-771.svg" parent="ZuAthXwGcjzi5zlEVdFH-1" vertex="1">
+          <mxGeometry x="136.25" y="330" width="17.5" height="17.5" as="geometry" />
+        </mxCell>
+        <mxCell id="ZuAthXwGcjzi5zlEVdFH-39" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.documents;" parent="ZuAthXwGcjzi5zlEVdFH-1" vertex="1">
+          <mxGeometry x="136.25" y="228.38" width="13.75" height="16.76" as="geometry" />
+        </mxCell>
+        <mxCell id="cG9VIBtE_pxbKwE-SDs5-2" value="&lt;i&gt;topic modeling&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="ZuAthXwGcjzi5zlEVdFH-1" vertex="1">
+          <mxGeometry x="435.63" y="370" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="cG9VIBtE_pxbKwE-SDs5-11" value="&lt;font color=&quot;#595959&quot;&gt;&lt;b&gt;&lt;i&gt;Covariates&lt;/i&gt;&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="ZuAthXwGcjzi5zlEVdFH-1" vertex="1">
+          <mxGeometry x="690" y="450" width="60" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="UH_dO8403h1tppIFx55I-0" value="&lt;font color=&quot;#595959&quot;&gt;&lt;b&gt;&lt;i&gt;Outcomes&lt;/i&gt;&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="ZuAthXwGcjzi5zlEVdFH-1" vertex="1">
+          <mxGeometry x="840" y="360" width="60" height="10" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
