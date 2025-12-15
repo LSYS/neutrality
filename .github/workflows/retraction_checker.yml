@@ -1,8 +1,11 @@
-name: Retracted Articles Check
+name: Retracted Citations Check
 
 on:
+  push:
+    paths:
+      - "**/*.bib"
   schedule:
-    - cron: '0 0 1 * *'
+    - cron: "0 0 1 * *"
   workflow_dispatch:
 
 jobs:
