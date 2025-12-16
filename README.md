@@ -140,3 +140,7 @@ Results saved to [`./results/`](./results/):
 See [results](https://github.com/LSYS/neutrality/tree/main/results)
 
 [![Retracted Citations Check](https://github.com/LSYS/neutrality/actions/workflows/retraction_checker.yml/badge.svg)](https://github.com/LSYS/neutrality/actions/workflows/retraction_checker.yml)
+
+## License
+
+This code is released under the MIT License. See the [LICENSE](https://github.com/LSYS/neutrality/blob/main/LICENSE) file for details.
