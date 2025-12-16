@@ -78,7 +78,7 @@ A natural starting point in the study of political media bias has been to examin
 
 The pipeline consists of **two main stages**: (1) Python data processing, and (2) statistical analysis.
 
-![Pipeline](./assets/media-pipeline.png)
+ ![DAG](./assets/dag.png)
 
 ### 🔄 Stage 1: Data Processing Pipeline (Python)
 
@@ -95,7 +95,6 @@ The pipeline consists of **two main stages**: (1) Python data processing, and (2
 | `build-semsim.py` | Semantic similarity (transformer-based) |
 | `build.py` | Integration into final panel dataset |
 
- ![DAG](./assets/dag.png)
 
 #### Running the Pipeline
 ```bash
@@ -129,6 +128,8 @@ To reproduce all tables and figures:
 cd analysis
 do media.do
 ```
+
+![Pipeline](./assets/media-pipeline.png)
 
 #### Outputs
 
