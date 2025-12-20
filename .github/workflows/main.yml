@@ -5,7 +5,7 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-  workflow_dispatch:  # Enables manual triggering
+  workflow_dispatch:
 
 jobs:
   lint:
@@ -20,13 +20,13 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.x'  # Adjust to your Python version
+        python-version: '3.x'
     
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install mypy pyflakes isort black
-      working-directory: .  # Override for this step to run from root
+      working-directory: .
     
     - name: Run mypy
       run: mypy --ignore-missing-imports --check-untyped-defs --exclude='.*__init__\.py$' utilities.py

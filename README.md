@@ -1,4 +1,4 @@
-# Shades of Neutrality: Detecting Media Slant Using Quotation Accuracy
+# 📦 Shades of Neutrality: Detecting Media Slant Using Quotation Accuracy
 
 ## 📄 Summary
 A natural starting point in the study of political media bias has been to examine differences in coverage intensity.
@@ -11,7 +11,7 @@ A natural starting point in the study of political media bias has been to examin
  I theorize that these partisan differences in media engagement embed private information about slant.
 
 
-## 📁 Repository Structure
+## 📂 Repo Structure and Scripts
 
 ```bash
 .
@@ -137,10 +137,17 @@ Results saved to [`./results/`](./results/):
 - `tables/` → LaTeX (`.tex`) and text (`.md`) tables
 - `figures/` → PDF/PNG/EPS/TIF figures
 
-See [results](https://github.com/LSYS/neutrality/tree/main/results)
+See also [`logs`](https://github.com/LSYS/neutrality/tree/main/analysis/logs) or [`results`](https://github.com/LSYS/neutrality/tree/main/results).
 
+
+## Citations
+
+
+
+I use [RetractionWatch](https://gitlab.com/crossref/retraction-watch-data) (via [Actions](https://github.com/marketplace/actions/retracted-articles-checker) to perdiodically check for retracted citations. 
 [![Retracted Citations Check](https://github.com/LSYS/neutrality/actions/workflows/retraction_checker.yml/badge.svg)](https://github.com/LSYS/neutrality/actions/workflows/retraction_checker.yml)
+
 
 ## License
 
-This code is released under the MIT License. See the [LICENSE](https://github.com/LSYS/neutrality/blob/main/LICENSE) file for details.
+This code is released under the [MIT License](https://github.com/LSYS/neutrality/blob/main/LICENSE).
