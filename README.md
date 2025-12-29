@@ -4,11 +4,11 @@
 A natural starting point in the study of political media bias has been to examine differences in coverage intensity.
  This study develops a notion of quotation accuracy as a dimension of media slant.
  Using natural language processing (NLP), I operationalize three measures of quotation accuracy---substring alignment, bag-of-words overlap, and a two-stage transformer-based semantic measure.
- I combine the measures with applied econometrics to analyze coverage of parliamentary speeches in Singapore's flagship daily newspaper, a setting where coverage intensity shows no slant.
- Across all three measures, opposition speeches are quoted less accurately than those of the ruling party, demonstrating accuracy as a crucial yet underappreciated dimension of slant.
- NLP and machine learning features, and bounding analyses rule out competing explanations such as topical composition, ignorable tokens, or linguistic coherence.
- I then contextualize the findings in the government-media machinery, where transcript circulations (or lack thereof) could explain lapses in quotation accuracy.
- I theorize that these partisan differences in media engagement embed private information about slant.
+ I combine these measures with applied econometrics to analyze coverage of parliamentary speeches in Singapore's flagship daily newspaper, a setting where coverage intensity shows no discernible slant.
+ Across all three measures, opposition speeches are quoted less accurately than those of the ruling party.
+ NLP-based features and bounding analyses rule out competing explanations such as topical composition, ignorable tokens, or linguistic coherence.
+ Finally, I contextualize the findings in a government-media machinery where ruling-party politicians pre-circulate transcripts to the media but the opposition does not, which could explain accuracy gaps.
+ I theorize that this difference in media engagement embeds private information about slant.
 
 
 ## 📂 Repo Structure and Scripts
